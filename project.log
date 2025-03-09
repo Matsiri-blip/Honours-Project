@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.5.14)  7 MAR 2025 18:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.5.14)  9 MAR 2025 22:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1001,7 +1001,239 @@ Package pdftex.def Info: Doc_20250302_185443.pdf , page1 used on input line 101
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
  [9
 
- <./Doc_20250302_185443.pdf>] [10] [11]
+ <./Doc_20250302_185443.pdf>] [10]
+
+pdfTeX warning: pdflatex.exe (file ./Doc_20250307_180116.pdf): PDF inclusion: f
+ound PDF version <1.7>, but at most version <1.5> allowed
+<Doc_20250307_180116.pdf, id=78, 597.23125pt x 845.1575pt>
+File: Doc_20250307_180116.pdf Graphic file (type pdf)
+<use Doc_20250307_180116.pdf>
+Package pdftex.def Info: Doc_20250307_180116.pdf  used on input line 113.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+
+
+pdfTeX warning: pdflatex.exe (file ./Doc_20250307_180116.pdf): PDF inclusion: f
+ound PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex.exe (file ./Doc_20250307_180116.pdf): PDF inclusion: f
+ound PDF version <1.7>, but at most version <1.5> allowed
+<Doc_20250307_180116.pdf, id=80, page=1, 597.23125pt x 845.1575pt>
+File: Doc_20250307_180116.pdf Graphic file (type pdf)
+<use Doc_20250307_180116.pdf, page 1>
+Package pdftex.def Info: Doc_20250307_180116.pdf , page1 used on input line 113
+.
+(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
+File: Doc_20250307_180116.pdf Graphic file (type pdf)
+<use Doc_20250307_180116.pdf, page 1>
+Package pdftex.def Info: Doc_20250307_180116.pdf , page1 used on input line 113
+.
+(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
+[11]
+File: Doc_20250307_180116.pdf Graphic file (type pdf)
+<use Doc_20250307_180116.pdf, page 1>
+Package pdftex.def Info: Doc_20250307_180116.pdf , page1 used on input line 113
+.
+(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
+File: Doc_20250307_180116.pdf Graphic file (type pdf)
+<use Doc_20250307_180116.pdf, page 1>
+Package pdftex.def Info: Doc_20250307_180116.pdf , page1 used on input line 113
+.
+(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
+File: Doc_20250307_180116.pdf Graphic file (type pdf)
+<use Doc_20250307_180116.pdf, page 1>
+Package pdftex.def Info: Doc_20250307_180116.pdf , page1 used on input line 113
+.
+(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
+ [12
+
+ <./Doc_20250307_180116.pdf, page is rotated 270 degrees>]
+
+pdfTeX warning: pdflatex.exe (file ./Doc_20250307_180116.pdf): PDF inclusion: f
+ound PDF version <1.7>, but at most version <1.5> allowed
+<Doc_20250307_180116.pdf, id=107, page=2, 597.23125pt x 845.1575pt>
+File: Doc_20250307_180116.pdf Graphic file (type pdf)
+<use Doc_20250307_180116.pdf, page 2>
+Package pdftex.def Info: Doc_20250307_180116.pdf , page2 used on input line 113
+.
+(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
+File: Doc_20250307_180116.pdf Graphic file (type pdf)
+<use Doc_20250307_180116.pdf, page 2>
+Package pdftex.def Info: Doc_20250307_180116.pdf , page2 used on input line 113
+.
+(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
+File: Doc_20250307_180116.pdf Graphic file (type pdf)
+<use Doc_20250307_180116.pdf, page 2>
+Package pdftex.def Info: Doc_20250307_180116.pdf , page2 used on input line 113
+.
+(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
+[13
+
+ <./Doc_20250307_180116.pdf, page is rotated 90 degrees>]
+<Doc_20250309_183606.pdf, id=150, 598.235pt x 845.1575pt>
+File: Doc_20250309_183606.pdf Graphic file (type pdf)
+<use Doc_20250309_183606.pdf>
+Package pdftex.def Info: Doc_20250309_183606.pdf  used on input line 114.
+(pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
+<Doc_20250309_183606.pdf, id=152, page=1, 598.235pt x 845.1575pt>
+File: Doc_20250309_183606.pdf Graphic file (type pdf)
+<use Doc_20250309_183606.pdf, page 1>
+Package pdftex.def Info: Doc_20250309_183606.pdf , page1 used on input line 114
+.
+(pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
+File: Doc_20250309_183606.pdf Graphic file (type pdf)
+<use Doc_20250309_183606.pdf, page 1>
+Package pdftex.def Info: Doc_20250309_183606.pdf , page1 used on input line 114
+.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: Doc_20250309_183606.pdf Graphic file (type pdf)
+<use Doc_20250309_183606.pdf, page 1>
+Package pdftex.def Info: Doc_20250309_183606.pdf , page1 used on input line 114
+.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: Doc_20250309_183606.pdf Graphic file (type pdf)
+<use Doc_20250309_183606.pdf, page 1>
+Package pdftex.def Info: Doc_20250309_183606.pdf , page1 used on input line 114
+.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: Doc_20250309_183606.pdf Graphic file (type pdf)
+<use Doc_20250309_183606.pdf, page 1>
+Package pdftex.def Info: Doc_20250309_183606.pdf , page1 used on input line 114
+.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+ [14
+
+ <./Doc_20250309_183606.pdf, page is rotated 270 degrees>]
+<Doc_20250309_183606.pdf, id=179, page=2, 598.235pt x 845.1575pt>
+File: Doc_20250309_183606.pdf Graphic file (type pdf)
+<use Doc_20250309_183606.pdf, page 2>
+Package pdftex.def Info: Doc_20250309_183606.pdf , page2 used on input line 114
+.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: Doc_20250309_183606.pdf Graphic file (type pdf)
+<use Doc_20250309_183606.pdf, page 2>
+Package pdftex.def Info: Doc_20250309_183606.pdf , page2 used on input line 114
+.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: Doc_20250309_183606.pdf Graphic file (type pdf)
+<use Doc_20250309_183606.pdf, page 2>
+Package pdftex.def Info: Doc_20250309_183606.pdf , page2 used on input line 114
+.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+ [15
+
+ <./Doc_20250309_183606.pdf, page is rotated 90 degrees>]
+
+pdfTeX warning: pdflatex.exe (file ./Doc_20250302_185443(1).pdf): PDF inclusion
+: found PDF version <1.7>, but at most version <1.5> allowed
+<Doc_20250302_185443(1).pdf, id=218, 598.235pt x 845.1575pt>
+File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
+<use Doc_20250302_185443(1).pdf>
+Package pdftex.def Info: Doc_20250302_185443(1).pdf  used on input line 115.
+(pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
+
+
+pdfTeX warning: pdflatex.exe (file ./Doc_20250302_185443(1).pdf): PDF inclusion
+: found PDF version <1.7>, but at most version <1.5> allowed
+
+
+pdfTeX warning: pdflatex.exe (file ./Doc_20250302_185443(1).pdf): PDF inclusion
+: found PDF version <1.7>, but at most version <1.5> allowed
+<Doc_20250302_185443(1).pdf, id=220, page=4, 598.235pt x 845.1575pt>
+File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
+<use Doc_20250302_185443(1).pdf, page 4>
+Package pdftex.def Info: Doc_20250302_185443(1).pdf , page4 used on input line 
+115.
+(pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
+File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
+<use Doc_20250302_185443(1).pdf, page 4>
+Package pdftex.def Info: Doc_20250302_185443(1).pdf , page4 used on input line 
+115.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
+<use Doc_20250302_185443(1).pdf, page 4>
+Package pdftex.def Info: Doc_20250302_185443(1).pdf , page4 used on input line 
+115.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
+<use Doc_20250302_185443(1).pdf, page 4>
+Package pdftex.def Info: Doc_20250302_185443(1).pdf , page4 used on input line 
+115.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
+<use Doc_20250302_185443(1).pdf, page 4>
+Package pdftex.def Info: Doc_20250302_185443(1).pdf , page4 used on input line 
+115.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+[16
+
+ <./Doc_20250302_185443(1).pdf>]
+
+pdfTeX warning: pdflatex.exe (file ./Doc_20250302_185443(1).pdf): PDF inclusion
+: found PDF version <1.7>, but at most version <1.5> allowed
+<Doc_20250302_185443(1).pdf, id=248, page=3, 598.235pt x 845.1575pt>
+File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
+<use Doc_20250302_185443(1).pdf, page 3>
+Package pdftex.def Info: Doc_20250302_185443(1).pdf , page3 used on input line 
+115.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
+<use Doc_20250302_185443(1).pdf, page 3>
+Package pdftex.def Info: Doc_20250302_185443(1).pdf , page3 used on input line 
+115.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
+<use Doc_20250302_185443(1).pdf, page 3>
+Package pdftex.def Info: Doc_20250302_185443(1).pdf , page3 used on input line 
+115.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+[17
+
+ <./Doc_20250302_185443(1).pdf>]
+
+pdfTeX warning: pdflatex.exe (file ./Doc_20250302_185443(1).pdf): PDF inclusion
+: found PDF version <1.7>, but at most version <1.5> allowed
+<Doc_20250302_185443(1).pdf, id=285, page=2, 598.235pt x 845.1575pt>
+File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
+<use Doc_20250302_185443(1).pdf, page 2>
+Package pdftex.def Info: Doc_20250302_185443(1).pdf , page2 used on input line 
+115.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
+<use Doc_20250302_185443(1).pdf, page 2>
+Package pdftex.def Info: Doc_20250302_185443(1).pdf , page2 used on input line 
+115.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
+<use Doc_20250302_185443(1).pdf, page 2>
+Package pdftex.def Info: Doc_20250302_185443(1).pdf , page2 used on input line 
+115.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+[18
+
+ <./Doc_20250302_185443(1).pdf>]
+
+pdfTeX warning: pdflatex.exe (file ./Doc_20250302_185443(1).pdf): PDF inclusion
+: found PDF version <1.7>, but at most version <1.5> allowed
+<Doc_20250302_185443(1).pdf, id=322, page=1, 598.235pt x 845.1575pt>
+File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
+<use Doc_20250302_185443(1).pdf, page 1>
+Package pdftex.def Info: Doc_20250302_185443(1).pdf , page1 used on input line 
+115.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
+<use Doc_20250302_185443(1).pdf, page 1>
+Package pdftex.def Info: Doc_20250302_185443(1).pdf , page1 used on input line 
+115.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
+<use Doc_20250302_185443(1).pdf, page 1>
+Package pdftex.def Info: Doc_20250302_185443(1).pdf , page1 used on input line 
+115.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+[19
+
+ <./Doc_20250302_185443(1).pdf>]
 
 enddocument/afterlastpage: lastpage setting LastPage.
 (project.aux)
@@ -1010,10 +1242,10 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 18059 strings out of 476361
- 368863 string characters out of 5788046
+ 18116 strings out of 476361
+ 370923 string characters out of 5788046
  1862993 words of memory out of 5000000
- 38116 multiletter control sequences out of 15000+600000
+ 38167 multiletter control sequences out of 15000+600000
  524978 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,17n,91p,822b,1060s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -1030,9 +1262,9 @@ matsi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/euler/eufm7.pfb
 r/eurm10.pfb><C:/Users/matsi/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
 msfonts/euler/eurm7.pfb><C:/Users/matsi/AppData/Local/Programs/MiKTeX/fonts/typ
 e1/public/amsfonts/euler/eusm10.pfb>
-Output written on project.pdf (11 pages, 306339 bytes).
+Output written on project.pdf (19 pages, 786512 bytes).
 PDF statistics:
- 194 PDF objects out of 1000 (max. 8388607)
+ 448 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 43 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 113 words of extra memory for PDF output out of 10000 (max. 10000000)
 
