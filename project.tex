@@ -95,7 +95,7 @@ So for this task I was able to draw different graphs starting with graph of only
 \end{enumerate}
 \subsection*{\underline{Sub-task B}}
 \begin{enumerate}
-	\item \includepdf[pages={4,3,2,1}]{Doc_20250302_185443.pdf}\newpage
+	\item \includepdf[pages={4,3,2,1}]{my_labeled_graphs.pdf}\newpage
 	\item So what i started with calculating the amount of graph that I need to draw depending on n, from the equation $2^{ \frac{\left(n^2-n\right)}{n}}$,\\\\
 	is draw the vertices or points for n=1. Which we get the number of graphs would be 1, so there would be a number of 1 vertices and 0 edges since we can connect it to any other vertex.\\\\Then going to n = 2 we have only 2 graph orientations, we have only 2 ways in which we can draw these graphs, the first orientation all vertices did not have any edges, where as the other orientation had all edges drawn from them, to save time, this implies to each and everyone of the graph, i.e for n=3 and n =4.\\\\ 
 	So going to n=3 we get the number of orientations we have 8 different ways in which this can be arranged, so what i started with all the edges connected to other ones with each one possible then seeing each of the graphs can be arranged,so starting by only any two random vertices with an edge and try to make sure that the "completed graph" drawn first is complete by joining any 2 random vertices this would only result in only 3 ways, \ then moving on to 2 edges, so what i did was from the previous graphs obtained with only one edge was extend each of them only once by an edge connecting them to another vertex which did not have any edge, doing this i had 3 more ways and finally i was done with n=3\\\\
@@ -104,4 +104,18 @@ So for this task I was able to draw different graphs starting with graph of only
 \subsection*{Summary}
 So for this task i was able to understand what a graph homomorphism is, in the context of complete graph. What i did was find different classes of graph with same vertices by drawing each individual orientation of these vertices leading to a combination of them. How i found these homomorphic graphs, i was able to map each vertex in one graph and try to ensure that they are all mapping to one vertices, and also it would have the same amount of neighbours.\newpage
 
+For this part of the project all we have to do is find labels for our graphs. In other words find a way in which we can count, say if we have 4 graphs we should be able to identify each graph and match it with its unique number depending on what we agree as our reference of labeling. If we consider the adjacency matrix we know that the relationship between the vertices which can be considered as a binary encoding, because the vertices can either be neighbours or not(i.e 1 or 0).\\
+So we see that this encoding can be a way to represent our labels, but it would be confusing if we do not agree on a which we are going to count from our adjacency matrix, so im going to include an example. Say we have a 4 x 4 adjacency matrix,
+
+$$\begin{pmatrix}
+	0&0_5&1_4&1_3\\
+	..&0&0_2&1_1\\
+	..&..&0&1_0\\
+	..&..&..&0
+\end{pmatrix}$$
+and the horizontal(binary) matrix in which we are going to use to count/label the graphs so this is given by how i have numbered the upper triangular matrix in the adjacent matrix.$$
+\begin{pmatrix}
+	0_5&1_4&1_3&0_2&1_1&1_0
+\end{pmatrix}$$ so converting this to binary we have $2^0+2^1+0+2^3+2^4+0$=1+2+8+16=27\\This means our 27th graph when we use the 0-th index we have that this list in which the vertices are connected is given by $\{(1,3),(1,4),(2,4),(3,4)\}$\\The following graphs are shown in where they are labeled in binary
+\includepdf[pages={1,2,3,4}]{binary_labeled_graphs.pdf}
 \end{document}
