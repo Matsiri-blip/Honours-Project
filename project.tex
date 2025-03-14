@@ -107,15 +107,21 @@ So for this task i was able to understand what a graph homomorphism is, in the c
 For this part of the project all we have to do is find labels for our graphs. In other words find a way in which we can count, say if we have 4 graphs we should be able to identify each graph and match it with its unique number depending on what we agree as our reference of labeling. If we consider the adjacency matrix we know that the relationship between the vertices which can be considered as a binary encoding, because the vertices can either be neighbours or not(i.e 1 or 0).\\
 So we see that this encoding can be a way to represent our labels, but it would be confusing if we do not agree on a which we are going to count from our adjacency matrix, so im going to include an example. Say we have a 4 x 4 adjacency matrix,
 
-$$\begin{pmatrix}
+\begin{equation}
+\begin{pmatrix}
 	0&0_5&1_4&1_3\\
 	..&0&0_2&1_1\\
 	..&..&0&1_0\\
 	..&..&..&0
-\end{pmatrix}$$
-and the horizontal(binary) matrix in which we are going to use to count/label the graphs so this is given by how i have numbered the upper triangular matrix in the adjacent matrix.$$
-\begin{pmatrix}
-	0_5&1_4&1_3&0_2&1_1&1_0
-\end{pmatrix}$$ so converting this to binary we have $2^0+2^1+0+2^3+2^4+0$=1+2+8+16=27\\This means our 27th graph when we use the 0-th index we have that this list in which the vertices are connected is given by $\{(1,3),(1,4),(2,4),(3,4)\}$\\The following graphs are shown in where they are labeled in binary
+\end{pmatrix}
+\end{equation}
+and the horizontal(binary) matrix in which we are going to use to count/label the graphs so this is given by how i have numbered the upper triangular matrix in the adjacent matrix.\begin{equation}
+	\begin{pmatrix}
+		0_5&1_4&1_3&0_2&1_1&1_0
+	\end{pmatrix}
+\end{equation}
+ so converting this to binary we have $2^0+2^1+0+2^3+2^4+0$=1+2+8+16=27\\This means our 27th graph when we use the 0-th index we have that this list in which the vertices are connected is given by $\{(1,3),(1,4),(2,4),(3,4)\}$\\The following graphs are shown in where they are labeled in binary
 \includepdf[pages={1,2,3,4}]{binary_labeled_graphs.pdf}
+Then for the second part we had to group these labeled graphs in a which they can be in their own homomorphic groups like in task 2. Here the only challenge would trying to find groups that have the same orientations, although 2 can show which graphs have how many certain edges the only problem would be ensuring that they have the same orientation. So i was able to find these groups and also ensure that they are correctly numbered.
+\includepdf[pages={4,3,2,1}]{binary_homomorphic_groups.pdf} which concluded the weeks progress, so we basically found a way to draw our graphs in a way which we can identify each individual graph using Binary counting. This is the efficient way so far that we can understand.
 \end{document}
