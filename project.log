@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.5.14)  9 MAR 2025 22:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.5.14)  22 MAR 2025 13:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -862,378 +862,335 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
 LaTeX Font Info:    Font shape `OT1/ccr/sbc/n' in size <17.28> not available
-(Font)              Font shape `OT1/cmss/sbc/n' tried instead on input line 11.
-
+(Font)              Font shape `OT1/cmss/sbc/n' tried instead on input line 8.
 LaTeX Font Info:    Font shape `OT1/ccr/sbc/n' in size <14.4> not available
-(Font)              Font shape `OT1/cmss/sbc/n' tried instead on input line 12.
-
+(Font)              Font shape `OT1/cmss/sbc/n' tried instead on input line 9.
 
 
 LaTeX Font Warning: Font shape `OT1/ccr/m/up' undefined
-(Font)              using `OT1/ccr/m/n' instead on input line 15.
+(Font)              using `OT1/ccr/m/n' instead on input line 12.
 
-LaTeX Font Info:    Trying to load font information for U+eur on input line 15.
+LaTeX Font Info:    Trying to load font information for U+eur on input line 12.
 
 (C:\Users\matsi\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\ueur.fd
 File: ueur.fd 2013/01/14 v3.01 Euler Roman
 )
-LaTeX Font Info:    Trying to load font information for U+euf on input line 15.
+LaTeX Font Info:    Trying to load font information for U+euf on input line 12.
 
 
 (C:\Users\matsi\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\ueuf.fd
 File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
 )
-LaTeX Font Info:    Trying to load font information for U+eus on input line 15.
+LaTeX Font Info:    Trying to load font information for U+eus on input line 12.
 
 
 (C:\Users\matsi\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\ueus.fd
 File: ueus.fd 2013/01/14 v3.01 Euler Script
 )
-LaTeX Font Info:    Trying to load font information for U+euex on input line 15
+LaTeX Font Info:    Trying to load font information for U+euex on input line 12
 .
 
 (C:\Users\matsi\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\ueuex.fd
 File: ueuex.fd 2013/01/14 v3.01 Euler extra symbols
 )
 LaTeX Font Info:    Trying to load font information for TS1+ccr on input line 2
-8.
+5.
 
 (C:\Users\matsi\AppData\Local\Programs\MiKTeX\tex/latex/ccfonts\ts1ccr.fd
 File: ts1ccr.fd 1999/11/22 v1.0a (WaS)
 )
 LaTeX Font Info:    Font shape `OT1/ccr/sbc/n' in size <12> not available
-(Font)              Font shape `OT1/cmss/sbc/n' tried instead on input line 29.
+(Font)              Font shape `OT1/cmss/sbc/n' tried instead on input line 38.
 
 
 [1
 
 {C:/Users/matsi/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] [2]
 [3] [4]
-<Doc_20250302_185443.pdf, id=25, 598.235pt x 845.1575pt>
-File: Doc_20250302_185443.pdf Graphic file (type pdf)
-<use Doc_20250302_185443.pdf>
-Package pdftex.def Info: Doc_20250302_185443.pdf  used on input line 101.
+<my_labeled_graphs.pdf, id=25, 598.235pt x 845.1575pt>
+File: my_labeled_graphs.pdf Graphic file (type pdf)
+<use my_labeled_graphs.pdf>
+Package pdftex.def Info: my_labeled_graphs.pdf  used on input line 98.
 (pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
-<Doc_20250302_185443.pdf, id=27, page=4, 598.235pt x 845.1575pt>
-File: Doc_20250302_185443.pdf Graphic file (type pdf)
-<use Doc_20250302_185443.pdf, page 4>
-Package pdftex.def Info: Doc_20250302_185443.pdf , page4 used on input line 101
-.
+<my_labeled_graphs.pdf, id=27, page=4, 598.235pt x 845.1575pt>
+File: my_labeled_graphs.pdf Graphic file (type pdf)
+<use my_labeled_graphs.pdf, page 4>
+Package pdftex.def Info: my_labeled_graphs.pdf , page4 used on input line 98.
 (pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
-File: Doc_20250302_185443.pdf Graphic file (type pdf)
-<use Doc_20250302_185443.pdf, page 4>
-Package pdftex.def Info: Doc_20250302_185443.pdf , page4 used on input line 101
-.
+File: my_labeled_graphs.pdf Graphic file (type pdf)
+<use my_labeled_graphs.pdf, page 4>
+Package pdftex.def Info: my_labeled_graphs.pdf , page4 used on input line 98.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
  [5]
-File: Doc_20250302_185443.pdf Graphic file (type pdf)
-<use Doc_20250302_185443.pdf, page 4>
-Package pdftex.def Info: Doc_20250302_185443.pdf , page4 used on input line 101
-.
+File: my_labeled_graphs.pdf Graphic file (type pdf)
+<use my_labeled_graphs.pdf, page 4>
+Package pdftex.def Info: my_labeled_graphs.pdf , page4 used on input line 98.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250302_185443.pdf Graphic file (type pdf)
-<use Doc_20250302_185443.pdf, page 4>
-Package pdftex.def Info: Doc_20250302_185443.pdf , page4 used on input line 101
-.
+File: my_labeled_graphs.pdf Graphic file (type pdf)
+<use my_labeled_graphs.pdf, page 4>
+Package pdftex.def Info: my_labeled_graphs.pdf , page4 used on input line 98.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250302_185443.pdf Graphic file (type pdf)
-<use Doc_20250302_185443.pdf, page 4>
-Package pdftex.def Info: Doc_20250302_185443.pdf , page4 used on input line 101
-.
+File: my_labeled_graphs.pdf Graphic file (type pdf)
+<use my_labeled_graphs.pdf, page 4>
+Package pdftex.def Info: my_labeled_graphs.pdf , page4 used on input line 98.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
  [6
 
- <./Doc_20250302_185443.pdf>]
-<Doc_20250302_185443.pdf, id=47, page=3, 598.235pt x 845.1575pt>
-File: Doc_20250302_185443.pdf Graphic file (type pdf)
-<use Doc_20250302_185443.pdf, page 3>
-Package pdftex.def Info: Doc_20250302_185443.pdf , page3 used on input line 101
-.
+ <./my_labeled_graphs.pdf>]
+<my_labeled_graphs.pdf, id=47, page=3, 598.235pt x 845.1575pt>
+File: my_labeled_graphs.pdf Graphic file (type pdf)
+<use my_labeled_graphs.pdf, page 3>
+Package pdftex.def Info: my_labeled_graphs.pdf , page3 used on input line 98.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250302_185443.pdf Graphic file (type pdf)
-<use Doc_20250302_185443.pdf, page 3>
-Package pdftex.def Info: Doc_20250302_185443.pdf , page3 used on input line 101
-.
+File: my_labeled_graphs.pdf Graphic file (type pdf)
+<use my_labeled_graphs.pdf, page 3>
+Package pdftex.def Info: my_labeled_graphs.pdf , page3 used on input line 98.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250302_185443.pdf Graphic file (type pdf)
-<use Doc_20250302_185443.pdf, page 3>
-Package pdftex.def Info: Doc_20250302_185443.pdf , page3 used on input line 101
-.
+File: my_labeled_graphs.pdf Graphic file (type pdf)
+<use my_labeled_graphs.pdf, page 3>
+Package pdftex.def Info: my_labeled_graphs.pdf , page3 used on input line 98.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
  [7
 
- <./Doc_20250302_185443.pdf>]
-<Doc_20250302_185443.pdf, id=57, page=2, 598.235pt x 845.1575pt>
-File: Doc_20250302_185443.pdf Graphic file (type pdf)
-<use Doc_20250302_185443.pdf, page 2>
-Package pdftex.def Info: Doc_20250302_185443.pdf , page2 used on input line 101
-.
+ <./my_labeled_graphs.pdf>]
+<my_labeled_graphs.pdf, id=57, page=2, 598.235pt x 845.1575pt>
+File: my_labeled_graphs.pdf Graphic file (type pdf)
+<use my_labeled_graphs.pdf, page 2>
+Package pdftex.def Info: my_labeled_graphs.pdf , page2 used on input line 98.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250302_185443.pdf Graphic file (type pdf)
-<use Doc_20250302_185443.pdf, page 2>
-Package pdftex.def Info: Doc_20250302_185443.pdf , page2 used on input line 101
-.
+File: my_labeled_graphs.pdf Graphic file (type pdf)
+<use my_labeled_graphs.pdf, page 2>
+Package pdftex.def Info: my_labeled_graphs.pdf , page2 used on input line 98.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250302_185443.pdf Graphic file (type pdf)
-<use Doc_20250302_185443.pdf, page 2>
-Package pdftex.def Info: Doc_20250302_185443.pdf , page2 used on input line 101
-.
+File: my_labeled_graphs.pdf Graphic file (type pdf)
+<use my_labeled_graphs.pdf, page 2>
+Package pdftex.def Info: my_labeled_graphs.pdf , page2 used on input line 98.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
 
 [8
 
- <./Doc_20250302_185443.pdf>]
-<Doc_20250302_185443.pdf, id=66, page=1, 598.235pt x 845.1575pt>
-File: Doc_20250302_185443.pdf Graphic file (type pdf)
-<use Doc_20250302_185443.pdf, page 1>
-Package pdftex.def Info: Doc_20250302_185443.pdf , page1 used on input line 101
-.
+ <./my_labeled_graphs.pdf>]
+<my_labeled_graphs.pdf, id=66, page=1, 598.235pt x 845.1575pt>
+File: my_labeled_graphs.pdf Graphic file (type pdf)
+<use my_labeled_graphs.pdf, page 1>
+Package pdftex.def Info: my_labeled_graphs.pdf , page1 used on input line 98.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250302_185443.pdf Graphic file (type pdf)
-<use Doc_20250302_185443.pdf, page 1>
-Package pdftex.def Info: Doc_20250302_185443.pdf , page1 used on input line 101
-.
+File: my_labeled_graphs.pdf Graphic file (type pdf)
+<use my_labeled_graphs.pdf, page 1>
+Package pdftex.def Info: my_labeled_graphs.pdf , page1 used on input line 98.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250302_185443.pdf Graphic file (type pdf)
-<use Doc_20250302_185443.pdf, page 1>
-Package pdftex.def Info: Doc_20250302_185443.pdf , page1 used on input line 101
-.
+File: my_labeled_graphs.pdf Graphic file (type pdf)
+<use my_labeled_graphs.pdf, page 1>
+Package pdftex.def Info: my_labeled_graphs.pdf , page1 used on input line 98.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
  [9
 
- <./Doc_20250302_185443.pdf>] [10]
-
-pdfTeX warning: pdflatex.exe (file ./Doc_20250307_180116.pdf): PDF inclusion: f
-ound PDF version <1.7>, but at most version <1.5> allowed
-<Doc_20250307_180116.pdf, id=78, 597.23125pt x 845.1575pt>
-File: Doc_20250307_180116.pdf Graphic file (type pdf)
-<use Doc_20250307_180116.pdf>
-Package pdftex.def Info: Doc_20250307_180116.pdf  used on input line 113.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-
-
-pdfTeX warning: pdflatex.exe (file ./Doc_20250307_180116.pdf): PDF inclusion: f
-ound PDF version <1.7>, but at most version <1.5> allowed
-
-
-pdfTeX warning: pdflatex.exe (file ./Doc_20250307_180116.pdf): PDF inclusion: f
-ound PDF version <1.7>, but at most version <1.5> allowed
-<Doc_20250307_180116.pdf, id=80, page=1, 597.23125pt x 845.1575pt>
-File: Doc_20250307_180116.pdf Graphic file (type pdf)
-<use Doc_20250307_180116.pdf, page 1>
-Package pdftex.def Info: Doc_20250307_180116.pdf , page1 used on input line 113
-.
-(pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
-File: Doc_20250307_180116.pdf Graphic file (type pdf)
-<use Doc_20250307_180116.pdf, page 1>
-Package pdftex.def Info: Doc_20250307_180116.pdf , page1 used on input line 113
-.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-[11]
-File: Doc_20250307_180116.pdf Graphic file (type pdf)
-<use Doc_20250307_180116.pdf, page 1>
-Package pdftex.def Info: Doc_20250307_180116.pdf , page1 used on input line 113
-.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-File: Doc_20250307_180116.pdf Graphic file (type pdf)
-<use Doc_20250307_180116.pdf, page 1>
-Package pdftex.def Info: Doc_20250307_180116.pdf , page1 used on input line 113
-.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-File: Doc_20250307_180116.pdf Graphic file (type pdf)
-<use Doc_20250307_180116.pdf, page 1>
-Package pdftex.def Info: Doc_20250307_180116.pdf , page1 used on input line 113
-.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
+ <./my_labeled_graphs.pdf>] [10]
+<binary_labeled_graphs.pdf, id=78, 614.295pt x 794.97pt>
+File: binary_labeled_graphs.pdf Graphic file (type pdf)
+<use binary_labeled_graphs.pdf>
+Package pdftex.def Info: binary_labeled_graphs.pdf  used on input line 122.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+<binary_labeled_graphs.pdf, id=80, page=1, 614.295pt x 794.97pt>
+File: binary_labeled_graphs.pdf Graphic file (type pdf)
+<use binary_labeled_graphs.pdf, page 1>
+Package pdftex.def Info: binary_labeled_graphs.pdf , page1 used on input line 1
+22.
+(pdftex.def)             Requested size: 614.29349pt x 794.96806pt.
+File: binary_labeled_graphs.pdf Graphic file (type pdf)
+<use binary_labeled_graphs.pdf, page 1>
+Package pdftex.def Info: binary_labeled_graphs.pdf , page1 used on input line 1
+22.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [11]
+File: binary_labeled_graphs.pdf Graphic file (type pdf)
+<use binary_labeled_graphs.pdf, page 1>
+Package pdftex.def Info: binary_labeled_graphs.pdf , page1 used on input line 1
+22.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: binary_labeled_graphs.pdf Graphic file (type pdf)
+<use binary_labeled_graphs.pdf, page 1>
+Package pdftex.def Info: binary_labeled_graphs.pdf , page1 used on input line 1
+22.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: binary_labeled_graphs.pdf Graphic file (type pdf)
+<use binary_labeled_graphs.pdf, page 1>
+Package pdftex.def Info: binary_labeled_graphs.pdf , page1 used on input line 1
+22.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
  [12
 
- <./Doc_20250307_180116.pdf, page is rotated 270 degrees>]
+ <./binary_labeled_graphs.pdf>]
+<binary_labeled_graphs.pdf, id=110, page=2, 614.295pt x 794.97pt>
+File: binary_labeled_graphs.pdf Graphic file (type pdf)
+<use binary_labeled_graphs.pdf, page 2>
+Package pdftex.def Info: binary_labeled_graphs.pdf , page2 used on input line 1
+22.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: binary_labeled_graphs.pdf Graphic file (type pdf)
+<use binary_labeled_graphs.pdf, page 2>
+Package pdftex.def Info: binary_labeled_graphs.pdf , page2 used on input line 1
+22.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: binary_labeled_graphs.pdf Graphic file (type pdf)
+<use binary_labeled_graphs.pdf, page 2>
+Package pdftex.def Info: binary_labeled_graphs.pdf , page2 used on input line 1
+22.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+ [13
 
-pdfTeX warning: pdflatex.exe (file ./Doc_20250307_180116.pdf): PDF inclusion: f
-ound PDF version <1.7>, but at most version <1.5> allowed
-<Doc_20250307_180116.pdf, id=107, page=2, 597.23125pt x 845.1575pt>
-File: Doc_20250307_180116.pdf Graphic file (type pdf)
-<use Doc_20250307_180116.pdf, page 2>
-Package pdftex.def Info: Doc_20250307_180116.pdf , page2 used on input line 113
-.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-File: Doc_20250307_180116.pdf Graphic file (type pdf)
-<use Doc_20250307_180116.pdf, page 2>
-Package pdftex.def Info: Doc_20250307_180116.pdf , page2 used on input line 113
-.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-File: Doc_20250307_180116.pdf Graphic file (type pdf)
-<use Doc_20250307_180116.pdf, page 2>
-Package pdftex.def Info: Doc_20250307_180116.pdf , page2 used on input line 113
-.
-(pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
-[13
-
- <./Doc_20250307_180116.pdf, page is rotated 90 degrees>]
-<Doc_20250309_183606.pdf, id=150, 598.235pt x 845.1575pt>
-File: Doc_20250309_183606.pdf Graphic file (type pdf)
-<use Doc_20250309_183606.pdf>
-Package pdftex.def Info: Doc_20250309_183606.pdf  used on input line 114.
-(pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
-<Doc_20250309_183606.pdf, id=152, page=1, 598.235pt x 845.1575pt>
-File: Doc_20250309_183606.pdf Graphic file (type pdf)
-<use Doc_20250309_183606.pdf, page 1>
-Package pdftex.def Info: Doc_20250309_183606.pdf , page1 used on input line 114
-.
-(pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
-File: Doc_20250309_183606.pdf Graphic file (type pdf)
-<use Doc_20250309_183606.pdf, page 1>
-Package pdftex.def Info: Doc_20250309_183606.pdf , page1 used on input line 114
-.
-(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250309_183606.pdf Graphic file (type pdf)
-<use Doc_20250309_183606.pdf, page 1>
-Package pdftex.def Info: Doc_20250309_183606.pdf , page1 used on input line 114
-.
-(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250309_183606.pdf Graphic file (type pdf)
-<use Doc_20250309_183606.pdf, page 1>
-Package pdftex.def Info: Doc_20250309_183606.pdf , page1 used on input line 114
-.
-(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250309_183606.pdf Graphic file (type pdf)
-<use Doc_20250309_183606.pdf, page 1>
-Package pdftex.def Info: Doc_20250309_183606.pdf , page1 used on input line 114
-.
-(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+ <./binary_labeled_graphs.pdf>]
+<binary_labeled_graphs.pdf, id=154, page=3, 614.295pt x 794.97pt>
+File: binary_labeled_graphs.pdf Graphic file (type pdf)
+<use binary_labeled_graphs.pdf, page 3>
+Package pdftex.def Info: binary_labeled_graphs.pdf , page3 used on input line 1
+22.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: binary_labeled_graphs.pdf Graphic file (type pdf)
+<use binary_labeled_graphs.pdf, page 3>
+Package pdftex.def Info: binary_labeled_graphs.pdf , page3 used on input line 1
+22.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: binary_labeled_graphs.pdf Graphic file (type pdf)
+<use binary_labeled_graphs.pdf, page 3>
+Package pdftex.def Info: binary_labeled_graphs.pdf , page3 used on input line 1
+22.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
  [14
 
- <./Doc_20250309_183606.pdf, page is rotated 270 degrees>]
-<Doc_20250309_183606.pdf, id=179, page=2, 598.235pt x 845.1575pt>
-File: Doc_20250309_183606.pdf Graphic file (type pdf)
-<use Doc_20250309_183606.pdf, page 2>
-Package pdftex.def Info: Doc_20250309_183606.pdf , page2 used on input line 114
-.
-(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250309_183606.pdf Graphic file (type pdf)
-<use Doc_20250309_183606.pdf, page 2>
-Package pdftex.def Info: Doc_20250309_183606.pdf , page2 used on input line 114
-.
-(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250309_183606.pdf Graphic file (type pdf)
-<use Doc_20250309_183606.pdf, page 2>
-Package pdftex.def Info: Doc_20250309_183606.pdf , page2 used on input line 114
-.
-(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+ <./binary_labeled_graphs.pdf>]
+<binary_labeled_graphs.pdf, id=182, page=4, 614.295pt x 794.97pt>
+File: binary_labeled_graphs.pdf Graphic file (type pdf)
+<use binary_labeled_graphs.pdf, page 4>
+Package pdftex.def Info: binary_labeled_graphs.pdf , page4 used on input line 1
+22.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: binary_labeled_graphs.pdf Graphic file (type pdf)
+<use binary_labeled_graphs.pdf, page 4>
+Package pdftex.def Info: binary_labeled_graphs.pdf , page4 used on input line 1
+22.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
+File: binary_labeled_graphs.pdf Graphic file (type pdf)
+<use binary_labeled_graphs.pdf, page 4>
+Package pdftex.def Info: binary_labeled_graphs.pdf , page4 used on input line 1
+22.
+(pdftex.def)             Requested size: 597.78697pt x 773.60669pt.
  [15
 
- <./Doc_20250309_183606.pdf, page is rotated 90 degrees>]
+ <./binary_labeled_graphs.pdf>]
 
-pdfTeX warning: pdflatex.exe (file ./Doc_20250302_185443(1).pdf): PDF inclusion
-: found PDF version <1.7>, but at most version <1.5> allowed
-<Doc_20250302_185443(1).pdf, id=218, 598.235pt x 845.1575pt>
-File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
-<use Doc_20250302_185443(1).pdf>
-Package pdftex.def Info: Doc_20250302_185443(1).pdf  used on input line 115.
+pdfTeX warning: pdflatex.exe (file ./binary_homomorphic_groups.pdf): PDF inclus
+ion: found PDF version <1.7>, but at most version <1.5> allowed
+<binary_homomorphic_groups.pdf, id=222, 598.235pt x 845.1575pt>
+File: binary_homomorphic_groups.pdf Graphic file (type pdf)
+<use binary_homomorphic_groups.pdf>
+Package pdftex.def Info: binary_homomorphic_groups.pdf  used on input line 124.
+
 (pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
 
 
-pdfTeX warning: pdflatex.exe (file ./Doc_20250302_185443(1).pdf): PDF inclusion
-: found PDF version <1.7>, but at most version <1.5> allowed
+pdfTeX warning: pdflatex.exe (file ./binary_homomorphic_groups.pdf): PDF inclus
+ion: found PDF version <1.7>, but at most version <1.5> allowed
 
 
-pdfTeX warning: pdflatex.exe (file ./Doc_20250302_185443(1).pdf): PDF inclusion
-: found PDF version <1.7>, but at most version <1.5> allowed
-<Doc_20250302_185443(1).pdf, id=220, page=4, 598.235pt x 845.1575pt>
-File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
-<use Doc_20250302_185443(1).pdf, page 4>
-Package pdftex.def Info: Doc_20250302_185443(1).pdf , page4 used on input line 
-115.
+pdfTeX warning: pdflatex.exe (file ./binary_homomorphic_groups.pdf): PDF inclus
+ion: found PDF version <1.7>, but at most version <1.5> allowed
+<binary_homomorphic_groups.pdf, id=224, page=4, 598.235pt x 845.1575pt>
+File: binary_homomorphic_groups.pdf Graphic file (type pdf)
+<use binary_homomorphic_groups.pdf, page 4>
+Package pdftex.def Info: binary_homomorphic_groups.pdf , page4 used on input li
+ne 124.
 (pdftex.def)             Requested size: 598.23354pt x 845.15544pt.
-File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
-<use Doc_20250302_185443(1).pdf, page 4>
-Package pdftex.def Info: Doc_20250302_185443(1).pdf , page4 used on input line 
-115.
+File: binary_homomorphic_groups.pdf Graphic file (type pdf)
+<use binary_homomorphic_groups.pdf, page 4>
+Package pdftex.def Info: binary_homomorphic_groups.pdf , page4 used on input li
+ne 124.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
-<use Doc_20250302_185443(1).pdf, page 4>
-Package pdftex.def Info: Doc_20250302_185443(1).pdf , page4 used on input line 
-115.
+[16]
+File: binary_homomorphic_groups.pdf Graphic file (type pdf)
+<use binary_homomorphic_groups.pdf, page 4>
+Package pdftex.def Info: binary_homomorphic_groups.pdf , page4 used on input li
+ne 124.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
-<use Doc_20250302_185443(1).pdf, page 4>
-Package pdftex.def Info: Doc_20250302_185443(1).pdf , page4 used on input line 
-115.
+File: binary_homomorphic_groups.pdf Graphic file (type pdf)
+<use binary_homomorphic_groups.pdf, page 4>
+Package pdftex.def Info: binary_homomorphic_groups.pdf , page4 used on input li
+ne 124.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
-<use Doc_20250302_185443(1).pdf, page 4>
-Package pdftex.def Info: Doc_20250302_185443(1).pdf , page4 used on input line 
-115.
+File: binary_homomorphic_groups.pdf Graphic file (type pdf)
+<use binary_homomorphic_groups.pdf, page 4>
+Package pdftex.def Info: binary_homomorphic_groups.pdf , page4 used on input li
+ne 124.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-[16
+ [17
 
- <./Doc_20250302_185443(1).pdf>]
+ <./binary_homomorphic_groups.pdf>]
 
-pdfTeX warning: pdflatex.exe (file ./Doc_20250302_185443(1).pdf): PDF inclusion
-: found PDF version <1.7>, but at most version <1.5> allowed
-<Doc_20250302_185443(1).pdf, id=248, page=3, 598.235pt x 845.1575pt>
-File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
-<use Doc_20250302_185443(1).pdf, page 3>
-Package pdftex.def Info: Doc_20250302_185443(1).pdf , page3 used on input line 
-115.
+pdfTeX warning: pdflatex.exe (file ./binary_homomorphic_groups.pdf): PDF inclus
+ion: found PDF version <1.7>, but at most version <1.5> allowed
+<binary_homomorphic_groups.pdf, id=255, page=3, 598.235pt x 845.1575pt>
+File: binary_homomorphic_groups.pdf Graphic file (type pdf)
+<use binary_homomorphic_groups.pdf, page 3>
+Package pdftex.def Info: binary_homomorphic_groups.pdf , page3 used on input li
+ne 124.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
-<use Doc_20250302_185443(1).pdf, page 3>
-Package pdftex.def Info: Doc_20250302_185443(1).pdf , page3 used on input line 
-115.
+File: binary_homomorphic_groups.pdf Graphic file (type pdf)
+<use binary_homomorphic_groups.pdf, page 3>
+Package pdftex.def Info: binary_homomorphic_groups.pdf , page3 used on input li
+ne 124.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
-<use Doc_20250302_185443(1).pdf, page 3>
-Package pdftex.def Info: Doc_20250302_185443(1).pdf , page3 used on input line 
-115.
-(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-[17
-
- <./Doc_20250302_185443(1).pdf>]
-
-pdfTeX warning: pdflatex.exe (file ./Doc_20250302_185443(1).pdf): PDF inclusion
-: found PDF version <1.7>, but at most version <1.5> allowed
-<Doc_20250302_185443(1).pdf, id=285, page=2, 598.235pt x 845.1575pt>
-File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
-<use Doc_20250302_185443(1).pdf, page 2>
-Package pdftex.def Info: Doc_20250302_185443(1).pdf , page2 used on input line 
-115.
-(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
-<use Doc_20250302_185443(1).pdf, page 2>
-Package pdftex.def Info: Doc_20250302_185443(1).pdf , page2 used on input line 
-115.
-(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
-<use Doc_20250302_185443(1).pdf, page 2>
-Package pdftex.def Info: Doc_20250302_185443(1).pdf , page2 used on input line 
-115.
+File: binary_homomorphic_groups.pdf Graphic file (type pdf)
+<use binary_homomorphic_groups.pdf, page 3>
+Package pdftex.def Info: binary_homomorphic_groups.pdf , page3 used on input li
+ne 124.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
 [18
 
- <./Doc_20250302_185443(1).pdf>]
+ <./binary_homomorphic_groups.pdf>]
 
-pdfTeX warning: pdflatex.exe (file ./Doc_20250302_185443(1).pdf): PDF inclusion
-: found PDF version <1.7>, but at most version <1.5> allowed
-<Doc_20250302_185443(1).pdf, id=322, page=1, 598.235pt x 845.1575pt>
-File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
-<use Doc_20250302_185443(1).pdf, page 1>
-Package pdftex.def Info: Doc_20250302_185443(1).pdf , page1 used on input line 
-115.
+pdfTeX warning: pdflatex.exe (file ./binary_homomorphic_groups.pdf): PDF inclus
+ion: found PDF version <1.7>, but at most version <1.5> allowed
+<binary_homomorphic_groups.pdf, id=292, page=2, 598.235pt x 845.1575pt>
+File: binary_homomorphic_groups.pdf Graphic file (type pdf)
+<use binary_homomorphic_groups.pdf, page 2>
+Package pdftex.def Info: binary_homomorphic_groups.pdf , page2 used on input li
+ne 124.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
-<use Doc_20250302_185443(1).pdf, page 1>
-Package pdftex.def Info: Doc_20250302_185443(1).pdf , page1 used on input line 
-115.
+File: binary_homomorphic_groups.pdf Graphic file (type pdf)
+<use binary_homomorphic_groups.pdf, page 2>
+Package pdftex.def Info: binary_homomorphic_groups.pdf , page2 used on input li
+ne 124.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
-File: Doc_20250302_185443(1).pdf Graphic file (type pdf)
-<use Doc_20250302_185443(1).pdf, page 1>
-Package pdftex.def Info: Doc_20250302_185443(1).pdf , page1 used on input line 
-115.
+File: binary_homomorphic_groups.pdf Graphic file (type pdf)
+<use binary_homomorphic_groups.pdf, page 2>
+Package pdftex.def Info: binary_homomorphic_groups.pdf , page2 used on input li
+ne 124.
 (pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
 [19
 
- <./Doc_20250302_185443(1).pdf>]
+ <./binary_homomorphic_groups.pdf>]
+
+pdfTeX warning: pdflatex.exe (file ./binary_homomorphic_groups.pdf): PDF inclus
+ion: found PDF version <1.7>, but at most version <1.5> allowed
+<binary_homomorphic_groups.pdf, id=330, page=1, 598.235pt x 845.1575pt>
+File: binary_homomorphic_groups.pdf Graphic file (type pdf)
+<use binary_homomorphic_groups.pdf, page 1>
+Package pdftex.def Info: binary_homomorphic_groups.pdf , page1 used on input li
+ne 124.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: binary_homomorphic_groups.pdf Graphic file (type pdf)
+<use binary_homomorphic_groups.pdf, page 1>
+Package pdftex.def Info: binary_homomorphic_groups.pdf , page1 used on input li
+ne 124.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+File: binary_homomorphic_groups.pdf Graphic file (type pdf)
+<use binary_homomorphic_groups.pdf, page 1>
+Package pdftex.def Info: binary_homomorphic_groups.pdf , page1 used on input li
+ne 124.
+(pdftex.def)             Requested size: 597.7406pt x 844.45905pt.
+[20
+
+ <./binary_homomorphic_groups.pdf>] [21] [22]
 
 enddocument/afterlastpage: lastpage setting LastPage.
 (project.aux)
@@ -1242,29 +1199,30 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 18116 strings out of 476361
- 370923 string characters out of 5788046
- 1862993 words of memory out of 5000000
- 38167 multiletter control sequences out of 15000+600000
+ 18105 strings out of 476361
+ 370651 string characters out of 5788046
+ 1861993 words of memory out of 5000000
+ 38158 multiletter control sequences out of 15000+600000
  524978 words of font info for 81 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,17n,91p,822b,1060s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,17n,91p,1019b,1060s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\matsi\AppData\Local\MiKTeX\fonts/pk/ljfour/public/ecc/dpi720\torm1
 0.pk> <C:\Users\matsi\AppData\Local\MiKTeX\fonts/pk/ljfour/public/concrete/dpi7
 20\ccr10.pk><C:/Users/matsi/AppData/Local/Programs/MiKTeX/fonts/type1/public/am
-sfonts/cmextra/cmex8.pfb><C:/Users/matsi/AppData/Local/Programs/MiKTeX/fonts/ty
-pe1/public/amsfonts/cm/cmssdc10.pfb><C:/Users/matsi/AppData/Local/Programs/MiKT
-eX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/matsi/AppData/Local/Prog
-rams/MiKTeX/fonts/type1/public/amsfonts/euler/euex10.pfb><C:/Users/matsi/AppDat
-a/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/euler/eufm10.pfb><C:/Users/
-matsi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/euler/eufm7.pfb
-><C:/Users/matsi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/eule
-r/eurm10.pfb><C:/Users/matsi/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
-msfonts/euler/eurm7.pfb><C:/Users/matsi/AppData/Local/Programs/MiKTeX/fonts/typ
-e1/public/amsfonts/euler/eusm10.pfb>
-Output written on project.pdf (19 pages, 786512 bytes).
+sfonts/cm/cmex10.pfb><C:/Users/matsi/AppData/Local/Programs/MiKTeX/fonts/type1/
+public/amsfonts/cmextra/cmex8.pfb><C:/Users/matsi/AppData/Local/Programs/MiKTeX
+/fonts/type1/public/amsfonts/cm/cmssdc10.pfb><C:/Users/matsi/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/matsi/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/euler/euex10.pfb><C:/Users/mat
+si/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/euler/eufm10.pfb><
+C:/Users/matsi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/euler/
+eufm7.pfb><C:/Users/matsi/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsf
+onts/euler/eurm10.pfb><C:/Users/matsi/AppData/Local/Programs/MiKTeX/fonts/type1
+/public/amsfonts/euler/eurm7.pfb><C:/Users/matsi/AppData/Local/Programs/MiKTeX/
+fonts/type1/public/amsfonts/euler/eusm10.pfb>
+Output written on project.pdf (22 pages, 802015 bytes).
 PDF statistics:
- 448 PDF objects out of 1000 (max. 8388607)
+ 466 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 113 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 103 words of extra memory for PDF output out of 10000 (max. 10000000)
 
