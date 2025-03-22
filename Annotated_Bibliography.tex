@@ -20,7 +20,7 @@
 \bibliographystyle{unsrtnat}
 \hypersetup{
 	colorlinks,
-	citecolor=red,
+	citecolor=blue,
 	linkcolor=red,
 	urlcolor=red}
 \usepackage{bibentry}
@@ -37,7 +37,7 @@
 \cite{burr1981generalized}~\bibentry{burr1981generalized}
 \begin{description}
 	\item[Aim:]
-To find the guiding ideas that have contributed to the discoveries in Ramsey theory for graphs and finding Ramsey numbers.
+To find the ideas that have contributed to the discoveries in Ramsey theory for graphs and finding Ramsey numbers.
 \item[Style:]
 Review Paper
 \item[Cross References:]
@@ -61,19 +61,98 @@ Then an asymptotic formula at minimum, upper and lower bounds is used to estimat
 		Journal article, theoretical.
 		\item[Cross References:]
 		It extends more on universal quantum computer by \cite{deutsch1985quantum}, which can simulate a quantum system. 
-		We understand about developing the theoretical basis for quantum computation, not on summarizing existing research. 
+		We understand about developing the theory  for quantum computation. 
 		It extends a bit on the theory between known classical computations. 
 		Together with few known quantum mechanics algorithms that have existed for few years prior to the release of the paper.
 		\item [Summary:]
-		Deutsch talks about quantum basics like compatible observables, superposition, entanglement and the Hamiltonian.
-		He emphasized that quantum computations could be represented as networks of quantum gates, similar to classical circuits.
-		Quantum logic and gates transform quantum binary inputs into quantum binary outputs regardless of the input values. To avoid repetition since these gates have same definitions.
-		There are various gates and each of them have different types of functions.
-		Then the paper explained universal quantum gate
-		So a universal quantum gate simplifies quantum computing theory and makes building quantum computers more practical. It then shows the importance of a Hamiltonian in computers.
+		Quantum computations could be represented as networks of quantum gates, similar to classical circuits.
+		Quantum logic and gates transform quantum binary inputs into quantum binary outputs regardless of the input values.
+		So a universal quantum gate simplifies quantum computing theory and makes building quantum computers more practical. 
+		It then shows the importance of a Hamiltonian in computers.
 	\end{description}
 
+	\newpage
+\cite{PhysRevA.93.032301}~\bibentry{PhysRevA.93.032301}
+\begin{description}
+	\item [Aim:]
+	To find Ramsey numbers using a quantum computer algorithms.
+	\item [Style:]
+	Theoretical Research paper
+	\item [Cross References:]
+	Here it  extends on using quantum algorithm to calculate Ramsey Numbers which was proposed by the paper \cite{gaitan2012ramsey}.
+	They used the scheme in this paper into turning Ramsey numbers into a decision problem on a quantum computer.
+	This was done by turning the problem into a combinatorial optimization problem, and to solve this they used Adiabatic Quantum Optimization the inspiration coming from \cite{farhi2000quantum}.
 	
+	\item [Summary]
+	We know Ramsey numbers are very difficult to calculate, even for small graphs.
+	Wang proposes to use a quantum algorithm that aims to provide a computational speedup compared to classical methods.
+	He defines the Hamiltonian, then checks whether it is zero or larger than zero.
+	To determine a Ramsey number becomes checks if the ground-state energy($E_1$) of Hamiltonian is zero or not. 
+	And with the help of known lower bounds of Ramsey Number, then n is increased up until the Hamiltonian $E_1$ is larger than 0.
+	The algorithm uses concepts such like probe qubits, adiabatic quantum evolution and resonance dynamics. 
+	The probe qubit measures Hamiltonian energy spectrum by varying reference state energy. 
+	And when the n is not a Ramsey Number we have that the probe qubits exhibits a resonance dynamics meaning they will oscillate at a larger frequency.
+\end{description}
+
+
+\newpage
+\cite{doi:10.1137/S0097539796298637}~\bibentry{doi:10.1137/S0097539796298637}
+\begin{description}
+	\item[Aim:]
+	To present a quantum algorithm that is efficient.
+	
+	\item [Style:]
+	Theoretical Research Paper
+	\item [Cross References:]
+	The focus is on quantum computing algorithms.
+	Using the paper \cite{shor1994algorithms} on the development of quantum polynomial-time algorithms for the discrete logarithm and integer factoring problems.
+	Another idea taken was from Feynman who proposed the introduction of quantum computers because classical computers were not able to simulate the quantum world.
+	
+	
+	\item[Summary:]
+	 In theory quantum computers can solve certain computational problems much faster than classical computers.
+	They use interference to increase or decrease the probability of a given state unlike classical computers.
+	There is a quantum algorithm that can distinguish between two classes of polynomial-time computable functions in polynomial time. 
+	This suggests a quantum advantage in function classification. 
+\end{description}
+
+\newpage
+\cite{UQS}~\bibentry{UQS}
+
+\begin{description}
+	\item[Aim:] To show that quantum computers can simulate nature, from a quantum scale.
+	
+	\item [Style:] Theoretical Research Paper
+	
+	\item [Cross References:] Lloyd introduces the concept of universal quantum simulators, to address quantum simulation. 
+	Which extends on the idea introduced by Richard Feynman, of a computer that can simulate quantum systems from the paper \cite{feynman1982simulating}. 
+	
+	\item[Summary:] Quantum computers are able to simulate quantum systems, where classical ones struggle. 
+	Showing the potential for quantum computers to efficiently simulate a wide range of physical processes.	
+	This is a very important since it shows how quantum computers offer an exponential speedup.
+	Not only can quantum computers simulate systems, it can also be useful in understanding different fields.
+	
+	
+\end{description}
+\newpage
+\cite{AndrewSteane}~\bibentry{AndrewSteane}
+\begin{description}
+	\item[Aim:] To have a basic understanding of quantum computers this includes strengths and weaknesses
+	
+	\item [Style:] Review paper
+	
+	\item [Cross References:] Here Steane speaks about the physical implementations of quantum computers, which have emerged as a promising technology in the field at the time. 
+	This basically comes from  the basic principles of quantum mechanics which came from the 20th century.
+	The concept of quantum computing developed through the work of physicists like Richard Feynman in the early 1980s with a paper like \cite{feynman1982simulating}. 
+	
+	
+	\item[Summary:]
+	Qubits represent the basic unit of quantum information.
+	They can be entangled, a phenomenon where two or more qubits become connected, even when separated by large distances.
+	Qubits can be manipulated using quantum gates.
+	Due to sensitivity of quantum computers to the external environment, Quantum Error Correlation was introduced.
+	Quantum error correction (QEC) ensures that a quantum computation remains  accurate.
+\end{description}
 	 	\newpage
 	 	\bibliography{sample}
 \end{document}
