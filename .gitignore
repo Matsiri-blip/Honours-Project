@@ -1,0 +1,14 @@
+*.pdf
+*.bib
+*.aux
+*.bbl
+*.bcf
+*.out
+*.xml
+*.gz
+*.cls
+*.log
+*.ipynb
+*.ini
+*.blg
+
