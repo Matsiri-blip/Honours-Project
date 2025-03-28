@@ -45,3 +45,21 @@ def vertices(n):
     l.append(float(np.cos(2*np.pi*i/n))) 	        ##x = cos(2pi/n), puts in the x values in the list l.
     m.append(float(np.sin(2*np.pi*i/n)))                ##y = sin(2pi/n) both divide by n for number of vertices
   return l,m 					
+
+##define edge function.
+def edges(n,k):  
+  x = vertices(n)[0]
+  y = vertices(n)[1]                                                              ##using the vertice function defined
+  for i in range(n):                                                              ##looping through the vertices
+    plt.scatter(x[i],y[i], label = f"{i+1}")                                      ##plotting the vertices using scatter
+    for j in range(n):                                                            ##looping through the vertices
+      if adjacency_matrix(n,k)[i][j]==1:                                          ## check if there is an edge between the edges using adjacency matrix defined                                               ## if there is an edge add the vertices into a list
+        plt.plot([x[i],x[j]],[y[i],y[j]],color = 'gray')                          ## plot the edges that have 1 between them
+        plt.legend()
+        plt.text(-0.035,0,f'{k}',fontsize = 10)
+        plt.axis('off')
+      else:
+        plt.axis('off')
+        plt.legend()
+        plt.text(-0.035,0,f'{k}',fontsize = 10)
+  return plt.show()
