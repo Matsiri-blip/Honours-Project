@@ -36,35 +36,52 @@ def binary_matrix(n,k):
         horizontal_matrix = np.array([int(i) for i in str(binary)])
     ##here this returns the binary matrix
     return horizontal_matrix
-
+## put the binary vector onto the adjacency matrix
+def  adjacency_matrix(n,k):
+    ##initialize the matrix
+    A = np.zeros((n,n))
+    B = binary_matrix(n,k)
+    ##this loops through the A-matrix and binary vector
+    ## making sure that each element on the matrix is as we defined our labeling
+    for i in range(n-1):
+        if i==0: 
+            A[i][1+i:] = B[:n-i-1]
+        else:
+            A[i][1+i:] = B[n-i-1:n-i-1+len(A[i][1+i:])]
+        for l in range(n):
+            for j in range(n):
+                A[j,l] = A[l,j]
+        
+    return A
 ##Drawing graphs
 
 #putting the vertex at (0,0)
 print("n = 1")
 x0 = np.array([0])
 y0 = np.array([0])
-
 plt.plot(x0,y0,'o')
 plt.axis('off')
 plt.title('GRAPH OF 1 VERTEX')
 plt.show()
 
 ##for n = 2
-
+n = 2
 
 
 x1 =np.array([0,1])
 y1 = np.array([0,0])
-
+print("n = 2")
 plt.scatter(x1,y1)
 plt.text(-0.01,0.01,'1')
 plt.text(0.99,0.01,'2')
 plt.text(0.5,-0.01,'0',fontsize = 15)
 plt.axis('off')
 plt.title('GRAPH OF 2 VERTEX')
-plt.show()
-print("n = 2")
 print(binary_matrix(2,0))
+print(adjacency_matrix(n,0))
+plt.show()
+
+
 
 
 plt.title('GRAPH OF 2 VERTEX')
@@ -74,9 +91,11 @@ plt.text(0.99,0.01,'2')
 plt.axhline(y = 0, xmin = 0.05, xmax = 0.95) 
 plt.text(0.5,-0.01,'1',fontsize = 15)
 plt.axis('off')
-plt.show()
 print(binary_matrix(2,1))
+print(adjacency_matrix(n,1))
+plt.show()
 
+n = 3
 ##N = 3
 print("n = 3")
 x2 =np.array([0,1,2])
@@ -94,8 +113,10 @@ plt.text(1.99,0.05,'3')
 plt.axis('off')
 plt.text(1,1,'0',fontsize = 15)
 plt.title('GRAPH OF 3 VERTEX')
-plt.show()
+print(adjacency_matrix(n,0))
 print(binary_matrix(3,0))
+plt.show()
+
 
 plt.axhline(y = 0, xmin = 0.05, xmax = 0.95) ###between vertices 1,3
 plt.scatter(x2,y2)
@@ -105,8 +126,10 @@ plt.text(1.98,0.05,'3')
 plt.text(1,1,'1',fontsize = 15)
 plt.axis('off')
 plt.title('GRAPH OF 3 VERTEX')
-plt.show()
+print(adjacency_matrix(n,1))
 print(binary_matrix(3,1))
+plt.show()
+
 
 
 plt.plot(x23,y23)##edge between 2&3
@@ -117,8 +140,10 @@ plt.text(0.99,2.05,'2')
 plt.text(1.99,0.05,'3')
 plt.axis('off')
 plt.title('GRAPH OF 3 VERTEX')
-plt.show()
+print(adjacency_matrix(n,2))
 print(binary_matrix(3,2))
+plt.show()
+
 
 plt.plot(x23,y23)##edge between 2&3 
 plt.axhline(y = 0, xmin = 0.05, xmax = 0.95)##and also 1&3
@@ -129,8 +154,10 @@ plt.text(0.99,2.05,'2')
 plt.text(1.99,0.05,'3')
 plt.axis('off')
 plt.title('GRAPH OF 3 VERTEX')
-plt.show()
+print(adjacency_matrix(n,2))
 print(binary_matrix(3,3))
+plt.show()
+
 
 
 plt.plot(x12,y12)##edge between 1,2
@@ -141,8 +168,10 @@ plt.text(1.99,0.05,'3')
 plt.text(1,1,'4',fontsize = 15)
 plt.axis('off')
 plt.title('GRAPH OF 3 VERTEX')
-plt.show()
+print(adjacency_matrix(n,4))
 print(binary_matrix(3,4))
+plt.show()
+
 
 
 plt.plot(x12,y12)##edge between 1,2
@@ -154,8 +183,9 @@ plt.text(1,1,'5',fontsize = 15)
 plt.text(1.99,0.05,'3')
 plt.axis('off')
 plt.title('GRAPH OF 3 VERTEX')
-plt.show()
 print(binary_matrix(3,5))
+plt.show()
+
 
 
 plt.plot(x12,y12)##edge between 1,2
@@ -167,8 +197,9 @@ plt.text(1,1,'6',fontsize = 15)
 plt.text(1.99,0.05,'3')
 plt.axis('off')
 plt.title('GRAPH OF 3 VERTEX')
-plt.show()
 print(binary_matrix(3,6))
+plt.show()
+
 
 
 plt.plot(x12,y12)##edge between 1,2
@@ -216,7 +247,7 @@ def plot_24():
 def plot_34():
     return plt.axhline(y = 0, xmin = 0.05, xmax = 0.95)
 ## using this as reference [(1,2),(1,3),(1,4),(2,3),(2,4),(3,4)]
-
+n = 4
 #0
 plt.scatter(x3,y3)
 plt.text(-0.01,1.01,'1')
