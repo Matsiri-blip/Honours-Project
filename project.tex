@@ -7,9 +7,16 @@
 
 \section*{Task 1}
 \subsection*{Introduction}
-Main idea of this project is to understand graphs  as a mathematical set and also in a computer science perspective. Generally graphs are thought of as usually thought of as functions that are made of axis i.e x and y, and well the z-th axis. But mathematicians usually study graphs made up of set of vertices(points) with edges(curves) connecting these vertices. And these graphs have various applications in our real lives, this includes flight paths, social networks like friend groups and puzzle games. In this project our main focus would be on complete graphs.\\
+Main idea of this project is to understand graphs  as a mathematical set and also in a computer science perspective. 
+Generally graphs are thought of as usually thought of as functions that are made of axis i.e x and y, and well the z-th axis.
+But mathematicians usually study graphs made up of set of vertices(points) with edges(curves) connecting these vertices.
+And these graphs have various applications in our real lives, this includes flight paths, social networks like friend groups and puzzle games. 
+In this project our main focus would be on complete graphs.\\
 \\
- I started preparing researching by starting with firstly this stage, understanding what a simple graph is, from a mathematical view point and how it can be understood from a computer science view point. From graphs we get to the Ramsey theory which is a problem relating to graphs theory and very hard to solve. Ramsey theory tries to understand how order is found in chaos. And from my understanding is Ramsey numbers are hard to find because the graphs that are generated depending on the vertices grow super-exponentially by a factor of $2^{n^2}$ this is the reason why Ramsey numbers of diagonals over 4 are not yet found.\\
+ I started preparing researching by starting with firstly this stage, understanding what a simple graph is, from a mathematical view point and how it can be understood from a computer science view point.
+  From graphs we get to the Ramsey theory which is a problem relating to graphs theory and very hard to solve.
+   Ramsey theory tries to understand how order is found in chaos. 
+   And from my understanding is Ramsey numbers are hard to find because the graphs that are generated depending on the vertices grow super-exponentially by a factor of $2^{n^2}$ this is the reason why Ramsey numbers of diagonals over 4 are not yet found.\\
   
 \section*{Sub task A}
 \subsection*{Graph Theory}
@@ -57,7 +64,7 @@ Adjacent List \\\\
 \end{itemize}
 \newpage
 \subsection*{Ramsey Theory}
-Named after mathematician Frank Ramsey, who first proved a problem in combinatorics.\\
+Named after mathematician Frank Ramsey, who first proved a problem in combinatorics.
 The theory state that a monochromatic cliques in any edge labeling of large enough complete graph, or for two colours say red(r) and blue(b) be any two positive integers, the theorem states that there's a least positive integer $R(r,b)$ such that for which every blue-red edge colouring of the complete graph on $R(r,b)$ vertices contains a blue clique on r vertices or a red clique on b vertices.\\\\
 \begin{itemize}
 	\item In a complex and large enough system a pattern can almost be found
@@ -82,30 +89,68 @@ Is the minimum number of vertices $n = R(r,b)$ such that all undirected simple g
 Showing that the n increases with an increase in both k and l
 \end{enumerate}
 \subsection*{Summary}
-Firstly what i did was use the links provided to understand the theories given namely Graph Theory and Ramsey Theory. Understanding concept of graphs from a mathematical point of view together with computer science point of view. We explored applications in different fields and how they are incredibly not easy to compute. And understood that there exists order in chaos.
+Firstly what i did was use the links provided to understand the theories given namely Graph Theory and Ramsey Theory.
+Understanding concept of graphs from a mathematical point of view together with computer science point of view.
+We explored applications in different fields and how they are incredibly not easy to compute.
+And understood that there exists order in chaos.
 \newpage
 \section*{Task 2}
 
 \subsection*{Introduction}
-Main idea is that graphs can have different orientations but same structure this is called homomorphic graphs. So what i understand in this task is to see how we can get different structures of graphs from making orientations with the vertices and edges. Each vertices in different graphs say graph A and graph B must first have same about of vertices that can be arranged in any orientation, same degrees and with same number of neighbours in other words this can be thought of as same graphs that have same structural properties. Its more about fitting one graph into the other by shifting vertices and edges but still preserving the same structure. \\\\
-So for this task I was able to draw different graphs starting with graph of only one vertices having no edges to going to in increasing manner from 2, 3 and 4 vertices. What happened is i explored different types of orientations and how the number of graphs depends on the number $2^{\left( \frac{n^2-n}{n}\right)}$, this shows that the number of graphs increases super exponentially by increasing n. Although when we get to graphs having different structures(Homomorphic graphs) I was able to notice that these do not grow as much as the number of graphs increases. 
+Main idea is that graphs can have different orientations but same structure this is called homomorphic graphs.
+ So what i understand in this task is to see how we can get different structures of graphs from making orientations with the vertices and edges.
+  Each vertices in different graphs say graph A and graph B must first have same about of vertices that can be arranged in any orientation, same degrees and with same number of neighbours in other words this can be thought of as same graphs that have same structural properties. 
+  Its more about fitting one graph into the other by shifting vertices and edges but still preserving the same structure. \\\\
+So for this task I was able to draw different graphs starting with graph of only one vertices having no edges to going to in increasing manner from 2, 3 and 4 vertices.
+ What happened is i explored different types of orientations and how the number of graphs depends on the number $2^{\left( \frac{n^2-n}{n}\right)}$, this shows that the number of graphs increases super exponentially by increasing n. 
+ Although when we get to graphs having different structures(Homomorphic graphs) I was able to notice that these do not grow as much as the number of graphs increases. 
 \subsection*{\underline{Sub-task A}}
 \begin{enumerate}
 	\item A graph homomorphism f from a graph $G = (V(G),E(G))$ to a graph $H =(V(H),E(H))$, f $: G \rightarrow H$ is a function from V(G) to V(H) that preserves edges.
 \end{enumerate}
 \subsection*{\underline{Sub-task B}}
 \begin{enumerate}
-	\item \includepdf[pages={4,3,2,1}]{my_labeled_graphs.pdf}\newpage
-	\item So what i started with calculating the amount of graph that I need to draw depending on n, from the equation $2^{ \frac{\left(n^2-n\right)}{n}}$,\\\\
-	is draw the vertices or points for n=1. Which we get the number of graphs would be 1, so there would be a number of 1 vertices and 0 edges since we can connect it to any other vertex.\\\\Then going to n = 2 we have only 2 graph orientations, we have only 2 ways in which we can draw these graphs, the first orientation all vertices did not have any edges, where as the other orientation had all edges drawn from them, to save time, this implies to each and everyone of the graph, i.e for n=3 and n =4.\\\\ 
-	So going to n=3 we get the number of orientations we have 8 different ways in which this can be arranged, so what i started with all the edges connected to other ones with each one possible then seeing each of the graphs can be arranged,so starting by only any two random vertices with an edge and try to make sure that the "completed graph" drawn first is complete by joining any 2 random vertices this would only result in only 3 ways, \ then moving on to 2 edges, so what i did was from the previous graphs obtained with only one edge was extend each of them only once by an edge connecting them to another vertex which did not have any edge, doing this i had 3 more ways and finally i was done with n=3\\\\
-	Going to n=4 we have the first one where there is no edges connected, and after draw all possible connections, why? In order to find all different types of graphs that can be obtained, after pair only 2 vertices and this can be 6 using the reference of the full complete graph. Then from there i took each graph and expanded all 5 different combinations which resulted in 6$\times 5$ = 30 graphs with 2 edges connected and from there only took the ones that are not duplicated which resulted in 15 more graphs.\\ Then from there i extended each of the 15 graphs since they can have any 4 more different ways in which they can complete the graph, this created a way in which i can get to 64 graphs of 4 vertices graph.\\\\I had a difficulty in identifying the classes of the homomorphism, for n=4 vertices.
-\end{enumerate}
-\subsection*{Summary}
-So for this task i was able to understand what a graph homomorphism is, in the context of complete graph. What i did was find different classes of graph with same vertices by drawing each individual orientation of these vertices leading to a combination of them. How i found these homomorphic graphs, i was able to map each vertex in one graph and try to ensure that they are all mapping to one vertices, and also it would have the same amount of neighbours.\newpage
+	
+	\item Let $G_1 = (v_i(G),e_i(G))$ represent a graph.\newline
+	then $v_i(G) \sim v_i(G)$ and $e_i(G) \sim e_i(G)$(by definition)\newline
+	$\implies G\sim G$  
+	
+	\item
+	Let $G = (v_i(G),e_i(G))$ represent a graph.\newline
+	$H = (v_i(H),e_i(H))$ also represent a graph.\newline
+	then $v_i(G) \sim v_i(H)$ and $e_i(G) \sim e_i(H)$(from the given condition)\newline
+	Hence $ G\sim H$  
+	\item 	Let $G = (v_i(G),e_i(G))$ represent a graph.\newline
+	$H = (v_i(H),e_i(H))$ also represent a graph.\newline
+ and	$K = (v_i(K),e_i(K))$ represent a graph.\newline
+	then if $v_i(G) \sim v_i(H)$ and $e_i(G) \sim e_i(H)$(from the given condition)\newline
+	And  $v_i(H) \sim v_i(K)$ and $e_i(H) \sim e_i(K)$(from the given condition)\newline
+	$\implies v_i(G)\sim v_i(K)$ with $e_i(G) \sim e_i(K)$ \newline
+	We would then have 
+	$\implies G\sim K$ 
+	 \end{enumerate}\includepdf[pages={4,3,2,1}]{my_labeled_graphs.pdf}
+	 \newpage
+	So what i started with calculating the amount of graph that I need to draw depending on n, using the equation $2^{ \frac{\left(n^2-n\right)}{n}}$,\\\\
+	Then i started to draw the vertices of n=1.
+	 Which we get the number of graphs would be 1, so there would be a number of 1 vertices and 0 edges since we can connect it to any other vertex.
+	 \\\\Then going to n = 2 we have only 2 graph orientations. 
+	 The first orientation all vertices did not have any edges, where the other orientation had all edges drawn from them, this implies to each vertex is connected to each vertex of the graph.\\\\ 
+	So going to n=3 we get the number of orientations we have 8 different ways in which this can be arranged.
+	 I started with all the edges connected to other ones with each one possible then seeing each of the graphs can be arranged,so starting by only any two other vertices with an edge and try to make sure that the "completed graph" drawn first is complete by joining any 2 random vertices this would only result in only 3 ways.
+	 Then moving on to 2 edges, so what i did was from the previous graphs obtained with only one edge was extend each of them only once by an edge connecting them to another vertex which did not have any edge, doing this i had 3 more ways and finally i was done with n=3.\\\\
+	Going to n=4 we have the first one where there is no edges connected, and after draw all possible connections.
+	 In order to find all different types of graphs that can be obtained, after pair only 2 vertices and this can be 6 using the reference of the full complete graph. 
+	 Then from there i took each graph and expanded all 5 different combinations which resulted in 6$\times 5$ = 30 graphs with 2 edges connected and from there only took the ones that are not duplicated which resulted in 15 more graphs.
+	  Then from there i extended each of the 15 graphs since they can have any 4 more different ways in which they can complete the graph, this created a way in which i can get to 64 graphs of 4 vertices graph.
 
-For this part of the project all we have to do is find labels for our graphs. In other words find a way in which we can count, say if we have 4 graphs we should be able to identify each graph and match it with its unique number depending on what we agree as our reference of labeling. If we consider the adjacency matrix we know that the relationship between the vertices which can be considered as a binary encoding, because the vertices can either be neighbours or not(i.e 1 or 0).\\
-So we see that this encoding can be a way to represent our labels, but it would be confusing if we do not agree on a which we are going to count from our adjacency matrix, so im going to include an example. Say we have a 4 x 4 adjacency matrix,
+\subsection*{Summary}
+So for this task i was able to understand what a graph homomorphism is, in the context of complete graph.
+ What i did was find different classes of graph with same vertices by drawing each individual orientation of these vertices leading to a combination of them. 
+ How i found these homomorphic graphs, i was able to map each vertex in one graph and try to ensure that they are all mapping to one vertices, and also it would have the same amount of neighbours.\newpage For this part of the project all we have to do is find labels for our graphs. 
+ In other words find a way in which we can count, say if we have 4 graphs we should be able to identify each graph and match it with its unique number depending on what we agree as our reference of labeling. 
+ If we consider the adjacency matrix we know that the relationship between the vertices which can be considered as a binary encoding, because the vertices can either be neighbours or not(i.e 1 or 0).
+So we see that this encoding can be a way to represent our labels, but it would be confusing if we do not agree on a which we are going to count from our adjacency matrix, so im going to include an example. 
+Say we have a 4 x 4 adjacency matrix,
 
 \begin{equation}
 \begin{pmatrix}
@@ -120,8 +165,202 @@ and the horizontal(binary) matrix in which we are going to use to count/label th
 		0_5&1_4&1_3&0_2&1_1&1_0
 	\end{pmatrix}
 \end{equation}
- so converting this to binary we have $2^0+2^1+0+2^3+2^4+0$=1+2+8+16=27\\This means our 27th graph when we use the 0-th index we have that this list in which the vertices are connected is given by $\{(1,3),(1,4),(2,4),(3,4)\}$\\The following graphs are shown in where they are labeled in binary
+ so converting this to binary we have $2^0+2^1+0+2^3+2^4+0$=1+2+8+16=27.\newline
+ This means our 27th graph when we use the 0-th index we have that this list in which the vertices are connected is given by $\{(1,3),(1,4),(2,4),(3,4)\}$\newline
+ The following graphs are shown in where they are labeled in binary
 \includepdf[pages={1,2,3,4}]{binary_labeled_graphs.pdf}
-Then for the second part we had to group these labeled graphs in a which they can be in their own homomorphic groups like in task 2. Here the only challenge would trying to find groups that have the same orientations, although 2 can show which graphs have how many certain edges the only problem would be ensuring that they have the same orientation. So i was able to find these groups and also ensure that they are correctly numbered.
-\includepdf[pages={4,3,2,1}]{binary_homomorphic_groups.pdf} which concluded the weeks progress, so we basically found a way to draw our graphs in a way which we can identify each individual graph using Binary counting. This is the efficient way so far that we can understand.
+Then for the second part we had to group these labeled graphs in a which they can be in their own homomorphic groups like in task 2.
+ Here the only challenge would trying to find groups that have the same orientations, although 2 can show which graphs have how many certain edges the only problem would be ensuring that they have the same orientation.
+  So i was able to find these groups and also ensure that they are correctly numbered.
+\includepdf[pages={4,3,2,1}]{binary_homomorphic_groups.pdf}
+ We basically found a way to draw our graphs in a way which we can identify each individual graph using Binary counting. This is the efficient way so far that we can understand.\newpage
+ \section*{first\_draft\_graph\_code.py}
+Then for putting all these graphs in python, i had to find a way in which i can define numbers in binary. 
+Using the function "bin(num)".
+Then from there i was able to split this binary number into a string, so that i can be able to return it as vector.
+Then this vector can be put in the adjacency matrix that i would need to draw the graph.
+The reason this was done was in order to identify the vertices that are going to be connected to each other according to the adjacency matrix.
+Then what i had to do was define the vertices on a graph using the "matplotlib.pyplot" to draw points on a Cartesian plane. 
+To get the vertices i just had to eye ball and ensure that the differences between them is the same.
+Then to get the edges i had to define a straight line graph between the vertices, this was either horizontal, vertical and diagonal lines between them.
+
+
+$$\includegraphics[scale=0.5]{first_draft_graphs_code/figure_10.png}$$\\
+n=2\\
+\includegraphics[scale = 0.4]{first_draft_graphs_code/figure_20.png} \includegraphics[scale = 0.4]{first_draft_graphs_code/figure_21.png}
+\\
+n=3\\
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_30.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_31.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_32.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_33.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_34.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_35.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_36.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_37.png}
+\\
+n=4\\
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_40.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_41.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_42.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_43.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_44.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_45.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_46.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_47.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_48.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_49.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_410.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_411.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_412.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_413.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_414.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_415.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_416.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_417.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_418.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_419.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_420.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_421.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_422.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_423.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_424.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_425.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_426.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_427.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_428.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_429.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_430.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_431.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_432.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_433.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_434.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_435.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_436.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_437.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_438.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_439.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_440.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_441.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_442.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_443.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_444.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_445.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_446.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_447.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_448.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_449.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_450.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_451.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_452.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_453.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_454.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_455.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_456.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_457.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_458.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_459.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_460.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_461.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_462.png}
+\includegraphics[scale = 0.5]{first_draft_graphs_code/figure_463.png}
+\newpage
+\section*{more\_systematic\_graphs.py}
+Using the functions from the first draft part, the binary matrix and adjacent matrix functions are used.
+Then i extended this by including the vertices because the first part was not a systematic way to draw the vertices.
+So what is different about this part of the code is that i used the equation of a circle to define a way in which we can put the vertices.
+So in python i defined a function "vertices" that takes in "n" for number of vertices.
+Then defined two empty lists in order to add in the lists of x and y values.
+x values of a circle are given by $\cos({2\pi \frac{i}{n}})$ this would then be added to the x values list.
+This would be the same for the y values only difference is the $\sin({2\pi \frac{i}{n}})$ part only.
+Then this function returns x and y values lists.\newline
+Going to edges, i created an "edges" function that also takes in n as an input.
+It uses the vertices function as a set of x and y values together with adjacency matrix.
+Firstly it plots the vertices using the x and y values.
+Then when the element in the adjacency matrix is 1 it draws an edge between the vertices.
+Using the plt.plot function to plot a line between these vertices.
+When the element is 0 it just returns no edge between them. \newline
+These functions are part of a function i defined as "Graphs" that takes in n and k for the number of graphs, and returns the plot of edges with vertices.
+Then starting with n = 1 we have the following outputs using a loop we get that\newline
+n = 1\newline
+$$\includegraphics[]{more_systematic_graphs/figure_10.png}$$
+n= 2\\
+\includegraphics[scale = 0.4]{more_systematic_graphs/figure_20.png} \includegraphics[scale = 0.4]{more_systematic_graphs/figure_21.png}
+\\
+n=3\\
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_30.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_31.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_32.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_33.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_34.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_35.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_36.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_37.png}
+\\
+n=4\\
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_40.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_41.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_42.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_43.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_44.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_45.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_46.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_47.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_48.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_49.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_410.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_411.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_412.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_413.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_414.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_415.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_416.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_417.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_418.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_419.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_420.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_421.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_422.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_423.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_424.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_425.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_426.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_427.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_428.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_429.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_430.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_431.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_432.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_433.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_434.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_435.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_436.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_437.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_438.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_439.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_440.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_441.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_442.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_443.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_444.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_445.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_446.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_447.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_448.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_449.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_450.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_451.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_452.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_453.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_454.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_455.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_456.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_457.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_458.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_459.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_460.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_461.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_462.png}
+\includegraphics[scale = 0.5]{more_systematic_graphs/figure_463.png}
+
 \end{document}
