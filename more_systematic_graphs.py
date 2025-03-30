@@ -115,23 +115,35 @@ def Graph(n,k):
       m.append(float(np.sin(-2*np.pi*i/n+np.pi)))                ##y = sin(2pi/n) both divide by n for number of vertices
     return l,m 				
   x = vertices(n)[0]
-  y = vertices(n)[1]                                                              ##using the vertice function defined
-  for i in range(n):                                                              ##looping through the vertices
-    plt.scatter(x[i],y[i], label = f"{i+1}")                                      ##plotting the vertices using scatter
-    for j in range(n):                                                            ##looping through the vertices
-      if n <2:
-        return [0]
-      elif adjacency_matrix(n,k)[i][j]==1:                                          ## check if there is an edge between the edges using adjacency matrix defined                                               ## if there is an edge add the vertices into a list
-        plt.plot([x[i],x[j]],[y[i],y[j]],color = 'gray')  
-        plt.axis('off')
-        plt.legend()
-        plt.text(-0.035,0,f'{k}',fontsize = 10)
-      else:
-        plt.axis('off')
-        plt.legend()
-        plt.text(-0.035,0,f'{k}',fontsize = 10)
-  return plt.show(), print(adjacency_matrix(n,k)),print(binary_matrix(n,k))    ##this function returns binary vector, adjacency matrix and graph
+  y = vertices(n)[1]
+  def edges(n,k):                                                              ##using the vertice function defined
+    for i in range(n):                                                              ##looping through the vertices
+      plt.scatter(x[i],y[i], label = f"{i+1}")                                      ##plotting the vertices using scatter
+      for j in range(n):                                                            ##looping through the vertices
+        if n <2:
+          return [0]
+        elif adjacency_matrix(n,k)[i][j]==1:                                          ## check if there is an edge between the edges using adjacency matrix defined                                               ## if there is an edge add the vertices into a list
+          plt.plot([x[i],x[j]],[y[i],y[j]],color = 'gray')  
+          plt.axis('off')
+          plt.legend()
+          plt.text(-0.035,0,f'{k}',fontsize = 10)
+        else:
+          plt.axis('off')
+          plt.legend()
+          plt.text(-0.035,0,f'{k}',fontsize = 10)
+    return plt.show()
+  def vertex():
+    plt.scatter(x[0],y[0], label = "1")
+    plt.axis('off')
+    plt.legend()
+    plt.text(-0.035,0,'0',fontsize = 10)
+    return plt.show()
+  if n<2:
+    return vertex()
+  else:
+    return edges(n,k)  ##this function returns the graph
+
 n=4
 m = (n**2-n)/2
-for i in range(int(m)):
+for i in range(int(2**m)):
   Graph(n,i)
