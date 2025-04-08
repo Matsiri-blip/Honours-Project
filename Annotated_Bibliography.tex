@@ -30,27 +30,31 @@
 
 \author{Matsiri Madiba}
 \date{March 2025}
-\title{Ramsey Numbers and Quantum Computing}
+\title{Annotated Bibliography}
 
 \begin{document}
 \maketitle
 \cite{burr1981generalized}~\bibentry{burr1981generalized}
 \begin{description}
 	\item[Aim:]
-To find the ideas that have contributed to the discoveries in Ramsey theory for graphs and finding Ramsey numbers.
+To get the ideas that have helped to the make findings in Ramsey theory for graphs.
 \item[Style:]
 Review Paper
 \item[Cross References:]
-We see that it extends on a 15 year old research at the time(1981). They only consider complete graphs. We see Ramsey theory explored by also considering the book \cite{graham1980ramsey}, while also exploring complex graph structures.
+The paper extends on a 15 year old research at time.
+For Ramsey theory complete graphs are considered. 
+Ramsey theory is explored by considering the book \cite{graham1980ramsey}.
+Burr tries to understand how hard evaluating Ramsey Numbers is.
+The paper \cite{PhysRevA.93.032301} they try getting around this by using Quantum Computing.
+And in this paper different graph structures are explored not just complete graphs.
 \item [Summary:]
-Ramsey theory deals with graphs, and tries to understand the patterns that occur in those graphs.
-Finding Ramsey numbers is not very easy.
-They can be defined as part of NP-complete problem.
-We see how an NP-complete problems are important.
-Here we see how to determine Ramsey numbers.  
-We have Ramsey numbers involving a fixed graph with growing graphs of size n, to find them aiming for exact results for all n. 
-Then an asymptotic formula at minimum, upper and lower bounds is used to estimate these numbers.  
-
+Ramsey theory tries to understand the patterns that occur within graphs.
+Finding Ramsey numbers is difficult.
+Generalized Ramsey Theory 
+They can be defined as part of NP-complete problem or even harder.
+Which are a class of difficult problems.
+We have Ramsey numbers involving a fixed graph with growing graphs of size n to find exact results for all n. 
+Then an asymptotic formula at the bounds is used to give information about these numbers.  
 \end{description}
 \newpage
 \cite{f3197c3a-bce3-3c72-b6d6-c1ee34ac9328}~\bibentry{f3197c3a-bce3-3c72-b6d6-c1ee34ac9328}
@@ -61,14 +65,14 @@ Then an asymptotic formula at minimum, upper and lower bounds is used to estimat
 		Journal article, theoretical.
 		\item[Cross References:]
 		It extends more on universal quantum computer by \cite{deutsch1985quantum}, which can simulate a quantum system. 
-		We understand about developing the theory  for quantum computation. 
+		We understand about the development of quantum computation theory.
 		It extends a bit on the theory between known classical computations. 
 		Together with few known quantum mechanics algorithms that have existed for few years prior to the release of the paper.
 		\item [Summary:]
 		Quantum computations could be represented as networks of quantum gates, similar to classical circuits.
 		Quantum logic and gates transform quantum binary inputs into quantum binary outputs regardless of the input values.
 		So a universal quantum gate simplifies quantum computing theory and makes building quantum computers more practical. 
-		It then shows the importance of a Hamiltonian in computers.
+	A Hamiltonian is important in computers.
 	\end{description}
 
 	\newpage
@@ -79,19 +83,19 @@ Then an asymptotic formula at minimum, upper and lower bounds is used to estimat
 	\item [Style:]
 	Theoretical Research paper
 	\item [Cross References:]
-	Here it  extends on using quantum algorithm to calculate Ramsey Numbers which was proposed by the paper \cite{gaitan2012ramsey}.
+	It  extends on using quantum algorithm to calculate Ramsey Numbers which was proposed by the paper \cite{gaitan2012ramsey}.
 	They used the scheme in this paper into turning Ramsey numbers into a decision problem on a quantum computer.
-	This was done by turning the problem into a combinatorial optimization problem, and to solve this they used Adiabatic Quantum Optimization the inspiration coming from \cite{farhi2000quantum}.
+	This was done by turning the problem into a combinatorial optimization problem, and to solve this they used Adiabatic Quantum Optimization from \cite{farhi2000quantum}.
 	
 	\item [Summary]
-	We know Ramsey numbers are very difficult to calculate, even for small graphs.
-	Wang proposes to use a quantum algorithm that aims to provide a computational speedup compared to classical methods.
-	He defines the Hamiltonian, then checks whether it is zero or larger than zero.
-	To determine a Ramsey number becomes checks if the ground-state energy($E_1$) of Hamiltonian is zero or not. 
+	Ramsey numbers are very difficult to calculate.
+	Wang proposes to use a quantum algorithm that provides a computational speedup compared to classical methods.
+	If you define a Hamiltonian and ground-state energy($E_1$) of it is zero, it confirms if a Ramsey number exist. 
 	And with the help of known lower bounds of Ramsey Number, then n is increased up until the Hamiltonian $E_1$ is larger than 0.
-	The algorithm uses concepts such like probe qubits, adiabatic quantum evolution and resonance dynamics. 
+	The algorithm uses concepts like probe qubits, adiabatic quantum evolution and resonance dynamics. 
 	The probe qubit measures Hamiltonian energy spectrum by varying reference state energy. 
-	And when the n is not a Ramsey Number we have that the probe qubits exhibits a resonance dynamics meaning they will oscillate at a larger frequency.
+	And when the n is not a Ramsey Number we have that the probe qubits exhibits a resonance dynamics.
+	This means they will oscillate at a larger frequency.
 \end{description}
 
 
@@ -106,12 +110,11 @@ Then an asymptotic formula at minimum, upper and lower bounds is used to estimat
 	\item [Cross References:]
 	The focus is on quantum computing algorithms.
 	Using the paper \cite{shor1994algorithms} on the development of quantum polynomial-time algorithms for the discrete logarithm and integer factoring problems.
-	Another idea taken was from Feynman who proposed the introduction of quantum computers because classical computers were not able to simulate the quantum world.
 	
 	
 	\item[Summary:]
 	 In theory quantum computers can solve certain computational problems much faster than classical computers.
-	They use interference to increase or decrease the probability of a given state unlike classical computers.
+	They use interference to increase or decrease the probability of a given state.
 	There is a quantum algorithm that can distinguish between two classes of polynomial-time computable functions in polynomial time. 
 	This suggests a quantum advantage in function classification. 
 \end{description}
@@ -125,12 +128,11 @@ Then an asymptotic formula at minimum, upper and lower bounds is used to estimat
 	\item [Style:] Theoretical Research Paper
 	
 	\item [Cross References:] Lloyd introduces the concept of universal quantum simulators, to address quantum simulation. 
-	Which extends on the idea introduced by Richard Feynman, of a computer that can simulate quantum systems from the paper \cite{feynman1982simulating}. 
+	Which extends on the idea introduced by Richard Feynman of a computer that can simulate quantum systems from the paper \cite{feynman1982simulating}. 
 	
 	\item[Summary:] Quantum computers are able to simulate quantum systems, where classical ones struggle. 
 	Showing the potential for quantum computers to efficiently simulate a wide range of physical processes.	
 	This is a very important since it shows how quantum computers offer an exponential speedup.
-	Not only can quantum computers simulate systems, it can also be useful in understanding different fields.
 	
 	
 \end{description}
@@ -143,7 +145,7 @@ Then an asymptotic formula at minimum, upper and lower bounds is used to estimat
 	
 	\item [Cross References:] Here Steane speaks about the physical implementations of quantum computers, which have emerged as a promising technology in the field at the time. 
 	This basically comes from  the basic principles of quantum mechanics which came from the 20th century.
-	The concept of quantum computing developed through the work of physicists like Richard Feynman in the early 1980s with a paper like \cite{feynman1982simulating}. 
+	The concept of quantum computing developed through the work of physicist in the early 1980s with a paper like \cite{feynman1982simulating}. 
 	
 	
 	\item[Summary:]
