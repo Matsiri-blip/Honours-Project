@@ -37,24 +37,24 @@
 \cite{burr1981generalized}~\bibentry{burr1981generalized}
 \begin{description}
 	\item[Aim:]
-To get the ideas that have helped to the make findings in Ramsey theory for graphs.
+	To investigate generalized Ramsey theory, which extends on classical Ramsey theory.
+	Find important ideas found in Ramsey theory for graphs while also focusing on Ramsey numbers.
+
 \item[Style:]
 Review Paper
 \item[Cross References:]
-Ramsey theory is explored by considering the book \cite{graham1980ramsey}.
-For Ramsey theory complete graphs are considered. 
+
+For Ramsey theory only complete graphs are considered. 
 Burr tries to understand how hard evaluating Ramsey Numbers is.
-We are introduced to different complexity of the problem.
-The paper \cite{PhysRevA.93.032301} they try getting around this by using Quantum Computing.
-And in this paper different graph structures are explored not just complete graphs.
+By introducing different complexities of problems.
+The article \cite{PhysRevA.93.032301} tries getting around this by using Quantum Computing to find these numbers.
 \item [Summary:]
 Ramsey theory tries to understand the patterns that occur within graphs.
 Finding Ramsey numbers is difficult.
 They can be defined as part of NP-complete problem or even harder.
 Which are a class of difficult problems.
 Generalized Ramsey Theory does not only consider complete graphs.
-Complex graph structures are considered .
-We have Ramsey numbers involving a fixed graph with growing graphs of size n to find exact results for all n. 
+We have Ramsey numbers involving a fixed graph with increasing n, try to find exact results for all n. 
 Then an asymptotic formula at the bounds is used to give information about these numbers.  
 \end{description}
 
@@ -62,26 +62,23 @@ Then an asymptotic formula at the bounds is used to give information about these
 \cite{PhysRevA.93.032301}~\bibentry{PhysRevA.93.032301}
 \begin{description}
 	\item [Aim:]
-	To find Ramsey numbers using a quantum computer algorithms.
+	To find Ramsey numbers using quantum computer algorithms.
 	\item [Style:]
 	Theoretical Research paper
 	\item [Cross References:]
-	Quantum algorithm was used to calculate Ramsey Numbers which was proposed by the paper \cite{gaitan2012ramsey}.
-	Some Ramsey theory is explored like in the paper \cite{burr1981generalized} and book \cite{graham1980ramsey}.
-	Wang turned Ramsey numbers into a decision problem on a quantum computer.
-	A humiliation is used, this was also introduced in the paper \cite{Deutsch1989}.
-	This was done by turning the problem into a combinatorial optimization problem.
-	He used Adiabatic Quantum Optimization from \cite{farhi2000quantum}.
+	Quantum algorithm is used to calculate Ramsey Numbers, proposed in \cite{gaitan2012ramsey}.
+	A Hamiltonian is used, this was also referenced in the paper \cite{doi:10.1137/S0097539796298637}.
+	Wang turned the problem into a combinatorial optimization problem.
+	Adiabatic Quantum Optimization considering \cite{farhi2000quantum} was used.
 	
-	\item [Summary]
+	\item [Summary:]
 	Ramsey numbers are very difficult to calculate.
-	Wang proposes to use a quantum algorithm.
-	This provides a computational speedup compared to classical methods.
+	Quantum computers provide a computational speedup compared to classical ones.
+	A Hamiltonian of the problem gets defined.
 	If ground-state energy($E_1$) of a Hamiltonian is zero a Ramsey number exist. 
 	And using bounds of Ramsey Number n is increased until the Hamiltonian $E_1$ is larger than 0.
-	The algorithm uses concepts like probe qubits, adiabatic quantum evolution and resonance dynamics. 
-	The probe qubit measures Hamiltonian energy spectrum by varying reference state energy. 
-	And when the n is not a Ramsey Number we have that the probe qubits exhibits a resonance dynamics.
+	The qubit measures Hamiltonian energy spectrum by varying reference state energy. 
+	And when the n is not a Ramsey Number the qubits exhibits a resonance dynamics.
 	This means they will oscillate at a larger frequency.
 \end{description}
 
@@ -90,22 +87,21 @@ Then an asymptotic formula at the bounds is used to give information about these
 \cite{Deutsch1989}~\bibentry{Deutsch1989}
 	    \begin{description}
 			\item [ Aim:]
-		To understand quantum computation and creation of quantum algorithms.
+		To understand the theory of quantum computations using understanding of classical ones.
+		By using the ideas of classical gates and extending them to quantum gates.
 		\item[Style:]
 		Journal article, theoretical.
 	
 		\item[Cross References:]
-		Deutsch extends more on universal quantum computer by \cite{deutsch1985quantum} from classical computing to quantum mechanics. 
+		Deutsch builds on universal quantum computer by \cite{deutsch1985quantum} from classical computing to quantum mechanics. 
 		We understand about the development of quantum computation theory.
-		He also includes the theory between known classical computations. 
 		He then relates universal quantum computer to the classical computer using the paper \cite{Turing1936}.
 		\item [Summary:]
 		Computation can be thought as a mathematical function that has an input, and gets an output from that.
 		Theory of computations deals with the complexity of a problem.
 		Quantum computations could be represented as networks of quantum gates.
-		Quantum gates differ from logic gates in where the inputs and outputs of quantum gates can be a mixture of states.
-		Quantum logic gates transform quantum binary inputs into quantum binary outputs independent of to the input values.
-		A universal quantum gate simplifies quantum computing theory, and makes building quantum computers more practical. 
+		A universal quantum gate simplifies quantum computing theory.
+		It makes building quantum computers more practical. 
 		Quantum coherence gives them computational power over classical ones.
 	\end{description}
 
@@ -121,7 +117,7 @@ Then an asymptotic formula at the bounds is used to give information about these
 	This article speaks about quantum machines from the paper \cite{Deutsch1989}.
 	Simon gives reasons why quantum computers have advantage over classical ones.
 	The focus is on quantum computing algorithm that can show how fast these computers are	.
-	Using the paper \cite{shor1994algorithms} he explores the development of quantum polynomial-time algorithms.
+	Using the article \cite{shor1994algorithms} he explores the development of quantum polynomial-time algorithms.
 	\item[Summary:]
 	 In theory quantum computers can solve certain computational problems fast.
 	They use interference to increase or decrease the probability of a given state.
@@ -141,7 +137,7 @@ Then an asymptotic formula at the bounds is used to give information about these
 	\item [Cross References:]
 	Lloyd introduces the concept of universal quantum simulators. 
 	Which extends on the idea introduced by Feynman of a computer that can simulate quantum systems from the paper \cite{feynman1982simulating}. 
-	Using the paper \cite{Deutsch1989} he also speaks on quantum gates
+	He also speaks on quantum gates, which was also referenced in the paper \cite{Deutsch1989}
 	
 	\item[Summary:] 
 	Quantum computers are able to simulate quantum systems. 
@@ -167,7 +163,7 @@ Then an asymptotic formula at the bounds is used to give information about these
 	
 	\item[Summary:] 
 	Qubits represent the basic unit of quantum information.
-	They can be entangled, a phenomenon where two or more qubits become connected, even when separated by large distances.
+	They can be entangled.
 	Qubits can be manipulated using quantum gates.
 	Due to sensitivity of quantum computers to the external environment, Quantum Error Correlation was introduced.
 	Quantum error correction (QEC) ensures that a quantum computation remains  accurate.
