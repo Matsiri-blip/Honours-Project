@@ -13,4 +13,7 @@
 *.blg
 *.gz
 *.png
+*.cls
+project.aux
 
+project.aux
