@@ -53,21 +53,21 @@ def Graph(n,k):
         if n <2:
           return [0]
         elif adjacency_matrix(n,k)[i][j]==1:                                          ## check if there is an edge between the edges using adjacency matrix defined                                               ## if there is an edge add the vertices into a list
-          plt.plot([x[i],x[j]],[y[i],y[j]],color = 'grey', zorder=1)
+          plt.plot([x[i],x[j]],[y[i],y[j]],color = 'blue', zorder=1)
           plt.scatter(x[i],y[i], label =f"{i+1}",s=200, color = 'maroon', zorder=2) 
           plt.axis('off')
           plt.text(x[i]-0.02,y[i]-0.02,f'{i+1}',fontsize = 10,color = 'white')
           # plt.text(-0.035,0,f'{k}',fontsize = 10)
         else:
-          # plt.plot([x[i],x[j]],[y[i],y[j]],color = 'red')  
+          plt.plot([x[i],x[j]],[y[i],y[j]],color = 'red', zorder=1)  
           plt.scatter(x[i],y[i], label =f"{i+1}",s=200, color = 'maroon', zorder=2) 
           plt.axis('off')
           plt.text(x[i]-0.02,y[i]-0.02,f'{i+1}',fontsize = 10,color = 'white')
           
     return plt.show()
   return edges(n,k)
-n=4
-homomorphic = [1,2,4,8,16,32]
+n=6
+homomorphic = [15,5654,511,7,56,123,8,46,458,464,613,54,98]
 for i in homomorphic:
    Graph(n,i)
 
