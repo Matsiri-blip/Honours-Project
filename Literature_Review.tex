@@ -71,6 +71,9 @@ Deutsch\cite{Deutsch1989} builds on universal quantum computer by \cite{deutsch1
 We understand about the development of quantum computation theory.
 He then relates universal quantum computer to the classical computer using the paper \cite{Turing1936}.
 While showing quantum computer can perform powerful computations using superposition and entanglement.
+\cite{rietsche2022quantum} speaks about the physical implementations of quantum computers. 
+The concept of quantum computing developed in the early 1980s from papers \cite{feynman1982simulating}. 	
+In the papers \cite{PhysRevA.93.032301}, \cite{doi:10.1137/S0097539796298637} and \cite{UQS} developments and applications are discussed.
 \newline
 \\
 Quantum algorithm is used to calculate Ramsey Numbers, proposed in \cite{gaitan2012ramsey}.
@@ -90,16 +93,13 @@ Which extends on the idea introduced by Feynman of a computer that can simulate 
 He also speaks on quantum gates, which was also referenced in the paper \cite{Deutsch1989}.
 \newline
 \\
-\cite{rietsche2022quantum} speaks about the physical implementations of quantum computers. 
-The concept of quantum computing developed in the early 1980s from papers \cite{feynman1982simulating}. 	
-In the papers \cite{PhysRevA.93.032301}, \cite{doi:10.1137/S0097539796298637} and \cite{UQS} developments and applications are discussed.
-\\\\
 In the first section I will explain graph theory.
 And I will be expanding on this by Ramsey theory.
 Extending Ramsey theory by explaining Ramsey numbers and their complexities.
 \\
 The second section will deal with computations and computation complexity.
 Explaining why Quantum computers have more computational power over classical ones.
+And how they work.
 \\
 And lastly explain how Quantum computers can help in solving Ramsey numbers.
 \section{Graph Theory}
@@ -231,10 +231,10 @@ The numbers $R(r,b)$ are known as Ramsey Numbers of r and b.
 When we have r = b, for a diagonal case this can be written as R(b).
 \begin{figure}[H]
 	\includegraphics{random_graphs/clique_2.png}
-	\caption{Complete Graph Ord(6) with clique of Ord(3) }
+	\caption{$K_6$ has a monochromatic clique $K_3$ with of blue edges}
 	\label{clique}
 \end{figure}
-\ref{clique} the graph $K_6$ has a monochromatic clique $K_3$ with of blue edges.
+
 \cite{burr1981generalized} talks about generalized Ramsey Theory.
 Which tries to understand other structures in Ramsey theory, not just complete graphs.
 Here the computational complexity of how to find these numbers is introduced.
@@ -248,16 +248,99 @@ A few of these bounds have been found currently.
 The paper does not address with finding certain Ramsey numbers only the bounds.
 Although these are helpful, it is still very hard to find the numbers even with the bounds.
 \section{Computations}
-Computation represents process of inputting something and getting an output from that input.
-We are introduced to what a computation is in the paper \cite{deutsch1985quantum}.
-This article uses classical computation to explain quantum computing.
-Logic gates perform computations.
-A logic gate can be either reversible or non-reversible.
-A logic gate is said to be reversible if its inputs and corresponding outputs are related by an invertible function.
+Computation represents process of inputing something and getting an output from that input.
+Classical computers use bits to hold information.
+This can either be 1 or 0 no in between.
+This usually appear in the computer as transistors.
+Logic gates are machines that have bits and perform computations.\cite{deutsch1985quantum}
+These are the type of computers we use in our everyday lives.
+And Quantum computers(QC) store information in quantum bits(qubits).
+These can be a superposition of both 1 and 0.
+Qubits physically can be thought of as a 2-state system such as a spin-half.
+Mathematically this is represented in Dirac notation as $$|1\rangle \& |0\rangle$$
+As a vector these are represented as $$|0\rangle \doteq \begin{pmatrix}
+	1\\0
+\end{pmatrix}$$
+$$|1\rangle \doteq \begin{pmatrix}
+	0\\1
+\end{pmatrix}$$
+$|0\rangle$ and $|1\rangle$ represents states.
+QC uses principles like superposition and entanglement.
+This gives these computers more computational power over the classical ones.
+Superposition of a state can be defined as a linear combination of these states.\cite{mcintyre_quantum_2012}
+A superposition state of qubits can be expressed as \begin{equation}
+|\psi\rangle = \alpha|0\rangle + \beta|1\rangle \doteq \begin{pmatrix}
+	\alpha\\\beta
+\end{pmatrix} \end{equation}
+Where the $\alpha \& \beta$ are complex constants.
+And their square of magnitude represents the probability of measuring the associated state, $P_{0}=|\alpha|^2$ and $P_{1}=|\beta|^2$. 
+If n particles are added we have $2^n$ states or $2^n$ pieces of information of information. 
+For n = 4,
+\begin{equation}
+	|\psi\rangle =c_1 |00\rangle+c_2 |01\rangle+c_3 |10\rangle+ c_4 |11\rangle
+\end{equation}
+Representing a new state basis. 
+Where in this new state \begin{equation}|00\rangle = |0\rangle\otimes|0\rangle =|0\rangle\langle 0| \doteq
+	\begin{pmatrix}
+		1\\0
+	\end{pmatrix} \begin{pmatrix}
+		1&0
+\end{pmatrix}\end{equation}
+Which returns the new vectors $|00\rangle =	\begin{pmatrix}
+	1\\0\\0\\0
+\end{pmatrix}$ , $|01\rangle =	\begin{pmatrix}
+0\\1\\0\\0
+\end{pmatrix}$ ,$|10\rangle =	\begin{pmatrix}
+0\\0\\1\\0
+\end{pmatrix}$
+$|11\rangle =	\begin{pmatrix}
+	0\\0\\0\\1
+\end{pmatrix}$
+Superposition states is the powerful of quantum information processing because the 
+amount of information contained in a quantum system grows exponentially with the n  qubits in a system.
+And entanglement happens when two or more particles connect to each other.
+In QC this introduces \textit{quantum parallelism} where multiple operations are performed at once.
+Measuring the state of one particle determines the other's state \cite{mcintyre_quantum_2012}.
+A two particle system of entangled states is mathematically expressed as \begin{equation}|\beta_{00} \rangle = a|00\rangle + b|11\rangle\end{equation}
+,this is one of the Bell state of a 2-system state.
+Bell states are an alternate basis to the couple and uncoupled bases\cite{mcintyre_quantum_2012}.\\
+Quantum computers use quantum gates to do their computations\cite{AndrewSteane}.
+Quantum gates are used to change the coefficients in qubits without destroying decoherence.
+This is because when measured quantum states are sensitive once measured they remain in that state(collapse).
+Quantum and logic gates use matrix multiplication to represent their transformations.
+For quantum gates Pauli matrices are examples of these.
+And these matrices are known as operators which are linear, meaning they act on these states \cite{AndrewSteane,mcintyre_quantum_2012}.
+\begin{equation}
+\sigma_x =\begin{pmatrix}
+	0&1\\1&0
+	\end{pmatrix},
+	\sigma_y =\begin{pmatrix}
+		0&-i\\i&0
+	\end{pmatrix},\sigma_z =\begin{pmatrix}
+	1&0\\0&-1
+	\end{pmatrix}
+\end{equation}
+Are the Pauli matrices these transform the initial state $\pi$ around their respective basis.
+And \begin{equation}H=\frac{1}{\sqrt{2}}
+	\begin{pmatrix}
+		1&1\\1&-1
+	\end{pmatrix}
+\end{equation} is the Hadamard gate, this is important because it helps to turn a state into a superposition of the 0 and 1 states.
+\\
+\\
+This article \cite{Deutsch1989} explains quantum computing by expanding on classical computation.
+What the challenge at the time was there was lack of quantum computational models.
+With this, Deutsch tries how to figure build quantum networks that can do computations like logic gates.
+Using the classical as a reference,these quantum gates have to include quantum mechanics principles like superposition.
+These quantum network takes qubits as inputs, gates for computation and measurements as outputs.
+Deutsch gives a picture of what a quantum machine does and capable of.
+And shows how in theory Quantum computers have more computational power over classical ones.
+Although these were a great theoretical model, no physical implementations are included.
+Even the way in which quantum computers work is not included in the paper. 
+
 \newpage 
 \bibliography{sample.bib}
 \end{document}
-
 
 .\newline
 \subsection{Quantum Networks}
