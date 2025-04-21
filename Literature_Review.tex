@@ -60,6 +60,12 @@ I do not understand how from this set what compatible observables are chosen.
 \\
 I notice I am very bad at getting the main ideas from papers.
 And even the main aims of the papers.
+\\
+\\
+In this paper \cite{doi:10.1137/S0097539796298637}, asks 'if a function is invariant under XOR-mask' I do not understand this part.
+Not fully sure what an "XOR-mask"
+Majority of this paper speaks about "Oracle".
+I feel like the reason i dont understand these parts is because the paper is more computer science based/ the notation of computer science is used and my background is poor.
 \section*{Introduction}
 Ramsey theory only considers complete graphs. 
 In the paper \cite{burr1981generalized} Burr tries to understand how hard evaluating Ramsey Numbers is.
@@ -336,8 +342,18 @@ These quantum network takes qubits as inputs, gates for computation and measurem
 Deutsch gives a picture of what a quantum machine does and capable of.
 And shows how in theory Quantum computers have more computational power over classical ones.
 Although these were a great theoretical model, no physical implementations are included.
-Even the way in which quantum computers work is not included in the paper. 
-
+Even the way in which quantum computers work is not included in the paper.
+And also it does not show how this network would break only shows theory.
+\\\\
+Here in the paper \cite{doi:10.1137/S0097539796298637}, Simon tries to see if it would be possible for quantum computer to be faster than classical computers.
+What was needed to be found is a problem that can prove this.
+Something called the Oracle task is defined.
+This tasks wants to see if a function is two-to-one and if so find a hidden string.
+For a classical computer for this problem one has to go through $ 2^{\left(\frac{n}{2}\right)}$ times of the function to get a solution. 
+Then Simon provided a way of using quantum computers to solve this.
+Using quantum circuit from \cite{Deutsch1989} to go through the function in superposition.
+Quantum superposition checks all inputs at once and interference is used to see the correct output.
+This showed that this quantum algorithm solves this faster than the classical.
 \newpage 
 \bibliography{sample.bib}
 \end{document}
