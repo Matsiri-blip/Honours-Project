@@ -1,5 +1,5 @@
 % ------------------------------------------------------------
-\documentclass[12pt, a4paper]{Assignment}
+\documentclass[15pt, a4paper]{Assignment}
 % ------------------------------------------------------------
 
 
@@ -42,126 +42,94 @@
 % ------------------------------------------------------------
 \begin{document}
 \maketitle
-\section*{Comments}
 
-From reading the paper \cite{burr1981generalized}, here I see they speak on the computational complexity of Ramsey Numbers. 
-I have a little trouble in understanding Ramsey numbers as a class of $\sum_{2}^{p}$. 
-I also do not get the notation or how Ramsey numbers are part of this class.
-The mathematical notation in this paper is the most confusing, like what $W_{1,n}$ n-spoked wheel represent.
-\\
-\\
-\cite{Deutsch1989}
-A complete set C of compatible observables for $\mathcal{P}$ is chosen, including an input 
-observable $\hat{I}$ and an observable $\hat{h}$ that is independent of $\hat{I}$ and has spectrum \{0,1\}, the halt flag. 
-This part in the paper is confusing.
-A halt flag is introduced not sure of its importance but im confused by this.
-I do not understand how from this set what compatible observables are chosen.
-\\
-\\
-I notice I am very bad at getting the main ideas from papers.
-And even the main aims of the papers.
-\\
-\\
-In this paper \cite{doi:10.1137/S0097539796298637}, asks 'if a function is invariant under XOR-mask' I do not understand this part.
-Not fully sure what an "XOR-mask"
-Majority of this paper speaks about "Oracle".
-I feel like the reason i dont understand these parts is because the paper is more computer science based/ the notation of computer science is used and my background is poor.
 \section*{Introduction}
-Ramsey theory only considers complete graphs. 
-In the paper \cite{burr1981generalized} Burr tries to understand how hard evaluating Ramsey Numbers is.
-By introducing different complexities of problems.
-The paper \cite{PhysRevA.93.032301} they try getting around this by using Quantum Computing.
+Our main goal is to find Ramsey numbers.
+Ramsey numbers $R(5,5)$, and succeeding are currently not known.
+These are the smallest numbers needed to have order in a large system.
+They explain minimum number of people needed such that at least r people are strangers or b people are friends.
+ Frank Ramsey came up with Ramsey Theory in 1928.
+Ramsey's Theorem was rediscovered by Erd$\ddot{o}$s and Szekeres in 1935 while investigating a problem on combinatorial geometry \cite{BondyMurty2008}.									
+It has applications in complexity theory, combinatorics and graph theory. 
+Here we will explore this in graph theory and complexity theory in the first section.
+Graphs are used to understand Ramsey theory.
+It deals not really with individual graphs, but with relationships between graphs.							
+\\\\
+Finding Ramsey numbers is extremely difficult.
+It would require a lot of computing power to find $R(5,5)$ \cite{spencer1994}.
+To find Ramsey numbers we need check for cliques in all possible colourings.
+This makes Ramsey Numbers part of a class called NP-hard complete  \cite{burr1981generalized}. 
+These are problems that take a lot of time to solve and would take as much time to verify the solutions. 
+Because it would take a long time for a classical one,
+Quantum Computers can be used to find these Ramsey numbers \cite{PhysRevA.93.032301}.
+Quantum computers provide a computational advantage that classical ones cannot.
+The main idea is to find Ramsey numbers using Quantum computers.
+Different quantum algorithms can be used to calculate Ramsey Numbers as in \cite{gaitan2012ramsey, PhysRevA.93.032301}.
 \newline
 \\
-Deutsch\cite{Deutsch1989} builds on universal quantum computer by \cite{deutsch1985quantum} from classical computing to quantum mechanics. 
-We understand about the development of quantum computation theory.
-He then relates universal quantum computer to the classical computer using the paper \cite{Turing1936}.
-While showing quantum computer can perform powerful computations using superposition and entanglement.
-\cite{rietsche2022quantum} speaks about the physical implementations of quantum computers. 
-The concept of quantum computing developed in the early 1980s from papers \cite{feynman1982simulating}. 	
-In the papers \cite{PhysRevA.93.032301}, \cite{doi:10.1137/S0097539796298637} and \cite{UQS} developments and applications are discussed.
-\newline
-\\
-Quantum algorithm is used to calculate Ramsey Numbers, proposed in \cite{gaitan2012ramsey}.
-A Hamiltonian is used, this was also referenced in the paper \cite{doi:10.1137/S0097539796298637}.
-Wang turned the problem into a combinatorial optimization problem.
-Adiabatic Quantum Optimization considering \cite{farhi2000quantum} was used.
-\newline
-\\
-This article\cite{doi:10.1137/S0097539796298637} speaks about quantum machines from the paper \cite{Deutsch1989}.
-Simon gives reasons why quantum computers have advantage over classical ones.
-The focus is on quantum computing algorithm that can show how fast these computers are	.
+Deutsch \cite{Deutsch1989} builds on universal quantum computer by \cite{deutsch1985quantum} from classical computing to quantum mechanics. 
+The development of quantum computation theory is important in building quantum computers \cite{Deutsch1989}.
+Quantum computer can perform powerful computations using superposition and entanglement.
+The concept of quantum computing developed in the early 1980s by Richard Feynman  \cite{feynman1982simulating}. 
+There is a quantum computing algorithm that can show how fast these computers are	\cite{doi:10.1137/S0097539796298637}.
 Using the article \cite{shor1994algorithms} he explores the development of quantum polynomial-time algorithms.
-\newline
-\\
-\cite{UQS} introduces the concept of universal quantum simulators. 
-Which extends on the idea introduced by Feynman of a computer that can simulate quantum systems from the paper \cite{feynman1982simulating}. 
-He also speaks on quantum gates, which was also referenced in the paper \cite{Deutsch1989}.
-\newline
-\\
-In the first section I will explain graph theory.
-And I will be expanding on this by Ramsey theory.
-Extending Ramsey theory by explaining Ramsey numbers and their complexities.
-\\
-The second section will deal with computations and computation complexity.
-Explaining why Quantum computers have more computational power over classical ones.
-And how they work.
-\\
-And lastly explain how Quantum computers can help in solving Ramsey numbers.
-\section{Graph Theory}
-A study of graphs where it aims to understand relationships between points. 
-A graph is set of ordered triple of objects $G = \{V(G),E(G), \psi_G\}$ called vertices $V(G)$, a pair of objects taken from $E(G)$ called edges and $\psi_G$ a function that connects the edges with vertices of G.
-And $V(G)$ = \{$v_i$\} and $E(G)=\{e_j\}$ where $i$ would represent the number of vertices and $j$ would be the number of edges found in the graph.
-If $e_1$ represents and edge and $v_1 ,v_2$ are vertices such that $\psi_G(e_1)=v_1v_2$, $e_1$ joins the vertices $v_1,v_2$.\cite{BondyMurty2008} 
-Vertices can be represented as points and edges are represented as lines joining these points/nodes.
-A graph is called finite if its edges and vertices are also finite.
-A representation of graph is shown below,
-\begin{figure}[H]
-	\centering
-	\includegraphics{random_graphs/random_graph1.png}
-	\caption{Graph with 4 vertices and 3 edges}
-	\label{random_graph1}
-\end{figure}
-
-An order of a graph can be represented by the number of vertices in the graph.
-The figure ~\ref{random_graph1} shows a graphs with 4 vertices which means it has Order 4.
+\\\\
+In the first section will be on Ramsey numbers using classical computations. 
+This would help understanding Ramsey theory visually using graphs.
+While in the second section will be using quantum computation to try and find Ramsey numbers.
+\section{Classical Computation of Ramsey Numbers}
+\subsection*{Graph Theory}
+Graph theory is a study of graph which aims to understand relationships between points. 
+A graph is set of ordered pair of objects $G = \{V(G),E(G)\}$ called vertices $V(G)$, a pair of objects taken from $E(G)$ called edges \cite{BondyMurty2008}.
+And $V(G)$ = \{$v_i$\} and $E(G)=\{e_{ij}\}$ $i,j$ are indices that can run up to the number of vertices in the graph. 
+An order of a graph is given by the number of vertices in the graph.
+If an there is an edge between vertices $v_1 ,v_2$, this would be given by an element in $E(G)$ as $e_{12}=v_1v_2$ \cite{BondyMurty2008}.
 Graphs can be either directed or undirected. 
 Directed graphs have asymmetrical vertices where as undirected have symmetrical vertices.
-An empty graph has no edges.
-A complete graph is a graph where all the vertices are connected to the other possible vertices in a graph.\cite{reducible_graph_theory} 
+For a directed graph $e_{12} = e_{21}$, but for an undirected graph $e_{12} \neq e_{21}$.
+An empty graph has no edges, the edge set $E(G)$ would be empty.
+And its complement would be a complete graph.
+This is a graph where all the vertices are connected to the other possible vertices in a graph \cite{reducible_graph_theory}.
+\\\\
+One way to represent a graph is by representing points as vertices and lines joining the points as edges.
+Let $G = (V(G),E(G))$ be a graph with $V(G) = \{v_1, v_2, v_3, v_4\}$ and $ E(G)=\{e_{ij}\}.$
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.7]{random_graphs/figure_1.png}
+	\caption{Random graph}
+	\label{random_graph}
+\end{figure}
+For ~\ref{random_graph} the graph would be $V = \{v_1, v_2, v_3, v_4\}$ and $E=\{v_1v_2,v_1v_3,v_1v_4\}.$
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale = 0.7]{random_graphs/empty_graph.png}
 	\caption{Empty graph}
 	\label{empty_graph}
 \end{figure}
+For ~\ref{empty_graph} the graph would be $V = \{v_1, v_2, v_3, v_4\}$ and $E=\{\}.$
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale = 0.7]{random_graphs/complete_graph.png}
 	\caption{Complete graph}
 	\label{complete_graph}
 \end{figure}
-~\ref{empty_graph} shows that empty graph has no edges and ~\ref{complete_graph} shows that a complete graph that all the vertices have edges between the other edges.
-$K_n$ represents a complete graph of n vertices.
-\newline 
-There ways in which a graph of any order $(n)$ can be represented.
-One way to represent graphs is by an adjacent matrix(A) which would be an $n \times n$.\cite{reducible_graph_theory}
-This method uses a yes or no method to represent the relationship between the vertices.
-When there is an edge between two vertices in the matrix we put 1 or else 0.
-And the length of the edges would be used.
-Considering a symmetric graph.
+And lastly for \ref{complete_graph} the graph would be $V = \{v_1, v_2, v_3, v_4\}$ and $E=\{v_1v_2,v_1v_3,v_1v_4,v_2v_3,v_2v_4,v_3,v_4\}.$\\\\
+~\ref{empty_graph} shows a graph with no edges and ~\ref{complete_graph} is graph that has all the vertices with possible edges connecting to other vertices.
+\\\\
+Another way to represent a graph is with an adjacency matrix.
+This is a table that contains information on the relationship represented by the set $ E(G)$.
+Each column and row represents a vertex in the graph.
 Each element in the matrix $A_{ij}$ represents the relationship between the vertices.
-If there is an edge between two vertices 1 and 2 we would have the elements $A_{12} = A_{21}=1$.
-And we only consider graphs without self loops so the diagonal elements would be 0.
-Here I define a graph,
-
+If there is an edge in the edge set $E(G)$ then the entry in the matrix between the vertices would be 1 else equal 0.
+Considering a symmetric graph.
+If there is an edge between two vertices $v_1 ,v_2$ we would have the elements $A_{12} = A_{21}=1$.
 \begin{figure}[H]
 	\centering
-	\includegraphics{random_graphs/random_graph2.png}
-	\caption{numbered graph with 4 vertices and 4 edges}
+	\includegraphics[scale = 0.5]{random_graphs/random_graph2.png}
+	\caption{Graph with 4 vertices}
 	\label{random_graph2}
 \end{figure}
-And the matrix representation of this graph would be of a $4\times 4$ considering the order which is 4.
+And the matrix representation of this graph would be of a $4\times 4$ because its of order 4.
 Then we see that the edges are between the number $[(1,2), (2,3), (3,4), (4,1)]$ so the adjacency matrix would be
 
 \begin{equation}
@@ -174,40 +142,38 @@ Then we see that the edges are between the number $[(1,2), (2,3), (3,4), (4,1)]$
 \end{equation}
 \newline
 \newline
-There is no unique way to draw a particular graph of Order(n) with m edges.
-Although there can be a way of label the graphs.
-If we can consider that the adjacency matrix takes in the numbers 1 and 0, this can be a great time to use binary encoding.
-Since a binary number can be 1 or 0 depending on the number, we can use this to input in the adjacency matrix. 
-In this way for ord(4)\begin{equation}
+There is no unique way to draw graphs.
+Although there can be a way of label the vertices of a graph.
+Adjacency matrix takes in 1 or 0, so binary can be used.
+Numbering each graph using binary can make things easier.
+If for a directed graph the adjacency matrix would be,\begin{equation}
 	\begin{pmatrix}
 		0&0_5&1_4&1_3\\
-		..&0&0_2&1_1\\
-		..&..&0&1_0\\	
-		..&..&..&0
+		0_5&0&0_2&1_1\\
+		1_4&0_2&0&1_0\\	
+		1_3&1_1&1_0&0
 	\end{pmatrix}\label{adj_mat}
 \end{equation}
-and the binary digits in which we are going to use to count/label the graphs so this is given by how i have numbered the upper triangular matrix in the adjacent matrix.
-
+then we can extract a binary number with the entries of the matrix.
+Considering the upper triangular part,
 \begin{equation}
 	\begin{pmatrix}
 		0_5&1_4&1_3&0_2&1_1&1_0
 	\end{pmatrix}\label{binary_matrix}
 \end{equation}
-So converting this to binary we have $2^0+2^1+0+2^3+2^4+0$=1+2+8+16=27.\newline
-From the adjacency matrix we can draw the graph depending on the edges, ensuring that the number of binary values is equal to the matrix upper triangular elements.
-This is because since for order (3), binary value number one would just be 10.
-But we want a number of 3 values instead so we add an extra first digit giving us 010.
-Then drawing graph 27 for ord(4) we usually start with defining the binary digit and put it in the adjacency matrix using equation ~\ref{adj_mat} we see that the edges are between [(1,3),(1,4),(2,4),(3,4)] 
+We can have the vector \ref{binary_matrix} as a number.
+So converting it from binary we have $2^0+2^1+0+2^3+2^4+0$=1+2+8+16=27.
 \begin{figure}[H]
 	\centering
-	\includegraphics{random_graphs/graph_27.png}
+	\includegraphics[scale =0.5]{random_graphs/graph_27.png}
 	\caption{Graph 27 Ord(4)}
 	\label{graph 27}
 \end{figure}
-This gave us a way in which we can define and label our graphs.
-And going through all the graphs for order 4, we can notice that they are graphs that look similar.
+We can also start from a number and convert it to binary and put into the matrix.
+From the adjacency matrix we can draw the graph depending on the edges, ensuring that the number of binary values is equal to the matrix upper triangular elements.This gave us a way in which we can define and label our graphs. 
+And going through all the graphs for order 4, we can notice that some graphs are similar.
 These graphs of the same order with different structures but same orientations are known as Homomorphic. 
-A graph homomorphism f from a graph $G = (V(G),E(G), \phi_G)$ to a graph $H =(V(H),E(H),\phi_H)$
+A graph homomorphism f from a graph $G = (V(G),E(G))$ to a graph $H =(V(H),E(H))$
 is a mapping from G to H such that each vertex in
 $V(G)$ is mapped to a vertex in $V(H)$ with the same label,
 and each edge in $E(G)$ is mapped to an edge in $E(H)$. \cite{fan2010graph}
@@ -221,45 +187,52 @@ and each edge in $E(G)$ is mapped to an edge in $E(H)$. \cite{fan2010graph}
 	\caption{Homomorphic Graphs Ord(4)}
 	\label{Homomorphic}
 \end{figure}
-This graphs represent one class of homomorphic graphs.
-They only have two vertices that have one edge out of the four each.
-And each vertex that has an edge has only one edge to another edge.
+These graphs represent one class graphs.
+Each vertex that has an edge has only one edge to another edge.
+This is going to help in understanding Ramsey theory.
 \newline
-\subsubsection*{Ramsey Theory}
-Homomorphic graphs help in understanding Ramsey Theory.
-Ramsey Theory states given an integer $ r\geq 0$ ,every large enough graph $G = (V(G),E(G),\phi_G)$ contains either  $K_r $ or ${K_b}$ monochromatic clique.\cite{katz2018introduction}
-Letting r be red and b represent blue.
-In simple terms we can say how many people do I have to invite to a party such that at least r people are strangers or b people are friends.
-The graphs have to be complete.
-If $G = (V(G), E(G),\phi_G)$, V(G) is a clique if it is a complete graph that is a subset $V(G)$ with order k, then $V'(G)$ is k-clique.\cite{katz2018introduction} 
-Ramsey theory deals not really with individual graphs, but with relationships between graphs and other graphs. 
-The numbers $R(r,b)$ are known as Ramsey Numbers of r and b.
-When we have r = b, for a diagonal case this can be written as R(b).
+\subsection*{Ramsey Theory}
+Ramsey Theory states given an integer $ r\geq 0$ ,every large enough graph $G = (V(G),E(G))$ contains either  $K_r $ or ${K_b}$ monochromatic clique.\cite{katz2018introduction}
+If $G = (V(G), E(G))$, V(G) is a clique if it is a complete graph that is a subset $V(G)$ with order k, then $V'(G)$ is k-clique.\cite{katz2018introduction} 
+Ramsey number is the minimum number of vertices R(r,b) such that all graphs of order n contain a clique of order r or an independent set of order r.
+Here complete graphs are considered.\cite{burr1981generalized}
+$K_n$ represents a complete graph of n vertices.
+A complete graph with n vertices has ${\frac{n^2-n}{2}}$ edges.
+For an order n graph, the total amount of graphs would be $2^{\left(\frac{n^2-n}{2}\right)}$.
 \begin{figure}[H]
-	\includegraphics{random_graphs/clique_2.png}
-	\caption{$K_6$ has a monochromatic clique $K_3$ with of blue edges}
+	\centering
+	\includegraphics[scale = 0.5]{random_graphs/clique_2.png}
+	\caption{The graph has clique $K_3$}
 	\label{clique}
 \end{figure}
-
-\cite{burr1981generalized} talks about generalized Ramsey Theory.
+The graph \ref{clique} has a monochromatic clique $K_3$ with blue edges.
+Ramsey numbers are very hard to find because the graphs in which we try to find the monochromatic cliques grow super exponential.
+Increasing with order $\sim 2^{n^2}$.
+Only a few of these are known.
+The highest known one is $R(4,4)= 18$ which was found by Graver and Yackel in 1968 \cite{GRAVER1968125}.
+For example for order 4, we would have a total of 64 graphs and for order 5 we have 1028 graphs.
+And going from this noticing that $R(3,3) = 6$ the total number of graphs of order 6 is $32768$.
+And what we are currently looking to find $R(5,5)$ was found is between 43 and 46\cite{angeltveit2024r55le46}.
+For $n= 43$, the total number of graphs is $2^{903}$ and 46 $2^{1035}$.
+If a brute force/ check all these one by one approach is used one would have to go through all this graphs.
+Which is impossible.\\
+So some methods of finding these numbers are introduced, \cite{burr1981generalized} talks about generalized Ramsey Theory.
 Which tries to understand other structures in Ramsey theory, not just complete graphs.
 Here the computational complexity of how to find these numbers is introduced.
-Ramsey Numbers are part of NP-hard complete, these are problems that can't be solved simple but they can be verified easily.
-Ramsey numbers are very hard to find because the graphs in which we try to find the monochromatic cliques grow super exponential.
-If a brute force approach is used one would have to go through $2^{\left(\frac{n^2-n}{2}\right)}$ graphs.
-Hence this paper tries to get around this by trying to find other ways of determining them.
 An asymptotic formula was introduced that explains how the numbers behave for large n.
 And trying to obtain the lower and upper bounds of Ramsey numbers.
 A few of these bounds have been found currently.
 The paper does not address with finding certain Ramsey numbers only the bounds.
-Although these are helpful, it is still very hard to find the numbers even with the bounds.
-\section{Computations}
-Computation represents process of inputing something and getting an output from that input.
+Although these are helpful, it is still very hard to find the numbers even with the bounds.\\
+The second section will deal with computations and computation complexity.
+Explaining why Quantum computers have more computational power over classical ones.
+And how they work.	
+Which would then lead to using them to find Ramsey numbers.
+\section{Quantum Computation of Ramsey Numbers}
 Classical computers use bits to hold information.
-This can either be 1 or 0 no in between.
-This usually appear in the computer as transistors.
-Logic gates are machines that have bits and perform computations.\cite{deutsch1985quantum}
-These are the type of computers we use in our everyday lives.
+They can either be 1 or 0.
+These usually appear in the computer as transistors.
+Logic gates are machines that have bits and perform computations \cite{deutsch1985quantum}.
 And Quantum computers(QC) store information in quantum bits(qubits).
 These can be a superposition of both 1 and 0.
 Qubits physically can be thought of as a 2-state system such as a spin-half.
@@ -354,7 +327,44 @@ Then Simon provided a way of using quantum computers to solve this.
 Using quantum circuit from \cite{Deutsch1989} to go through the function in superposition.
 Quantum superposition checks all inputs at once and interference is used to see the correct output.
 This showed that this quantum algorithm solves this faster than the classical.
-\newpage 
+\newpage
+\cite{rietsche2022quantum} gives an overview of quantum computing.
+Seeing that many fields might need quantum computers to help solve problems, a knowledge of it is needed.
+These organizations don’t know how to leverage quantum computing practically.
+Here this article addresses this by providing three ways in which a quantum computer operates.
+Quantum annealing is used an analog of how they operate.
+Also by providing different applications that can be used like optimization.
+Search and graph is used as one of examples of optimization applications.
+After defining these, another way to deal with this was proposed is to introduce research areas in different places.
+Different way of looking at this paper is that it assumes breakthroughs in error correction.
+\newpage
+\section*{Comments}
+
+
+From reading the paper \cite{burr1981generalized}, here I see they speak on the computational complexity of Ramsey Numbers. 
+I have a little trouble in understanding Ramsey numbers as a class of $\sum_{2}^{p}$. 
+I also do not get the notation or how Ramsey numbers are part of this class.
+The mathematical notation in this paper is the most confusing, like what $W_{1,n}$ n-spoked wheel represent.
+\\
+\\
+\cite{Deutsch1989}
+A complete set C of compatible observables for $\mathcal{P}$ is chosen, including an input 
+observable $\hat{I}$ and an observable $\hat{h}$ that is independent of $\hat{I}$ and has spectrum \{0,1\}, the halt flag. 
+This part in the paper is confusing.
+A halt flag is introduced not sure of its importance but im confused by this.
+I do not understand how from this set what compatible observables are chosen.
+\\
+\\
+I notice I am very bad at getting the main ideas from papers.
+And even the main aims of the papers.
+\\
+\\
+In this paper \cite{doi:10.1137/S0097539796298637}, asks 'if a function is invariant under XOR-mask' I do not understand this part.
+Not fully sure what an "XOR-mask"
+Majority of this paper speaks about "Oracle".
+I feel like the reason i dont understand these parts is because the paper is more computer science based/ the notation of computer science is used and my background is poor. 
+\section*{Previous draft comments}
+\newpage
 \bibliography{sample.bib}
 \end{document}
 
