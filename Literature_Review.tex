@@ -44,6 +44,7 @@
 \maketitle
 
 \section*{Introduction}
+
 Our main goal is to find Ramsey numbers.
 Ramsey numbers $R(5,5)$, and succeeding are currently not known.
 These are the smallest numbers needed to have order in a large system.
@@ -51,28 +52,32 @@ They explain minimum number of people needed such that at least r people are str
  Frank Ramsey came up with Ramsey Theory in 1928.
 Ramsey's Theorem was rediscovered by Erd$\ddot{o}$s and Szekeres in 1935 while investigating a problem on combinatorial geometry \cite{BondyMurty2008}.									
 It has applications in complexity theory, combinatorics and graph theory. 
-Here we will explore this in graph theory and complexity theory in the first section.
+Here we will explore this in graph theory and complexity theory.
 Graphs are used to understand Ramsey theory.
-It deals not really with individual graphs, but with relationships between graphs.							
+It deals not really with individual graphs, but with relationships between graphs.\cite{burr1981generalized}
 \\\\
 Finding Ramsey numbers is extremely difficult.
-It would require a lot of computing power to find $R(5,5)$ \cite{spencer1994}.
 To find Ramsey numbers we need check for cliques in all possible colourings.
 This makes Ramsey Numbers part of a class called NP-hard complete  \cite{burr1981generalized}. 
 These are problems that take a lot of time to solve and would take as much time to verify the solutions. 
-Because it would take a long time for a classical one,
-Quantum Computers can be used to find these Ramsey numbers \cite{PhysRevA.93.032301}.
+We can try to use a computer to go through these graphs.
+It would require a lot of computing power to find $R(5,5)$ and even more power to find succeeding numbers \cite{spencer1994}.
+The bounds of $R(5,5)$ are known it is between 43\cite{Exoo1993} and 46\cite{angeltveit2024r55le46}.
+Compared to the analytical methods used to find $R(4,4)=18$\cite{GreenwoodGleason1955} uses computational approaches like linear programming to help in tackling this problem.
+We will see why computational techniques are required for finding these numbers.
+But it would take a long time for a classical one.
+That where Quantum Computers can be introduced to find these Ramsey numbers \cite{PhysRevA.93.032301}.
+\\\\
 Quantum computers provide a computational advantage that classical ones cannot.
 The main idea is to find Ramsey numbers using Quantum computers.
+Because with analytical and classical computing these is extremely hard.
 Different quantum algorithms can be used to calculate Ramsey Numbers as in \cite{gaitan2012ramsey, PhysRevA.93.032301}.
-\newline
-\\
-Deutsch \cite{Deutsch1989} builds on universal quantum computer by \cite{deutsch1985quantum} from classical computing to quantum mechanics. 
+Classical computing methods can be extended on to build a universal quantum computer.
 The development of quantum computation theory is important in building quantum computers \cite{Deutsch1989}.
-Quantum computer can perform powerful computations using superposition and entanglement.
+Quantum computer can perform powerful computations using superposition and entanglement which are explored in the second section of this paper".
 The concept of quantum computing developed in the early 1980s by Richard Feynman  \cite{feynman1982simulating}. 
-There is a quantum computing algorithm that can show how fast these computers are	\cite{doi:10.1137/S0097539796298637}.
-Using the article \cite{shor1994algorithms} he explores the development of quantum polynomial-time algorithms.
+There is a quantum computing algorithm that can show how fast these computers are	\cite{doi:10.1137/S0097539796298637}. 
+Quantum computations are still in development there is a way in which they can be used.
 \\\\
 In the first section will be on Ramsey numbers using classical computations. 
 This would help understanding Ramsey theory visually using graphs.
@@ -99,54 +104,49 @@ Let $G = (V(G),E(G))$ be a graph with $V(G) = \{v_1, v_2, v_3, v_4\}$ and $ E(G)
 	\caption{Random graph}
 	\label{random_graph}
 \end{figure}
-For ~\ref{random_graph} the graph would be $V = \{v_1, v_2, v_3, v_4\}$ and $E=\{v_1v_2,v_1v_3,v_1v_4\}.$
+To make things simple we name the vertices.
+For ~\ref{random_graph} the graph is given by the sets  $V = \{v_1, v_2, v_3, v_4\}$ and $E=\{v_1v_2,v_1v_4\}.$
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale = 0.7]{random_graphs/empty_graph.png}
 	\caption{Empty graph}
 	\label{empty_graph}
 \end{figure}
-For ~\ref{empty_graph} the graph would be $V = \{v_1, v_2, v_3, v_4\}$ and $E=\{\}.$
+For ~\ref{empty_graph} the graph is given by the sets  $V = \{v_1, v_2, v_3, v_4\}$ and $E=\{\}.$
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale = 0.7]{random_graphs/complete_graph.png}
 	\caption{Complete graph}
 	\label{complete_graph}
 \end{figure}
-And lastly for \ref{complete_graph} the graph would be $V = \{v_1, v_2, v_3, v_4\}$ and $E=\{v_1v_2,v_1v_3,v_1v_4,v_2v_3,v_2v_4,v_3,v_4\}.$\\\\
-~\ref{empty_graph} shows a graph with no edges and ~\ref{complete_graph} is graph that has all the vertices with possible edges connecting to other vertices.
+And lastly for figure \ref{complete_graph} the graph is given by the sets  $V = \{v_1, v_2, v_3, v_4\}$ and $E=\{v_1v_2,v_1v_3,v_1v_4,v_2v_3,v_2v_4,v_3,v_4\}.$ 
+Figure ~\ref{empty_graph} shows a graph with no edges and figure ~\ref{complete_graph} is graph that has all the vertices with possible edges connecting to other vertices.
+A complete graph with n vertices has ${\frac{n^2-n}{2}}$ edges.
 \\\\
 Another way to represent a graph is with an adjacency matrix.
 This is a table that contains information on the relationship represented by the set $ E(G)$.
 Each column and row represents a vertex in the graph.
 Each element in the matrix $A_{ij}$ represents the relationship between the vertices.
 If there is an edge in the edge set $E(G)$ then the entry in the matrix between the vertices would be 1 else equal 0.
-Considering a symmetric graph.
-If there is an edge between two vertices $v_1 ,v_2$ we would have the elements $A_{12} = A_{21}=1$.
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale = 0.5]{random_graphs/random_graph2.png}
-	\caption{Graph with 4 vertices}
-	\label{random_graph2}
-\end{figure}
-And the matrix representation of this graph would be of a $4\times 4$ because its of order 4.
-Then we see that the edges are between the number $[(1,2), (2,3), (3,4), (4,1)]$ so the adjacency matrix would be
-
 \begin{equation}
-\begin{pmatrix}
-0& 1& 0& 1\\
-1 & 0 & 1 & 0\\
-0 & 1 & 0 & 1\\
-1 & 0 & 1 & 0\\
-\end{pmatrix}	
+A=	\begin{pmatrix}
+		&v_1&v_2&v_3&v_4&...\\
+		v_1&&&&&\\
+		v_2&&&&&\\
+		v_3&&&&&\\
+		v_4&&&&&\\
+		...&&&&&\\
+	\end{pmatrix}
 \end{equation}
-\newline
-\newline
-There is no unique way to draw graphs.
+Populated by either 1 or 0 depending on if there exists an element in the edge set.
+Considering a symmetric graph.
+If there is an edge between two vertices $v_1 ,v_2$ we would have the elements $A_{12} = A_{21}=1$. 
+There is no unique way to represent graphs.
 Although there can be a way of label the vertices of a graph.
 Adjacency matrix takes in 1 or 0, so binary can be used.
 Numbering each graph using binary can make things easier.
-If for a directed graph the adjacency matrix would be,\begin{equation}
+If for a directed graph the adjacency matrix would be for Order(4),
+\begin{equation}
 	\begin{pmatrix}
 		0&0_5&1_4&1_3\\
 		0_5&0&0_2&1_1\\
@@ -155,7 +155,7 @@ If for a directed graph the adjacency matrix would be,\begin{equation}
 	\end{pmatrix}\label{adj_mat}
 \end{equation}
 then we can extract a binary number with the entries of the matrix.
-Considering the upper triangular part,
+Considering the upper triangular part this is a notation we focusing on,
 \begin{equation}
 	\begin{pmatrix}
 		0_5&1_4&1_3&0_2&1_1&1_0
@@ -163,14 +163,41 @@ Considering the upper triangular part,
 \end{equation}
 We can have the vector \ref{binary_matrix} as a number.
 So converting it from binary we have $2^0+2^1+0+2^3+2^4+0$=1+2+8+16=27.
+Then the points and line representation is,
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale =0.5]{random_graphs/graph_27.png}
 	\caption{Graph 27 Ord(4)}
 	\label{graph 27}
 \end{figure}
+
 We can also start from a number and convert it to binary and put into the matrix.
-From the adjacency matrix we can draw the graph depending on the edges, ensuring that the number of binary values is equal to the matrix upper triangular elements.This gave us a way in which we can define and label our graphs. 
+From the adjacency matrix we can draw the graph depending on the edges, ensuring that the number of binary values is equal to the matrix upper triangular elements.
+Starting with a number $ 55$ of order 4.
+Converting it into binary we have 
+$$1 1 0 111 $$
+\begin{equation}
+\begin{pmatrix}
+	1_5&1_4&0_3&1_2&1_1&1_0
+\end{pmatrix}
+\end{equation}
+putting it into the adjacency matrix we get,
+\begin{equation}
+	\begin{pmatrix}
+		0& 1_5& 1_4& 0_3\\
+		1 & 0 & 1_2 & 1_1\\
+		1 & 1 & 0 & 1_0\\
+		0 & 1 & 1 & 0\\
+	\end{pmatrix}	
+\end{equation}
+Then we see that the edge set is given by $ E=\{(v_1v_2), (v_1v_3), (v_2v_3), (v_2v_4),(v_3v_4\}$ so the graph would be
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.5]{random_graphs/random_graph2.png}
+	\caption{Graph with 4 vertices}
+	\label{random_graph2}
+\end{figure}
+
 And going through all the graphs for order 4, we can notice that some graphs are similar.
 These graphs of the same order with different structures but same orientations are known as Homomorphic. 
 A graph homomorphism f from a graph $G = (V(G),E(G))$ to a graph $H =(V(H),E(H))$
@@ -190,15 +217,12 @@ and each edge in $E(G)$ is mapped to an edge in $E(H)$. \cite{fan2010graph}
 These graphs represent one class graphs.
 Each vertex that has an edge has only one edge to another edge.
 This is going to help in understanding Ramsey theory.
-\newline
 \subsection*{Ramsey Theory}
-Ramsey Theory states given an integer $ r\geq 0$ ,every large enough graph $G = (V(G),E(G))$ contains either  $K_r $ or ${K_b}$ monochromatic clique.\cite{katz2018introduction}
-If $G = (V(G), E(G))$, V(G) is a clique if it is a complete graph that is a subset $V(G)$ with order k, then $V'(G)$ is k-clique.\cite{katz2018introduction} 
-Ramsey number is the minimum number of vertices R(r,b) such that all graphs of order n contain a clique of order r or an independent set of order r.
-Here complete graphs are considered.\cite{burr1981generalized}
+Ramsey Theory states given an integer $ r\geq 0$ ,every large enough graph $G = (V(G),E(G))$ contains either  $K_r $ or ${K_b}$ monochromatic clique \cite{katz2018introduction}.
+Here complete graphs are considered \cite{burr1981generalized}.
 $K_n$ represents a complete graph of n vertices.
-A complete graph with n vertices has ${\frac{n^2-n}{2}}$ edges.
-For an order n graph, the total amount of graphs would be $2^{\left(\frac{n^2-n}{2}\right)}$.
+If $G = (V(G), E(G))$, V(G) is a clique if it is a complete graph that is a subset $V(G)$ with order k, then $V'(G)$ is k-clique \cite{katz2018introduction}. 
+Ramsey number is the minimum number of vertices R(r,b) such that all graphs of order n contain a clique of order r or an independent set of order b.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale = 0.5]{random_graphs/clique_2.png}
@@ -206,38 +230,63 @@ For an order n graph, the total amount of graphs would be $2^{\left(\frac{n^2-n}
 	\label{clique}
 \end{figure}
 The graph \ref{clique} has a monochromatic clique $K_3$ with blue edges.
-Ramsey numbers are very hard to find because the graphs in which we try to find the monochromatic cliques grow super exponential.
-Increasing with order $\sim 2^{n^2}$.
-Only a few of these are known.
-The highest known one is $R(4,4)= 18$ which was found by Graver and Yackel in 1968 \cite{GRAVER1968125}.
+This graph is of order 6, it is a known Ramsey number $R(3,3)=6$.
+\\\\
+Ramsey numbers are very hard to find because the graphs in which we try to find the monochromatic cliques increase super exponential.
+For an order n graph, the total amount of graphs would be $2^{\left(\frac{n^2-n}{2}\right)}$.
+They are increasing with order $\sim 2^{n^2}$.
 For example for order 4, we would have a total of 64 graphs and for order 5 we have 1028 graphs.
 And going from this noticing that $R(3,3) = 6$ the total number of graphs of order 6 is $32768$.
-And what we are currently looking to find $R(5,5)$ was found is between 43 and 46\cite{angeltveit2024r55le46}.
-For $n= 43$, the total number of graphs is $2^{903}$ and 46 $2^{1035}$.
-If a brute force/ check all these one by one approach is used one would have to go through all this graphs.
-Which is impossible.\\
-So some methods of finding these numbers are introduced, \cite{burr1981generalized} talks about generalized Ramsey Theory.
-Which tries to understand other structures in Ramsey theory, not just complete graphs.
-Here the computational complexity of how to find these numbers is introduced.
-An asymptotic formula was introduced that explains how the numbers behave for large n.
-And trying to obtain the lower and upper bounds of Ramsey numbers.
-A few of these bounds have been found currently.
-The paper does not address with finding certain Ramsey numbers only the bounds.
-Although these are helpful, it is still very hard to find the numbers even with the bounds.\\
-The second section will deal with computations and computation complexity.
+Seeing a very huge jump from $n = 5$ to $n = 6$.
+To find these clique we have to go through each graph.
+A couple Ramsey numbers are known.
+\\\\
+The highest known one is $R(4,4)$ which was proved to be $18$ \cite{GreenwoodGleason1955}.
+This was done by using the bounds of this number.
+Showing that $R(4,4) > 17$, and together with a result showed,
+\begin{equation}
+R(r ,b) \geq R(r-1,b)+ R(r,b-1) 
+\label{theorem_2}
+\end{equation}
+It was shown that for order 17 there is no $K_4$ clique by constructing the graph of order 17.
+And using equation \ref{theorem_2} it also was shown that there is a clique of order 4.
+Where $R(3,4) =9$\cite{GreenwoodGleason1955} was also found with $R(4,4) \leq 18$.
+Hence combining the results it was proved that $R(4,4) = 18$.
+The same result cannot be shown for 5th Ramsey number.
+$R(5,5)$ was found to be between 43\cite{Exoo1993} and 46 \cite{angeltveit2024r55le46}.
+For $n= 43$, the total number of graphs is $2^{903} \approx 10^{271}$ and  $2^{1035}\approx10^{312}$.
+This makes checking the graphs or analytical proofs not possible with traditional methods.
+\\\\
+So some methods of finding Ramsey numbers are introduced, like using a generalized method \cite{burr1981generalized}. 
+At first Ramsey numbers were found using analytical methods or combinatorial methods.
+But as the numbers grow, it becomes exponentially harder.
+In context, the last Ramsey number with $r=b$ found was $R(4,4)$ and was found in 1955 \cite{GreenwoodGleason1955}.
+Analytic approaches start to fail since the orders of magnitude are impossible to work with.
+Computers have been used to find these numbers in the past.
+Majority of the methods were successful in finding numbers where $r=b$ using computational techniques.
+Methods like Linear programming can be used in order to reduce the number of graphs we are considering \cite{angeltveit2024r55le46}.
+And with known Ramsey numbers and equation ~\ref{theorem_2} bounds can be determined.
+We now know that the Ramsey number we are looking for is between 43 and 46.
+It is still extremely hard to determine which number it is.
+Even with the fastest classical computers available in the world it would take a lot of years to go through every graph.
+But if one considers Quantum computers there can be some progress.
+\\\\
+The second section will deal with Quantum computations of Ramsey numbers.
 Explaining why Quantum computers have more computational power over classical ones.
 And how they work.	
-Which would then lead to using them to find Ramsey numbers.
+Which would then lead to using them to possibly find Ramsey numbers.
 \section{Quantum Computation of Ramsey Numbers}
+\subsection*{Quantum Mechanics}
 Classical computers use bits to hold information.
 They can either be 1 or 0.
 These usually appear in the computer as transistors.
 Logic gates are machines that have bits and perform computations \cite{deutsch1985quantum}.
 And Quantum computers(QC) store information in quantum bits(qubits).
-These can be a superposition of both 1 and 0.
-Qubits physically can be thought of as a 2-state system such as a spin-half.
-Mathematically this is represented in Dirac notation as $$|1\rangle \& |0\rangle$$
-As a vector these are represented as $$|0\rangle \doteq \begin{pmatrix}
+These can be both 1 and 0.
+Qubits can be physically thought of as a 2-state system spin-half.
+Mathematically this is represented in Dirac notation as $$0 bit =|0\rangle $$ $$1 bit =  |1\rangle$$
+As a vector these are represented as 
+$$|0\rangle \doteq \begin{pmatrix}
 	1\\0
 \end{pmatrix}$$
 $$|1\rangle \doteq \begin{pmatrix}
@@ -253,7 +302,7 @@ A superposition state of qubits can be expressed as \begin{equation}
 \end{pmatrix} \end{equation}
 Where the $\alpha \& \beta$ are complex constants.
 And their square of magnitude represents the probability of measuring the associated state, $P_{0}=|\alpha|^2$ and $P_{1}=|\beta|^2$. 
-If n particles are added we have $2^n$ states or $2^n$ pieces of information of information. 
+If n particles are added we have $2^n$ states or $2^n$ pieces of information. 
 For n = 4,
 \begin{equation}
 	|\psi\rangle =c_1 |00\rangle+c_2 |01\rangle+c_3 |10\rangle+ c_4 |11\rangle
@@ -287,7 +336,7 @@ Quantum computers use quantum gates to do their computations\cite{AndrewSteane}.
 Quantum gates are used to change the coefficients in qubits without destroying decoherence.
 This is because when measured quantum states are sensitive once measured they remain in that state(collapse).
 Quantum and logic gates use matrix multiplication to represent their transformations.
-For quantum gates Pauli matrices are examples of these.
+Pauli matrices are examples of quantum gates.
 And these matrices are known as operators which are linear, meaning they act on these states \cite{AndrewSteane,mcintyre_quantum_2012}.
 \begin{equation}
 \sigma_x =\begin{pmatrix}
@@ -327,7 +376,7 @@ Then Simon provided a way of using quantum computers to solve this.
 Using quantum circuit from \cite{Deutsch1989} to go through the function in superposition.
 Quantum superposition checks all inputs at once and interference is used to see the correct output.
 This showed that this quantum algorithm solves this faster than the classical.
-\newpage
+\\\\
 \cite{rietsche2022quantum} gives an overview of quantum computing.
 Seeing that many fields might need quantum computers to help solve problems, a knowledge of it is needed.
 These organizations don’t know how to leverage quantum computing practically.
@@ -367,18 +416,6 @@ I feel like the reason i dont understand these parts is because the paper is mor
 \newpage
 \bibliography{sample.bib}
 \end{document}
-
-.\newline
-\subsection{Quantum Networks}
-
-A logic gate for quantum computation can be represented as a matrix $S$.
-For computation to be reversible $S$ has to be unitary or $$S^*S=SS^* =I$$
-Depending on the number of particles n, $S$ would have dimensions $2^n\times2^n$.
-An inverse of an $S$ matrix is Hermitian.
-
-Here we are introduced to quantum computational networks.
-Quantum computations that use quantum coherence are reversible.
-
 
 
 
