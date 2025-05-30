@@ -1,6 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
+import os
+folder_path = "graphs/order_4"
+if not os.path.exists(folder_path):
+    os.makedirs(folder_path)
+    print(f"Created folder: {folder_path}")
 def Graph(n,k):
   def binary_matrix(n,k):
     m = (n**2-n)/2
@@ -53,22 +57,36 @@ def Graph(n,k):
         if n <2:
           return [0]
         elif adjacency_matrix(n,k)[i][j]==1:                                          ## check if there is an edge between the edges using adjacency matrix defined                                               ## if there is an edge add the vertices into a list
-          plt.plot([x[i],x[j]],[y[i],y[j]],color = 'blue', zorder=1)
-          plt.scatter(x[i],y[i], label =f"{i+1}",s=200, color = 'maroon', zorder=2) 
+          plt.plot([x[i],x[j]],[y[i],y[j]],color = 'blue', linewidth = 3,zorder=1)
+          plt.scatter(x[i],y[i], label =f"{i+1}",s=400, color = 'black', zorder=2) 
           plt.axis('off')
-          plt.text(x[i]-0.02,y[i]-0.02,f'{i+1}',fontsize = 10,color = 'white')
-          # plt.text(-0.035,0,f'{k}',fontsize = 10)
+          plt.text(x[i]-0.04,y[i]-0.04,f'$v_{i+1}$',fontsize = 15,color = 'white')
+          #plt.text(0,0,f'{k}',fontsize = 20)
         else:
-          plt.plot([x[i],x[j]],[y[i],y[j]],color = 'red', zorder=1)  
-          plt.scatter(x[i],y[i], label =f"{i+1}",s=200, color = 'maroon', zorder=2) 
+          #plt.plot([x[i],x[j]],[y[i],y[j]],color = 'red',linewidth = 3, zorder=1)  
+          plt.scatter(x[i],y[i], label =f"{i+1}",s=400, color = 'black', zorder=2) 
           plt.axis('off')
-          plt.text(x[i]-0.02,y[i]-0.02,f'{i+1}',fontsize = 10,color = 'white')
-          
-    return plt.show()
-  return edges(n,k)
-n=6
-homomorphic = [15,5654,511,7,56,123,8,46,458,464,613,54,98]
-for i in homomorphic:
-   Graph(n,i)
+          plt.text(x[i]-0.04,y[i]-0.04,f'$v_{i+1}$',fontsize = 15,color = 'white')
+    plt.show()
+  def save_figures(n, colorings):
+        m = int((n**2 - n) / 2)
+        for idx, k in enumerate(colorings):
+            # Create a new figure for each coloring
+            edges(n, k)  # Generate the plot
+            # Save the figure
+            image_name = f"k{n}_coloring_{k}.png"
+            image_path = os.path.join(folder_path, image_name)
+            try:
+                plt.savefig(image_path, dpi=300, bbox_inches='tight')
+                print(f"Saved: {image_path}")
+            except Exception as e:
+                print(f"Error saving {image_path}: {e}")
+            # Close the plot to free memory
+            plt.close()
 
-# [1+4+32+512+1024+16384]
+    # Call save_figures with a list containing the single k value
+  return edges(n,k)
+n = 4
+k=27
+Graph(n,27)
+#[1+4+32+64+512]
