@@ -1,0 +1,235 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{positioning, overlay-beamer-styles}
+\usepackage{pgfplots}
+\usepackage{lmodern}
+\pgfplotsset{compat=1.18}
+\usetheme{Montpellier} % Modern, clean theme
+\institute{Wits University}
+\title{\texorpdfstring{Computing $R(5,5)$ using a quantum computer}{Computing R(5,5) using a quantum computer}}
+\author[A. Name]{Matsiri Madiba}
+\date{30 May 2025}
+\begin{document}
+	\begin{frame}
+		\titlepage
+	\end{frame}
+\begin{frame}{Outline}
+	\begin{itemize}
+		\item Introduction
+		\item Background: Ramsey Theory and Quantum computing
+		\item Research Objectives
+		\item Methodology and Work Plan
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Introduction}
+	\frametitle{Introduction}
+\begin{itemize}
+			\item Ramsey Theory
+	\begin{itemize}
+		\item Graph Theory: Helps in understanding Ramsey Numbers \pause
+		\item Ramsey Number \( R(5,5) \) \pause
+	\end{itemize}
+	\item Quantum Computing: Methods for Optimization \pause
+	\item Can quantum computers solve \(R(5,5)\) \pause
+
+
+
+	\end{itemize}
+\end{frame}	
+\begin{frame}{Graph Theory Basics}
+	\begin{itemize}
+		\item A graph \( G = (V, E) \):
+		\begin{itemize}
+			\item \( V \): Vertex set 
+			\item \( E \): Edge set 
+		\end{itemize}
+	\end{itemize}
+	 Representation of a graph.\\
+	 
+	Adjacency matrix,
+		$$A_{ij}=\begin{cases} 
+			1 & \text{if } e_{ij} \in E \\ 
+			0 & \text{otherwise}
+		\end{cases}$$
+		$e_{ij}$ is an element in the edge set $E$
+	%	\item Example: Complete graph \( K_3 \) (3 vertices, all edges present)
+	%	\item Relevance: Ramsey numbers involve 2-edge-colorings of \( K_n \), seeking monochromatic cliques.
+	
+\end{frame}
+\begin{frame}{Graph Theory Basics}
+Types of graphs
+\begin{enumerate}
+	\item Complete graph
+		\begin{center}
+		\includegraphics[scale=0.2]{complete_graph.png}
+	\end{center}\pause
+	\item Empty graph
+		\begin{center}
+		\includegraphics[scale=0.2]{empty_graph.png}
+	\end{center}
+\end{enumerate}
+
+\end{frame}
+\begin{frame}{Graph Theory Basics}
+ Complete graph (n-vertices)
+\begin{itemize}
+	\item Each vertex has $n-1$ edges
+	\item There are n vertices
+	\item The complete graph has of n vertices has ${\frac{n(n-1)}{2}}$	possible 2-edge-colourings,
+
+\end{itemize}
+Ramsey Theory considers complete graphs
+\end{frame}
+\begin{frame}{Ramsey Theory}
+Ramsey Numbers \( R(r,b) \) 
+\begin{itemize}
+	\item clique
+	\item independent set 
+\end{itemize}
+
+$$\includegraphics[scale =0.3]{clique.png}$$
+\begin{center}\textit{Complete graph of 6 vertices with a 3 vertex clique}\end{center}
+\end{frame}
+\begin{frame}
+	\begin{itemize}
+\item A 2-colouring n-vertex has $2^{\left(\frac{n^2-n}{2}\right)}$ graphs.
+\end{itemize}
+$$\includegraphics[scale = 0.5]{plot.png}$$
+\begin{center}
+\small{Plot showing the growth of number of graphs with increasing n}
+\end{center}
+\end{frame}
+
+\begin{frame}{Research Problem}
+	\begin{itemize}
+		\item Find Ramsey Number \( R(r,b) \), $r=b=5$
+		\item \( R(5,5) \) has bounds \( 43 \leq R(5,5) \leq 46 \) \cite{Exoo1993, angeltveit2024r55le46}.
+		\item Computational Challenge:
+		\begin{itemize}
+			\item Exponential colourings: \( 2^{903} \approx 10^{271} \) for \( n = 43 \).
+			\item NP-hard \cite{burr1981generalized}.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+\begin{frame}{Quantum computing basics}
+	\begin{itemize}
+		\item Made up of Qubits\pause
+		\item Unlike classical computers a qubit can be in two states \pause
+		\item Leverages concepts like \underline{superposition} \pause and \underline{entanglement}
+		$$	\includegraphics[width=0.5\linewidth]{Qubit}$$
+
+		
+	\end{itemize}
+\end{frame}
+\begin{frame}{Quantum computing basics}
+	\begin{itemize}
+		\item Quantum gates are used to make calculations.
+		\item These gates can be represented as \underline{unitary} matrices.
+	\end{itemize}
+	\textbf{Examples of Quantum gates}
+	\begin{itemize}
+\item Hadamard gate
+\item Pauli matrices
+\item CNOT gate
+	\end{itemize}
+\end{frame}
+\begin{frame}{Quantum computing}
+	\textbf{Why Quantum computing?}
+	\begin{itemize}
+		\item Quantum computers can try many solutions faster.
+		\item Classical computers would take too long to go through $ 2^{903}$ graphs.
+
+	\end{itemize}
+\end{frame}
+\begin{frame}{Objectives}
+	\begin{itemize}
+		\item Determine \( R(5,5) \)
+		\item Develop and test quantum algorithms.
+		\item Evaluate quantum computing’s efficiency.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Methodology}
+	\begin{itemize}
+		\item \textbf{Classical Methods}:
+		\begin{itemize}
+			\item Use binary encoding to enumerate 2-edge-colourings.
+		\end{itemize}
+		\item \textbf{Quantum Methods}:
+		\begin{itemize}
+			\item Quantum computing: Map \( R(5,5) \) into an optimization problem.
+		\end{itemize}
+		\item Test on small graphs first.
+	\end{itemize}
+\end{frame}
+\begin{frame}{Work Plan}
+	\begin{table}[h]
+
+		\begin{tabular}{|p{2cm}|p{2cm}|p{5cm}|}
+			\hline
+			\textbf{Phase} & \textbf{Time} & \textbf{Tasks} \\
+			\hline
+			Phase I & Feb--May & \small{Study Ramsey theory, graph theory and quantum computing.} \\
+			\hline
+			Phase II & Jun--Jul & Develop classical algorithms. \\
+			\hline
+			Phase III & Aug--Sep & Implement quantum algorithms, test on small graphs. \\
+			\hline
+			Phase IV & Oct & Analyze results, put into final report. \\
+			\hline
+		\end{tabular}
+	\end{table}
+\end{frame}
+\begin{frame}
+	\textbf{Thank You.}
+\end{frame}
+\begin{frame}{References}
+	\begin{thebibliography}{9}
+		\bibitem{BondyMurty2008}
+		J.A. Bondy and U.S.R. Murty, \textit{Graph Theory}, Springer, 2008.
+		\bibitem{Exoo1993}
+		G. Exoo, A lower bound for \( R(5,5) \), \textit{J. Graph Theory}, 1993.
+		\bibitem{angeltveit2024r55le46}
+		V. Angeltveit et al., \( R(5,5) \leq 46 \), arXiv:2401.08077, 2024.
+		\bibitem{burr1981generalized}
+		S.A. Burr, Generalized Ramsey theory for graphs, \textit{Discrete Mathematics}, 1981.
+		\bibitem{PhysRevA.93.032301}
+		F. Gaitan and L. Clark, Ramsey numbers and adiabatic quantum computing, \textit{Phys. Rev. A}, 2016.
+	\end{thebibliography}
+\end{frame}
+\begin{frame}
+$$\includegraphics[scale=0.6]{figure_1.png}$$
+\end{frame}
+\begin{frame}
+
+\end{frame}
+\end{document}
+
+
+
+
+ Example: \( R(3,3) = 6 \)
+\begin{center}
+	\begin{tikzpicture}
+		% Vertices of K_6
+		\foreach \i in {0,...,5}
+		\node[circle, draw] (v\i) at (60*\i:1) {};
+		% All edges in black (neutral)
+		\foreach \i in {0,...,4}
+		\foreach \j in {\i,...,5}
+		\ifnum \j>\i
+		\draw (v\i) -- (v\j);
+		\fi
+		% Highlight a clique of size 3 (v0, v1, v2) in red
+		\draw[red, thick] (v0) -- (v1) -- (v2) -- (v0);
+	\end{tikzpicture} \\
+	\small{\( K_6 \): Any 2-edge-coloring has a monochromatic triangle (clique of size 3).}
+\end{center}
+\end{itemize
