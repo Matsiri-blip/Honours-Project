@@ -1,6 +1,15 @@
 \documentclass{Assignment}
+\usepackage{indentfirst}
+\usepackage{algorithm2e}
+\usepackage{booktabs}   % For \toprule, \midrule, \bottomrule
+\usepackage{adjustbox}  % For the adjustbox environment
+\usepackage{graphicx}   % Recommended for figures and tables
+
 \usepackage{tikz}
 \usepackage{pdfpages}
+\usepackage{booktabs}       % For professional-looking tables (\toprule, \midrule, \bottomrule)
+\usepackage{adjustbox}      % For table adjustment if it's too wide
+\usepackage{textcomp}       % For \textsuperscript
 \usetikzlibrary{graphs}
 \title{Graph Theory}
 \begin{document}
@@ -370,10 +379,412 @@ n=4\\
 	ground state encodes the solution to the computational problem.
 \end{itemize}
 \newpage
+
+\section*{Classical Algorithm for finding ramsey numbers}
+\subsubsection*{Thinking}
 \underline{\centering{Goal:Write code that determines a Ramsey Number}}
 \begin{itemize}
-	\item i need to verify ramsey number 3
+	\item i need to verify ramsey numbers
 	\item use brute force method to verify if all graphs of n-vertices there will be either red or subgraphs. 
+	\item use adjacency matrix code to determine if a rxr matrix of either empty graph or matrix with ones at off diagonal elements and zero at diagonal elements in the adjacency matrix
 	\item firstly define the matrix of the complete graph call it blue\_clique, and an empty graph call it red\_clique
+	\item create an empty vector this will keep track of which graphs has either a red clique or a blue clique
+	\item if the graph in the graph set has either a red / blue clique the element of the graph in the graph set change the element to 1
+	\item then use the empty vector to see if for a graph set of n vertices there is a zero in the vector then n is not a ramsey number
 \end{itemize}
+
+\begin{enumerate}
+	\item Comparison set
+	\item write the algorithm used (check online internet) pseudo-code algorithm in the write up
+	\item need to implement Ramsey number search 
+	\item explain how the recipe works type 
+	\item write code as lean as possible to run in cluster
+	\item table for different inputs(not complete in my machine )
+\end{enumerate}
+\%\% firstly starting with defining the graph plots\\
+\% \underline{binary vector} - creating a vector of binary string of each graph in the graph set return the binary vector of the string ensuring that the vector has $\left(\frac{n^2-n}{2}\right)$ elements\\\\
+\begin{itemize} \item BEGIN FUNCTION binary\_vector(number of vertices, graph number)
+\begin{itemize}
+	
+\item INITIALIZE and Define parameters\\
+set\\
+n= number of vertices  \\
+ m =$\left(\frac{n^2-n}{2}\right)$\\
+binary\_vec = zeros(m)\\
+binary(n)\\
+L = len(binary(n))
+\item BEGIN LOOP\\
+FOR i FROM 1 to L\\
+  \hspace*{0.5cm} DO binary\_vec(m-i-1) = REVERSE(binary)(i)\\
+  END LOOP
+\end{itemize}
+\hspace*{0.5cm}RETURN binary\_vec\\
+END FUNCTION\\\\
+\%\% create a function that transposes the binary matrix into an empty matrix of n x n\\\\
+\item BEGIN FUNCTION adjacency\_matrix(number of vertices,graph number)
+\begin{itemize}
+\item INITIALIZE and Define parameters\\
+n= number of vertices\\
+$m = \left(\frac{n^2-n}{2}\right)$\\
+$A = zeros(n,n)$\\
+b =  binary\_vector(n,graph number)\\
+start\_index = 1
+\item BEGIN LOOP\\
+FOR i = 1 TO n\\
+ \hspace*{0.5cm} DO\\
+  \hspace*{0.5cm}index\_length = n-1-i\\
+ \hspace*{0.5cm} end\_index = start\_index + index\_length\\
+ \hspace*{0.5cm} A(i,i+1:) = b(start\_index , end\_index)\\
+ \hspace*{0.5cm} start\_index = end\_index\\
+END LOOP
+ \item BEGIN LOOP\\
+ FOR i = 1 TO n\\
+ FOR j = 1 TO n\\
+ \hspace*{0.5cm} DO A(j,i) = A(i,j)\\
+ END LOOP
+
+	RETURN A\\
+\hspace*{-1cm}END FUNCTION\\
+	\end{itemize}
+\%\% create a function to plot graph, this takes in number of vertices and the graph number.\\
+\%\% it returns a graph with red edges and blue edges
+\item	BEGIN FUNCTION GRAPH(number of vertices , graph number)\\
+\begin{itemize}
+
+\item	INITIALIZE\\
+	A = adjacency\_matrix\\
+	b = binary\_matrix\\
+	x = zeros(n)\\
+	y = zeros(n)\\
+	
+	\item BEGIN LOOP\\
+	FOR i = 1 TO n\\
+	\hspace*{0.5cm} DO\\
+	\hspace*{0.5cm} x = cos($\frac{2\pi}{n}i$)\\
+	\hspace*{0.5cm}	y = sin($\frac{2\pi}{n}i$)\\
+	END LOOP
+	\item \hspace*{0.2cm} BEGIN LOOP\\
+	\hspace*{0.5cm} FOR i = 1 TO n:\\
+	\hspace*{0.5cm} FOR i = j TO n:\\
+	\hspace*{0.5cm} DO\\
+	\hspace*{1cm} IF A(i,j) = 1\\
+\hspace*{1.5cm}	add\_line between points (x[i],x[j]) and (y[i],y[j]) with blue colour\\
+\hspace*{1.5cm} add k at center for number of graph\\
+\hspace*{1cm}	ELSE  A(i,j) = 0\\
+\hspace*{1.5cm}	add\_line between points (x[i],x[j]) and (y[i],y[j]) with red colour\\
+	\hspace*{1.5cm} put k for number of graph\\
+RETURN PLOT\\
+\end{itemize}
+END FUNCTION\\\\
+\%\% create a function that verifies if all the graphs of n vertices has either a red clique of order r or blue clique of order s\\
+\%\% And if a clique does not exist then return the graph that does not contain the clique
+\item BEGIN FUNCTION ramsey\_find(number of vertices , r , s)
+\begin{itemize}
+\item
+INITIALIZE\\
+n = number of vertices \\
+$m = \left(\frac{n^2-n}{2}\right)$ \\
+b = binary\_matrix(number of vertices,graph number)\\
+A = adjacency\_matrix(number of vertices,graph number)\\
+clique = graphs of size r and s 
+
+\item BEGIN LOOP\\
+\hspace*{1cm}FOR k = 1 TO $2^{m}$\\
+\begin{itemize}
+	\item \hspace*{1.5cm}BEGIN LOOP\\
+\hspace*{1.5cm} FOR subgraph IN A\\
+\hspace*{1.5cm} BEGIN LOOP\\
+\hspace*{1.5cm} IF subgraph = size r or size s clique:\\
+\hspace*{2cm}CONTINUE to the next graph\\
+\hspace*{1.5cm}ELSE \\
+\hspace*{2cm}BREAK LOOP\\
+\hspace*{1.5cm} END LOOP\\
+
+\end{itemize}
+\hspace*{1cm} END k LOOP
+\item BEGIN LOOP\\
+\hspace*{1cm}IF clique not found\\
+\hspace*{1.5cm} PRINT('(n) is a Ramsey Number R(r, s)')\\
+\hspace*{1.5cm} PRINT(Graph(n,k))\\
+\hspace*{1.5cm} BREAK LOOP\\
+\hspace*{1cm}ELSE \\
+\hspace*{1.5cm} return '(n) is a Ramsey Number R(r, s)'\\
+ END LOOP\\
+\end{itemize}
+END FUNCTION
+\end{itemize}
+\newpage
+\%\%\% Goal\\
+\%\%\% Create a function that searches for ramsey numbers \\
+\begin{itemize}
+\item FUNCTION Ramsey\_Number(r : INTEGER , s : INTEGER)\\
+\begin{itemize}
+\item  n $\leftarrow$ 2 (*starting at 2 vertices*)
+\item N $\leftarrow$ total\_graphs(n)
+	\item A $\leftarrow$ adjacency\_matrix(n,graph)
+\item G $\leftarrow$ draw\_graph(n,graph)
+\item comb1 $\leftarrow$choose different vertex combination
+\item comb2 $\leftarrow$choose different vertex combination
+\item WHILE TRUE DO:
+\begin{itemize}
+\item FOR graph $\leftarrow$ 1 TO N:
+
+
+\begin{itemize}
+\item FOR vertex in comb1:
+\item A[vertex,vertex+1]
+\section*{Pseudocode}
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\newpage
+\RestyleAlgo{ruled}
+\SetKwFunction{Fnumber}{total\_edges} % Defines a function named 'AddNumbers' that can be called with \
+\SetKwFunction{Fdraw}{fill\_bits} % Defines another function
+\SetKwFunction{Flabel}{label\_graph} % Defines another function
+\SetKwFunction{Fdraw}{draw\_graph} % Defines another function
+\SetKwFunction{Fempty}{empty\_graph} % Defines a function named 'AddNumbers' that can be called with \
+\SetKwFunction{Fcomplete}{complete\_graph} % Defines another function
+\SetKwFunction{Freverse}{Reverse} % Defines another function
+\SetKwFunction{Fbinary}{binary\_string} % Defines another function
+\SetKwFunction{Ftotal}{total\_graphs} % Defines another function
+\SetKwComment{Comment}{/* }{ */}
+\begin{itemize}
+\item This function verifies the graphs of n vertices has either a red clique of order r or blue clique of order s\\
+And if a clique does not exist then return the graph that does not contain the clique
+
+\begin{algorithm}[hbt!]
+	\caption{Main Function}\label{alg:two}
+	\DontPrintSemicolon
+	\KwIn{integers r and s}
+	\KwOut{minimum n that has r or s size clique} % This command now works
+	
+	\Begin{
+		Set\; 
+		$n \gets 1$  \Comment{starting with 1 vertex}\;
+		$m \leftarrow$ \Fnumber{$n$}\;
+		$\N \gets \Ftotal{n}$\;
+		$red\_clique \gets$\Fempty{$r$}\;
+		$blue\_clique \gets $ \Fcomplete{$s$}\;
+		plot $\gets$ \Fdraw{$n,k$} \;
+		$A \gets$ \Flabel{$n,k$}\;
+		\textbf{repeat}\;{
+			\For{$k$ from 1 to $2^m$} {
+				\If{A has red clique or blue clique}{
+					 \textbf{continue}
+				}
+				\Else{
+					 return plot\;\textbf{break}
+				}
+
+			}
+			
+			\If{one graph has no clique}{n $\gets$ n+1}
+		}
+		
+		\textbf{until} all graphs contain clique % This command now works
+	}
+\end{algorithm}
+\item create a function that labels graphs
+\begin{algorithm}[H]
+	
+	\DontPrintSemicolon
+	\KwIn{integers $n$,k}\Comment*[r]{n is the number of vertices and k represents the graph number}\;
+	\KwOut{graph\_label}
+	\Comment{This function labels all the graphs in the graph set}
+	\Begin{
+		$m \leftarrow$ \Fnumber{$n$}\; % Calling the previously defined function
+		$b \leftarrow$  binary\_string(n,k)\\
+		adj $\leftarrow$ zeros(n,n)\;
+		N = \Ftotal{$n$}\;
+		\For{ i to $N$}{fill\_bits(adj,b)}
+		\KwRet adj\;
+	}
+\caption{graph\_label(n,k) Function}
+\end{algorithm}
+
+\item create a function to plot graph
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\KwIn{integers $n$,k}\Comment*[r]{n is the number of vertices and k represents the graph number}\;
+	\KwOut{graph\_plot}
+	\Comment{This function returns a plot of the graph using the graph labels }
+	\Begin{
+		$m \leftarrow$ \Fnumber{$n$}\; % Calling the previously defined function
+		A $\leftarrow$ \Flabel{n,k}\\
+		\For{ i=1 to n}{\For{j =1 to n}{\If{A[i,j]=1 }{add edge}\Else{add red edge}}}
+		\KwRet plot\;
+	}
+	\caption{draw\_label(n,k) Function}
+\end{algorithm}
+
+
+\item This function fills a matrix with the binary vector
+
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+\KwIn{matrix $A$, vector $b$}
+\KwOut{A filled with elements of b}
+\Comment{This function fills upper element of the A matrix using elements of b}\;
+\Comment{Assumption the number of elements in the upper matrix of A is equal to number of elements in b}
+	\Begin{
+		start $\gets$ 1 \Comment{starting point of the b vector}\;
+		
+		$n \leftarrow $ length(A)\;
+
+		
+		\For{i 1 to n}{length\_cut $\gets$ n-i \Comment{this is the number of elements in the row}\;
+				end $\gets$ start + length\_cut \Comment{the cut off at which the b vector must stop}
+				A[i,i+1] = b[start, end] \;
+			start $\gets$ end \Comment{update the starting point after each iteration}}\;
+			\For{i 1 to n}{\For{i 1 to n}{A[j,i]=A[i,j]}\Comment{This ensures that the matrix is symmetric}}
+		\KwRet $A$\;
+	}
+	\caption{fill\_bits(A, b) Function}
+\end{algorithm}
+\item Create a function that returns the binary vector of a graph in the graph set.\\
+This ensures that the binary string can have total number of edges so that each possible edge can be accounted for in the adjacency matrix.
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\KwIn{integers $n$, $k$}
+	\KwOut{binary string of k}
+	\Begin{
+		
+		$m \gets \frac{n^2-n}{2}$\;
+		$b$ $\gets$ zeros(m) \Comment*[r]{ensures that the binary string can have total number of edges}\;
+		graph\_number $\gets$ binary(k)\;
+		\For{edge 1 to m }{b[m+1-edge] = Reverse(graph\_number)[edge]\Comment*[r]{fills the binary vector using the binary string} } \
+		\KwRet $b$\;
+	}
+	\caption{binary\_string(n,k) Function}
+\end{algorithm}
+\item This function calculates the possible edges in an n vertex graph
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\KwIn{An integer $n$}
+	\KwOut{Returns total number of edges}
+	\Begin{
+		
+		$m \leftarrow \frac{n^2-n}{2}$\; \Comment{given n we have ${\frac{n^2-n}{2}}$ possible number of graphs}
+		\KwRet $m$\;
+	}
+	\caption{total\_edges(n) Function}
+\end{algorithm}
+\item This function calculates the total graph in an n vertex
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\KwIn{An integer $n$}
+	\KwOut{Returns total number of graphs}
+	\Begin{
+		
+		
+		$N \leftarrow \Fnumber{n}$\; \Comment{given n we have $^{\frac{n^2-n}{2}}$ possible number of graphs}
+		\KwRet $2^N$\;
+	}
+\end{algorithm}
+\item This function is for reversing vectors
+\begin{algorithm}[H]
+		\Comment{The function reverses the vector by swapping elements}
+	\DontPrintSemicolon
+	\KwIn{vector v}
+	\KwOut{reverse of the vector}
+\Begin{
+
+	$n \leftarrow \text{length}(v)$\;
+	\For{$i$ from 1 to $\lfloor n/2 \rfloor$}{
+		\Comment{Swap the element at position i with the element at position n-i+1}
+		temp $\leftarrow v[i]$\;
+		$v[i] \leftarrow v$[n-i+1]\;
+		$v$[n-i+1]$ \leftarrow temp$\;
+	}
+	\KwRet $v$\;
+}
+
+	\caption{Reverse(v) Function}
+\end{algorithm}
+\item This function is to create an empty graph label
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\KwIn{An integer $r$}
+	\KwOut{empty graph with no edges}
+	\Begin{
+		
+		$clique \leftarrow $ zeros(r,r)\;
+		\KwRet $clique$\;
+	}
+	\caption{empty\_graph(r) Function}
+\end{algorithm}
+\item This function returns the complete graph
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\KwIn{An integer $r$}
+	\KwOut{complete graph with edges}
+	\Begin{
+		
+		$clique \leftarrow $ ones(r,r)-identity(r,r)\;
+		\KwRet $clique$\;
+	}
+	\caption{complete\_graph(r) Function}
+\end{algorithm}
+\end{itemize}
+\newpage
+\section*{Time Taken for to verify known ramsey numbers}
+\begin{table}[hbt!]
+	\centering
+	\begin{adjustbox}{max width=\textwidth}
+		\begin{tabular}{| r | c |}
+			\toprule
+			\multicolumn{1}{|c|}{Ramsey Number} & Time Taken(s) \\
+			\midrule
+			\textbf{R(2,2) = 2} & 0.0002942 \\
+			\hline
+			\textbf{R(2,3) = 3} & 0.0009021759 \\
+			\hline
+			\textbf{R(2,4) = 4} & 0.008728 \\
+			\hline
+			\textbf{R(2,5) = 5} & 0.1223 \\
+			\hline
+			\textbf{R(2,6) = 6} & 2.7557759 \\
+			\hline
+			\textbf{R(2,7) = 7} & 172.1652746 \\
+			\hline
+			\textbf{R(2,8) = 8} & 43956.63028907776 \\
+			\hline
+			\textbf{R(2,9) = 9} & \\
+			\hline
+			\textbf{R(2,10) = 10} & \\
+			\hline
+			\textbf{R(3,3) = 6} & 8.6705279 \\
+			\hline
+			\textbf{R(3,4) = 9} & \\
+			\hline
+			\textbf{R(3,5) = 14} & \\
+			\hline
+			\textbf{R(3,6) = 18} & \\
+			\hline
+			\textbf{R(3,7) = 23} & \\
+			\hline
+			\textbf{R(4,4) = 18} & \\
+			\hline
+			\textbf{R(4,5) = 25} & \\
+			\bottomrule
+		\end{tabular}
+	\end{adjustbox}
+	\caption{Ramsey Number Calculation Times}
+	\label{tab:ramsey_times}
+\end{table}
+\newpage
+\subsubsection*{What i notice}
+\begin{enumerate}
+\item The runtime for finding each ramsey number increases exponentially
+\item The runtime is lower when instead of finding $R(s,r)$ when $s<r$.
+\end{enumerate}
+\section{Quantum algorithm}
+\begin{itemize}
+	\item VQE
+	\item Grover adaptive search(QUBO highest term quadratic)
+	\item Use order reduction
+\end{itemize}
+
 \end{document}
