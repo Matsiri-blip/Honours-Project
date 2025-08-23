@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from itertools import combinations
 import time
+import os
 def total_edges(n):
   return int((n**2-n)/2)
 def  adjacency_matrix(n,k):
@@ -28,33 +29,59 @@ def  adjacency_matrix(n,k):
           A[j,l] = A[l,j]
   return A
 def Graph(n,k):
+
+  # Create a new figure and axes
+  fig, ax = plt.subplots()
   A =adjacency_matrix(n,k)
   x = -np.cos(2 * np.pi * np.arange(n) / n+np.pi/2)        ##points where the vertices will be placed
   y = np.sin(2 * np.pi * np.arange(n) / n+np.pi/2)         ## these points are around a circle
   if n < 2:
-      plt.scatter([0],[0], s=400, color='black', zorder=2)
-      plt.text(0, 0, f'$v_1$', fontsize=15, color='white', horizontalalignment='center', verticalalignment='center')
-      plt.axis('off')
-      plt.show()
+      ax.scatter([0],[0], s=400, color='black', zorder=2)
+      ax.text(0, 0, f'$v_1$', fontsize=15, color='white', horizontalalignment='center', verticalalignment='center')
+      ax.axis('off')
+      ax.show()
       return
   for i in range(n):
-    plt.scatter(x[i],y[i], label =f"{i+1}",s=400, color = 'black', zorder=2)  ##drawing vertices
-    plt.text(x[i],y[i],"$v_{{{}}}$".format(i+1),fontsize = 15,color = 'white', horizontalalignment='center', verticalalignment='center')
+    ax.scatter(x[i],y[i], label =f"{i+1}",s=400, color = 'black', zorder=2)  ##drawing vertices
+    ax.text(x[i],y[i],"$v_{{{}}}$".format(i+1),fontsize = 15,color = 'white', horizontalalignment='center', verticalalignment='center')
 
   A=adjacency_matrix(n,k)
   for i in range(n):                                                          ##looping through the vertices
     for j in range(n):
       if A[i][j]==1:                                                           ## check if there is an edge between the edges using adjacency matrix defined                                               ## if there is an edge add the vertices into a list
-        plt.plot([x[i],x[j]],[y[i],y[j]],color = 'blue', linewidth = 3,zorder=1)
+        ax.plot([x[i],x[j]],[y[i],y[j]],color = 'blue', linewidth = 3,zorder=1)
 
       else:
-        plt.plot([x[i],x[j]],[y[i],y[j]],color = 'red',linewidth = 3, zorder=1)
-  plt.plot([x[i],x[j]],[y[i],y[j]],color = 'red',linewidth = 3, zorder=1)
-  plt.text(0,0,f'{k}',fontsize = 20, horizontalalignment='center', verticalalignment='center')
-  plt.axis('off')
-  plt.show()
+        ax.plot([x[i],x[j]],[y[i],y[j]],color = 'red',linewidth = 3, zorder=1)
+  
+  ax.text(0,0,f'{k}',fontsize = 20, horizontalalignment='center', verticalalignment='center')
+  ax.axis('off')
+  return fig
+def save_graph(n, k, folder_path, r_s=None):
+    if not os.path.exists(folder_path):
+        os.makedirs(folder_path)
+        print(f"Created folder: {folder_path}")
 
+    fig= Graph(n, k)
+    
+    if r_s:
+        image_name = f"counter_example_R({r_s}).png"
+    else:
+        image_name = f"counter_example_for_{n}_graph_{k}.png"
+    
+    image_path = os.path.join(folder_path, image_name)
+    
+    try:
+        plt.savefig(image_path, dpi=300, bbox_inches='tight')
+        print(f"Saved: {image_path}")
+    except Exception as e:
+        print(f"Error saving {image_path}: {e}")
+    
+    return plt.close()
+
+  
 def ramsey_numbers(s,r):
+  folder_path = f"graphs/R({s},{r})"
   n = 2
   while True:
     m = total_edges(n)  ##total number of edges possible
@@ -89,6 +116,9 @@ def ramsey_numbers(s,r):
         is_ramsey_number = False
         print(f'{n} is not ramsey number R{(s,r)}')
         print(Graph(n,k))
+        save_graph(n,k,folder_path)
+        
+        
         break
     final_time = time.time()
     change_in_time =   final_time-start_time
@@ -96,7 +126,7 @@ def ramsey_numbers(s,r):
         final_time = time.time()
         change_in_time = final_time - start_time
         print(f"All graphs with n = {n} vertices have a monochromatic clique.")
-        print(f"{n} is R{(r,s)} and time taken to find R{(r,s)} was {change_in_time} seconds.")
+        print(f"{n} is R{(s,r)} and time taken to find R{(s,r)} was {change_in_time} seconds.")
         break  # Exit the while loop
     
     n += 1
