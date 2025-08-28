@@ -87,8 +87,7 @@ def ramsey_numbers(s,r):
     m = total_edges(n)  ##total number of edges possible
     red_clique = np.zeros((r,r), int)    ## for the independent set
     
-    blue_clique = np.ones((s,s), int)
-    np.fill_diagonal(blue_clique,0)        ##for the monochromatic clique
+    blue_clique = np.ones((s,s))-np.eye(s)       ##for the monochromatic clique
     
     is_ramsey_number = True
 
