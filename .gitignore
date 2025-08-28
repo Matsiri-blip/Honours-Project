@@ -17,3 +17,15 @@
 project.aux
 
 project.aux
+*.toc
+Literature_Review.synctex(busy)
+*.aux
+*.aux
+presentation/presentation.nav
+presentation/presentation.snm
+project.aux
+project.aux
+QICG/vqls-prototype/
+*.synctex(busy)
+*.aux
+project.aux
