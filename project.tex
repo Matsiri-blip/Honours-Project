@@ -729,7 +729,7 @@ This ensures that the binary string can have total number of edges so that each 
 \end{algorithm}
 \end{itemize}
 \newpage
-\section*{Time Taken for to verify known ramsey numbers}
+\subsubsection*{Time Taken for to verify known ramsey numbers}
 \begin{table}[hbt!]
 	\centering
 	\begin{adjustbox}{max width=\textwidth}
@@ -778,13 +778,55 @@ This ensures that the binary string can have total number of edges so that each 
 \subsubsection*{What i notice}
 \begin{enumerate}
 \item The runtime for finding each ramsey number increases exponentially
-\item The runtime is lower when instead of finding $R(s,r)$ when $s<r$.
+\item The runtime is lower when instead of finding $R(s,r)$ when $s<r$. 
 \end{enumerate}
-\section{Quantum algorithm}
+\section*{Quantum algorithm}
+
 \begin{itemize}
 	\item VQE
 	\item Grover adaptive search(QUBO highest term quadratic)
 	\item Use order reduction
 \end{itemize}
-
+\subsection*{Grover's Algorithm}
+\begin{itemize}
+\item Search Algorithm 
+\item Can search through unordered list
+\item uses superposition and interference to search
+\item offers a quadratic speed up 
+\begin{itemize}
+\item If a list has $N$ elements the algorithm would have $\mathcal{O}(\sqrt{N})$ iterations
+\item for a list with 16 elements there would be 4 qubits required
+\end{itemize}
+\subsubsection*{Procedure}
+\begin{itemize}
+	\item Apply the oracle
+	\item Apply the Hadamard Gate to turn all states into superposition
+\end{itemize}
+\end{itemize}
+\subsubsection*{Pseudocode For Grover's Algorithm}
+\subsubsection*{Difference between Grover and VQE}
+\begin{table}[hbt!]
+	\centering
+	\caption{Comparison of Grover's Algorithm and VQE}
+	\label{tab:grover_vqe_comparison}
+	\begin{adjustbox}{max width=\textwidth}
+		\begin{tabular}{|c|c|c|}
+			\toprule
+		
+			& \textbf{Grover's Algorithm} & \textbf{VQE} \\
+			\midrule
+			\textbf{Primary Goal} & Unstructured search & Find ground state energy \\
+			\hline
+			\textbf{Optimization Type} & Search-based & Energy minimization \\
+			\hline
+			\textbf{Uses Hamiltonian} &uses an oracle & Yes \\
+			\hline
+			\textbf{Theoretical Speedup} & Quadratic ($O(\sqrt{N})$) & Not specified\\
+	
+			\hline
+			\textbf{Initialization} & Initialize states to superposition & Also initializes states at the beginning of algorithm  \\
+			\bottomrule
+		\end{tabular}
+	\end{adjustbox}
+\end{table}
 \end{document}
