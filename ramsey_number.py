@@ -77,7 +77,7 @@ def save_graph(n, k, folder_path, r_s=None):
     except Exception as e:
         print(f"Error saving {image_path}: {e}")
     
-    return plt.close()
+    return plt.close(fig)
 
   
 def ramsey_numbers(s,r):
