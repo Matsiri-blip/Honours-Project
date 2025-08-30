@@ -129,22 +129,5 @@ def ramsey_numbers(s,r):
         break  # Exit the while loop
     
     n += 1
-ramsey_numbers(2, 2)
-ramsey_numbers(2, 3)
-ramsey_numbers(2, 4)
-ramsey_numbers(2, 5)
-ramsey_numbers(2, 6)
-ramsey_numbers(2, 7)
-ramsey_numbers(2, 8)
-ramsey_numbers(2, 9)
-ramsey_numbers(2, 10)
-ramsey_numbers(3, 3)
-ramsey_numbers(3, 4)
-ramsey_numbers(3, 5)
-ramsey_numbers(3, 6)
-ramsey_numbers(3, 7)
-ramsey_numbers(3, 8)
-ramsey_numbers(3, 9)
-ramsey_numbers(4, 4)
-ramsey_numbers(4, 5)
+
 
