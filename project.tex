@@ -832,6 +832,7 @@ This ensures that the binary string can have total number of edges so that each 
 \newpage
 \subsection*{Quantum Algorithm from \cite{PhysRevA.93.032301}}
 \begin{itemize}
+	\item From the fact that there are $L = \frac{n^2-n}{2}$ possible edges, and this can be represented as a binary vector of length $L$ 
 	\item  Quantum Register Q: This is the total collection of qubits used for the algorithm. It's the quantum equivalent of a computer's memory register.
 \end{itemize}
 \subsubsection*{The Algorithm}
@@ -842,7 +843,7 @@ This ensures that the binary string can have total number of edges so that each 
 	\DontPrintSemicolon
 	\KwIn{integers r and s}
 	\KwOut{minimum n that has r or s size clique}
-	\Begin{$L\gets $\Fnumber{n}\;}
+	\Begin{$L\gets $\Fnumber{$n$}\;}
 \end{algorithm}
 \item
 \begin{algorithm}[H]
@@ -858,6 +859,37 @@ This ensures that the binary string can have total number of edges so that each 
 		\KwRet $b$\;
 	}
 	\caption{binary\_string(n,k) Function}
+\end{algorithm}
+\item 
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+\KwIn{integer $n$}
+\KwOut{integer $\geq 0$}
+\Begin{
+	
+	$m \gets $ \Fnumber{$n$}\;
+	$N \gets $\Ftotal{$n$}\;
+	$a \gets $\Fbinary{$n,k$}\;
+	$clique \gets$\Fcomplete{$r$}\;
+	$h\gets 0$\;
+	$independent\_set$ $\gets$ \Fempty{$s$}\;
+	\For{graph $= 1$ to $N$ }{\If{$a(n,graph) $ has $clique$ or $independent\_set$}{$h \gets$ total number(cliques)+ total number($independent\_set$)}} 
+	\KwRet $h$\;
+}
+\caption{energy(n,k) Function}
+\end{algorithm}
+
+\item This function calculates the total graph in an n vertex
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\KwIn{An integer $n$}
+	\KwOut{Returns total number of graphs}
+	\Begin{
+		
+		
+		$N \leftarrow \Fnumber{n}$\; \Comment{given n we have $^{\frac{n^2-n}{2}}$ possible number of graphs}
+		\KwRet $2^N$\;
+	}
 \end{algorithm}
 \item
 \begin{algorithm}[H]
