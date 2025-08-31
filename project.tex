@@ -1,6 +1,6 @@
 \documentclass{Assignment}
 \usepackage{indentfirst}
-\usepackage{algorithm2e}
+\usepackage[linesnumbered,lined,boxed,commentsnumbered]{algorithm2e}
 \usepackage{booktabs}   % For \toprule, \midrule, \bottomrule
 \usepackage{adjustbox}  % For the adjustbox environment
 \usepackage{graphicx}   % Recommended for figures and tables
@@ -552,38 +552,38 @@ END FUNCTION
 \SetKwComment{Comment}{/* }{ */}
 \begin{itemize}
 \item This function verifies the graphs of n vertices has either a red clique of order r or blue clique of order s\\
-And if a clique does not exist then return the graph that does not contain the clique
-
-\begin{algorithm}[hbt!]
+And if a clique does not exist then return the graph that does not contain the clique\\
+\begin{algorithm}[H]
 	\caption{Main Function}\label{alg:two}
 	\DontPrintSemicolon
 	\KwIn{integers r and s}
-	\KwOut{minimum n that has r or s size clique} % This command now works
+	\KwOut{minimum n that has r or s size clique}
 	
 	\Begin{
-		Set\; 
-		$n \gets 1$  \Comment{starting with 1 vertex}\;
-		$m \leftarrow$ \Fnumber{$n$}\;
-		$\N \gets \Ftotal{n}$\;
-		$red\_clique \gets$\Fempty{$r$}\;
-		$blue\_clique \gets $ \Fcomplete{$s$}\;
-		plot $\gets$ \Fdraw{$n,k$} \;
-		$A \gets$ \Flabel{$n,k$}\;
-		\textbf{repeat}\;{
+		Set\;
+		$n \gets 1$  \Comment{starting with 1 vertex}\;
+		
+		\Repeat{all graphs contain clique} {
+			$m \leftarrow$ \Fnumber{$n$}\;
+			$N \gets \Ftotal{n}$\;
+			$red\_clique \gets$\Fempty{$r$}\;
+			$blue\_clique \gets $ \Fcomplete{$s$}\;
+			plot $\gets$ \Fdraw{$n,k$} \;
+			$A \gets$ \Flabel{$n,k$}\;
+			
 			\For{$k$ from 1 to $2^m$} {
 				\If{A has red clique or blue clique}{
-					 \textbf{continue}
+					Continue
 				}
 				\Else{
-					 return plot\;\textbf{break}
+					return plot\;Break
 				}
-
 			}
 			
-			\If{one graph has no clique}{n $\gets$ n+1}
+			\If{one graph has no clique}{
+				$n \gets n+1$
+			}
 		}
-		
-		\textbf{until} all graphs contain clique % This command now works
 	}
 \end{algorithm}
 \item create a function that labels graphs
