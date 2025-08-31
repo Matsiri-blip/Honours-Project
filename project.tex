@@ -651,7 +651,7 @@ This ensures that the binary string can have total number of edges so that each 
 	\KwOut{binary string of k}
 	\Begin{
 		
-		$m \gets \frac{n^2-n}{2}$\;
+		$m \gets $ \Fnumber\;
 		$b$ $\gets$ zeros(m) \Comment*[r]{ensures that the binary string can have total number of edges}\;
 		graph\_number $\gets$ binary(k)\;
 		\For{edge 1 to m }{b[m+1-edge] = Reverse(graph\_number)[edge]\Comment*[r]{fills the binary vector using the binary string} } \
@@ -830,9 +830,71 @@ This ensures that the binary string can have total number of edges so that each 
 	\end{adjustbox}
 \end{table}
 \newpage
-\subsubsection*{Quantum Algorithm \cite{PhysRevA.93.032301}}
+\subsection*{Quantum Algorithm from \cite{PhysRevA.93.032301}}
 \begin{itemize}
 	\item  Quantum Register Q: This is the total collection of qubits used for the algorithm. It's the quantum equivalent of a computer's memory register.
+\end{itemize}
+\subsubsection*{The Algorithm}
+\begin{itemize}
+\item
+\begin{algorithm}[H]
+	\caption{Main Function}
+	\DontPrintSemicolon
+	\KwIn{integers r and s}
+	\KwOut{minimum n that has r or s size clique}
+	\Begin{$L\gets $\Fnumber{n}\;}
+\end{algorithm}
+\item
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\KwIn{integers $n$, $k$}
+	\KwOut{binary string of k}
+	\Begin{
+		
+		$m \gets $ \Fnumber{n}\;
+		$b$ $\gets$ zeros(m) \Comment*[r]{ensures that the binary string can have total number of edges}\;
+		graph\_number $\gets$ binary(k)\;
+		\For{edge 1 to m }{b[m+1-edge] = Reverse(graph\_number)[edge]\Comment*[r]{fills the binary vector using the binary string} } \
+		\KwRet $b$\;
+	}
+	\caption{binary\_string(n,k) Function}
+\end{algorithm}
+\item
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\KwIn{An integer $n$}
+	\KwOut{Returns total number of edges}
+	\Begin{
+		
+		$m \leftarrow \frac{n^2-n}{2}$\; \Comment{given n we have ${\frac{n^2-n}{2}}$ possible number of graphs}
+		\KwRet $m$\;
+	}
+	\caption{total\_edges(n) Function}
+\end{algorithm}
+\item This function is to create an independent set of r vertices
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\KwIn{An integer $r$}
+	\KwOut{empty graph with no edges}
+	\Begin{
+		
+		$clique \leftarrow $ zeros(r,r)\;
+		\KwRet $clique$\;
+	}
+	\caption{empty\_graph(r) Function}
+\end{algorithm}
+\item This function returns the clique of r vertices
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\KwIn{An integer $r$}
+	\KwOut{complete graph with edges}
+	\Begin{
+		
+		$clique \leftarrow $ ones(r,r)-identity(r,r)\;
+		\KwRet $clique$\;
+	}
+	\caption{complete\_graph(r) Function}
+\end{algorithm}
 \end{itemize}
 \newpage
 \bibliography{sample.bib}
