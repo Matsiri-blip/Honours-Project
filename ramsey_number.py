@@ -56,7 +56,7 @@ def Graph(n,k):
   
   ax.text(0,0,f'{k}',fontsize = 20, horizontalalignment='center', verticalalignment='center')
   ax.axis('off')
-  return plt.close(fig)
+  return fig
 def save_graph(n, k, folder_path, r_s=None):
     if not os.path.exists(folder_path):
         os.makedirs(folder_path)
@@ -114,7 +114,6 @@ def ramsey_numbers(s,r):
       if not clique_found:
         is_ramsey_number = False
         print(f'{n} is not ramsey number R{(s,r)}, because graph {k} has no clique')
-        print(Graph(n,k))
         save_graph(n,k,folder_path)
         
         
