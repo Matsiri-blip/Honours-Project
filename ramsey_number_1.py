@@ -81,7 +81,7 @@ def save_graph(n, k, folder_path, r_s=None):
 
   
 def ramsey_numbers(s,r):
-  folder_path = f"graphs/R({s},{r})"
+  folder_path = f"graphs_1/R({s},{r})"
   n = 2
   while True:
     m = total_edges(n)  ##total number of edges possible
