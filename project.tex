@@ -840,8 +840,14 @@ This ensures that the binary string can have total number of edges so that each 
 	\item From the fact that there are $L = \frac{n^2-n}{2}$ possible edges, and this can be represented as a binary vector of length $L$ call it $a$
 	\item There are a total number of $2^L$ graphs in total, there would be a total number of $N = 2^L$ vectors.
 	\item For given n, s and r and a given number in the set $N$, count the total number of s sized clique and r sized cliques.
-	\item Define the energy function as the total number of s sized cliques and total number of r sized cliques for a certain graph.$$h^n_{s,r}(a) = C^n_s(a)+I^n_r(a)$$
-	$C^n_s(a)$ is the total clique of size s found in the graph $a$
+	\item Chose a way to select different ways to choose different clique of sizes $s$ and $r$ subgraphs inside a graph of $n$ vertices.
+ 	\item Define the energy function as the total number of s sized cliques and total number of r sized cliques for a certain graph.$$h^n_{s,r}(a) = C^n_s(a)+I^n_r(a)$$
+	$C^n_s(a)$ is the total clique of size s found in the graph $a$ and $I^n_s(a)$ is the total clique of size r found in the graph $a$
+	\item If either of them is not found then the energy would be 0, else if a clique is found then 1 would be added to the energy function then the energy function would be a positive number.
+	\item If the energy is zero for all graph of $n$ vertices then the $n$ is not Ramsey number $s,r$ and if the energy is positive then 
+	\item The problem Hamiltonian is defined as $$H_p|z_1 z_2 z_3.....z_N\rangle =h^n_{s,r}(a)|z_1 z_2 z_3.....z_N\rangle$$
+	\item $H_p|z_1 z_2 z_3.....z_N\rangle =0$ when a bit string does not contain a clique of either size s or r.
+	\item The algorithm starts with lower bound and if the $n$ is not a Ramsey number or if  $H_p =0$ $n$ is increased until one where $H_p$ is not 0 is found.
 	\item  Quantum Register Q: This is the total collection of qubits used for the algorithm. It's the quantum equivalent of a computer's memory register.
 	\item The algorithm uses ancilla qubit these are extra bits (units of information) used in computing paradigms that require reversible operations.
 	\item It also uses a probe qubit, A probe qubit is a quantum bit used to indirectly characterize or measure a quantum system of interest, such as its temperature, topological edge states, or quantum phase transitions, by interacting with it and observing the resulting dynamics or changes in the probe's state. The probe qubit acts as a sensor, converting information about the target system into a measurable signal, which can then be used to deduce properties of the system that are otherwise difficult to access. 
@@ -854,26 +860,9 @@ This ensures that the binary string can have total number of edges so that each 
 	\DontPrintSemicolon
 	\KwIn{integers r and s,lower\_bound,}
 	\KwOut{minimum n that has r or s size clique}
-	\Begin{$L\gets $\Fnumber{$n$}\;
+	\Begin{$L\gets \Fnumber{n}$\;
+		$N \gets \Ftotal{n}$\;
 	n0$\gets$ lower\_bound}
-\end{algorithm}
-\item 
-\begin{algorithm}[H]
-	\DontPrintSemicolon
-	\KwIn{integer $n$}
-	\KwOut{integer $\geq 0$}
-	\Begin{
-		
-		$m \gets $ \Fnumber{$n$}\;
-		$N \gets $\Ftotal{$n$}\;
-		$a \gets $\Fbinary{$n,k$}\;
-		$clique \gets$\Fcomplete{$r$}\;
-		$h\gets 0$\;
-		$independent\_set$ $\gets$ \Fempty{$s$}\;
-		\For{graph $= 1$ to $N$ }{\If{$a(n,graph) $ has $clique$ or $independent\_set$}{$h \gets$ total number(cliques)+ total number($independent\_set$)}} 
-		\KwRet $h$\;
-	}
-	\caption{Hamiltonian Function}
 \end{algorithm}
 \item 
 \begin{algorithm}[H]
@@ -886,9 +875,10 @@ This ensures that the binary string can have total number of edges so that each 
 		$N \gets $\Ftotal{$n$}\;
 		$a \gets $\Fbinary{$n,k$}\;
 		$clique \gets$\Fcomplete{$r$}\;
-		$h\gets 0$\;
+
 		$independent\_set$ $\gets$ \Fempty{$s$}\;
-		\For{graph $= 1$ to $N$ }{\If{$a(n,graph) $ has $clique$ or $independent\_set$}{$h \gets$ total number(cliques)+ total number($independent\_set$)}} 
+				$h\gets 0$\;
+		\For{graph $= 1$ to $N$ }{\If{$a(n,graph) $ has $clique$}{$h \gets h+1$\; continue until all cliques are counted}\Else{if $a(n,graph) $ has $independent\_set$\;{$h \gets h+1$\;} continue until all independent\_sets are counted}} 
 		\KwRet $h$\;
 	}
 	\caption{energy(n,k) Function}
@@ -920,6 +910,7 @@ This ensures that the binary string can have total number of edges so that each 
 		$N \leftarrow \Fnumber{n}$\; \Comment{given n we have $^{\frac{n^2-n}{2}}$ possible number of graphs}
 		\KwRet $2^N$\;
 	}
+		\caption{total\_graphs(n) Function}
 \end{algorithm}
 \item
 \begin{algorithm}[H]
