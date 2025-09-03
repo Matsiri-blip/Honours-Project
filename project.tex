@@ -835,8 +835,13 @@ This ensures that the binary string can have total number of edges so that each 
 \subsection*{Quantum Algorithm from \cite{PhysRevA.93.032301}}
 \begin{itemize}
 	\item  The task is transformed to check whether the ground state energy of
-	the problem Hamiltonian equals or greater than zero
-	\item From the fact that there are $L = \frac{n^2-n}{2}$ possible edges, and this can be represented as a binary vector of length $L$ 
+	the problem Hamiltonian equals or greater than zero.
+	\item The problem is turned into a decision one.
+	\item From the fact that there are $L = \frac{n^2-n}{2}$ possible edges, and this can be represented as a binary vector of length $L$ call it $a$
+	\item There are a total number of $2^L$ graphs in total, there would be a total number of $N = 2^L$ vectors.
+	\item For given n, s and r and a given number in the set $N$, count the total number of s sized clique and r sized cliques.
+	\item Define the energy function as the total number of s sized cliques and total number of r sized cliques for a certain graph.$$h^n_{s,r}(a) = C^n_s(a)+I^n_r(a)$$
+	$C^n_s(a)$ is the total clique of size s found in the graph $a$
 	\item  Quantum Register Q: This is the total collection of qubits used for the algorithm. It's the quantum equivalent of a computer's memory register.
 	\item The algorithm uses ancilla qubit these are extra bits (units of information) used in computing paradigms that require reversible operations.
 	\item It also uses a probe qubit, A probe qubit is a quantum bit used to indirectly characterize or measure a quantum system of interest, such as its temperature, topological edge states, or quantum phase transitions, by interacting with it and observing the resulting dynamics or changes in the probe's state. The probe qubit acts as a sensor, converting information about the target system into a measurable signal, which can then be used to deduce properties of the system that are otherwise difficult to access. 
