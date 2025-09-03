@@ -788,6 +788,7 @@ This ensures that the binary string can have total number of edges so that each 
 	\item Use order reduction
 \end{itemize}
 \subsection*{Grover's Algorithm}
+
 \begin{itemize}
 \item Search Algorithm 
 \item Can search through unordered list
@@ -830,10 +831,15 @@ This ensures that the binary string can have total number of edges so that each 
 	\end{adjustbox}
 \end{table}
 \newpage
+\section*{Adiabatic Quantum Algorithm}
 \subsection*{Quantum Algorithm from \cite{PhysRevA.93.032301}}
 \begin{itemize}
+	\item  The task is transformed to check whether the ground state energy of
+	the problem Hamiltonian equals or greater than zero
 	\item From the fact that there are $L = \frac{n^2-n}{2}$ possible edges, and this can be represented as a binary vector of length $L$ 
 	\item  Quantum Register Q: This is the total collection of qubits used for the algorithm. It's the quantum equivalent of a computer's memory register.
+	\item The algorithm uses ancilla qubit these are extra bits (units of information) used in computing paradigms that require reversible operations.
+	\item It also uses a probe qubit, A probe qubit is a quantum bit used to indirectly characterize or measure a quantum system of interest, such as its temperature, topological edge states, or quantum phase transitions, by interacting with it and observing the resulting dynamics or changes in the probe's state. The probe qubit acts as a sensor, converting information about the target system into a measurable signal, which can then be used to deduce properties of the system that are otherwise difficult to access. 
 \end{itemize}
 \subsubsection*{The Algorithm}
 \begin{itemize}
@@ -841,9 +847,46 @@ This ensures that the binary string can have total number of edges so that each 
 \begin{algorithm}[H]
 	\caption{Main Function}
 	\DontPrintSemicolon
-	\KwIn{integers r and s}
+	\KwIn{integers r and s,lower\_bound,}
 	\KwOut{minimum n that has r or s size clique}
-	\Begin{$L\gets $\Fnumber{$n$}\;}
+	\Begin{$L\gets $\Fnumber{$n$}\;
+	n0$\gets$ lower\_bound}
+\end{algorithm}
+\item 
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\KwIn{integer $n$}
+	\KwOut{integer $\geq 0$}
+	\Begin{
+		
+		$m \gets $ \Fnumber{$n$}\;
+		$N \gets $\Ftotal{$n$}\;
+		$a \gets $\Fbinary{$n,k$}\;
+		$clique \gets$\Fcomplete{$r$}\;
+		$h\gets 0$\;
+		$independent\_set$ $\gets$ \Fempty{$s$}\;
+		\For{graph $= 1$ to $N$ }{\If{$a(n,graph) $ has $clique$ or $independent\_set$}{$h \gets$ total number(cliques)+ total number($independent\_set$)}} 
+		\KwRet $h$\;
+	}
+	\caption{Hamiltonian Function}
+\end{algorithm}
+\item 
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\KwIn{integer $n$,matrices $sigma_x$}
+	\KwOut{integer $\geq 0$}
+	\Begin{
+		
+		$m \gets $ \Fnumber{$n$}\;
+		$N \gets $\Ftotal{$n$}\;
+		$a \gets $\Fbinary{$n,k$}\;
+		$clique \gets$\Fcomplete{$r$}\;
+		$h\gets 0$\;
+		$independent\_set$ $\gets$ \Fempty{$s$}\;
+		\For{graph $= 1$ to $N$ }{\If{$a(n,graph) $ has $clique$ or $independent\_set$}{$h \gets$ total number(cliques)+ total number($independent\_set$)}} 
+		\KwRet $h$\;
+	}
+	\caption{energy(n,k) Function}
 \end{algorithm}
 \item
 \begin{algorithm}[H]
@@ -859,24 +902,6 @@ This ensures that the binary string can have total number of edges so that each 
 		\KwRet $b$\;
 	}
 	\caption{binary\_string(n,k) Function}
-\end{algorithm}
-\item 
-\begin{algorithm}[H]
-	\DontPrintSemicolon
-\KwIn{integer $n$}
-\KwOut{integer $\geq 0$}
-\Begin{
-	
-	$m \gets $ \Fnumber{$n$}\;
-	$N \gets $\Ftotal{$n$}\;
-	$a \gets $\Fbinary{$n,k$}\;
-	$clique \gets$\Fcomplete{$r$}\;
-	$h\gets 0$\;
-	$independent\_set$ $\gets$ \Fempty{$s$}\;
-	\For{graph $= 1$ to $N$ }{\If{$a(n,graph) $ has $clique$ or $independent\_set$}{$h \gets$ total number(cliques)+ total number($independent\_set$)}} 
-	\KwRet $h$\;
-}
-\caption{energy(n,k) Function}
 \end{algorithm}
 
 \item This function calculates the total graph in an n vertex
