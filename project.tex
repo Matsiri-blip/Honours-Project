@@ -780,9 +780,42 @@ This ensures that the binary string can have total number of edges so that each 
 \item The runtime for finding each ramsey number increases exponentially
 \item The runtime is lower when instead of finding $R(s,r)$ when $s<r$. 
 \end{enumerate}
-\section*{Quantum algorithm}
-
+\section*{Quantum algorithms}
+There are 6 different types of Quantum computers namely
+\begin{enumerate}
+\item Superconducting Ions-
+use superconducting circuits as qubits, which are made from materials that can conduct electricity without resistance at extremely low temperatures.
+Superconducting qubits work by exploiting the quantum properties of superconducting circuits. 
+These circuits have two states, representing 0 and 1, and can exist in superposition and be entangled.
+\item Neutral Atom Quantum Computers -
+Neutral atom quantum computers use neutral atoms as qubits. 
+The atoms are trapped in place using optical tweezers (focused laser beams) and manipulated by lasers. 
+Atoms are individually trapped and held in place using precise laser beams. 
+The internal quantum states of these atoms (such as their electron configurations) are used to represent quantum bits (qubits).
+ Quantum operations are performed using lasers to manipulate these states.
+\item Photonic -
+Photons(particles of light) are used as qubits.
+These photons can carry quantum information and be manipulated using optical components. 
+Photons are generated, manipulated, and measured using optical components like beamsplitters, mirrors, and waveguides.
+ Quantum operations are performed using properties of photons such as polarization, phase, and path.
+\item Trapped Ion Quantum Computers-
+Trapped ion quantum computers use individual ions (charged atoms) as qubits, which are manipulated using electromagnetic fields. Ions are trapped in a vacuum chamber using electromagnetic fields and manipulated with lasers. 
+The internal energy states of the ions are used to represent quantum bits.
+\item Topological Quantum Computers -
+Topological quantum computers aim to use exotic particles called anyons to represent qubits. 
+These qubits are more robust against errors due to their topological nature, which means that information is stored in the global properties of the system rather than the individual states of particles.
+\item Quantum Dots Quantum Computers - 
+Quantum dots are semiconductor-based structures that confine electrons in all three spatial dimensions, effectively creating artificial atoms. 
+These quantum dots can be used as qubits. 
+A quantum dot is essentially a tiny region of a semiconductor material where an electron can be confined.
+ The qubit is represented by the spin or energy level of the electron confined in the quantum dot.
+ External electric or magnetic fields are used to control the qubits.
+\end{enumerate}
+\textbf{IBM}:\\
+IBM is a leader in superconducting quantum computing, with its IBM Quantum platform that provides cloud-based quantum computing services. 
+Their quantum processors, such as the Eagle and Condor chips, use superconducting qubits to scale up quantum systems.
 \begin{itemize}
+
 	\item VQE
 	\item Grover adaptive search(QUBO highest term quadratic)
 	\item Use order reduction
@@ -832,6 +865,9 @@ This ensures that the binary string can have total number of edges so that each 
 \end{table}
 \newpage
 \section*{Adiabatic Quantum Algorithm}
+\begin{itemize}
+\item
+\end{itemize}
 \subsection*{Quantum Algorithm from \cite{PhysRevA.93.032301}}
 \begin{itemize}
 	\item  The task is transformed to check whether the ground state energy of
@@ -849,8 +885,12 @@ This ensures that the binary string can have total number of edges so that each 
 	\item $H_p|z_1 z_2 z_3.....z_N\rangle =0$ when a bit string does not contain a clique of either size s or r.
 	\item The algorithm starts with lower bound and if the $n$ is not a Ramsey number or if  $H_p =0$ $n$ is increased until one where $H_p$ is not 0 is found.
 	\item  Quantum Register Q: This is the total collection of qubits used for the algorithm. It's the quantum equivalent of a computer's memory register.
+	Quantum Register Q: This is the primary memory for the algorithm
 	\item The algorithm uses ancilla qubit these are extra bits (units of information) used in computing paradigms that require reversible operations.
+	\item A quantum register containing an ancilla qubit and L qubit quantum register
 	\item It also uses a probe qubit, A probe qubit is a quantum bit used to indirectly characterize or measure a quantum system of interest, such as its temperature, topological edge states, or quantum phase transitions, by interacting with it and observing the resulting dynamics or changes in the probe's state. The probe qubit acts as a sensor, converting information about the target system into a measurable signal, which can then be used to deduce properties of the system that are otherwise difficult to access. 
+	\item There are a total of $L+2$ total qubits, including $L$ graph qubits, ancilla qubit and a probe qubit.
+	\item $$H = -\frac{1}{2}\omega\sigma_z+I_2\otimes H_Q+c \sigma_x\otimes A$$
 \end{itemize}
 \subsubsection*{The Algorithm}
 \begin{itemize}
