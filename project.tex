@@ -5,6 +5,7 @@
 \usepackage{adjustbox}  % For the adjustbox environment
 \usepackage{graphicx}   % Recommended for figures and tables
 \bibliographystyle{unsrtnat}
+\usepackage{url}
 \usepackage{tikz}
 \usepackage{pdfpages}
 \usepackage{booktabs}       % For professional-looking tables (\toprule, \midrule, \bottomrule)
@@ -371,13 +372,6 @@ n=4\\
 \includegraphics[scale = 0.5]{more_systematic_graphs/figure_461.png}
 \includegraphics[scale = 0.5]{more_systematic_graphs/figure_462.png}
 \includegraphics[scale = 0.5]{more_systematic_graphs/figure_463.png}
-\newpage
-\begin{itemize}
-	\item  Adiabatic quantum computing(AQC) started as an approach to solving optimization problems
-	\item in AQC the computation proceeds from an initial Hamiltonian whose ground
-	state is easy to prepare, to a final Hamiltonian whose
-	ground state encodes the solution to the computational problem.
-\end{itemize}
 \newpage
 
 \section*{Classical Algorithm for finding ramsey numbers}
@@ -763,24 +757,93 @@ This ensures that the binary string can have total number of edges so that each 
 	\hline
 	\textbf{R(3,6) = 18} & \\
 	\hline
-	\textbf{R(3,7) = 23} & \\
-	\hline
 	\textbf{R(4,4) = 18} & \\
-	\hline
-	\textbf{R(4,5) = 25} & \\
 	\bottomrule
 \end{tabular}
 	\end{adjustbox}
 	\caption{Ramsey Number Calculation Times}
 	\label{tab:ramsey_times}
 \end{table}
-\newpage
+
 \subsubsection*{What i notice}
+
+
 \begin{enumerate}
 \item The runtime for finding each ramsey number increases exponentially
-\item The runtime is lower when instead of finding $R(s,r)$ when $s<r$. 
+\item The runtime is lower when instead of finding $R(s,r)$ when $s<r$.
+\end{enumerate} 
+\newpage
+\section*{Quantum Computing}
+Quantum computers store information in quantum bits (qubits).
+A spin-half system is a system that has 2 states spin up and spin down similar to qubits.
+Mathematically qubits are represented  as in Dirac notation 
+\begin{center}
+	0 bit $=|0\rangle $ \\1 bit $=  |1\rangle$
+\end{center}
+If n particles are added we have $2^n$ states or $2^n$ pieces of information. 
+For n = 2 we have 4 different states which are,
+\begin{equation}
+	|\psi\rangle =c_1 |00\rangle+c_2 |01\rangle+c_3 |10\rangle+ c_4 |11\rangle
+\end{equation}
+Where in this new state \begin{equation}|00\rangle = |0\rangle\otimes|0\rangle  =	\begin{pmatrix}
+		1\\0\\0\\0
+\end{pmatrix}\end{equation}
+The other vectors are given by,
+$$|01\rangle =	\begin{pmatrix}
+	0\\1\\0\\0
+\end{pmatrix}|10\rangle =	\begin{pmatrix}
+	0\\0\\1\\0
+\end{pmatrix}|11\rangle =	\begin{pmatrix}
+	0\\0\\0\\1
+\end{pmatrix} $$
+This represents a 2-qubit superposition state with the coefficients $c_i$ are complex and like the 1-qubit system they tell us the probability of measuring their respective states.\\
+These matrices are known as operators which are linear, meaning they act on these states \cite{AndrewSteane,mcintyre_quantum_2012}.
+\begin{equation}
+	\sigma_x =\begin{pmatrix}
+		0&1\\1&0
+	\end{pmatrix},
+	\sigma_y =\begin{pmatrix}
+		0&-i\\i&0
+	\end{pmatrix},\sigma_z =\begin{pmatrix}
+		1&0\\0&-1
+	\end{pmatrix}
+\end{equation}
+\begin{enumerate}
+\item The pauli matrices for a state with more than 1 qubit is defined by 
+\begin{equation}\sigma_x^{\otimes n} =\sigma_x \otimes \sigma_x \otimes \sigma_x \otimes ...\sigma_x \end{equation}n times\\
+Example of 2 state system 
+$$\sigma_x^{\otimes2} =\sigma_x \otimes \sigma_x $$
+$$\sigma_x^{\otimes2} =\begin{pmatrix}
+	0&1\\1&0
+\end{pmatrix} \otimes \begin{pmatrix}
+	0&1\\1&0
+\end{pmatrix}$$
+This matrix tensor product is represented by 
+$$\begin{pmatrix}
+0 \begin{pmatrix}
+	0&1\\1&0
+\end{pmatrix} &1 \begin{pmatrix}
+0&1\\1&0
+\end{pmatrix}\\
+1 \begin{pmatrix}
+	0&1\\1&0
+\end{pmatrix}&0\begin{pmatrix}
+0&1\\1&0
+\end{pmatrix}
+\end{pmatrix}$$
+$$\sigma_x^{\otimes2}=\begin{pmatrix}
+
+		0&0&0&1\\
+
+		0&0&1&0\\
+
+		0&1&0&0\\
+
+		1&0&0&0
+
+\end{pmatrix}$$
 \end{enumerate}
-\section*{Quantum algorithms}
+
 There are 6 different types of Quantum computers namely
 \begin{enumerate}
 \item Superconducting Ions-
@@ -814,12 +877,55 @@ A quantum dot is essentially a tiny region of a semiconductor material where an 
 \textbf{IBM}:\\
 IBM is a leader in superconducting quantum computing, with its IBM Quantum platform that provides cloud-based quantum computing services. 
 Their quantum processors, such as the Eagle and Condor chips, use superconducting qubits to scale up quantum systems.
-\begin{itemize}
 
-	\item VQE
-	\item Grover adaptive search(QUBO highest term quadratic)
-	\item Use order reduction
+\subsection*{Adiabatic Quantum Algorithm}
+Adiabatic Quantum Computing (AQC) seeks to evolve a state under a time-dependent Hamiltonian 
+$H(t)$. More specifically, a system of qubits is initialized into an easy-to-prepare ground state of a Hamiltonian $H_0$.
+Then, the system is allowed to interact through the Hamiltonian .
+The quantum algorithm's goal is not to find a graph with a specific number of cliques. Its goal is to find the graph that has the absolute minimum number of cliques—which corresponds to the state with the lowest possible energy.
+\begin{equation}
+H(t)=(1-t)H_0+tH_1, t\epsilon [0,1]
+\label{evolution}
+\end{equation}
+The equation ~\ref{evolution} is defined as the evolution. 
+Time is varied slowly so that the system of qubits always remains in the ground state throughout the evolution \cite{Kolotouros2022}.
+\begin{itemize}
+	\item  Adiabatic quantum computing(AQC) started as an approach to solving optimization problems
+	\item in AQC the computation proceeds from an initial Hamiltonian whose ground
+	state is easy to prepare, to a final Hamiltonian whose
+	ground state encodes the solution to the computational problem.
 \end{itemize}
+\begin{itemize}
+	\item A type of quantum computing that uses Adiabatic theorem to perform calculations
+	\item Adiabatic Theorem says that a quantum mechanical system, starting in an eigenstate of its initial Hamiltonian, will remain in the corresponding instantaneous eigenstate of the Hamiltonian as it is changed slowly over time, provided there is a sufficiently large "gap" (or separation) between its energy level and other energy levels.
+	\item adiabatic quantum computing relies on the use of continuous transformations
+\end{itemize}
+In the paper \cite{Kolotouros2022} they simulate adiabatic quantum computing with parameterized quantum circuits using qiskit or Qiskit Statevector. 
+This means Adiabatic quantum computing can be applied in qiskit.
+\\
+\\
+\subsection*{Differences between Analog and Digital Computing}
+\begin{table}[h!]
+	\centering
+	
+	\begin{tabularx}{\textwidth}{|X|X|}
+		\hline
+	 \textbf{Analog Quantum Computing} & \textbf{Digital Quantum Computing} \\\hline
+	 There is a problem Hamiltonian&Uses quantum circuits \\
+		\hline
+	The quantum state is changing continuously&	\\\hline
+		 uses continuous variables to represent and manipulate quantum information &operates on continuous quantum states  \\
+		\hline
+		  Relies on discrete qubits and gates & Employs continuous transformations \\
+		\hline
+It’s easier to implement architecturally & Can introduce errors with every gate operation, which limits practicality \\
+		\hline
+		 Offers the potential for more natural and efficient simulations of certain quantum systems. & Applications in quantum simulation, optimization \\\hline
+	\end{tabularx}
+	\caption{Differences between Analog and Digital Quantum Computing \cite{Quera_Analog_Quantum_Computing}}
+	\label{tab:quantum_comparison}
+\end{table}
+\newpage
 \subsection*{Grover's Algorithm}
 
 \begin{itemize}
@@ -864,10 +970,7 @@ Their quantum processors, such as the Eagle and Condor chips, use superconductin
 	\end{adjustbox}
 \end{table}
 \newpage
-\section*{Adiabatic Quantum Algorithm}
-\begin{itemize}
-\item
-\end{itemize}
+
 \subsection*{Quantum Algorithm from \cite{PhysRevA.93.032301}}
 \begin{itemize}
 	\item  The task is transformed to check whether the ground state energy of
@@ -876,9 +979,9 @@ Their quantum processors, such as the Eagle and Condor chips, use superconductin
 	\item From the fact that there are $L = \frac{n^2-n}{2}$ possible edges, and this can be represented as a binary vector of length $L$ call it $a$
 	\item There are a total number of $2^L$ graphs in total, there would be a total number of $N = 2^L$ vectors.
 	\item For given n, s and r and a given number in the set $N$, count the total number of s sized clique and r sized cliques.
-	\item Chose a way to select different ways to choose different clique of sizes $s$ and $r$ subgraphs inside a graph of $n$ vertices.
  	\item Define the energy function as the total number of s sized cliques and total number of r sized cliques for a certain graph.$$h^n_{s,r}(a) = C^n_s(a)+I^n_r(a)$$
 	$C^n_s(a)$ is the total clique of size s found in the graph $a$ and $I^n_s(a)$ is the total clique of size r found in the graph $a$
+	\item find the way in which the subgraphs are chosen in the binary string
 	\item If either of them is not found then the energy would be 0, else if a clique is found then 1 would be added to the energy function then the energy function would be a positive number.
 	\item If the energy is zero for all graph of $n$ vertices then the $n$ is not Ramsey number $s,r$ and if the energy is positive then 
 	\item The problem Hamiltonian is defined as $$H_p|z_1 z_2 z_3.....z_N\rangle =h^n_{s,r}(a)|z_1 z_2 z_3.....z_N\rangle$$
@@ -891,20 +994,47 @@ Their quantum processors, such as the Eagle and Condor chips, use superconductin
 	\item It also uses a probe qubit, A probe qubit is a quantum bit used to indirectly characterize or measure a quantum system of interest, such as its temperature, topological edge states, or quantum phase transitions, by interacting with it and observing the resulting dynamics or changes in the probe's state. The probe qubit acts as a sensor, converting information about the target system into a measurable signal, which can then be used to deduce properties of the system that are otherwise difficult to access. 
 	\item There are a total of $L+2$ total qubits, including $L$ graph qubits, ancilla qubit and a probe qubit.
 	\item $$H = -\frac{1}{2}\omega\sigma_z+I_2\otimes H_Q+c \sigma_x\otimes A$$
+	\item The system is allowed to evolve with time.
+	\item the paper uses a matrix to encode the entire problem space. The quantum computer's job is not to check every configuration, but to find the lowest possible energy of that complex matrix. If that lowest energy is zero, it means
+	 a valid clique exists. If the lowest energy is greater than zero, it means no such clique exists.
 \end{itemize}
 \subsubsection*{The Algorithm}
 \begin{itemize}
+	\SetKwFunction{Fenergy}{energy} % Defines another function
+	\SetKwFunction{Ftotal}{total\_graphs} % Defines another function
 \item
 \begin{algorithm}[H]
 	\caption{Main Function}
 	\DontPrintSemicolon
 	\KwIn{integers r and s,lower\_bound,}
 	\KwOut{minimum n that has r or s size clique}
+	\Begin{$n0\gets$ lower\_bound\;
+		$L\gets \Fnumber{n}$\;
+		$N \gets \Ftotal{n}$\;
+		$H_P = \Fenergy{n,k}$\;
+		\textbf{Initialize} main quantum register $Q$ ($L+1$ qubits) to the reference state $|\Phi\rangle = |0\rangle^{\otimes(L+1)}$\;
+		\textbf{Initialize} the probe qubit to its excited state $|1\rangle$\;
+		 \If{the probability measurement indicates the ground state energy is NOT zero}{
+			\tcc{If the ground state energy is non-zero, it means every graph for this $n$ must contain a clique or independent set.}
+			\KwRet n
+		}
+		\Else{
+			\tcc{A graph with a zero-energy was found}
+			 $n\gets n+1$
+		}
+	}
+\end{algorithm}
+\item
+\begin{algorithm}[H]
+	\caption{Hamiltonian Function}
+	\DontPrintSemicolon
+	\KwIn{integers r and s,lower\_bound,}
+	\KwOut{minimum n that has r or s size clique}
 	\Begin{$L\gets \Fnumber{n}$\;
 		$N \gets \Ftotal{n}$\;
-	n0$\gets$ lower\_bound}
+		$n0\gets$ lower\_bound}
 \end{algorithm}
-\item 
+\item Construct the Problem Hamiltonian $H_P$ for the $n$-vertex graph
 \begin{algorithm}[H]
 	\DontPrintSemicolon
 	\KwIn{integer $n$,matrices $sigma_x$}
@@ -992,3 +1122,9 @@ Their quantum processors, such as the Eagle and Condor chips, use superconductin
 \newpage
 \bibliography{sample.bib}
 \end{document}
+\begin{itemize}
+	
+	\item VQE
+	\item Grover adaptive search(QUBO highest term quadratic)
+	\item Use order reduction
+\end{itemize}
