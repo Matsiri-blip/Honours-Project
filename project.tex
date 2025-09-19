@@ -882,7 +882,6 @@ Their quantum processors, such as the Eagle and Condor chips, use superconductin
 Adiabatic Quantum Computing (AQC) seeks to evolve a state under a time-dependent Hamiltonian 
 $H(t)$. More specifically, a system of qubits is initialized into an easy-to-prepare ground state of a Hamiltonian $H_0$.
 Then, the system is allowed to interact through the Hamiltonian .
-The quantum algorithm's goal is not to find a graph with a specific number of cliques. Its goal is to find the graph that has the absolute minimum number of cliques—which corresponds to the state with the lowest possible energy.
 \begin{equation}
 H(t)=(1-t)H_0+tH_1, t\epsilon [0,1]
 \label{evolution}
@@ -972,6 +971,7 @@ It’s easier to implement architecturally & Can introduce errors with every gat
 \newpage
 
 \subsection*{Quantum Algorithm from \cite{PhysRevA.93.032301}}
+The quantum algorithm's goal is not to find a graph with a specific number of cliques. Its goal is to find the graph that has the absolute minimum number of cliques—which corresponds to the state with the lowest possible energy.
 \begin{itemize}
 	\item  The task is transformed to check whether the ground state energy of
 	the problem Hamiltonian equals or greater than zero.
@@ -981,7 +981,7 @@ It’s easier to implement architecturally & Can introduce errors with every gat
 	\item For given n, s and r and a given number in the set $N$, count the total number of s sized clique and r sized cliques.
  	\item Define the energy function as the total number of s sized cliques and total number of r sized cliques for a certain graph.$$h^n_{s,r}(a) = C^n_s(a)+I^n_r(a)$$
 	$C^n_s(a)$ is the total clique of size s found in the graph $a$ and $I^n_s(a)$ is the total clique of size r found in the graph $a$
-	\item find the way in which the subgraphs are chosen in the binary string
+	\item Each bit string is represented as a qubit
 	\item If either of them is not found then the energy would be 0, else if a clique is found then 1 would be added to the energy function then the energy function would be a positive number.
 	\item If the energy is zero for all graph of $n$ vertices then the $n$ is not Ramsey number $s,r$ and if the energy is positive then 
 	\item The problem Hamiltonian is defined as $$H_p|z_1 z_2 z_3.....z_N\rangle =h^n_{s,r}(a)|z_1 z_2 z_3.....z_N\rangle$$
