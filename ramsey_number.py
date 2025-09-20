@@ -6,11 +6,11 @@ import os
 def total_edges(n):
   return int((n**2-n)/2)
 def binary_vector(n,k):
-    m =total_edges(n)
+    m = total_edges(n)
     binary_vec = np.zeros(m)
-    binary = bin(k)[2:]
-    for i in range(len(binary)):
-        binary_vec[m-i-1] = int(binary[::-1][i])
+    binary = bin(k)[2:].zfill(m) # Use zfill to pad with leading zeros
+    for i in range(m):
+        binary_vec[i] = int(binary[i])
     return binary_vec
 def  adjacency_matrix(n,k):
   ##conditions for the matrix
@@ -18,11 +18,9 @@ def  adjacency_matrix(n,k):
   ##first define the pattern in which it is going to be put numbers for the z
   ##binary vector
   m =total_edges(n)
-  binary_vec = np.zeros(m)
-  binary = binary_vector(n,k)
   start = 0
   A = np.zeros((n,n))
-  B = binary_vec
+  B = binary_vector(n,k)
   for i in range(n-1): ##this loop is to return the list of the pattern
       length_cut = n-1-i
       end = start + length_cut
@@ -115,20 +113,17 @@ def ramsey_numbers(s,r):
     for k in range(2**m):  ##iterating over total number of graphs
       current_graph_matrix = binary_vector(n, k)
       clique_found = False    ##intialize for when a clique exists in the graph
-      ##combination of different was to choose vertices takes n choose r
-      comb1 = list(combinations(range(n), r))  ##this depends on r
-      comb2 = list(combinations(range(n), s))  ##this ones depends on s
       # Check for monochromatic subgraphs of size r1
-      for vertices in comb1:
-          sub_matrix = current_graph_matrix[np.ix_(vertices, vertices)]    ##chooses the combinations from the nxn matrix
-          if (np.array_equal(sub_matrix, red_clique)):                                               ##checks if a red clique  exists 
-              clique_found = True                                                                ##then the variable clique_found updates to True
-              break
-      for vertices in comb2:
-        sub_matrix = current_graph_matrix[np.ix_(vertices, vertices)]    ##chooses the combinations from the nxn matrix
-        if (np.array_equal(sub_matrix, blue_clique)):                                                ##if a blue clique exists 
-          clique_found = True                                                                ##then the variable clique_found updates to True
-          break   
+      # Check for red r-cliques
+      for indices in r_clique_indices:
+        if all(current_graph_matrix[idx] ==0  for idx in indices):
+          clique_found = True
+          break
+      # Check for red r-cliques
+      for indices in s_clique_indices:
+        if all(current_graph_matrix[idx] == 1 for idx in indices):
+          clique_found = True
+          break
 
       if not clique_found:
         is_ramsey_number = False
