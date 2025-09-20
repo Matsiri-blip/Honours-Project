@@ -85,16 +85,30 @@ def ramsey_numbers(s,r):
   n = 2
   while True:
     m = total_edges(n)  ##total number of edges possible
-    red_clique = np.zeros((r,r), int)    ## for the independent set
-    
-    blue_clique = np.ones((s,s))-np.eye(s)       ##for the monochromatic clique
+    #calculate clique indices for the current n
+    edges = list(combinations(range(n), 2))                       ##define edges in graph
+    edge_to_index = {edge: i for i, edge in enumerate(edges)}
+
+    r_clique_vertices = list(combinations(range(n), r))
+    r_clique_indices = []
+    for vertices in r_clique_vertices:
+      subgraph_edges = list(combinations(vertices, 2))
+      indices = [edge_to_index[tuple(sorted(e))] for e in subgraph_edges] # Ensure consistent edge representation
+      r_clique_indices.append(indices)
+
+    s_clique_vertices = list(combinations(range(n), s))
+    s_clique_indices = []
+    for vertices in s_clique_vertices:
+      subgraph_edges = list(combinations(vertices, 2))
+      indices = [edge_to_index[tuple(sorted(e))] for e in subgraph_edges] # Ensure consistent edge representation
+      s_clique_indices.append(indices)
     
     is_ramsey_number = True
 
     start_time = time.time()
 
     for k in range(2**m):  ##iterating over total number of graphs
-      current_graph_matrix = adjacency_matrix(n, k)
+      current_graph_matrix = [(k >> bit) & 1 for bit in range(m - 1, -1, -1)]
       clique_found = False    ##intialize for when a clique exists in the graph
       ##combination of different was to choose vertices takes n choose r
       comb1 = list(combinations(range(n), r))  ##this depends on r
