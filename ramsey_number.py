@@ -5,6 +5,13 @@ import time
 import os
 def total_edges(n):
   return int((n**2-n)/2)
+def binary_vector(n,k):
+    m =total_edges(n)
+    binary_vec = np.zeros(m)
+    binary = bin(k)[2:]
+    for i in range(len(binary)):
+        binary_vec[m-i-1] = int(binary[::-1][i])
+    return binary_vec
 def  adjacency_matrix(n,k):
   ##conditions for the matrix
   ##for putting vector into the matrix
@@ -12,9 +19,7 @@ def  adjacency_matrix(n,k):
   ##binary vector
   m =total_edges(n)
   binary_vec = np.zeros(m)
-  binary = bin(k)[2:]
-  for i in range(len(binary)):
-    binary_vec[m-i-1] = int(binary[::-1][i])
+  binary = binary_vector(n,k)
   start = 0
   A = np.zeros((n,n))
   B = binary_vec
@@ -108,7 +113,7 @@ def ramsey_numbers(s,r):
     start_time = time.time()
 
     for k in range(2**m):  ##iterating over total number of graphs
-      current_graph_matrix = [(k >> bit) & 1 for bit in range(m - 1, -1, -1)]
+      current_graph_matrix = binary_vector(n, k)
       clique_found = False    ##intialize for when a clique exists in the graph
       ##combination of different was to choose vertices takes n choose r
       comb1 = list(combinations(range(n), r))  ##this depends on r
