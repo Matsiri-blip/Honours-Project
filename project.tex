@@ -5,8 +5,11 @@
 \usepackage{adjustbox}  % For the adjustbox environment
 \usepackage{graphicx}   % Recommended for figures and tables
 \bibliographystyle{unsrtnat}
+\usepackage{listings}
+\usepackage{hyperref}
 \usepackage{url}
 \usepackage{tikz}
+\usepackage{float}
 \usepackage{pdfpages}
 \usepackage{booktabs}       % For professional-looking tables (\toprule, \midrule, \bottomrule)
 \usepackage{adjustbox}      % For table adjustment if it's too wide
@@ -731,25 +734,25 @@ This ensures that the binary string can have total number of edges so that each 
 	\toprule
 	\multicolumn{1}{|c|}{Ramsey Number} & Time Taken(s) \\
 	\midrule
-	\textbf{R(2,2) = 2} & $2.942 \times 10^{-4}$ \\
+	\textbf{R(2,2) = 2} & $3.719 \times 10^{-5}$ \\
 	\hline
-	\textbf{R(2,3) = 3} & $9.022 \times 10^{-4}$ \\
+	\textbf{R(2,3) = 3} & $4.816 \times 10^{-5}$ \\
 	\hline
-	\textbf{R(2,4) = 4} & $8.728 \times 10^{-3}$ \\
+	\textbf{R(2,4) = 4} & $2.291 \times 10^{-4}$ \\
 	\hline
-	\textbf{R(2,5) = 5} & $1.223 \times 10^{-1}$ \\
+	\textbf{R(2,5) = 5} & $4.204 \times 10^{-3}$ \\
 	\hline
-	\textbf{R(2,6) = 6} & 2.756 \\
+	\textbf{R(2,6) = 6} & $1.638 \times 10^{-1}$ \\
 	\hline
-	\textbf{R(2,7) = 7} & $1.722 \times 10^{2}$ \\
+	\textbf{R(2,7) = 7} & $1.20559 \times 10^{1}$ \\
 	\hline
-	\textbf{R(2,8) = 8} & $4.396 \times 10^{4}$ \\
+	\textbf{R(2,8) = 8} & $3.792 \times 10^{4}$ \\
 	\hline
 	\textbf{R(2,9) = 9} & \\
 	\hline
 	\textbf{R(2,10) = 10} & \\
 	\hline
-	\textbf{R(3,3) = 6} & 8.671 \\
+	\textbf{R(3,3) = 6} &  $4.2922 \times 10^{-1}$ \\
 	\hline
 	\textbf{R(3,4) = 9} & \\
 	\hline
@@ -764,7 +767,46 @@ This ensures that the binary string can have total number of edges so that each 
 	\caption{Ramsey Number Calculation Times}
 	\label{tab:ramsey_times}
 \end{table}
-
+\begin{table}[hbt!]
+	\centering
+	\begin{adjustbox}{max width=\textwidth}
+		\begin{tabular}{| r | c |}
+			\toprule
+			\multicolumn{1}{|c|}{Ramsey Number} & Time Taken(s) \\
+			\midrule
+			\textbf{R(2,2) = 2} & $2.942 \times 10^{-4}$ \\
+			\hline
+			\textbf{R(2,3) = 3} & $9.022 \times 10^{-4}$ \\
+			\hline
+			\textbf{R(2,4) = 4} & $8.728 \times 10^{-3}$ \\
+			\hline
+			\textbf{R(2,5) = 5} & $1.223 \times 10^{-1}$ \\
+			\hline
+			\textbf{R(2,6) = 6} & 2.756 \\
+			\hline
+			\textbf{R(2,7) = 7} & $1.722 \times 10^{2}$ \\
+			\hline
+			\textbf{R(2,8) = 8} & $4.396 \times 10^{4}$ \\
+			\hline
+			\textbf{R(2,9) = 9} & \\
+			\hline
+			\textbf{R(2,10) = 10} & \\
+			\hline
+			\textbf{R(3,3) = 6} &8.671 \\
+			\hline
+			\textbf{R(3,4) = 9} & \\
+			\hline
+			\textbf{R(3,5) = 14} & \\
+			\hline
+			\textbf{R(3,6) = 18} & \\
+			\hline
+			\textbf{R(4,4) = 18} & \\
+			\bottomrule
+		\end{tabular}
+	\end{adjustbox}
+	\caption{Ramsey Number Calculation Times}
+	\label{tab:ramsey_times_2}
+\end{table}
 \subsubsection*{What i notice}
 
 
@@ -1044,12 +1086,9 @@ The quantum algorithm's goal is not to find a graph with a specific number of cl
 		$m \gets $ \Fnumber{$n$}\;
 		$N \gets $\Ftotal{$n$}\;
 		$a \gets $\Fbinary{$n,k$}\;
-		$clique \gets$\Fcomplete{$r$}\;
-
-		$independent\_set$ $\gets$ \Fempty{$s$}\;
-				$h\gets 0$\;
-		\For{graph $= 1$ to $N$ }{\If{$a(n,graph) $ has $clique$}{$h \gets h+1$\; continue until all cliques are counted}\Else{if $a(n,graph) $ has $independent\_set$\;{$h \gets h+1$\;} continue until all independent\_sets are counted}} 
-		\KwRet $h$\;
+				$e\gets 0$\;
+		\For{graph $= 1$ to $N$ }{\If{$a(n,graph) $ has $red\_clique$}{$h \gets h+1$\; continue until all cliques are counted}\Else{if $a(n,graph) $ has $blue\_clique$\;{$h \gets h+1$\;} continue until all independent\_sets are counted}} 
+		\KwRet $e$\;
 	}
 	\caption{energy(n,k) Function}
 \end{algorithm}
@@ -1094,31 +1133,137 @@ The quantum algorithm's goal is not to find a graph with a specific number of cl
 	}
 	\caption{total\_edges(n) Function}
 \end{algorithm}
-\item This function is to create an independent set of r vertices
 \begin{algorithm}[H]
 	\DontPrintSemicolon
-	\KwIn{An integer $r$}
-	\KwOut{empty graph with no edges}
+	\KwIn{An integer $n$}
+	\KwOut{Returns edges}
 	\Begin{
 		
-		$clique \leftarrow $ zeros(r,r)\;
-		\KwRet $clique$\;
+		$edges of graph $\; \Comment{given n we have ${\frac{n^2-n}{2}}$ number of edges}
+		\KwRet $edges$\;
 	}
-	\caption{empty\_graph(r) Function}
-\end{algorithm}
-\item This function returns the clique of r vertices
-\begin{algorithm}[H]
-	\DontPrintSemicolon
-	\KwIn{An integer $r$}
-	\KwOut{complete graph with edges}
-	\Begin{
-		
-		$clique \leftarrow $ ones(r,r)-identity(r,r)\;
-		\KwRet $clique$\;
-	}
-	\caption{complete\_graph(r) Function}
+	\caption{edges(n) Function}
 \end{algorithm}
 \end{itemize}
+\newpage
+\section*{Discussion}
+\subsubsection*{Optimization Problem}
+The problem of finding Ramsey numbers can be converted into an optimization problem.
+The way this is done is by counting the total number of cliques in a certain graph.
+The graph set of order n will be minimized by determining the graph with 0 cliques, and that n will not be considered as Ramsey number.\\ 
+To do this what I had to do is count the total number of blue cliques and red cliques. 
+Construct the Problem Hamiltonian $H_P$ for the $n$-vertex graph
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\KwIn{integers $n,s,r,k$}
+	\KwOut{integer $\geq 0$}
+	\Begin{
+		
+		$m \gets $ \Fnumber{$n$}\;
+		$N \gets $\Ftotal{$n$}\;
+		$a \gets $\Fbinary{$n,k$}\;
+		$e\gets 0$\;
+		\For{graph $= 1$ to $N$ }{\If{$a(n,graph) $ has $red\_clique$}{$e \gets e+1$\; continue until all cliques are counted}\Else{if $a(n,graph) $ has $blue\_clique$\;{$e \gets e+1$\;} continue until all independent\_sets are counted}} 
+		\KwRet $e$\;
+	}
+	\caption{energy(n,s,r,k) Function}
+\end{algorithm}
+I then define the function below
+\begin{lstlisting}[language=Python, numbers=left, basicstyle=\ttfamily\small,frame=single]
+def energy(n, s, r, k):
+	graph_edges=edges(n) ##define the total edges
+	edge_value=edge_values(n,k)        ##define map edges
+	binary_vec = binary_vector(n, k)
+	objective = 0
+	penalty = 1
+  
+#Count the total number of Blue cliques
+	for edge in combinations(range(n), s):
+	blue_edges = [(min(i, j), max(i, j)) for i, j in combinations(edge, 2)]
+	if all(edge_value.get(graph_edges, 0) == 1 for edge in blue_edges):
+	objective += penalty
+	
+# Count the total number of Red cliques
+  for edge in combinations(range(n), r):
+  red_edges = [(min(i, j), max(i, j)) for i, j in combinations(edge, 2)]
+  if all(edge_value.get(graph_edges, 0) == 0 for edge in red_edges): 
+	objective += penalty
+	
+	return objective
+	\end{lstlisting}
+	\begin{lstlisting}[language=Python, numbers=left, basicstyle=\ttfamily\small,frame=single]
+##classical finding algorithm
+def find_min(n, s, r):
+
+  m = total_edges(n)
+  N = 2**m
+  min_objective = float('inf')
+
+#Iterate through every possible graphs
+  for k in range(N):
+    current_objective = energy(n, s, r, k)
+
+	if current_objective < min_objective:
+	min_objective = current_objective
+
+  return min_objective
+
+minimum_cliques = find_min(n, s, r)
+	\end{lstlisting}
+If the "find\_min(n,s,r)" function returns 0 that means the all possible graphs of n vertices has no clique of either size r or size s.
+The first output code shows how many cliques graphs of n-vertices have, 
+\begin{figure}[H]
+	\centering
+	\includegraphics{quantum stuff/plots/clique_plot_n5_s3_r3.png}
+	\caption{Plot of number of cliques for each graph in order 5 graphs}
+	\label{n = 5, r = 3 ,s = 3}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics{quantum stuff/plots/clique_plot_n6_s3_r3.png}
+	\caption{Plot of number of cliques for each graph in order 6 graphs}
+	\label{n = 6, r = 3 ,s = 3}
+\end{figure}
+The two plots ~\ref{n = 5, r = 3 ,s = 3} and  ~\ref{n = 6, r = 3 ,s = 3} above show the total number of graphs and how many cliques each graph has.
+The figure ~\ref{n = 5, r = 3 ,s = 3} shows that some graphs have 0 cliques which confirms why 5 is not Ramsey number $R(3,3)$. In other words For a graph with 5 vertices, the minimum number of $R(3,3)$ cliques is 0. This is because Ramsey number $R(r,s)\leq n$ only if n has a clique of size r or a clique of size s, but none of which is contained in some graphs of size 5. 
+When n is increased by 1, to $n = 6$ it shows that the minimum is 2 confirming that this is Ramsey number $R(3,3)$.
+\\
+\subsubsection*{Quantum Optimization}
+Quantum computers can find a minimum of an optimization problem. 
+Optimization problems have to be mapped into an Ising Hamilonian.
+In the Quantum algorithms section I have defined a way to solve the Ramsey number problem into an optimization problem.
+In this part I convert the optimization problem into an Ising Hamiltonian.
+To find the minimum of the objective function we have to find the ground state because it corresponds to the solution that minimizes the cost function.
+ to solve your optimization problem you now need to prepare the ground state of the Hamiltonian (or a state with a high overlap with it) on the quantum computer. Then, sampling from this state will, with a high probability, yield the solution to 
+min objective function. 
+I have used the QAOA algorithm to find the graph that has the lowest energy or with the least number of cliques.
+The Quantum Approximate Optimization Algorithm(QAOA) is a variational quantum algorithm that can solve combinatorial optimizational problems.
+I have defined the QAOA method to determine a binary string of the graph with the lowest energy.
+ 
+\begin{lstlisting}[language=Python, numbers=left, basicstyle=\ttfamily\small,frame=single]
+from qiskit.primitives import StatevectorSampler
+from qiskit.quantum_info import Pauli
+from qiskit.result import QuasiDistribution
+
+from qiskit_algorithms import QAOA
+from qiskit_algorithms.optimizers import COBYLA
+
+from qiskit_algorithms.utils import algorithm_globals
+sampler = StatevectorSampler(seed=42)
+
+n = 5  # Number of vertices
+r = 3  # Red clique size
+s = 3  # Blue clique size
+cost_hamiltonian, shift = get_ramsey_hamiltonian(n, r, s)
+algorithm_globals.random_seed = 10598
+
+optimizer = COBYLA()
+qaoa = QAOA(sampler, optimizer, reps=8)
+
+result = qaoa.compute_minimum_eigenvalue(cost_hamiltonian)
+\end{lstlisting}
+and the result of this are as follows starting with $R(3,3)$ with $n = 5$ the bit string of the graph with the lowest energy is $|0 0 1 1 1 0 1 1 0 0\rangle$ with the energy 0, this converted to integer is $236$.
+
 \newpage
 \bibliography{sample.bib}
 \end{document}
