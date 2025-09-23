@@ -1,0 +1,563 @@
+% ------------------------------------------------------------
+\documentclass{Assignment}
+% ------------------------------------------------------------
+
+
+\usepackage{pdfpages}
+\usepackage{tikz}
+
+\usepackage{booktabs}       % For professional-looking tables (\toprule, \midrule, \bottomrule)
+\usepackage{adjustbox}      % For table adjustment if it's too wide
+\usepackage{textcomp}       % For \textsuperscript
+
+% ------------------------------------------------------------
+% Formatting
+% ------------------------------------------------------------
+\usepackage{color}
+\usepackage{fullpage}
+% ------------------------------------------------------------
+\usepackage{float}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amssymb}
+% ------------------------------------------------------------
+% Bibliography
+% ------------------------------------------------------------
+\usepackage{doi}
+\usepackage{hyperref}
+\usepackage{usnomencl}
+\usepackage[square,sort&compress,comma,numbers]{natbib}
+\bibliographystyle{unsrtnat}
+\hypersetup{
+	colorlinks,
+	citecolor=blue,
+	linkcolor=red,
+	urlcolor=blue}
+\usepackage{bibentry}
+\usepackage{tikz}
+\usepackage{pdfpages}
+% ------------------------------------------------------------
+
+
+% ------------------------------------------------------------
+
+
+% ------------------------------------------------------------
+
+
+% ------------------------------------------------------------
+\begin{document}
+\begin{titlepage}
+	\centering % Centers all content on the page
+	
+	% Add a logo if needed
+	% \includegraphics[width=0.5\textwidth]{path/to/your/logo.png} 
+	
+	\vspace*{2cm} % Adds vertical space
+	
+	{\Huge\bfseries Ramsey numbers and Quantum computing}
+	
+	\vspace{1cm}
+	
+	{\Large Honours Project}
+	
+	\vspace{2cm}
+	
+	\begin{tabular}{c}
+		\Large Matsiri Madiba \\
+		\large Student Number: 2604158 \\
+		\large School of Computer Science and Applied Mathematics
+	\end{tabular}
+	
+	\vfill % Pushes the next content to the bottom of the page
+	
+	{\large Supervisor: Dr Warren Carlson}
+	
+	\vspace{0.5cm}
+	
+	{\large October 2025}
+	
+\end{titlepage}
+
+	\tableofcontents
+	\newpage
+	\section{Introduction}
+	Ramsey theory, named after Frank P. Ramsey, derived from his 1928 paper 'On a problem of formal logic' studying order in large disordered structures \cite{graham1980ramsey}.
+	Ramsey theory explains how in a large structure it is guaranteed to find certain substructure.
+	He proved a theorem that states that there exists a minimum integer $R(r,b)$ for positive integers $r, b$ such that every graph on $R(r,b)$ vertices contains either a clique of $r$ vertices or an independent set of $b$ vertices \cite{BondyMurty2008}.
+	A clique is a complete sub-graph that is a subset of a complete graph, and an independent set is a set of vertices with no edges \cite{BondyMurty2008}.	
+	Ramsey numbers $R(r,b)$ can represent the minimum number of people needed such that either r people are mutual acquaintances or b people are mutual strangers.
+An example is that in any group of six people, it is guaranteed that there will be at least three mutual acquaintances or three mutual strangers. However, for a group of five people, it is possible to arrange a combination where this is not true. This is why $6 = R(3,3)$.
+	Ramsey theory has applications in complexity theory, combinatorics and graph theory. 
+	The goal here is to find Ramsey numbers, particularly $R(5,5)$.
+	Exact values of $R(r,b)$ for $r,b$ greater or equal to 5 are currently unknown.
+	\\\\
+The computation of Ramsey numbers is a computationally intensive task because it requires verifying all possible 2-edge-colorings for monochromatic cliques, an NP-hard problem with exponential complexity \cite{PhysRevA.93.032301, burr1981generalized}.
+	These colourings represent all possible ways to label edges with two colours.
+	A monochromatic clique can either be a complete graph of red colour or blue colour.
+	While analytical methods were used to find $R(4,4)=18$ \cite{GreenwoodGleason1955},
+	for $R(5,5)$ analytical methods are not feasible.
+	This number is bounded between 43 \cite{Exoo1993} and 46 \cite{angeltveit2024r55le46}.
+	It requires a lot of computational resources to find the exact value of $R(5,5)$ \cite{spencer1994}.
+	Classical computers struggle with this complexity.
+	Quantum computers offer a promising approach to finding Ramsey numbers \cite{PhysRevA.93.032301}.
+	\\\\
+	Quantum computers provide a computational advantage over classical ones for this type of problem.
+	A quantum computer uses superposition and entanglement by exploring multiple 2-edge-colourings simultaneously, offering a computational advantage for combinatorial problems  \cite{Deutsch1989,PhysRevA.93.032301}.
+	Quantum algorithms such as quantum adiabatic computing and quantum simulated annealing have been proposed for computing Ramsey numbers \cite{gaitan2012ramsey, PhysRevA.93.032301}.
+	\\
+	This paper reviews classical and quantum computational methods for computing Ramsey numbers.
+	\section{Classical Computation of Ramsey Numbers}
+	\subsection{Graph Theory}
+	Graph theory is a study of mathematical structures called graphs, which aims to understand relationships between objects. 
+	A graph is a structure $G =\left(V,E\right)$ made up of a vertex set $V$ and an edge set $E$.
+	$V = \{v_1,v_2,v_3,...,v_n$\} has elements called vertices, and the edge set $E$ has pairs of objects taken from $V$ called edges \cite{BondyMurty2008}.
+	The order of a graph is the number of vertices.
+	Edges are unordered pairs $e_{ij} = \left\{v_i,v_j\right\}$ for undirected graphs or ordered pair $e_{ij} = (v_i,v_j)$ for directed graphs with $i\neq j$  \cite{BondyMurty2008}.
+	Directed graphs have asymmetrical edges $e_{ij} \neq e_{ji}$ whereas undirected have symmetrical edges $e_{ij} = e_{ji}$.
+	An empty graph has no edges, whose complement is a complete graph with possible edges between all pairs of vertices.
+	Graph theory has applications in computer science, mathematics and social network modeling.
+	\\\\
+	Graphs can be visualized by representing vertices as points and edges as lines that connect the vertices.
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale = 0.7]{random_graphs/figure_1.png}
+		\caption{A graph with four vertices and three edges}
+		\label{random_graph}
+	\end{figure}
+\noindent For clarity the vertices can be labeled.
+ The vertices of Figure \ref{random_graph} is not labeled.
+ Unlabeled graphs only show vertices being connected with no explanation but when a graph is labeled it shows the relationship between certain object/things.
+	Let $G = (V,E)$ be a graph with $V = \{v_1, v_2, v_3, v_4\}$
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale = 0.7]{random_graphs/empty_graph.png}
+		\caption{Empty graph}
+		\label{empty_graph}
+	\end{figure}
+\noindent	The graph in figure \ref{empty_graph} is given by the sets $V$ and $E=\{\}.$
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale = 0.7]{random_graphs/complete_graph.png}
+		\caption{Complete graph with four vertices }
+		\label{complete_graph}
+	\end{figure}
+\noindent	The graph in figure \ref{complete_graph} is given by the sets  $V $ and $E=\{e_{12},e_{13},e_{14},e_{23},e_{24},e_{34}\}.$ 
+	Figure \ref{empty_graph} shows a graph with no edges and figure \ref{complete_graph} is graph that has all the vertices with possible edges connecting to other vertices.
+	A complete graph with n vertices has ${\frac{n^2-n}{2}}$ edges.
+	For a two colouring graph, there would be 2 vertices from n. 
+	Each vertex has $n-1$ edges.
+	There are $n$ vertices in the graph.
+	The $\frac{1}{2}$ factor comes from avoiding double counting of edges, since one edge between two vertices is counted twice.
+	This is because each vertex pair forms a unique undirected edge.
+	Such representations are crucial in Ramsey theory for visualizing cliques and independent sets \cite{BondyMurty2008}.
+	\\\\
+	Another way to represent a graph is with an adjacency matrix.
+	This is a table that contains information on the relationship represented by the set $ E$.
+	Each column and row represents a vertex in the graph.
+	Each element in the matrix $A_{ij}$ represents the relationship between the vertices.
+	If there is an edge in the edge set $E$ then the entry in the matrix between the vertices would be 1, else equal 0.
+	\begin{equation}
+		A = \begin{tabular}{c|ccccc}
+			& $v_1$ & $v_2$ & $v_3$ & $v_j$ & $v_n$ \\ \hline
+			$v_1$ & $e_{11}$ & $e_{12}$ & $e_{13}$ & $e_{1j}$ & $\dots$ \\ \hline
+			$v_2$ & $e_{21}$ & $e_{22}$ & $e_{23}$ & $e_{2j}$ & $\dots$ \\ \hline
+			$v_3$ & $e_{31}$ & $e_{32}$ & $e_{33}$ & $e_{3j}$ & $\dots$ \\ \hline
+			$v_4$ & $e_{41}$ & $e_{42}$ & $e_{43}$ & $e_{4j}$ & $\dots$ \\ \hline
+			$v_n$ & $\vdots$ & $\ddots$ & $\ddots$ & $\vdots$ & $\dots$ \\ \hline
+			$v_n$ & $e_{n1}$ & $e_{n2}$ & $e_{n3}$ & $\dots$ & $e_{nn}$ \\ \hline
+		\end{tabular}
+	\end{equation}
+	Filling the elements by either 1 or 0 depending on if there is an element in the edge set that matches with the elements of the matrix.
+	If there is an edge between two vertices $v_1 ,v_2$ we would have the elements $A_{12} = A_{21}=1$. 
+	For the complete graph in figure \ref{complete_graph} the adjacency matrix is:
+	\begin{equation}
+		\begin{pmatrix}
+			0&1&1&1\\
+			1&0&1&1\\
+			1&1&0&1\\
+			1&1&1&0
+		\end{pmatrix}
+	\end{equation}
+	Where $A_{ij}=1$ means there is an edge between the vertices and $A_{ij}=0$ means there is no edge.
+	Graphs have no unique way of representing them visually.
+	In the set of graphs of n vertices some have identical structure.
+	Their edge set would be the same if their vertices were changed.
+	These graphs of the same order with different structures but same orientations are known as Homomorphic. 
+	A graph homomorphism from a graph $G = (V_G,E_G)$ to a graph $H =(V_H,E_H)$
+	is a mapping from G to H such that each vertex in
+	$V_G$ is mapped to a vertex in $V_H$ with the same label,
+	and each edge in $E_G$ is mapped to an edge in $E_H$ \cite{fan2010graph}.
+	\begin{figure}[H]
+		\centering
+		\begin{tabular}{|c|c|c|}\hline
+			\hline
+			\includegraphics[scale=0.3]{graphs/order_4/k4_coloring_3.png}&
+			\includegraphics[scale=0.3]{graphs/order_4/k4_coloring_5.png}&
+			\includegraphics[scale=0.3]{graphs/order_4/k4_coloring_6.png}\\\hline
+			\includegraphics[scale=0.3]{graphs/order_4/k4_coloring_9.png}&
+			\includegraphics[scale=0.3]{graphs/order_4/k4_coloring_10.png}&
+			\includegraphics[scale=0.3]{graphs/order_4/k4_coloring_17.png}\\\hline
+			\includegraphics[scale=0.3]{graphs/order_4/k4_coloring_20.png}&
+			\includegraphics[scale=0.3]{graphs/order_4/k4_coloring_24.png}&
+			\includegraphics[scale=0.3]{graphs/order_4/k4_coloring_34.png}\\\hline
+			\includegraphics[scale=0.3]{graphs/order_4/k4_coloring_36.png}&
+			\includegraphics[scale=0.3]{graphs/order_4/k4_coloring_40.png}&
+			\includegraphics[scale=0.3]{graphs/order_4/k4_coloring_48.png}\\
+			\hline
+		\end{tabular}
+		\small	\caption{Homomorphic Graphs of four vertices two edges between them}
+		\label{Homomorphic}
+	\end{figure}
+\noindent	These graphs represent graphs with same structure and properties.
+	Three vertices have an edge between them.
+	This is going to help in understanding Ramsey theory because they reduce the number of graphs needed to be verified.
+	\subsection{Ramsey Theory}
+	Ramsey Theory states given integers $ r,b\geq 1$, every large enough graph $G = (V,E)$ contains a monochromatic clique of either $r$ or $b$ vertices.  \cite{katz2018introduction}.
+	Monochromatic clique is a complete sub-graph with the same colour that is a subset of a larger complete graph \cite{BondyMurty2008}.
+	\begin{figure}[H]
+	\centering
+	\includegraphics{graphs/order_5/graph_869}
+	\caption{Graph with $k_3$ clique}
+	\label{graph_869}
+\end{figure}
+\noindent The graph in figure \ref{graph_869} has a clique of size 3 formed by vertices $v_1,v_2, v3$.
+	In Ramsey theory complete graphs are considered \cite{burr1981generalized}.
+	$K_n$ is a notation to represent a complete graph of n vertices.
+	Ramsey number is the minimum number of vertices $R(r,b)$ such that every 2-colouring of the edges of the complete graph $K_n$ contains a clique of order r or a clique of order b.
+	\\\\
+	Ramsey numbers are very hard to find because the graphs in which we try to find the monochromatic cliques increase exponentially.
+	For an order n graph, the total amount of graphs would be $2^{\left(\frac{n^2-n}{2}\right)}$.
+	They are increasing with order $\sim 2^{\frac{n^2}{2}}$.
+	\begin{figure}[H]
+		\begin{center}
+			
+			\begin{tabular}{|c|c|}
+				n&$2^{\left(\frac{n^2-n}{2}\right)}$\\
+				\hline
+				1  & 1 \\\hline
+				2  & 2 \\\hline
+				3  & 8 \\\hline
+				4  & 64 \\\hline
+				5  & 1024 \\\hline
+				6  & 32768 \\\hline
+				7 & 2097152 \\\hline
+				8  & 268435456 \\\hline
+				9  & 68719476736 \\\hline
+				10  & 35184372088832 \\
+				\hline
+			\end{tabular}
+			
+			\caption{Table showing growth of graph with increasing n}
+			\label{tableofn}
+		\end{center}
+	\end{figure}
+\noindent	Putting the table \ref{tableofn} on the plot,
+	\begin{figure}[H]
+		\centering
+		\includegraphics{plots/plot.png}
+		\caption{Plot of amount of graphs per n-vertices}
+		\label{plot}
+	\end{figure}
+\noindent	For example for order 4, we would have a total of 64 graphs and for order 5 we have 1024 graphs.
+	The total number of graphs of order 6 is $32768$.
+	This difference is not visible on the plot \ref{plot} because of how these graphs exponentially increase.
+	The orders of magnitude for $n= 10$ are in the $10^{9}$ which is a huge number.
+	\begin{figure}[H]
+		\centering
+		\includegraphics{plots/logplot.png}
+		\caption{Logarithmic scale of the increase of n vertex graphs}
+		\label{logplot}
+	\end{figure}
+\noindent	In the logarithmic scale in figure \ref{logplot} shows a quadratic increase.
+	The total amount of graphs increase fast.
+	To find these clique we have to go through each graph.
+	These graphs grow larger with increase in n.
+	A few Ramsey numbers are known.
+	\begin{table}[H]
+		\centering
+		
+		\label{tab:ramsey_matrix_upto_6_6}
+		\begin{adjustbox}{max width=\textwidth} 
+			\begin{tabular}{| r | c | c | c | c | c | c |} 
+				\toprule
+				\multicolumn{1}{|c|}{$r \setminus b$} & 1 & 2 & 3 & 4 & 5 & 6 \\
+				\midrule
+				\textbf{1} & \textbf{1} & 1 & 1 & 1 & 1 & 1 \\\hline
+				\textbf{2} & & \textbf{2} & 3 & 4 & 5 & 6 \\\hline
+				\textbf{3} & & & \textbf{6} & 9 & 14 & 18 \\\hline
+				\textbf{4} & & & & \textbf{18} & 25 & 36--40 \\\hline
+				\textbf{5} & & & & & \textbf{43--46} & 59--85 \\\hline
+				\textbf{6} & & & & & & \textbf{102--160} \\
+				\bottomrule
+			\end{tabular}
+		\end{adjustbox}
+		\vspace{0.5cm}
+		\small 	\caption{ Known Ramsey numbers and bounds for $R(r,b)$  up to $R(6,6)$ \cite{GreenwoodGleason1955}}
+	\end{table}
+	
+\noindent	The highest known Ramsey number is $R(4,4)$ which was proved to be $18$ \cite{GreenwoodGleason1955}.
+	This proof was done by using the bounds.
+	Ramsey numbers are bounded between certain numbers.
+	It was shown that $R(4,4) > 17$ by checking if the graphs of 17 vertices cannot have a monochromatic clique of 4 vertices. 
+	Using the proof,
+	\begin{equation}
+		R(r ,b) \geq R(r-1,b)+ R(r,b-1) 
+		\label{theorem_2}
+	\end{equation}
+	$$R(4,4) \geq R(3,4)+R(4,3) = 2R(3,4)$$
+	$R(3,4) $ was found to be 9, from equation \eqref{theorem_2} it was proved that $R(4,4) \leq 18$ \cite{GreenwoodGleason1955}.
+	Hence combining the results it was proved that $R(4,4) = 18$.
+	The same result cannot be shown for 5th Ramsey number.
+	$R(5,5)$ was found to be between 43 \cite{Exoo1993} and 46 \cite{angeltveit2024r55le46}.
+	For $n= 43$, the total number of graphs is $2^{903} \approx 10^{271}$ and for $n=46$ we have $2^{1035}\approx10^{312}$.
+	This makes checking the graphs or analytical proofs not feasible with traditional methods.
+	Methods of finding Ramsey numbers were introduced, like generalized Ramsey theory \cite{burr1981generalized}. 
+	Generalized Ramsey theory does not only consider complete graphs unlike classical.
+	At first Ramsey numbers were found using analytical methods.
+	Proofs and combinatorial methods of checking if graphs do not have a certain clique of r amount of graphs is not feasible.
+	Analytic approaches start to fail since the orders of magnitude are impossible to work with.
+	Since as n grows, it becomes exponentially harder as shown by figure \ref{plot}.
+	\\
+	Computers have been used to find bounds of Ramsey numbers.
+	Methods like Linear programming can reduce the number of graphs considered \cite{angeltveit2024r55le46}.
+	This was done by reducing the number of cases to check by identifying feasible solutions. 
+	With known Ramsey numbers and equation \eqref{theorem_2} bounds can be determined.
+	We now know $R(5,5)$ is between 43 and 46.
+	It is still extremely hard to determine the exact value.
+	With the fastest classical computers available in the world, it would take a lot of years to go through every graph.
+	Quantum computers can be considered to compute Ramsey numbers.
+	\\\\
+	The third section will deal with quantum computations of Ramsey numbers.
+	It will deal with why quantum computers have more computational power over classical ones.
+	Which would then lead to using them to possibly find Ramsey numbers.
+	\section{Quantum Computation of Ramsey Numbers}
+	\subsection{Quantum Computers}
+	Classical computers use bits to hold information.
+	Bits represent a single binary number.
+	They can either be 1 or 0.
+	Logic gates use bits and to perform computations \cite{deutsch1985quantum}.
+	Logic gates are electronic circuits that take in bits as input and produce a bit as output based on a logical operation \cite{Jaeger1997}.\\
+	Quantum computers store information in quantum bits (qubits).
+	A spin-half system is a system that has 2 states spin up and spin down similar to qubits.
+	Mathematically qubits are represented  as in Dirac notation 
+	\begin{center}
+		0 bit $=|0\rangle $ \\1 bit $=  |1\rangle$
+	\end{center}
+	As a vector these are represented as 
+	$$|0\rangle = \begin{pmatrix}
+		1\\0
+	\end{pmatrix}$$
+	$$|1\rangle = \begin{pmatrix}
+		0\\1
+	\end{pmatrix}$$
+	A superposition state of qubits can be expressed as \begin{equation}
+		|\psi\rangle = \alpha|0\rangle + \beta|1\rangle = \begin{pmatrix}
+			\alpha\\\beta
+			\label{superposition}
+	\end{pmatrix} \end{equation}
+	The constants $\alpha $ and $ \beta$ are complex constants.
+	A qubit can visually be represented on the Bloch Sphere 
+	\begin{figure}[H]
+		\begin{center}
+			\includegraphics[scale =0.5]{plots/Qubit.png}
+			\caption{Qubit in a superposition state}
+		\end{center}
+	\end{figure}
+\noindent	Quantum Computing uses principles like superposition and entanglement.
+	This gives these computers more computational power over the classical ones.
+	Superposition of a state can be defined as a linear combination of these states \cite{mcintyre_quantum_2012}.
+	Their square of magnitude represents the probability of measuring the associated state.
+	To find the probability of finding a state $|\psi\rangle$ of equation \eqref{superposition} in $|0\rangle$ state.
+	I would say
+	$$P_0=|\langle0|\psi\rangle|^2 = \left| \begin{pmatrix}
+		1&0
+	\end{pmatrix}^*\begin{pmatrix}
+		\alpha\\\beta
+	\end{pmatrix} \right|^2 = |\alpha|^2$$
+	Where $\langle 0|$ is the complex conjugate of $|0\rangle$.
+	Superposition states make quantum computers powerful, because the amount of information contained in a quantum system grows exponentially with the n qubits in a system.
+	If n particles are added we have $2^n$ states or $2^n$ pieces of information. 
+	For n = 2 we have 4 different states which are,
+	\begin{equation}
+		|\psi\rangle =c_1 |00\rangle+c_2 |01\rangle+c_3 |10\rangle+ c_4 |11\rangle
+	\end{equation}
+	Where in this new state \begin{equation}|00\rangle = |0\rangle\otimes|0\rangle  =	\begin{pmatrix}
+			1\\0\\0\\0
+	\end{pmatrix}\end{equation}
+	The other vectors are given by,
+	$$01\rangle =	\begin{pmatrix}
+		0\\1\\0\\0
+	\end{pmatrix}|10\rangle =	\begin{pmatrix}
+		0\\0\\1\\0
+	\end{pmatrix}|11\rangle =	\begin{pmatrix}
+		0\\0\\0\\1
+	\end{pmatrix} $$
+	This represents a 2-qubit superposition state with the coefficients $c_i$ are complex and like the 1-qubit system they tell us the probability of measuring their respective states.
+	\\\\
+	Quantum entanglement is when quantum states of multiple particles are connected, such that the state of one particle cannot be described without considering the states of the other \cite{Horodecki_2009}.
+	This introduces \textit{quantum parallelism} in quantum computing, where multiple operations are performed at once \cite{mcintyre_quantum_2012}.
+	A two particle system of entangled states is mathematically expressed as
+	\begin{equation}
+		|\psi \rangle = a|00\rangle + b|11\rangle
+		\label{entagled_state}
+	\end{equation}
+	The equation \eqref{entagled_state} is one of the Bell states of a 2-system state.
+	Bell states are an alternate basis to the couple and uncoupled bases \cite{mcintyre_quantum_2012}.
+	Bell states are quantum states of two qubits that represent examples of quantum entanglement in quantum computing.
+	When one of the qubits in the states is measured and takes on a certain value, the other one is going to take the same value.
+	This is because in quantum mechanics a state can be measured once, measurement collapses a state to classical \cite{mcintyre_quantum_2012}.
+	Quantum computers use quantum gates to do their computations \cite{AndrewSteane}.
+	Quantum gates are used to change the coefficients in qubits without destroying decoherence.
+	Destroying decoherence means the qubits lose their quantum properties.
+	This can be because they interact with the environment.\\
+	Quantum states are sensitive, measuring them causes them to be in a classical state.
+	Quantum and logic gates use matrix multiplication to represent their transformations.
+	Pauli matrices are examples of quantum gates.
+	These matrices are known as operators which are linear, meaning they act on these states \cite{AndrewSteane,mcintyre_quantum_2012}.
+	\begin{equation}
+		\sigma_x =\begin{pmatrix}
+			0&1\\1&0
+		\end{pmatrix},
+		\sigma_y =\begin{pmatrix}
+			0&-i\\i&0
+		\end{pmatrix},\sigma_z =\begin{pmatrix}
+			1&0\\0&-1
+		\end{pmatrix}
+	\end{equation}
+	These are Pauli matrices and they rotate the initial state $\pi$ about their respective basis.
+	If a state was in a certain initial state with a phase 0, then $\sigma_x$ acts on the state, it would later be in $\pi$ radians about the x-axis.
+	\begin{equation}U_H=\frac{1}{\sqrt{2}}
+		\begin{pmatrix}
+			1&1\\1&-1
+		\end{pmatrix}
+	\end{equation} is the Hadamard gate, this is an important gate that helps turn a state into a superposition of the 0 and 1 states.
+	If an initial state is 0, 
+	\begin{equation}
+		U_H|0\rangle = \frac{1}{\sqrt{2}}
+		\begin{pmatrix}
+			1&1\\1&-1
+		\end{pmatrix}\begin{pmatrix}
+			1\\0
+		\end{pmatrix}=\begin{pmatrix}
+			\frac{1}{\sqrt{2}}\\
+			\frac{1}{\sqrt{2}}
+		\end{pmatrix}=\frac{1}{\sqrt{2}}(|0 \rangle + |1\rangle)
+	\end{equation} 
+	If we start with the initial state 1,
+	$$U_H|1\rangle = \frac{1}{\sqrt{2}}(|0 \rangle - |1\rangle)$$
+	giving a superposition of the states.
+	There is a Controlled-NOT(CNOT) gate.
+	\\
+	The CNOT gate introduces entanglement.
+	The CNOT gate is represented as 
+	\begin{equation}
+		U_X = \begin{pmatrix}
+			1&0&0&0\\
+			0&1&0&0\\
+			0&0&0&1\\
+			0&0&1&0
+		\end{pmatrix}
+	\end{equation}
+	Combining CNOT gate with Hadamard gate produces entanglement.
+	A CNOT gate has two input qubits, referred to as the control and target qubits, and two output qubits. \cite{mcintyre_quantum_2012}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics{screenshot001}
+		\caption{Quantum gate with Hadamard and CNOT gate}
+		\label{entanglement}
+	\end{figure}
+\noindent	Figure \ref{entanglement} the input state is $|0\rangle|0\rangle$.
+	The Hadamard gate will transform the upper $|0\rangle$ meaning,
+	$$U_H|0\rangle = \frac{1}{\sqrt{2}}(|0 \rangle + |1\rangle)$$
+	Then with the bottom target $|0\rangle$ we have
+	$$\frac{1}{\sqrt{2}}(|0 \rangle_C + |1\rangle_C)|0\rangle_T$$
+	$$=\frac{1}{\sqrt{2}}(|0 \rangle_C|0 \rangle_T + |1\rangle_C|0 \rangle_T)$$
+	Then CNOT ($U_X$) acting on this state we have 
+	$$U_X\frac{1}{\sqrt{2}}(|0 \rangle_C|0 \rangle_T + |1\rangle_C|0 \rangle_T) $$
+	$$ =\frac{1}{\sqrt{2}}\left(|00\rangle + |11\rangle\right)$$
+	Equation \eqref{entagled_state} with $a=b = \frac{1}{\sqrt{2}}$.
+	Showing how we can start from two qubits and entangle them using the Hadamard and CNOT gates.
+	This shows how in theory quantum computers have more computational power over classical ones \cite{Deutsch1989}.
+	Another powerful quantum mechanics concept is the idea of Hamiltonian.
+	\\\\
+	A Hamiltonian is an operator that is equal to the total energy of a system \cite{mcintyre_quantum_2012}.
+	The Hamiltonian governs time evolution of a system.
+	This is described the Schr$\ddot{o}$dinger equation \cite{mcintyre_quantum_2012}.
+	\begin{equation}
+		i \hbar\frac{\partial}{\partial t}|\psi(t)\rangle = H(t)|\psi(t)\rangle
+		\label{Schrodinger_equation}
+	\end{equation}
+	where $\hbar$ is the reduced Planck's constant, $H$ is the Hamiltonian and $|\psi(t)\rangle$ is the quantum state.
+	The solution of equation \eqref{Schrodinger_equation} is given by 
+	\begin{equation}
+		|\psi(t)\rangle = e^{-i\frac{ H\cdot t}{\hbar}}|\psi(0)\rangle
+	\end{equation}
+	$U(t)=e^{-i\frac{ H\cdot t}{\hbar}} $ is the time-evolution operator a unitary operator that changes the state over time \cite{UQS}.
+	In quantum computing the Hamiltonian is used to describe the dynamics of qubits and to design quantum gates, which are unitary transformations that manipulate quantum states. \cite{Deutsch1989} 
+	Quantum gates are implemented by applying specific Hamiltonian to a quantum system for a specific time using $U$.
+	The Hamiltonian depends on the type of problem defined.
+	\subsubsection{Quantum Computer and Ramsey Numbers}
+	The reason a quantum computer is preferred over classical is because some algorithms can outperform in certain tasks. 
+	Simon's algorithm showed that for a type of searching problem, quantum computers outperform classical computers \cite{doi:10.1137/S0097539796298637}.
+	Quantum superposition checks all inputs at once and interference is used to see the correct output.
+	Quantum interference is when the probability magnitudes of the states are decreased using destructive interference and increased using constructive interference.
+	\\\\
+	There is another algorithm called Quantum Annealing which was extended from a classical Simulated Annealing.
+	This method takes advantage of how systems always go to the lowest energy.
+	This algorithm can be used to solve combinatorial optimization problems \cite{AndrewSteane}.
+	Using superposition and entanglement, the quantum annealer is able to calculate all potential solutions at once, which speeds up the 
+	calculation process \cite{AndrewSteane}.
+	\\\\
+	Finding Ramsey numbers can be mapped as combinatorial optimization problem \cite{PhysRevA.93.032301}.
+	The algorithm uses adiabatic quantum computing, evolving the system from a simple initial Hamiltonian to the problem's Hamiltonian.
+	If the Hamiltonian is defined such that the ground state corresponds to a colouring without a red $k_r$ or blue $k_b$.
+	The Hamiltonian of the problem is given by
+	\begin{equation}
+		H = -\frac{1}{2}\omega \sigma_z + I_2 \otimes H_Q+c\sigma_x\otimes A
+		\label{hamiltonian}
+	\end{equation}
+	it contains Pauli's x and z matrices, with $I_2$ being identity matrix of size $2 x 2$ , c is a coupling constant, $\omega$ is the frequency of the qubit.
+	$$H_Q =|0\rangle\langle0|\otimes[\epsilon_0(|0\rangle\langle0|^{\otimes L})] + |1\rangle\langle 1|\otimes H_P$$
+	$\epsilon_0$ is a parameter set as a reference point to the ground state energy $H_P$.
+	The operator $$A = \sigma_x \otimes H_d^{\otimes L}$$
+	$H_d$ is the Hadamard matrices , $L = \frac{n(n-1)}{2}$.
+	The idea was to see if ground state energy of $H_P$ is equal to zero or not.
+	A certain qubit is prepared as an initial state.
+	Then apply the Hamiltonian in equation \eqref{hamiltonian} time evolution. 
+	Using the known Ramsey numbers bounds.
+	If the ground state energy is zero for a certain n, then the number is not Ramsey number. 
+	This method is still theoretical, but may help in finding $R(5,5)$.
+	\section{Research Objectives and Questions}
+	\begin{itemize}
+		\item Determine \( R(5,5) \) using quantum computing.
+		\item Given the computational complexity, if found with a certain algorithm can help in finding other NP-hard problems.
+		\item Develop and test quantum algorithms for $R(5,5)$.
+		\item Evaluate quantum computing’s efficiency for NP-hard problems.
+	\end{itemize}
+	\subsection*{Research questions}
+	\begin{itemize}
+		\item Why are Ramsey numbers difficult to compute?
+		\item How do quantum computers provide a computational advantage on optimization problems.
+	\end{itemize}
+	\section{Methodology}
+	This research aims to find $ R(5,5)$.
+	The first months of the project will be on understanding the theory behind Ramsey numbers and quantum computing.
+	In this phase I will learn about Ramsey theory, and how difficult it is to compute Ramsey numbers.
+	Understand computational complexity of NP problems like computing $R(5,5)$.
+	Finally learn quantum computing with principles of quantum mechanics such as superposition and entanglement.
+\\
+
+	\section{Conclusion}
+	Ramsey numbers define the smallest number such that every 2-edge-colouring of $K_n$ contains a monochromatic clique of either blue $K_b$ or red $K_b$.
+	Graph theory helps in understanding the complexity of finding Ramsey numbers.
+	The total number of graphs to be searched for cliques increases exponentially.
+	Binary encoding enumerates the total number of graphs.
+	$R(5,5)$ is bounded between the numbers $43$ and $46$.
+	Despite these bounds, the exact number is still hard to compute analytically.
+	The reason why they are hard to compute is because of the exponential growth of the graph.
+	This is also difficult using classical computers.
+	Thus, quantum computing provides a promising approach for finding $R(5,5)$ using adiabatic quantum computing \cite{PhysRevA.93.032301}.
+	\newpage
+	\bibliography{sample.bib}
+\end{document}
