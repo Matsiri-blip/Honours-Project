@@ -1,11 +1,53 @@
 \documentclass{Assignment}
-\usepackage{indentfirst}
 \usepackage[linesnumbered,lined,boxed,commentsnumbered]{algorithm2e}
 \usepackage{booktabs}   % For \toprule, \midrule, \bottomrule
 \usepackage{adjustbox}  % For the adjustbox environment
 \usepackage{graphicx}   % Recommended for figures and tables
 \bibliographystyle{unsrtnat}
+\usepackage{xcolor}
 \usepackage{listings}
+\usepackage{etoolbox}
+
+\AfterEndEnvironment{figure}{\noindent}
+\AfterEndEnvironment{table}{\noindent}
+% Define custom colors
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codeblue}{rgb}{0.1,0.2,0.6}
+\definecolor{backgrey}{rgb}{0.95,0.95,0.95}
+\lstdefinestyle{myPseudocodeStyle}{
+	backgroundcolor=\color{backgrey},
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{codeblue},
+	stringstyle=\color{codegreen},
+	basicstyle=\ttfamily\footnotesize,
+	breaklines=true,
+	numbers=left,
+	numbersep=5pt,
+	tabsize=2,
+	% Define your own keywords for pseudocode
+	keywords={function, begin, end, for, to, do, if, then, else, while, read, print, return, and, or, not, true, false, in},
+}
+% Define a custom Python style
+\lstdefinestyle{myPythonStyle}{
+	backgroundcolor=\color{backgrey},
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{codeblue},
+	stringstyle=\color{codegreen},
+	numberstyle=\tiny\color{codegray},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	keepspaces=true,
+	numbers=left,
+	numbersep=5pt,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2,
+	language=Python,
+}
 \usepackage{hyperref}
 \usepackage{url}
 \usepackage{tikz}
@@ -378,6 +420,7 @@ n=4\\
 \newpage
 
 \section*{Classical Algorithm for finding ramsey numbers}
+
 \subsubsection*{Thinking}
 \underline{\centering{Goal:Write code that determines a Ramsey Number}}
 \begin{itemize}
@@ -725,6 +768,52 @@ This ensures that the binary string can have total number of edges so that each 
 	\caption{complete\_graph(r) Function}
 \end{algorithm}
 \end{itemize}
+\begin{lstlisting}[style=myPythonStyle, caption=Ramsey number finding function ]
+def ramsey_numbers(s, r):
+	while True:
+	n = 2
+	m = total_edges(n)                              ##total edges of a graph           
+	edges = list(combinations(range(n), 2))        ##select different edges in a graph
+	edge_to_index = {edge: i for i, edge in enumerate(edges)}     ##enumerate edges
+	r_clique_vertices = list(combinations(range(n), r))           ##select vertices of size r clique
+	r_clique_indices = [[edge_to_index[e] for e in combinations(vertices, 2)]for vertices in r_clique_vertices]   ##combination of different r sized cliques
+	
+	s_clique_vertices = list(combinations(range(n), s))     #select vertices of size r clique
+	s_clique_indices = [[edge_to_index[e] for e in combinations(vertices, 2)] for vertices in s_clique_vertices] #combination of different r sized cliques
+	
+	is_ramsey_number = True
+	start_k = 0 
+	
+	for k in range(start_k, 2**m):
+		current_coloring = binary_vector(n,k)
+		
+		clique_found = False
+		
+		# Check for red r-cliques 
+		for indices in r_clique_indices:
+		if all(current_coloring[idx] == 0 for idx in indices):
+		clique_found = True
+		break
+		
+		# Check for blue s-cliques 
+		for indices in s_clique_indices:
+		if all(current_coloring[idx] == 1 for idx in indices):
+		clique_found = True
+		break
+		
+		if not clique_found:
+		is_ramsey_number = False
+		print(f'{n} is not a Ramsey number R({s},{r}), because graph {k} has no monochromatic clique.')
+		break  # Exit the for loop if and increase n by 1
+		
+		if is_ramsey_number:
+		print(f"All graphs with n = {n} vertices have a monochromatic clique.")
+		print(f"{n} is R({s},{r}) and time taken was {change_in_time} seconds.")
+		break                                         #exit while loop if n is ramsey number                           
+	
+	start_k = k                         # Reset start_k for the next n
+	n += 1
+\end{lstlisting}
 \newpage
 \subsubsection*{Time Taken for to verify known ramsey numbers}
 \begin{table}[hbt!]
@@ -816,6 +905,7 @@ This ensures that the binary string can have total number of edges so that each 
 \end{enumerate} 
 \newpage
 \section*{Quantum Computing}
+\subsection*{Introduction}
 Quantum computers store information in quantum bits (qubits).
 A spin-half system is a system that has 2 states spin up and spin down similar to qubits.
 Mathematically qubits are represented  as in Dirac notation 
@@ -1168,30 +1258,36 @@ Construct the Problem Hamiltonian $H_P$ for the $n$-vertex graph
 	}
 	\caption{energy(n,s,r,k) Function}
 \end{algorithm}
-I then define the function below
-\begin{lstlisting}[language=Python, numbers=left, basicstyle=\ttfamily\small,frame=single]
+\noindent Then I define the pseudocode in python, this energy function gives the total number of s sized cliques and total number of r sized cliques for a certain graph $a$.
+$$h^n_{s,r}(a) = C^n_s(a)+I^n_r(a)$$
+$C^n_s(a)$ is the total clique of size s found in the graph $a$ and $I^n_s(a)$ is the total clique of size r found in the graph $a$.
+\begin{lstlisting}[style=myPythonStyle, caption=classical energy function]
 def energy(n, s, r, k):
-	graph_edges=edges(n) ##define the total edges
-	edge_value=edge_values(n,k)        ##define map edges
-	binary_vec = binary_vector(n, k)
-	objective = 0
-	penalty = 1
+ graph_edges=edges(n) ##define the total edges
+ edge_value=edge_values(n,k)        ##define map edges
+ binary_vec = binary_vector(n, k)
+ objective = 0
+ penalty = 1
   
 #Count the total number of Blue cliques
-	for edge in combinations(range(n), s):
-	blue_edges = [(min(i, j), max(i, j)) for i, j in combinations(edge, 2)]
-	if all(edge_value.get(graph_edges, 0) == 1 for edge in blue_edges):
-	objective += penalty
+ for edge in combinations(range(n), s):
+   blue_edges = [(min(i, j), max(i, j)) for i, j in combinations(edge, 2)]
+   if all(edge_value.get(graph_edges, 0) == 1 for edge in blue_edges):
+     objective += penalty
 	
 # Count the total number of Red cliques
   for edge in combinations(range(n), r):
-  red_edges = [(min(i, j), max(i, j)) for i, j in combinations(edge, 2)]
-  if all(edge_value.get(graph_edges, 0) == 0 for edge in red_edges): 
-	objective += penalty
-	
-	return objective
+    red_edges = [(min(i, j), max(i, j)) for i, j in combinations(edge, 2)]
+    if all(edge_value.get(graph_edges, 0) == 0 for edge in red_edges): 
+	    objective += penalty
+ return objective
 	\end{lstlisting}
-	\begin{lstlisting}[language=Python, numbers=left, basicstyle=\ttfamily\small,frame=single]
+This function counts the total number of cliques, red or blue found in a graph of size $n$ in the graph set.
+The lines 11 and 17 counts the total cliques found in the graph $a$, then $1$ is added to the objective function else if there is no clique then $0$ is added to the objective. \\\\
+In the following function I define a find\_min, this function finds a minimum of the energy function which represent the graph with the lowest clique count.
+This determines how a number $n$ is Ramsey number, this is done by determining if the lowest/minimum energy of that $\geq 0$. 
+
+	\begin{lstlisting}[style=myPythonStyle, caption=classical min function]
 ##classical finding algorithm
 def find_min(n, s, r):
 
@@ -1206,26 +1302,32 @@ def find_min(n, s, r):
 	if current_objective < min_objective:
 	min_objective = current_objective
 
-  return min_objective
+  return min_objective, binary_vector(n,k)
 
 minimum_cliques = find_min(n, s, r)
 	\end{lstlisting}
 If the "find\_min(n,s,r)" function returns 0 that means the all possible graphs of n vertices has no clique of either size r or size s.
-The first output code shows how many cliques graphs of n-vertices have, 
+To visualize how this is done, i define the plot of graphs of order $n$ starting with $n = 4$ searching for $R(3,3)$.
 \begin{figure}[H]
 	\centering
-	\includegraphics{quantum stuff/plots/clique_plot_n5_s3_r3.png}
+	\includegraphics[scale =0.7]{quantum stuff/plots/clique_plot_n4_s3_r3.png}
+	\caption{Plot of number of cliques for each graph in order 4 graphs}
+	\label{n = 4, r = 3 ,s = 3}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale =0.7]{quantum stuff/plots/clique_plot_n5_s3_r3.png}
 	\caption{Plot of number of cliques for each graph in order 5 graphs}
 	\label{n = 5, r = 3 ,s = 3}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics{quantum stuff/plots/clique_plot_n6_s3_r3.png}
+	\includegraphics[scale =0.7]{quantum stuff/plots/clique_plot_n6_s3_r3.png}
 	\caption{Plot of number of cliques for each graph in order 6 graphs}
 	\label{n = 6, r = 3 ,s = 3}
 \end{figure}
-The two plots ~\ref{n = 5, r = 3 ,s = 3} and  ~\ref{n = 6, r = 3 ,s = 3} above show the total number of graphs and how many cliques each graph has.
-The figure ~\ref{n = 5, r = 3 ,s = 3} shows that some graphs have 0 cliques which confirms why 5 is not Ramsey number $R(3,3)$. In other words For a graph with 5 vertices, the minimum number of $R(3,3)$ cliques is 0. This is because Ramsey number $R(r,s)\leq n$ only if n has a clique of size r or a clique of size s, but none of which is contained in some graphs of size 5. 
+The two plots \ref{n = 4, r = 3 ,s = 3} , \ref{n = 5, r = 3 ,s = 3} and  \ref{n = 6, r = 3 ,s = 3} above show the total number of graphs and how many cliques each graph has.
+The figures \ref{n = 4, r = 3 ,s = 3} and \ref{n = 5, r = 3 ,s = 3} shows that some graphs have 0 cliques which confirms why 4 and 5 are not Ramsey numbers $R(3,3)$. In other words For a graph with 5 vertices, the minimum number of $R(3,3)$ cliques is 0. This is because Ramsey number $R(r,s)\leq n$ only if n has a clique of size r or a clique of size s, but none of which is contained in some graphs of size 5. 
 When n is increased by 1, to $n = 6$ it shows that the minimum is 2 confirming that this is Ramsey number $R(3,3)$.
 \\
 \subsubsection*{Quantum Optimization}
@@ -1234,13 +1336,14 @@ Optimization problems have to be mapped into an Ising Hamilonian.
 In the Quantum algorithms section I have defined a way to solve the Ramsey number problem into an optimization problem.
 In this part I convert the optimization problem into an Ising Hamiltonian.
 To find the minimum of the objective function we have to find the ground state because it corresponds to the solution that minimizes the cost function.
- to solve your optimization problem you now need to prepare the ground state of the Hamiltonian (or a state with a high overlap with it) on the quantum computer. Then, sampling from this state will, with a high probability, yield the solution to 
+ To solve a optimization problem what is needed is to prepare the ground state of the Hamiltonian on the quantum computer. 
+ Then, sampling from this state will, with a high probability, yield the solution to 
 min objective function. 
-I have used the QAOA algorithm to find the graph that has the lowest energy or with the least number of cliques.
+\subsubsection*{QAOA}
+I have used the QAOA to find the graph that has the lowest energy or with the least number of cliques.
 The Quantum Approximate Optimization Algorithm(QAOA) is a variational quantum algorithm that can solve combinatorial optimizational problems.
 I have defined the QAOA method to determine a binary string of the graph with the lowest energy.
- 
-\begin{lstlisting}[language=Python, numbers=left, basicstyle=\ttfamily\small,frame=single]
+\begin{lstlisting}[style=myPythonStyle, caption=quantum min function]
 from qiskit.primitives import StatevectorSampler
 from qiskit.quantum_info import Pauli
 from qiskit.result import QuasiDistribution
@@ -1251,23 +1354,148 @@ from qiskit_algorithms.optimizers import COBYLA
 from qiskit_algorithms.utils import algorithm_globals
 sampler = StatevectorSampler(seed=42)
 
-n = 5  # Number of vertices
-r = 3  # Red clique size
-s = 3  # Blue clique size
-cost_hamiltonian, shift = get_ramsey_hamiltonian(n, r, s)
+
 algorithm_globals.random_seed = 10598
 
 optimizer = COBYLA()
 qaoa = QAOA(sampler, optimizer, reps=8)
 
+cost_hamiltonian, shift = get_ramsey_hamiltonian(n, r, s)
 result = qaoa.compute_minimum_eigenvalue(cost_hamiltonian)
 \end{lstlisting}
-and the result of this are as follows starting with $R(3,3)$ with $n = 5$ the bit string of the graph with the lowest energy is $|0 0 1 1 1 0 1 1 0 0\rangle$ with the energy 0, this converted to integer is $236$.
+and the result of this are as follows starting with $R(3,3)$ with $n = 3$ of the state with the lowest energy is $|1 0 0 \rangle$ with the energy 0.
+\begin{table}[H]
+	\centering
+	\caption{Probability Distribution of Graph IDs}
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Graph ID} & \textbf{Probability ($\mathbf{P}$)} \\ \hline
+		001 & 0.188 \\ \hline
+		110 & 0.169 \\ \hline
+		101 & 0.164 \\ \hline
+		100 & 0.164 \\ \hline
+		011 & 0.159 \\ \hline
+		010 & 0.156 \\ \hline
+	\end{tabular}
+	\label{tab:prob_dist}
+\end{table}
+\noindent The above table shows the probability distribution of measuring bit strings with the lowest energy.
+These bit strings correspond to the graphs that have the lowest clique count. 
+The graphs $[000]$ and $[111]$ have 0 probabilities and all the other bit strings have almost similar probabilities.
+The QAOA results successfully identified the six bit strings corresponding to the minimum energy confirming the theoretical ground states of the problem. 
+The results are plotted below in the histogram.
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{quantum stuff/plots/prob_distribution_3.png}
+	\caption{Graph with the lowest clique count}
+	\label{probability_distr}
+\end{figure}
+	\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{quantum stuff/plots/prob_distribution_4(1).png}
+	\caption{Graph with the lowest clique count}
+	\label{probability_distri}
+\end{figure}
+These plot shows the graphs with no cliques of size 3, and these graphs 
+	\begin{figure}[H]
+	\centering
+	\begin{tabular}{|c|c|c|}\hline
+		\hline
+		\includegraphics[scale=0.3]{graphs/order_3/k3_coloring_1.png}&
+		\includegraphics[scale=0.3]{graphs/order_3/k3_coloring_2.png}&
+		\includegraphics[scale=0.3]{graphs/order_3/k3_coloring_3.png}\\\hline
+		\hline
+		\includegraphics[scale=0.3]{graphs/order_3/k3_coloring_4.png}&
+		\includegraphics[scale=0.3]{graphs/order_3/k3_coloring_5.png}&
+		\includegraphics[scale=0.3]{graphs/order_3/k3_coloring_6.png}\\\hline
+
+	\end{tabular}
+	\caption{	\small Graphs of order 3 with no cliques of size 3}
+	\label{no_clique_3}
+\end{figure}
+\noindent This does confirm that $n = 3$ is not Ramsey number $R(3,3)$, increasing $n$ to $4$ the probability distribution are defined in the table below,
+\begin{table}[H]
+	\centering
+	\caption{Probability Distribution of Graph Indices}
+	\begin{tabular}{|c|c||c|c|}
+		\hline
+		\textbf{Graph ID} & \textbf{P} & \textbf{Graph ID} & \textbf{P} \\ \hline
+		001100 & 0.1582 & 101001 & 0.0039 \\ \hline
+		011110 & 0.1426 & 011010 & 0.0039 \\ \hline
+		101101 & 0.1416 & 100110 & 0.0039 \\ \hline
+		110011 & 0.1396 & 000011 & 0.0029 \\ \hline
+		100001 & 0.1396 & 100011 & 0.0020 \\ \hline
+		010010 & 0.1338 & 100111 & 0.0020 \\ \hline
+		001101 & 0.0088 & 110000 & 0.0020 \\ \hline
+		100101 & 0.0088 & 101000 & 0.0020 \\ \hline
+		111000 & 0.0078 & 000110 & 0.0020 \\ \hline
+		010011 & 0.0078 & 100100 & 0.0020 \\ \hline
+		011001 & 0.0078 & 111001 & 0.0020 \\ \hline
+		101010 & 0.0068 & 011000 & 0.0020 \\ \hline
+		001011 & 0.0068 & 000101 & 0.0020 \\ \hline
+		110100 & 0.0068 & 111100 & 0.0020 \\ \hline
+		110010 & 0.0059 & 011100 & 0.0010 \\ \hline
+		110001 & 0.0049 & 001001 & 0.0010 \\ \hline
+		010101 & 0.0049 & 101110 & 0.0010 \\ \hline
+		000111 & 0.0049 & 001111 & 0.0010 \\ \hline
+		001110 & 0.0049 & 100010 & 0.0010 \\ \hline
+		010110 & 0.0049 & 110110 & 0.0010 \\ \hline
+		101100 & 0.0049 & 111010 & 0.0010 \\ \hline
+		110101 & 0.0039 & 111101 & 0.0010 \\ \hline
+		\hline
+	\end{tabular}
+	\label{tab:prob_dist_multicolumn_46}
+\end{table}
+
+
+\begin{figure}[H] 
+	\centering
+	\includegraphics[scale = 0.6]{quantum stuff/plots/prob_distribution_4.png}
+	\caption{Graph with the lowest clique count}
+	\label{pro_dis}
+\end{figure}
+
+\begin{figure}[H] 
+	\centering
+	\includegraphics[scale = 0.6]{quantum stuff/plots/prob_distribution_4(1).png}
+	\caption{Graph with the lowest clique count}
+	\label{pro_dis_1}
+\end{figure}
+\subsubsection*{VQE}
+In this part of the section I define the same problem using VQE method.
+\begin{lstlisting}[style=myPythonStyle, caption=quantum min function]
+	from qiskit.circuit.library import n_local
+	from qiskit_algorithms import VQE
+	from qiskit_algorithms.optimizers import COBYLA, SPSA
+	from qiskit_algorithms.utils import algorithm_globals
+	from qiskit.primitives import StatevectorEstimator
+algorithm_globals.random_seed = 13345
+
+optimizer = COBYLA()
+
+cost_hamiltonian, shift = get_ramsey_hamiltonian(n, r, s) # Define cost_hamiltonian first
+ansatz = n_local(cost_hamiltonian.num_qubits, "ry", "cz", reps=2, entanglement="linear") # Initialize ansatz with the correct number of qubits
+
+# Use StatevectorEstimator for simulation
+estimator = StatevectorEstimator(seed=42)
+
+vqe = VQE(estimator=estimator, ansatz=ansatz, optimizer=optimizer)
+
+result = vqe.compute_minimum_eigenvalue(cost_hamiltonian) 
+min_eigenvalue = result.eigenvalue.real+shift
+\end{lstlisting}
+When I perform the same calculations using the VQE method I get the following results, the following probability distribution emerge,
+This algorithm return an eigenvalue which corresponds to the measured energy of the graphs, if the lowest energy found is close to 0, this will mean that the $n$ is not Ramsey number.
 
 \newpage
 \bibliography{sample.bib}
 \end{document}
 \begin{itemize}
+incorporate todays discussion
+explain the things i have done.
+understanding is not correct
+use new understanding to incoporate results.
+
 	
 	\item VQE
 	\item Grover adaptive search(QUBO highest term quadratic)
