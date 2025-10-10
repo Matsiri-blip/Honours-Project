@@ -29,3 +29,10 @@ QICG/vqls-prototype/
 *.synctex(busy)
 *.aux
 project.aux
+QICG/.ipynb_checkpoints/quantum_algorithm-checkpoint.py
+Assignment.cls
+Assignment.cls
+*.cls
+/.ipynb_checkpoints
+Assignment.cls
+.ipynb_checkpoints/Honours-Project-checkpoint.ipynb
