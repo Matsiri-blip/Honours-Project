@@ -463,29 +463,10 @@ then using the matrix to draw the graph connecting to the vertices that are conn
 		\small 	\caption{ Known Ramsey numbers and bounds for $R(r,b)$  up to $R(6,6)$ \cite{GreenwoodGleason1955}}
 	\end{table}
 	
-\noindent	The highest known Ramsey number is $R(4,4)$ which was proved to be $18$ \cite{GreenwoodGleason1955}.
-	This proof was done by using the bounds.
-	Ramsey numbers are bounded between certain numbers.
-	It was shown that $R(4,4) > 17$ by checking if the graphs of 17 vertices cannot have a monochromatic clique of 4 vertices. 
-	Using the proof,
-	\begin{equation}
-		R(r ,b) \geq R(r-1,b)+ R(r,b-1) 
-		\label{theorem_2}
-	\end{equation}
-	$$R(4,4) \geq R(3,4)+R(4,3) = 2R(3,4)$$
-	$R(3,4) $ was found to be 9, from equation \eqref{theorem_2} it was proved that $R(4,4) \leq 18$ \cite{GreenwoodGleason1955}.
-	Hence combining the results it was proved that $R(4,4) = 18$.
-	The same result cannot be shown for 5th Ramsey number.
-	$R(5,5)$ was found to be between 43 \cite{Exoo1993} and 46 \cite{angeltveit2024r55le46}.
-	For $n= 43$, the total number of graphs is $2^{903} \approx 10^{271}$ and for $n=46$ we have $2^{1035}\approx10^{312}$.
-	This makes checking the graphs or analytical proofs not feasible with traditional methods.
-	Proofs and combinatorial methods of checking if graphs do not have a certain clique of r amount of graphs is not feasible.
-	Analytic approaches start to fail since the orders of magnitude are impossible to work with.
-	Since as n grows, it becomes exponentially harder as shown by figure \ref{plot}.
-	\\
-	Computers have been used to find bounds of Ramsey numbers.
-	It is still extremely hard to determine the exact value of $R(5,5)$.
-	With the fastest classical computers available in the world, it would take a lot of years to go through every graph.
+\noindent	The highest known Ramsey number is $R(4,4)$ which was proved to be $18$
+ \cite{GreenwoodGleason1955}.
+	This makes finding Ramsey numbers a class of problems called NP-hard.
+	These are problems that are hard to solve and also hard to verify.
 		\section{Quantum Computing}
 	
 	Classical computers use bits to make calculations.
@@ -674,11 +655,36 @@ then using the matrix to draw the graph connecting to the vertices that are conn
 	$$=\frac{1}{\sqrt{2}}(|0 \rangle_C|0 \rangle_T + |1\rangle_C|0 \rangle_T)$$
 	Then CNOT ($U_X$) acting on this state we have 
 	$$U_X\frac{1}{\sqrt{2}}(|0 \rangle_C|0 \rangle_T + |1\rangle_C|0 \rangle_T) $$
-	$$ =\frac{1}{\sqrt{2}}\left(|00\rangle + |11\rangle\right)$$
+	\begin{equation} =\frac{1}{\sqrt{2}}\left(|00\rangle + |11\rangle\right)
+	\label{entangle}\end{equation}
 	Equation \eqref{entagled_state} with $a=b = \frac{1}{\sqrt{2}}$.
 	Showing how we can start from two qubits and entangle them using the Hadamard and CNOT gates.
-	This shows how in theory quantum computers have more computational power over classical ones \cite{Deutsch1989}.
-	Another powerful quantum mechanics concept is the idea of Hamiltonian.
+	This shows how in theory quantum computers have more computational power over classical ones \cite{Deutsch1989}.\\
+	The final observable state of quantum system is determined measuring the states of the qubits.
+	The result of the state is returned in a form of a bit string $ |00...\rangle$ $|01...\rangle$.
+	This is a probabilistic result, depending on the quantum circuit and algorithm the measurement must be ran multiple times to get a probabilistic distribution across all possible states.\\
+	In the equation \eqref{entangle} the state of one qubit determines the state of the other one,this is known as quantum correlation. 
+For instant the first qubit is measured to be $|0\rangle$ the other qubit is certain to be in $|0\rangle$.
+When the circuit in figure \ref{fig:quantumcircuit} is ran on a Quantum computer simulator the following results are given,
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{"quantum stuff/plots/entagled"}
+	\caption{Entangled state distribution}
+	\label{fig:entagled}
+\end{figure}
+\noindent The results above, obtained from running the circuit 1024 times, showing the expected probability distribution for an entangled two-qubit system.
+ The histogram shows that the system is found in the correlated states $|00\rangle$ and $|11\rangle$, confirming result of the Bell state using the Qiskit Aer simulator with a Sampler.
+These are from a "perfect" Quantum computer where there are no errors, unlike the simulator real Quantum computers are prone to errors.
+When "noise" is added to the system the following distribution results:
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{"quantum stuff/plots/noisy_entanglement"}
+	\caption{entangled states with noise}
+	\label{fig:noisyentanglement}
+\end{figure}
+\noindent Which still shows that the probability of measuring the states $|00\rangle$ and $|11\rangle$ is $\approx$ 50/50.
+However, the introduction of noise causes a non-zero probability of measuring the states  $|01\rangle$ and $|10\rangle$.\\
+These measurements results are helpful when solving a certain and the answer depends on whether the encoded problem defines 
 	\subsection{The Hamiltonian}
 	
 	A Hamiltonian is an operator that is equal to the total energy of a system, this is the sum of kinetic and potential energy of a system.
@@ -699,17 +705,51 @@ then using the matrix to draw the graph connecting to the vertices that are conn
 	The Hamiltonian depends on the type of problem defined.
 	In the next subsection I define an algorithm that determines Ramsey numbers which will use the Hamiltonian of this problem".
 	\newpage
-	\section{Objectives And Methodology}
+	\section{Objectives}
 	The main objective of this research project is to use both quantum and classical implementations to find Ramsey numbers.
+	To also develop and test quantum algorithms for finding small Ramsey numbers.
+	Understand computational complexity of NP problems in computing.
+	\section{Methodology}
+	To develop both classical and 
 \section{Computation of Ramsey numbers}
 	\subsection{Classical Algorithm for finding Ramsey numbers}
 
 To determine if a number is a Ramsey number $R(r,b)$, all the graphs on $n$ vertices have to contain either a clique of size $b$ or clique of size $r$.
 To prove that a certain $n$ is not Ramsey number $R(r,b)$ there should exist a graph that does not contain either a clique of size $b$ or clique of size $r$.\\
 The first way to prove is, is by using mathematical proof.
-
-A graph set has a total number of \eqref{total_graphs} graphs the best way to through all the graphs is by the method of brute force.
-The brute force method is a method used classically to go through all possible graphs.
+Firstly to establish a Ramsey number $R(r,b) = n$ two conditions must be satisfied,
+\begin{enumerate}
+\item All the graphs on $n$ vertices must have a clique of either size $r$ or $b$.
+\item A counter example on $n-1$ vertices has to exist that does not contain either a clique of size r and b.
+\end{enumerate}
+This proof was done by using the bounds.
+Ramsey numbers are bounded between certain numbers.
+It was shown that $R(4,4) > 17$ by checking if the graphs of 17 vertices cannot have a monochromatic clique of 4 vertices. 
+Using the lower bound:
+\begin{equation}
+	R(r ,b) < R(r-1,b)+ R(r,b-1) -1
+	\label{theorem_2}
+\end{equation}
+and the upper bound with:
+\begin{equation}
+	R(r ,b) \geq R(r-1,b)+ R(r,b-1)
+	\label{theorem_3}
+\end{equation}
+$$R(4,4) \geq R(3,4)+R(4,3) = 2R(3,4)$$
+$R(3,4) $ was found to be 9, from equation \eqref{theorem_2} and \eqref{theorem_3} it was showed that $17 < R(4,4) \leq 18$ \cite{GreenwoodGleason1955}.
+Hence combining the results it was proved that .
+The same result cannot be shown for 5th Ramsey number.
+$R(5,5)$ was found to be between 43 \cite{Exoo1993} and 46 \cite{angeltveit2024r55le46}.
+For $n= 43$, the total number of graphs is $2^{903} \approx 10^{271}$ and for $n=46$ we have $2^{1035}\approx10^{312}$.
+This makes checking the graphs or analytical proofs not feasible with traditional methods.
+Proofs and combinatorial methods of checking if graphs do not have a certain clique of r amount of graphs is not feasible.
+Analytic approaches start to fail since the orders of magnitude are impossible to work with.
+Since as n grows, it becomes exponentially harder as shown by figure \ref{plot}.
+\\
+Computers have been used to find bounds of Ramsey numbers.
+It is still extremely hard to determine the exact value of $R(5,5)$.
+With the fastest classical computers available in the world, it would take a lot of years to go through every graph.
+On an $n$ vertex graph there are a total number of \eqref{total_graphs} graphs, to confirm an existance of either clique of size $r$ and size $b$ all the total graphs have to be verified this is known as the brute force method.
 In determining and verifying smaller Ramsey numbers I create a function that checks every graph for cliques.
 For simplification I define a clique of size $b$ and the independent set $r$, as a blue clique and red clique respectively. 
 The main idea of the function is to identify a blue clique or red clique inside of a graph of $n$ vertices starting at $n = 2$.
@@ -928,9 +968,16 @@ The other known Ramsey numbers are still running in a cluster.
 	\newpage
 		\subsection{Quantum Computation of Ramsey Numbers}
 	\label{quantum}
+	In this section I will use Quantum algorithms to compute Ramsey numbers.
+	Quantum computers are probabilistic in measurement outcomes unlike classical ones.
+	With the options to explore the search space of the graphs without needing to go through all the graphs.
+	The problem of determining Ramsey numbers can be turned into finding the Ground state energy of a Hamiltonian.
+Three algorithms are explored in this paper which are Quantum Approximate Optimization Algorithm(QAOA), Variational Quantum Eigensolver(VQE) and Grover's Algorithm which is a search algorithm.
+
 	\subsubsection*{QAOA}
-	I have used the QAOA to find the graph that has the lowest energy or with the least number of cliques.
-	The Quantum Approximate Optimization Algorithm(QAOA) is a variational quantum algorithm that can solve combinatorial optimizational problems.
+	The Quantum Approximate Optimization Algorithm(QAOA) is a variational quantum algorithm that can solve combinatorial optimization problems such as finding Ramsey numbers.
+	QAOA is a hybrid quantum-classical optimization that involves a
+	parameterized quantum circuit to be run on a quantum computer and an optimizer that can update the parameters on a classical machine by minimizing the cost function constructed based on the outputs of the quantum circuit.
 	I have defined the QAOA method to determine a binary string of the graph with the lowest energy.
 	\begin{lstlisting}[style=myPythonStyle, caption=quantum min function]
 		from qiskit.primitives import StatevectorSampler
