@@ -134,8 +134,8 @@
 	The goal here is to find Ramsey numbers, particularly $R(5,5)$.
 	Exact values of $R(r,b)$ for $r,b$ greater or equal to 5 are currently unknown.
 	\\\\
-	The computation of Ramsey numbers is a computationally intensive task because it requires verifying all possible 2-edge-colorings for monochromatic cliques, making it an NP-hard problem with exponential complexity \cite{PhysRevA.93.032301, burr1981generalized}.
-	These colourings represent all possible ways to label edges with two colours.
+	The computation of Ramsey numbers is a computationally intensive task because it requires verifying all total 2-edge-colorings for monochromatic cliques, making it an NP-hard problem with exponential complexity \cite{PhysRevA.93.032301, burr1981generalized}.
+	These colourings represent all total ways to label edges with two colours.
 	A monochromatic clique can either be a complete graph of red colour or blue colour.
 	While analytical methods were used to find $R(4,4)=18$ \cite{GreenwoodGleason1955},
 	for $R(5,5)$ analytical methods are not feasible.
@@ -159,7 +159,7 @@
 	The order of a graph is the number of vertices.
 	Edges are unordered pairs $e_{ij} = \left\{v_i,v_j\right\}$ for undirected graphs or ordered pair $e_{ij} = (v_i,v_j)$ for directed graphs with $i\neq j$  \cite{BondyMurty2008}.
 	Directed graphs have asymmetrical edges $e_{ij} \neq e_{ji}$ whereas undirected have symmetrical edges $e_{ij} = e_{ji}$.
-	An empty graph has no edges, whose complement is a complete graph with possible edges between all pairs of vertices.
+	An empty graph has no edges, whose complement is a complete graph with total edges between all pairs of vertices.
 	Graph theory has applications in computer science, mathematics and social network modeling.
 	\\\\
 	Graphs can be visualized by representing vertices as points and edges as lines that connect the vertices.
@@ -187,7 +187,7 @@
 		\label{complete_graph}
 	\end{figure}
 \noindent	The graph in figure \ref{complete_graph} is given by the sets  $V = \{v_1, v_2, v_3, v_4\} $ and $E=\{e_{12},e_{13},e_{14},e_{23},e_{24},e_{34}\}.$ 
-	Figure \ref{empty_graph} shows a graph with no edges and figure \ref{complete_graph} is graph that has all the vertices with possible edges connecting to other vertices in the vertex set.
+	Figure \ref{empty_graph} shows a graph with no edges and figure \ref{complete_graph} is graph that has all the vertices with all the edges connecting to other vertices in the vertex set.
 	A complete graph with n vertices has ${\frac{n^2-n}{2}}$ edges.
 There are $n$ vertices in the graph each vertex has $n-1$ edges.
 	To avoid double counting each edge a factor of $\frac{1}{2}$ is multiplied since vertices share a common edge.
@@ -684,9 +684,9 @@ When "noise" is added to the system the following distribution results:
 \end{figure}
 \noindent Which still shows that the probability of measuring the states $|00\rangle$ and $|11\rangle$ is $\approx$ 50/50.
 However, the introduction of noise causes a non-zero probability of measuring the states  $|01\rangle$ and $|10\rangle$.\\
-These measurements results are helpful when solving a certain and the answer depends on whether the encoded problem defines 
+These measurements results are helpful when solving a certain and the answer depends on whether the encoded problem defines.
+One of the way to define a problem for Quantum computing is by finding the ground state of a Hamiltonian.
 	\subsection{The Hamiltonian}
-	
 	A Hamiltonian is an operator that is equal to the total energy of a system, this is the sum of kinetic and potential energy of a system.
 	The Hamiltonian governs time evolution of a system.
 	This is described the Schr$\ddot{o}$dinger equation \cite{mcintyre_quantum_2012}.
@@ -705,12 +705,7 @@ These measurements results are helpful when solving a certain and the answer dep
 	The Hamiltonian depends on the type of problem defined.
 	In the next subsection I define an algorithm that determines Ramsey numbers which will use the Hamiltonian of this problem".
 	\newpage
-	\section{Objectives}
-	The main objective of this research project is to use both quantum and classical implementations to find Ramsey numbers.
-	To also develop and test quantum algorithms for finding small Ramsey numbers.
-	Understand computational complexity of NP problems in computing.
-	\section{Methodology}
-	To develop both classical and 
+
 \section{Computation of Ramsey numbers}
 	\subsection{Classical Algorithm for finding Ramsey numbers}
 
@@ -956,28 +951,96 @@ The other known Ramsey numbers are still running in a cluster.
 	\end{figure}
 	
 
-	\subsubsection*{What i notice}
-	
-	
-	\begin{enumerate}
-		\item The runtime for finding each ramsey number increases exponentially
-		\item The runtime is lower when instead of finding $R(r,b)$ when $s<r$.
-	\end{enumerate} 
-	\newpage
+
 	Quantum computers can be considered to compute Ramsey numbers.
 	\newpage
 		\subsection{Quantum Computation of Ramsey Numbers}
 	\label{quantum}
-	In this section I will use Quantum algorithms to compute Ramsey numbers.
-	Quantum computers are probabilistic in measurement outcomes unlike classical ones.
-	With the options to explore the search space of the graphs without needing to go through all the graphs.
-	The problem of determining Ramsey numbers can be turned into finding the Ground state energy of a Hamiltonian.
-Three algorithms are explored in this paper which are Quantum Approximate Optimization Algorithm(QAOA), Variational Quantum Eigensolver(VQE) and Grover's Algorithm which is a search algorithm.
+	Due to the computational complexity of computing Ramsey numbers, Quantum computers can be used.
+	Unlike classical computers, quantum computing uses principles like superposition, entanglement and parallelism to explore large solution spaces simultaneously, which provides an advantage over classical computers.\\
+	One way to solve this is by mapping the Ramsey constraints onto finding the ground state energy of a Hamiltonian \cite{PhysRevA.93.032301}.
+By assigning one qubit to represent the red or blue edge, the total states represent all total graphs $2^m$ on $n$ vertices.
+The edge encoding are defined by thee red edge is given by state $ |0\rangle$ and blue $ |1\rangle$.
+Each state $|z_1z_2z_3..z_N\rangle$ corresponds to a unique graph which is also defined by the bit string \eqref{binary_matrix}.
+The way of proving that $n $ is a Ramsey number, all graphs on $n$ vertices have to contain a clique of either size $r$ or size $b$.
+This definition can be used to define the problem Hamiltonian.\\
+	 Define the energy function as the total number of s sized cliques and total number of r sized cliques for a certain graph:
+	 \begin{equation}
+	 	h^n_{r,b}(a) = C^n_r(a)+C^n_b(a)
+	 	\label{energy}
+	 \end{equation}
+$C^n_r(a)$ are the total cliques of size r and $C^n_b(a)$ are the total cliques of size b found in the graph $a$.
+The energy function would be zero when a graph has no cliques of sizes r and b, meaning the graph on $n$ vertices makes $n$ is not $R(r,b)$.
+Then if the energy function is a positive number for the lowest energy graph, then $n$ is $R(r,b)$
+ The problem Hamiltonian is defined as 
+ \begin{equation}H_p|z_1 z_2 z_3.....z_N\rangle =h^n_{r,b}(a)|z_1 z_2 z_3.....z_N\rangle
+ 	\label{Hamiltonian}
+ \end{equation}
 
+$$H_p|z_1 z_2 z_3.....z_N\rangle =0$$when a bit string does not contain a clique of either size s or r.
+The following pseudocode defines how this is done,\\
+\begin{algorithm}[H]
+	\DontPrintSemicolon
+	\KwIn{integers number\_of\_vertices,red\_clique\_size,blue\_clique\_size,graph\_number}
+	\KwOut{integer $\geq 0$}
+	\Begin{
+
+
+		$m \gets $ \Fnumber{$number\_of\_vertices$}\;
+		$N \gets $\Ftotal{$number\_of\_vertices$}\;
+		$a \gets $\Fbinary{$number\_of\_vertices,graph\_number$}\;
+		$e\gets 0$\;
+		\For{graph $= 1$ to $N$ }{\If{$a(number\_of\_vertices,graph) $ has $red\_clique$}{$e \gets e+1$\; continue until all cliques are counted}\Else{if $a(number\_of\_vertices,graph) $ has $blue\_clique$\;{$e \gets e+1$\;} continue until all independent\_sets are counted}} 
+		\KwRet $e$\;
+	}\
+	\caption{calculate\_energy Function}
+\label{ener}
+\end{algorithm}
+\noindent The main idea is to minimize the energy.
+The state that has the lowest energy will correspond to the graph with the least number of cliques.
+If the minimum of this function is a positive number for $n$ vertices this implies that $n =R(r,b)$ however, if the minimum is 0, then $n\neq R(r,b)$.
+I then define the pseudo-code in python with the code below:
+\begin{lstlisting}[style=myPythonStyle, caption=classical energy function]
+	def energy(n, s, r, k):
+		graph_edges=edges(n) ##define the total edges
+		edge_value=edge_values(n,k)        ##define map edges
+		binary_vec = binary_vector(n, k)
+		objective = 0
+		penalty = 1
+		
+		#Count the total number of Blue cliques
+		for edge in combinations(range(n), s):
+			blue_edges = [(min(i, j), max(i, j))for i, j in combinations(edge, 2)]
+			if all(edge_value.get(graph_edges, 0) == 1 for edge in blue_edges):
+			objective += penalty
+		
+		# Count the total number of Red cliques
+		for edge in combinations(range(n), r):
+			red_edges = [(min(i, j), max(i, j))for i, j in combinations(edge, 2)]
+			if all(edge_value.get(graph_edges, 0) == 0 for edge in red_edges): 
+			objective += penalty
+		return objective
+\end{lstlisting}
+This function counts the total number of cliques, red or blue found in a graph of size $n$ in the graph set.
+The lines 11 and 17 counts the total cliques found in the graph $a$, then $1$ is added to the objective function else if there is no clique then $0$ is added to the objective. \\
+The following plot for $R(3,3)$ on $n$ vertices, is given by the plot below
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{"quantum stuff/plots/clique_plot_n3_s3_r3"}
+	\caption{Clique counts of $3$ vertices}
+	\label{fig:cliqueplotn3s3r3}
+\end{figure}
+\noindent The above plot shows the total cliques each graphs have of order $3$.
+The min number of cliques is $0$, which does prove that $3 \neq R(3,3)$. 
+ Three algorithms are focused on in this paper which are Quantum Approximate Optimization Algorithm(QAOA), Variational Quantum Eigensolver (VQE) and Grover's Algorithm.
+The quantum computer used is on a website called Qiskit which enables users to run simulations and do experiments on a quantum hardware.
+Each of these algorithm have the ability to find the minimum energy defined by the algorithm \ref{ener}.
 	\subsubsection*{QAOA}
 	The Quantum Approximate Optimization Algorithm(QAOA) is a variational quantum algorithm that can solve combinatorial optimization problems such as finding Ramsey numbers.
 	QAOA is a hybrid quantum-classical optimization that involves a
 	parameterized quantum circuit to be run on a quantum computer and an optimizer that can update the parameters on a classical machine by minimizing the cost function constructed based on the outputs of the quantum circuit.
+ The idea behind QAOA is to encode the objective function of the optimization problem into the cost Hamiltonian which is done using the energy function \eqref{energy}.
+ The idea is to search for an optimal bitstring that will give a good approximation ratio with a high probability of having the least amount of cliques.
 	I have defined the QAOA method to determine a binary string of the graph with the lowest energy.
 	\begin{lstlisting}[style=myPythonStyle, caption=quantum min function]
 		from qiskit.primitives import StatevectorSampler
@@ -1135,6 +1198,100 @@ Three algorithms are explored in this paper which are Quantum Approximate Optimi
 		\label{VQEpro_dis_1}
 	\end{figure}
 	\subsubsection*{Grover Algorithm}
+	This is a search algorithm that finds a unique state in an unstructured list or database.
+	It offers a quadratic speed up, this means that in a list of $N$ items, only  $\mathcal{O}(\sqrt{N})$ iterations compared to  $\mathcal{O}(N)$ iterations of the best classical algorithm.
+	Grovers' Algorithm uses the principle of superposition and quantum interference to increase the probability of the unique state being measured while suppressing the amplitudes of all other states.\\
+	For this Ramsey numbers the unique states would be the graphs with the least number of cliques of sizes $r$ and $b$.
+	The same energy function from equation \eqref{energy} is used to determine the graph with the lowest clique making it a search problem instead.
+	The goal is to determine the minimum energy of the function if a positive number is returned then, $n$ is a $R(r,b)$ else it is not.
+	Below i define the pseudo-code of finding the lowest number of cliques using Grover's algorithm;
+	\begin{algorithm}[H]
+		\caption{Main Function}\label{Grover's}
+		\DontPrintSemicolon
+		\KwIn{integers r and s}
+		\KwOut{minimum n that has r or s size clique}
+		
+		\Begin{
+			Initialize quantum register\;
+			Apply hadamard gate on all states\;
+			Define Oracle \;
+		 {
+		
+			Apply phase oracle on the marked state\;
+				$red\_clique \gets$\Fempty{$r$}\;
+				$blue\_clique \gets $ \Fcomplete{$s$}\;
+				plot $\gets$ \Fdraw{$n,k$} \;
+				$A \gets$ \Flabel{$n,k$}\;
+				
+				\For{$k$ from 1 to $2^m$} {
+					\If{A has red clique or blue clique}{
+						Continue
+					}
+					\Else{
+						return plot\;Break
+					}
+				}
+				
+				\If{one graph has no clique}{
+					$n \gets n+1$
+				}
+			}
+		}
+	\end{algorithm}
+		\begin{tabular}{|c|c|}
+		\hline
+		Basis State (Decimal) & Count \\
+		\hline
+		(0) & 0.4982 \\
+		(1) & 0.0 \\
+		(2) & 0.0 \\
+		(3) & 0.0 \\
+		(4) & 0.0 \\
+		(5) & 0.0 \\
+		(6) & 0.0 \\
+		(7) & 0.5018 \\
+		\hline
+	\end{tabular} \\
+	\begin{tabular}{|c|c|c}
+		\hline
+		Basis State (Decimal) & Count \\
+		\hline
+		000000 & 0 & 2 \\
+		000001 & 1 & 2 \\
+		000010 & 2 & 1 \\
+		000011 & 3 & 3 \\
+		000100 & 4 & 1 \\
+		000101 & 5 & 3 \\
+		000110 & 6 & 1 \\
+		000111 & 7 & 3 \\
+		001000 & 8 & 1 \\
+		001001 & 9 & 3 \\
+		001010 & 10 & 2 \\
+		001011 & 11 & 3 \\
+		001100 & 12 & 517 \\
+		001101 & 13 & 535 \\
+		001110 & 14 & 539 \\
+		001111 & 15 & 2 \\
+		010001 & 17 & 3 \\
+		010010 & 18 & 546 \\
+		010011 & 19 & 544 \\
+		010100 & 20 & 1 \\
+		010101 & 21 & 1 \\
+		010110 & 22 & 518 \\
+		010111 & 23 & 1 \\
+		011000 & 24 & 3 \\
+		011001 & 25 & 2 \\
+		011010 & 26 & 552 \\
+		011011 & 27 & 2 \\
+		011100 & 28 & 596 \\
+		011101 & 29 & 4 \\
+		011110 & 30 & 544 \\
+		011111 & 31 & 2 \\
+		100001 & 33 & 539 \\
+		100010 & 34 & 1 \\
+
+		\hline
+	\end{tabular}
 	
 
 
@@ -1404,7 +1561,7 @@ def save_graph(n, k, folder_path):
 		\end{enumerate}
 		\textbf{IBM}:\\
 		IBM is a leader in superconducting quantum computing, with its IBM Quantum platform that provides cloud-based quantum computing services. 
-		IBM Quantum Platform provides access to quantum computers, documentation, and learning resources in one place.\\\\
+		IBM Quantum Platform provides access to quantum computers.\\\\
 		The company has developed an open-source toolbox for quantum computing called Qiskit which enables users to run simulations and do experiments on a quantum hardware.
 		Qiskit gives access to components like building circuits, operators and primitives that enable optimized computations through the IBM quantum cloud.
 		Main features of Qiskit involve defined libraries of quantum logic gates and parameterized circuits, a quantum information module for working with quantum states and operators, and a transpiler that optimizes and converts circuits to run on specific quantum hardware backends.
@@ -1420,3 +1577,11 @@ def save_graph(n, k, folder_path):
 	\bibliography{sample.bib}
 	
 \end{document}
+	\section{Objectives}
+The main objective of this research project is to use both quantum and classical implementations to find Ramsey numbers.
+To also develop and test quantum algorithms for finding small Ramsey numbers.
+Understand computational complexity of NP problems in computing.
+\section{Methodology}
+To develop both classical and quantum algorithm for finding Ramsey numbers.
+In the classical case I will use a brute force method in determining if a certain $n$ is Ramsey number $R(r,b)$ and also determining the counter examples of graphs on vertices $ < n.$
+For the Quantum computation, I firstly map finding Ramsey numbers into a quantum problem.
