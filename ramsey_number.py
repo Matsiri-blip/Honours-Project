@@ -102,9 +102,9 @@ def ramsey_numbers(r,b):
     
     is_ramsey_number = True
 
-    start_time = time.time()                     ##define start of algorithm        
-
-    for graph in range(N):  ##iterating over total number of graphs
+    start_time = time.time()                     ##define start of algorithm
+    start_k = 0
+    for graph in range(start_k,N):  ##iterating over total number of graphs
       
       current_graph_label = binary_vector(n, graph)
       clique_found = False    ##intialize for when a clique exists in the graph
@@ -135,5 +135,5 @@ def ramsey_numbers(r,b):
         print(f"All graphs with n = {n} vertices have a monochromatic clique.")
         print(f"{n} = R{(r,b)} and time taken to find R{(r,b)} was {change_in_time} seconds.")
         break  # Exit the while loop
-    
+    start_k = graph
     n += 1                                    ##increase n if one graph does not contain a clique

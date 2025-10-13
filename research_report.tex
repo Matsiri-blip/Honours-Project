@@ -799,49 +799,62 @@ I have a psuedo-code below to show how the algorithm works,
 \noindent I have defined the main function in the above pseudo-code, this includes extra functions that are found in the appendix section \ref{Psueso}.
 Here the function is defined in python.\\\\
 	\begin{lstlisting}[style=myPythonStyle, basicstyle={\fontsize{9pt}{9pt}\selectfont\ttfamily},caption=Ramsey number finding function ]
-		def ramsey_numbers(r,b):
-			while True:
-			n = 2
-			m = total_edges(n)    ##total edges of a graph           
-			edges = list(combinations(range(n), 2))  ##select different edges in a graph
-			edge_to_index = {edge: i for i, edge in enumerate(edges)}     ##enumerate edges
-			r_clique_vertices = list(combinations(range(n), r))  ##select vertices of size r clique
-		   ##combination of different r sized cliques
-			
-			b_clique_vertices = list(combinations(range(n), b))   #select vertices of size b clique
-			b_clique_indices = [[edge_to_index[e] for e in combinations(vertices, 2)] for vertices in b_clique_vertices] #combination of different b sized cliques
-			
-			is_ramsey_number = True
-			start_k = 0 
-			
-			for k in range(start_k, 2**m):
-			current_coloring = binary_vector(n,k)
-			
-			clique_found = False
-			
-			# Check for red r-cliques 
-			for indices in r_clique_indices:
-			if all(current_coloring[idx] == 0 for idx in indices):
-			clique_found = True
-			break
-			
-			# Check for blue b-cliques 
-			for indices in b_clique_indices:
-			if all(current_coloring[idx] == 1 for idx in indices):
-			clique_found = True
-			break
-			
-			if not clique_found:
-			is_ramsey_number = False
-				save_graph(n,k,folder_path)   ##save the counter example graph
-				break  # Exit the for loop if and increase n by 1
-			
-			if is_ramsey_number:
-			print(f"{n} is Ramsey number R({r},{b})")
-			break            #exit while loop if n is ramsey number                           
-			
-			start_k = k          # Reset start_k for the next n
-			n += 1
+def ramsey_numbers(r,b):
+
+	n = 2
+	while True:
+	m = total_edges(n)  ##total number of edges
+	N = 2**m            ##total number of graphs
+	#calculate clique indices for the current n
+  	graph_edges = edges(n)                                                        ##define the total edges
+	edge_values = edge_values(n,graph_number)        
+	
+	##define ways of selecting vertices
+	r_clique_vertices = vertices_combinations(n,r)         ##choose a way to select r vertices using combinations
+	r_clique_indices = []                                     
+	for vertices in r_clique_vertices:
+	subgraph_edges = vertices_combinations(n,2)                  ##select r vertices to verify if they have a clique
+	indices = [edge_to_index[tuple(sorted(e))] for e in subgraph_edges] # Ensure consistent edge representation
+	r_clique_indices.append(indices)                                    #append to r_clique_indices list
+	
+	b_clique_vertices = vertices_combinations(n,b)
+	b_clique_indices = []
+	for vertices in b_clique_vertices:
+		subgraph_edges = vertices_combinations(n,2)
+		indices = [edge_to_index[tuple(sorted(e))] for e in subgraph_edges] # Ensure consistent edge representation
+		b_clique_indices.append(indices)                                    #append to r_clique_indices list
+	
+	is_ramsey_number = True
+	
+	start_time = time.time()                     ##define start of algorithm        
+	
+	for graph in range(N):  ##iterating over total number of graphs
+	
+		current_graph_label = binary_vector(n, graph)
+		clique_found = False    ##intialize for when a clique exists in the graph
+		# Check for blue cliques
+		for indices in b_clique_indices:
+		if all(current_graph_label[idx] == 1 for idx in indices):   ##search for red cliques
+		clique_found = True
+		break                                                     ##if blue clique found go to the next graph
+		##if a blue clique not found then,
+		# Check for red cliques
+		for indices in r_clique_indices:
+		if all(current_graph_label[idx] == 0  for idx in indices):   ##search for red cliques
+		clique_found = True         
+			break                                                     ##if a red clique found go to the next graph        
+		
+		
+		if not clique_found:                          ##if a clique of either size r or size b is not found, n is not Ramsey number
+		is_ramsey_number = False
+			break     ##break loop and go to next n 
+		final_time = time.time()              
+		change_in_time =   final_time-start_time
+		if is_ramsey_number:
+		
+		break  # Exit the while loop
+		
+		n += 1                                  
 	\end{lstlisting}
 	This function defined to find and return $R(r,b)$ which is defined as the smallest number n such that every graph on $n$ vertices either contain a clique of size $r$ or an independent set of size $b$. 
 	The rest of the functions are found in the appendix section \ref{Algos}.
@@ -1001,10 +1014,10 @@ The state that has the lowest energy will correspond to the graph with the least
 If the minimum of this function is a positive number for $n$ vertices this implies that $n =R(r,b)$ however, if the minimum is 0, then $n\neq R(r,b)$.
 I then define the pseudo-code in python with the code below:
 \begin{lstlisting}[style=myPythonStyle, caption=classical energy function]
-	def energy(n, s, r, k):
+	def energy(n, s, r, graph_number):
 		graph_edges=edges(n) ##define the total edges
-		edge_value=edge_values(n,k)        ##define map edges
-		binary_vec = binary_vector(n, k)
+		edge_value=edge_values(n,graph_number)        ##define map edges
+		binary_vec = binary_vector(n, graph_number)
 		objective = 0
 		penalty = 1
 		
@@ -1220,10 +1233,10 @@ Each of these algorithm have the ability to find the minimum energy defined by t
 			Apply phase oracle on the marked state\;
 				$red\_clique \gets$\Fempty{$r$}\;
 				$blue\_clique \gets $ \Fcomplete{$s$}\;
-				plot $\gets$ \Fdraw{$n,k$} \;
-				$A \gets$ \Flabel{$n,k$}\;
+				plot $\gets$ \Fdraw{$n,graph\_number$} \;
+				$A \gets$ \Flabel{$n,graph\_number$}\;
 				
-				\For{$k$ from 1 to $2^m$} {
+				\For{$graph\_number$ from 1 to $2^m$} {
 					\If{A has red clique or blue clique}{
 						Continue
 					}
@@ -1313,33 +1326,33 @@ Each of these algorithm have the ability to find the minimum energy defined by t
 	\begin{algorithm}[H]
 		
 		\DontPrintSemicolon
-		\KwIn{integers $n$,k}\Comment*[r]{n is the number of vertices and k represents the graph number}\;
+		\KwIn{integers $n$,graph\_number}\Comment*[r]{n is the number of vertices}\;
 		\KwOut{graph\_label}
 		\Comment{This function labels all the graphs in the graph set}
 		\Begin{
 			$m \leftarrow$ \Fnumber{$n$}\; % Calling the previously defined function
-			$b \leftarrow$  binary\_string(n,k)\\
+			$b \leftarrow$  binary\_string(n,graph\_number)\\
 			adj $\leftarrow$ zeros(n,n)\;
 			N = \Ftotal{$n$}\;
 			\For{ i to $N$}{fill\_bits(adj,b)}
 			\KwRet adj\;
 		}
-		\caption{graph\_label(n,k) Function}
+		\caption{graph\_label(n,graph\_number) Function}
 	\end{algorithm}
 	
 	\item create a function to plot graph
 	\begin{algorithm}[H]
 		\DontPrintSemicolon
-		\KwIn{integers $n$,k}\Comment*[r]{n is the number of vertices and k represents the graph number}\;
+		\KwIn{integers $n$,graph\_number}\Comment*[r]{n is the number of vertices and graph\_number represents the graph number}\;
 		\KwOut{graph\_plot}
 		\Comment{This function returns a plot of the graph using the graph labels }
 		\Begin{
 			$m \leftarrow$ \Fnumber{$n$}\; % Calling the previously defined function
-			A $\leftarrow$ \Flabel{n,k}\\
+			A $\leftarrow$ \Flabel{n,graph\_number}\\
 			\For{ i=1 to n}{\For{j =1 to n}{\If{A[i,j]=1 }{add edge}\Else{add red edge}}}
 			\KwRet plot\;
 		}
-		\caption{draw\_label(n,k) Function}
+		\caption{draw\_label(n,graph\_number) Function}
 	\end{algorithm}
 	
 	
@@ -1370,17 +1383,17 @@ Each of these algorithm have the ability to find the minimum energy defined by t
 	This ensures that the binary string can have total number of edges so that each possible edge can be accounted for in the adjacency matrix.
 	\begin{algorithm}[H]
 		\DontPrintSemicolon
-		\KwIn{integers $n$, $k$}
-		\KwOut{binary string of k}
+		\KwIn{integers $n$, $graph\_number$}
+		\KwOut{binary string of graph\_number}
 		\Begin{
 			
 			$m \gets $ \Fnumber\;
 			$b$ $\gets$ zeros(m) \Comment*[r]{ensures that the binary string can have total number of edges}\;
-			graph\_number $\gets$ binary(k)\;
+			graph\_number $\gets$ binary(graph\_number)\;
 			\For{edge 1 to m }{b[m+1-edge] = Reverse(graph\_number)[edge]\Comment*[r]{fills the binary vector using the binary string} } \
 			\KwRet $b$\;
 		}
-		\caption{binary\_string(n,k) Function}
+		\caption{binary\_string(n,graph\_number) Function}
 	\end{algorithm}
 	\item This function calculates the possible edges in an n vertex graph
 	\begin{algorithm}[H]
@@ -1461,20 +1474,32 @@ def total_edges(n):
 
 	\end{lstlisting}
 	\begin{lstlisting}[style=myPythonStyle, caption=adjacency matrix]
-def binary_vector(n,k):
+def binary_vector(n,graph_number):
 	m =total_edges(n)
 	binary_vec = np.zeros(m)
-	binary = bin(k)[2:]
+	binary = bin(graph_number)[2:]
 	for i in range(len(binary)):
 		binary_vec[m-i-1] = int(binary[::-1][i])
 	return binary_vec
 		\end{lstlisting}
+		\begin{lstlisting}[style=myPythonStyle, caption=graph edges]
+		def edges(n):
+			edges = list(combinations(range(n), 2))
+			return edges     
+	\end{lstlisting}
+		\begin{lstlisting}[style=myPythonStyle, caption=edge mapping]
+		def edge_values(n,graph_number):
+			binary_vec = binary_vector(n, graph_number)    ##call binary vector function
+			edge_list = edges(n)     ##define map edges
+			edge_values = {edge: int(binary_vec[idx]) for idx, edge in enumerate(edge_list)}     ##enumerate each edge to the binary matrix
+			return edge_values                    ##returns edges and their values using binary matrix   
+			\end{lstlisting}
 			\begin{lstlisting}[style=myPythonStyle, caption=binary vector]
-def  adjacency_matrix(n,k):
+def  adjacency_matrix(n,graph_number):
 	##conditions for the matrix
 	##for putting vector into the matrix
 
-	binary = binary_vector(n,k)
+	binary = binary_vector(n,graph_number)
 	##first define the pattern in which it is going to be put numbers for the z
 	start = 0
 	A = np.zeros((n,n))
@@ -1491,11 +1516,11 @@ def  adjacency_matrix(n,k):
 
 		\end{lstlisting}
 			\begin{lstlisting}[style=myPythonStyle, caption=Graph plotting]
-def Graph(n,k):
+def Graph(n,graph_number):
 
 # Create a new figure and axes
 	fig, ax = plt.subplots()
-	A =adjacency_matrix(n,k)
+	A =adjacency_matrix(n,graph_number)
 	x = -np.cos(2 * np.pi * np.arange(n) / n+np.pi/2)        ##points where the vertices will be placed
 	y = np.sin(2 * np.pi * np.arange(n) / n+np.pi/2)         ## these points are around a circle
 	for i in range(n):
@@ -1503,7 +1528,7 @@ def Graph(n,k):
 		ax.scatter(x[i],y[i], label =f"{i+1}",s=400, color = 'black', zorder=2) 
 		ax.text(x[i],y[i],"$v_{{{}}}$".format(i+1),fontsize = 15,color = 'white', horizontalalignment='center', verticalalignment='center')
 		
-		A=adjacency_matrix(n,k)
+		A=adjacency_matrix(n,graph_number)
 		for i in range(n):                                                          ##looping through the vertices
 		for j in range(n):
 		if A[i][j]==1:                                                           ## check if there is an edge between the edges using adjacency matrix defined                                               ## if there is an edge add the vertices into a list
@@ -1512,19 +1537,24 @@ def Graph(n,k):
 		else:
 		ax.plot([x[i],x[j]],[y[i],y[j]],color = 'red',linewidth = 3, zorder=1)
 		
-		ax.text(0,0,f'{k}',fontsize = 20, horizontalalignment='center', verticalalignment='center')
+		ax.text(0,0,f'{graph_number}',fontsize = 20, horizontalalignment='center', verticalalignment='center')
 		ax.axis('off')
 	return fig
 		\end{lstlisting}
+		\begin{lstlisting}[style=myPythonStyle, caption=Save counter example]
+def vertices_combinations(n,r):
+	r_clique_vertices = list(combinations(range(n), r))
+	return r_clique_vertices
+		\end{lstlisting}
 			\begin{lstlisting}[style=myPythonStyle, caption=Save counter example]
-def save_graph(n, k, folder_path):
+def save_graph(n, graph_number, folder_path):
 	if not os.path.exists(folder_path):
 		os.makedirs(folder_path)
 		print(f"Created folder: {folder_path}")
 	
-	fig= Graph(n, k)
+	fig= Graph(n, graph_number)
 	
-	image_name = f"counter_example_for_{n}_graph_{k}.png"
+	image_name = f"counter_example_for_{n}_graph_{graph_number}.png"
 	
 	image_path = os.path.join(folder_path, image_name)
 	
