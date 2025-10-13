@@ -3,143 +3,137 @@ import matplotlib.pyplot as plt
 from itertools import combinations
 import time
 import os
-def total_edges(n):
-  return int((n**2-n)/2)
-def binary_vector(n,k):
-    m = total_edges(n)
+def total_edges(n):                         #total edges function,
+  return int((n**2-n)/2)                    # returns total edges of a graph
+
+def binary_vector(n,graph_number):          ##define binary matrix 
+    m = total_edges(n)                      #recall tota edges function
     binary_vec = np.zeros(m)
-    binary = bin(k)[2:].zfill(m) # Use zfill to pad with leading zeros
+    binary = bin(graph_number)[2:].zfill(m) # Use zfill to pad with leading zeros
     for i in range(m):
         binary_vec[i] = int(binary[i])
-    return binary_vec
-def  adjacency_matrix(n,k):
-  ##conditions for the matrix
-  ##for putting vector into the matrix
-  ##first define the pattern in which it is going to be put numbers for the z
-  ##binary vector
-  m =total_edges(n)
-  start = 0
-  A = np.zeros((n,n))
-  B = binary_vector(n,k)
-  for i in range(n-1): ##this loop is to return the list of the pattern
-      length_cut = n-1-i
-      end = start + length_cut
-      A[i][i + 1:] = B[start:end]
-      start = end
+    return binary_vec                       #returns binary string of a number with m total bits
+  
+def  adjacency_matrix(n,graph_number):                 #define adjacency matrix, using binary matrix to fill in upper triangular terms
 
+  m =total_edges(n)                         ##call total edges function
+  A_matrix = np.zeros((n,n))                       #initialize binary matrix
+  b_vector = binary_vector(n,graph_number)                    #recall binary matrix
+  start = 0                                 #start at index 0 from the binary matrix
+
+  for i in range(n-1):                         ##this loop is to return the list of the pattern
+      length_cut = n-1-i                        ##length of cutting matrix matching with elements from binary vector
+      end = start + length_cut                  ##end of the length cut,
+      A_matrix[i][i + 1:] = b_vector[start:end]
+      start = end                              ##to ensure that the start restarts to the previous end
+##loop for ensuring symmetric
   for l in range(n):
       for j in range(n):
-          A[j,l] = A[l,j]
-  return A
-def Graph(n,k):
+          A_matrix[j,l] = A_matrix[l,j]
+  return A_matrix
+
+##draw graph function, returns a plot of a graph on n vertices
+def Graph(n,graph_number):
 
   # Create a new figure and axes
   fig, ax = plt.subplots()
-  A =adjacency_matrix(n,k)
-  x = -np.cos(2 * np.pi * np.arange(n) / n+np.pi/2)        ##points where the vertices will be placed
-  y = np.sin(2 * np.pi * np.arange(n) / n+np.pi/2)         ## these points are around a circle
-  if n < 2:
-      ax.scatter([0],[0], s=400, color='black', zorder=2)
-      ax.text(0, 0, f'$v_1$', fontsize=15, color='white', horizontalalignment='center', verticalalignment='center')
-      ax.axis('off')
-      ax.show()
-      return
+  Adj_matrix =adjacency_matrix(n,graph_number)                                 ##recall adjacency matrix function
+  x = -np.cos(2 * np.pi * np.arange(n) / n+np.pi/2)        ##x points of the vertices
+  y = np.sin(2 * np.pi * np.arange(n) / n+np.pi/2)         ##y-points of the vertices, these points are around a circle
+
   for i in range(n):
     ax.scatter(x[i],y[i], label =f"{i+1}",s=400, color = 'black', zorder=2)  ##drawing vertices
-    ax.text(x[i],y[i],"$v_{{{}}}$".format(i+1),fontsize = 15,color = 'white', horizontalalignment='center', verticalalignment='center')
+    ax.text(x[i],y[i],"$v_{{{}}}$".format(i+1),fontsize = 15,color = 'white', horizontalalignment='center', verticalalignment='center') #labelling vertices
 
-  A=adjacency_matrix(n,k)
+
   for i in range(n):                                                          ##looping through the vertices
     for j in range(n):
-      if A[i][j]==1:                                                           ## check if there is an edge between the edges using adjacency matrix defined                                               ## if there is an edge add the vertices into a list
-        ax.plot([x[i],x[j]],[y[i],y[j]],color = 'blue', linewidth = 3,zorder=1)
+      if Adj_matrix[i][j]==1:                                                 ##if there is an edge between vertices
+        ax.plot([x[i],x[j]],[y[i],y[j]],color = 'blue', linewidth = 3,zorder=1)  ##add a blue line between the vertices with edges
 
       else:
-        ax.plot([x[i],x[j]],[y[i],y[j]],color = 'red',linewidth = 3, zorder=1)
+        ax.plot([x[i],x[j]],[y[i],y[j]],color = 'red',linewidth = 3, zorder=1)    ##if a clique does not exist add a red edge
   
-  ax.text(0,0,f'{k}',fontsize = 20, horizontalalignment='center', verticalalignment='center')
+  ax.text(0,0,f'{graph_number}',fontsize = 20, horizontalalignment='center', verticalalignment='center')   ##label graphs
   ax.axis('off')
-  return fig
-def save_graph(n, k, folder_path, r_s=None):
-    if not os.path.exists(folder_path):
-        os.makedirs(folder_path)
-        print(f"Created folder: {folder_path}")
+##return a graph with n vertices, labeled 'graph_number'
 
-    fig= Graph(n, k)
+#def save graph function
+def save_graph(n, graph_number, folder_path):
+    if not os.path.exists(folder_path):                ##create a folder if it does not exist
+        os.makedirs(folder_path)        
+
+    fig= Graph(n, graph_number)                        ##recall Graph function
     
-    if r_s:
-        image_name = f"counter_example_R({r_s}).png"
-    else:
-        image_name = f"counter_example_for_{n}_graph_{k}.png"
+    image_name = f"counter_example_for_{n}_graph_{graph_number}.png"    ##name the graph counter example
     
-    image_path = os.path.join(folder_path, image_name)
-    
-    try:
-        plt.savefig(image_path, dpi=300, bbox_inches='tight')
-        print(f"Saved: {image_path}")
-    except Exception as e:
-        print(f"Error saving {image_path}: {e}")
+    image_path = os.path.join(folder_path, image_name)                 
+
+    plt.savefig(image_path, dpi=300, bbox_inches='tight')        
+
     
     return plt.close(fig)
 
   
-def ramsey_numbers(s,r):
-  folder_path = f"graphs/R({s},{r})"
+def ramsey_numbers(r,b):
+  folder_path = f"graphs/R({r},{b})"
   n = 2
   while True:
-    m = total_edges(n)  ##total number of edges possible
+    m = total_edges(n)  ##total number of edges
+    N = 2**m            ##total number of graphs
     #calculate clique indices for the current n
-    edges = list(combinations(range(n), 2))                       ##define edges in graph
-    edge_to_index = {edge: i for i, edge in enumerate(edges)}
-
-    r_clique_vertices = list(combinations(range(n), r))
-    r_clique_indices = []
+    edges = list(combinations(range(n), 2))                       ##define edges in graph 
+    edge_to_index = {edge: i for i, edge in enumerate(edges)}     ##map each edge to a number
+    
+##define ways of selecting vertices
+    r_clique_vertices = list(combinations(range(n), r))           ##choose a way to select r vertices using combinations
+    r_clique_indices = []                                     
     for vertices in r_clique_vertices:
-      subgraph_edges = list(combinations(vertices, 2))
+      subgraph_edges = list(combinations(vertices, 2))                    ##select r vertices to verify if they have a clique
       indices = [edge_to_index[tuple(sorted(e))] for e in subgraph_edges] # Ensure consistent edge representation
-      r_clique_indices.append(indices)
+      r_clique_indices.append(indices)                                    #append to r_clique_indices list
 
-    s_clique_vertices = list(combinations(range(n), s))
-    s_clique_indices = []
-    for vertices in s_clique_vertices:
+    b_clique_vertices = list(combinations(range(n), b))
+    b_clique_indices = []
+    for vertices in b_clique_vertices:
       subgraph_edges = list(combinations(vertices, 2))
       indices = [edge_to_index[tuple(sorted(e))] for e in subgraph_edges] # Ensure consistent edge representation
-      s_clique_indices.append(indices)
+      b_clique_indices.append(indices)                                    #append to r_clique_indices list
     
     is_ramsey_number = True
 
-    start_time = time.time()
+    start_time = time.time()                     ##define start of algorithm        
 
-    for k in range(2**m):  ##iterating over total number of graphs
-      current_graph_matrix = binary_vector(n, k)
+    for graph in range(N):  ##iterating over total number of graphs
+      
+      current_graph_label = binary_vector(n, graph)
       clique_found = False    ##intialize for when a clique exists in the graph
-      # Check for monochromatic subgraphs of size r1
-      # Check for red r-cliques
+      # Check for blue cliques
+      for indices in b_clique_indices:
+        if all(current_graph_label[idx] == 1 for idx in indices):   ##search for red cliques
+          clique_found = True
+          break                                                     ##if blue clique found go to the next graph
+      ##if a blue clique not found then,
+      # Check for red cliques
       for indices in r_clique_indices:
-        if all(current_graph_matrix[idx] ==0  for idx in indices):
-          clique_found = True
-          break
-      # Check for red r-cliques
-      for indices in s_clique_indices:
-        if all(current_graph_matrix[idx] == 1 for idx in indices):
-          clique_found = True
-          break
+        if all(current_graph_label[idx] == 0  for idx in indices):   ##search for red cliques
+          clique_found = True         
+          break                                                     ##if a red clique found go to the next graph        
 
-      if not clique_found:
+
+      if not clique_found:                          ##if a clique of either size r or size b is not found, n is not Ramsey number
         is_ramsey_number = False
-        print(f'{n} is not ramsey number R{(s,r)}, because graph {k} has no clique')
-        save_graph(n,k,folder_path)
+        print(f'{n} is not ramsey number R{(r,b)}, because graph {graph} has no clique')
+        save_graph(n,graph,folder_path)            ##save the current graph
         
-        
-        break
-    final_time = time.time()
+        break  
+    final_time = time.time()              
     change_in_time =   final_time-start_time
     if is_ramsey_number:
         final_time = time.time()
         change_in_time = final_time - start_time
         print(f"All graphs with n = {n} vertices have a monochromatic clique.")
-        print(f"{n} is R{(s,r)} and time taken to find R{(s,r)} was {change_in_time} seconds.")
+        print(f"{n} = R{(r,b)} and time taken to find R{(r,b)} was {change_in_time} seconds.")
         break  # Exit the while loop
     
-    n += 1
-
+    n += 1                                    ##increase n if one graph does not contain a clique
