@@ -7,9 +7,10 @@
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{tikz}
-
+\usepackage{array}
 \usepackage{pgfplots}
-\usepackage{graphicx}
+
+\usepackage{tabularx}
 % Place your image in the root directory or specify the path
 
 \pgfplotsset{compat=1.18}
@@ -48,58 +49,63 @@
 
 	\end{frame}
 
-\begin{frame}{Graph Theory Basics}
+\begin{frame}{Graph Theory}
 	
 	\begin{itemize}
 		\item \textbf{A graph $G = (V, E)$:} A set of vertices ($\mathbf{V}$) connected by a set of edges ($\mathbf{E}$).
-		\pause
+		
 		
 		\item \textbf{Complete Graph $K_n$:} A graph where there is an edge between pair of vertices
-		
-		\vspace{1em}
-		\pause
-		
-		% Only include one image of a clean, uncolored, or simply colored complete graph.
+	
 		\begin{center}
 
-\includegraphics[scale=0.3]{../../../../Downloads/order_4/k4_coloring_63}
-
+\includegraphics[scale=0.4]{complete_graph}
 
 			\textbf{Example:} Graph with $4$ vertices and $6$ edges.
 					\end{center}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Graph Theory Basics}
-			\begin{center}
+\begin{frame}{Complete Graph $K_n$: Properties and Representation}
+	\centering
+	% Increased image scale for a larger graph visual
+	\includegraphics[scale=0.4]{complete_graph} 
 	
-	\includegraphics[scale=0.25]{../../../../Downloads/order_4/k4_coloring_63}
-\end{center}
- In a complete graph on $n$ vertices
-\begin{itemize}
-	\item Each vertex has $n-1$ edges \pause
-	\item The total number of edges  are $M = {\frac{n(n-1)}{2}}$.\pause
-	\item The total number of graphs  are $2^{M}$\pause
-	
-\item 	And the adjacency matrix\\ 	
-\small
-$$\begin{pmatrix}
-	0 & 1 & 1 & 1 \\
-	1 & 0 & 1 & 1 \\
-	1 & 1 & 0 & 1 \\
-	1 & 1 & 1 & 0
-\end{pmatrix}
-$$
-\end{itemize}
+	\vspace{0.5em}
+	\begin{columns}
+		
+		\begin{column}{0.5\textwidth} % Left Column: Properties
+			\footnotesize % Smaller font for the bullet points
+			\textbf{A complete graph on $n$ vertices:}
+			\begin{itemize}
+\item Each vertex has $n-1$ edges 
+\item The total number of edges  are $M = {\frac{n(n-1)}{2}}$.
+\item The total number of graphs  are $2^{M}$
+			\end{itemize}
+		\end{column}
+		
+		\begin{column}{0.6\textwidth} % Right Column: Matrix
+			\centering
+			\footnotesize
+			\textbf{Adjacency Matrix for $K_4$:}
+			\vspace{0.2em}
 
-
+			$$\begin{pmatrix}
+				0 & 1 & 1 & 1 \\
+				1 & 0 & 1 & 1 \\
+				1 & 1 & 0 & 1 \\
+				1 & 1 & 1 & 0
+			\end{pmatrix}$$
+		\end{column}
+		
+	\end{columns}
 \end{frame}
 \begin{frame}{Graph Labeling}
 \begin{itemize}
 	\item Convert the graph into a binary string
-	\pause
+	
 	\item Define a consistent ordering by reading the upper triangle of the adjacency matrix.
-	\pause
+	
 	
 	\begin{center}
 		
@@ -123,69 +129,73 @@ $$
 \end{frame}
  
 \begin{frame}{Ramsey Theory}
-
-\begin{itemize}
-	\item $R(r,b) $ the smallest number of vertices $n$, such that all graphs on $K_n$ vertices has a clique of either size $r$ or $b$\pause
-	\item A clique, 
-
-\begin{center}	\includegraphics[width=0.7\linewidth]{../graphs/order_5/graph_869}
-	\\{\textbf{Example:} 5 vertex graph with a 3 sized (blue) clique}
-\end{center}
-\pause
-	\item Finding exact values for $R(r,b)$ is $\mathbf{NP}$-hard \cite{burr1981generalized}.
-\end{itemize}
+	
+	\begin{itemize}
+		\small
+		\item \textbf{Ramsey Numbers} $R(r,b)$
+	
+		\item \textbf{A Monochromatic Clique ($K_r$/$K_b$)}
+		
+	\end{itemize}
+	
+	\vspace{-0.5em} % Tighten space before the image
+	
+	\begin{center}
+		\includegraphics[width=0.7\linewidth]{../graphs/order_5/graph_869}
+		\\{\textbf{Example:} Graph with a 3-sized (blue) clique ($K_3$)}
+	\end{center}
+	
+	\begin{itemize}
+		\item Finding exact values for $R(r,b)$ is $\mathbf{NP}$-hard.
+	\end{itemize}
+	
 \end{frame}
 \begin{frame}{Computational Challenge}
 	
 	\centering % Center everything inside the frame
-	
+	\renewcommand{\arraystretch}{1.5}
 	% --- Table ---
 	\textbf{Total Graphs vs. Vertices}
 	\footnotesize % Keep the font small for space
 	
-	\begin{tabular}{|c|c|r|}\hline
-		\textbf{Vertices ($\mathbf{n}$)} & \textbf{Edges ($\mathbf{M}$)} & \textbf{Total Graphs $\mathbf{2^{M}}$} \\\hline
-		\hline
-		1  & 1  & 1 \\
-		2  & 2  & 2 \\
-		3  & 3  & 8 \\
-		4  & 6  & 64 \\
-		5  & 10 & 1,024 \\
-		6  & 15 & 32,768 \\
-		7  & 21 & 2,097,152 \\
-		8  & 28 & 268,435,456 \\
-		9  & 36 & 68,719,476,736 \\
-		10 & 45 & 35,184,372,088,832 \\
-		\hline
-	\end{tabular}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\arraybackslash}X|}\hline
+	\textbf{Vertices ($\mathbf{n}$)} &  \textbf{Edges ($\mathbf{M}$)} & \textbf{Total Graphs $\mathbf{2^{M}}$} \\\hline
+	\hline
+	1 & 0 & 1 \\
+	2 & 1 & 2 \\
+	3 & 3 & 8 \\
+	4 & 6 & 64 \\
+	5 & 10 & 1,024 \\
+	6 & 15 & 32,768 \\
+	7 & 21 & 2,097,152 \\
+	8 & 28 & 268,435,456 \\
+	9 & 36 & 68,719,476,736 \\
+	10 & 45 & 35,184,372,088,832 \\
+	\hline
+\end{tabularx}
 \end{frame}
 \begin{frame}
-	% --- Plot ---
-	\centering
-	
-	\includegraphics[scale=0.45]{../../../../Downloads/file}\\
-	\text{Logarithmic scale of the increase of n vertex graphs}
+	% --- Plot ---	
+	\includegraphics[scale=0.41]{my_plot}\\
 	
 \end{frame}
 \begin{frame}{Classical Search}
 	
 	Example $R(3,3)$ from $n = 3$ searching for a graph with no red or blue clique
-	\pause
-	\vspace{-0.5em}
 	
-	\begin{center}
-		\centering
+	\vspace{-0.5em}
+
+	
 		\begin{tabular}{|c|c|c|c|}
 			\hline
 			$n$&3&4&5\\\hline
 			\hline
 		\rotatebox{90}{counterexamples}	&	\includegraphics[scale = 0.24]{C:/Users/matsi/OneDrive/Desktop/Honours-Project/graphs/R(3,3)/counter_example_for_3_graph_1.png}&
-			\includegraphics[scale = 0.25]{../graphs/order_4/k4_coloring_12}&
+			\includegraphics[scale = 0.24]{../graphs/order_4/k4_coloring_12}&
 			\includegraphics[scale = 0.25]{C:/Users/matsi/OneDrive/Desktop/Honours-Project/graphs/R(3,3)/counter_example_for_5_graph_236.png}\\\hline
 		\end{tabular}
-		{Counterexamples of $R(3,3)$ from $n = 3, 4, 5$}
-	\end{center}
-	\pause
+		\begin{center}{Counterexamples of $R(3,3)$ from $n = 3, 4, 5$ }\end{center}
+
 	All graphs on $n = 6$ vertices contain either blue or red triangle.\\
 	$\implies R(3,3) = 6$\\
 and the Ramsey number is $R(4,4)$ and found to be $18$
@@ -195,48 +205,25 @@ and the Ramsey number is $R(4,4)$ and found to be $18$
 
 
 
-\centering
 
-\begin{frame}
-	Table of classical algorithm runtimes\\
-	\begin{tabular}{| r | c |}
-		\hline
-		\multicolumn{1}{|c|}{Ramsey Number} & Time Taken(s) \\
-		\hline
-		\textbf{R(2,2) = 2} & $3.719 \times 10^{-5}$ \\
-		\hline
-		\textbf{R(2,3) = 3} & $4.816 \times 10^{-5}$ \\
-		\hline
-		\textbf{R(2,4) = 4} & $2.291 \times 10^{-4}$ \\
-		\hline
-		\textbf{R(2,5) = 5} & $4.204 \times 10^{-3}$ \\
-		\hline
-		\textbf{R(2,6) = 6} & $1.638 \times 10^{-1}$ \\
-		\hline
-		\textbf{R(2,7) = 7} & $1.20559 \times 10^{1}$ \\
-		\hline
-		\textbf{R(2,8) = 8} & $3.792 \times 10^{4}$ \\
-		\hline
-		\textbf{R(2,9) = 9} & 9.26941$ \times 10^{6}$\\\hline
-	\end{tabular}
-\end{frame}
+
 \begin{frame}
 	\begin{center}
 		\centering
 		\includegraphics[width=\linewidth]{screenshot001}
-		\\{\small{Runtime growth for cliques size $r = 2-9$.}}
+		\\{\small{Runtime growth for cliques size $b = 2-9$.}}
 	\end{center}
 \end{frame}
 \begin{frame}{Computational Challenge}
 	
 	\begin{itemize}
 		\item  To find  Ramsey number $R(5, 5)$ 
-		\pause
+		
 		
 		\item It is bounded between $n = 43$ and $46$ vertices \cite{Exoo1993,angeltveit2024r55le46}
 		% State the formula clearly and accurately
 		$$\mathbf{\text{Total number of graphs} = 2^{M}}$$
-		\pause
+		
 		\item The search space grows exponentially large.
 		\begin{itemize}
 			\item For $n=43$, there are $\approx 10^{271}$ graphs.
@@ -256,8 +243,8 @@ and the Ramsey number is $R(4,4)$ and found to be $18$
 		\small
 		\item \textbf{Qubit ($\mathbf{|\psi\rangle}$):} The fundamental unit of quantum information.
 		
-		\pause		
-		\item \textbf{Basis States:} The computational basis states are orthogonal vectors in the Hilbert space.
+				
+		\item \textbf{Basis States:}
 		
 		$$|0\rangle = \begin{pmatrix}
 			1\\0
@@ -277,60 +264,50 @@ and the Ramsey number is $R(4,4)$ and found to be $18$
 	\end{itemize}
 	
 \end{frame}
-\begin{frame}
+\begin{frame}{Quantum Computing principles}
 \begin{itemize}
 
 
-\item \textbf{Superposition:} A qubit exists as a linear combination of the basis states $\mathbf{|0\rangle}$ and $\mathbf{|1\rangle}$.
+\item \textbf{Superposition:} 
 $$|\psi\rangle = \alpha|0\rangle + \beta|1\rangle = \begin{pmatrix}
 	\alpha\\
 	\beta
 \end{pmatrix}$$
-Where $\mathbf{|\alpha|^2 + |\beta|^2 = 1}$.
-\begin{center}
-	\includegraphics[width=0.4\linewidth]{superposition}\\
-	\small{\textbf{Example:} Qubit in superposition}
-\end{center}
-\pause
+
+\item \textbf{Entanglement(2>qubits)}
+$$|\psi\rangle = \alpha|00\rangle + \beta|11\rangle = \begin{pmatrix}
+	\alpha\\
+	0\\
+	0\\
+	\beta
+\end{pmatrix} $$ 
+Where $\mathbf{|\alpha|^2 + |\beta|^2 = 1}$.\\
+\item \textbf{Scalability} The solution space increases exponentially $2^Q$.
+\item \textbf{Measurement} When measured superposition collapses.
+%\begin{center}
+%	\includegraphics[width=0.4\linewidth]{superposition}\\
+%	\small{\textbf{Example:} Qubit in superposition}
+%\end{center}
+
 \item \textbf{Quantum Power:} The principles of \textbf{superposition} and \textbf{entanglement} enable quantum parallelism.
 \end{itemize}
 \end{frame}
 % Decrease font size for the entire table content
-\begin{frame}{Difference Between Classical and Quantum computers}
-
-
-
-
-\begin{tabular}{|c|c|}\hline
-	\textbf{Classical computers} & \textbf{Quantum computers} \\\hline
-	\hline
-	Stores one value ($\mathbf{0}$ OR $\mathbf{1}$) & Stores both ($\mathbf{0}$ AND $\mathbf{1}$ in superposition) \\\hline
-	Checks one possible solution at a time & \textbf{Checks all possible simultaneously} \\\hline
-	Deterministic & Probabilistic \\\hline
-	
-\end{tabular}
-
-
-\end{frame}
-
 \begin{frame}{Quantum Gates}
 
 \begin{itemize}
 	\item Qubits are manipulated and transformed using quantum gates.
-	\item These are similar to Classical Logic gates
-	\pause
-	\item Examples of gates
+	\item These are similar to Classical Logic gates.
+	
+	\item Examples of gates,
 	\begin{itemize}
 		\item \textbf{Hadamard ($\mathbf{H}$):} Creates \textbf{superposition} from basis states.
 		$$ H = \frac{1}{\sqrt{2}}\begin{pmatrix} 1 & 1 \\ 1 & -1 \end{pmatrix} \quad \implies \quad H|0\rangle = \frac{1}{\sqrt{2}}\left(|0\rangle+|1\rangle\right) $$
-		\pause
+		
 		\item \textbf{Pauli Gates ($\mathbf{X, Y, Z}$):} Perform rotations around the Bloch sphere axes.
-		$$ X = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}  \implies X|0\rangle = |1\rangle $$
+		\item \textbf{C-NOT} Gate - flips the \textbf{target} qubit if the \textbf{control} qubit is in state $|1\rangle$
 	\end{itemize}
 	
-	\pause
-	\item \textbf{Two-Qubit Gates (e.g., CNOT):} Link states to create \textbf{entanglement}. The CNOT flips the target qubit only if the control qubit is $|1\rangle$.
-	$$ \text{CNOT} = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 1 & 0 \end{pmatrix} $$
 	
 \end{itemize}
 
@@ -338,26 +315,13 @@ Where $\mathbf{|\alpha|^2 + |\beta|^2 = 1}$.
 
 
 \end{frame}
-\begin{frame}{Quantum Gates}
-\centering
-{Visualizing Gate Effects on the Bloch Sphere}
-\begin{tabular}{|c|c|c|}
-	\hline
-	
-&	Initial state&Final state  \\\hline
-	\hline
-Apply $H$ gate&	\includegraphics[scale =0.2]{../bloch_plots/initial}&
-	\includegraphics[scale = 0.2]{superposition}\\
-	\hline
-	 Apply $X$ gate&	\includegraphics[scale =0.2]{../bloch_plots/initial}&
-		\includegraphics[scale = 0.2]{../bloch_plots/final}\\ \hline
-\end{tabular}
-\end{frame}
+
 \begin{frame}{Quantum Circuits}
 	
 	\begin{itemize}
 		\item Quantum circuits is a sequence of gates applied on a qubit(s)
-		\item  Gates (like $H$ and $CNOT$) are applied to get superposition and entanglement
+		\item Computation flows from left to right
+		\item  Gates ($H$ and $CNOT$) are applied to get superposition and entanglement
 	\end{itemize}
  
 	\includegraphics[scale=3.0]{../plots/quantum_circuit}\\
@@ -366,25 +330,31 @@ Apply $H$ gate&	\includegraphics[scale =0.2]{../bloch_plots/initial}&
 
 
 \end{frame}
+\begin{frame}{Quantum computers limitations}
+	\begin{itemize}
+		\item Decoherence(Noise)- Limits number of gates applied
+		\item Number of Qubits - Few number
+		
+	\end{itemize}
+\end{frame}
 
 \begin{frame}{Mapping Ramsey Number to Quantum Computing}
 	
 	\begin{itemize}
 		\item The \textbf{Hamiltonian ($\mathcal{{H}}$)} represents the total energy of a system.
 		$$\mathcal{{H}} = T + V$$
-\pause
-		\item Quantum computing solves for the system's ground state.
-		\pause
+
+		\item Quantum computers can be used for the system's ground state.
+		
 		$$\mathcal{{\hat{H}}}|\psi\rangle = E|\psi\rangle$$
 
-		\pause
+		
 		\item Ramsey numbers can be encoded as a Hamiltonian
-		\pause
-		\item The defining the Hamiltonian as $$\mathcal{{H}}^n_{r,b}(a) = C^n_r(a)+C^n_b(a)$$
-		$C^n_r(a) $ total count of red cliques\\ \pause$C^n_b(a)$ total count of blue cliques \\
+		
+		\item The defining the Hamiltonian as $$\mathcal{{H}}_c(a) = C^n_r(a)+C^n_b(a)$$
+		$C^n_r(a) $ total count of red cliques\\ $C^n_b(a)$ total count of blue cliques \\
 		\small
-		Example for $n = 3, r = 3 $ and $ b = 3$
-$$\mathcal{{H}}^3_{3,3}(a)=\frac{1}{4}\left(IZZ+ZIZ+ZZI\right)$$
+		\item When the Hamiltonian acts on the state we get $\mathcal{{\hat{H}}}|\psi\rangle = E|\psi\rangle$
 	\end{itemize}
 	
 \end{frame}
@@ -392,14 +362,14 @@ $$\mathcal{{H}}^3_{3,3}(a)=\frac{1}{4}\left(IZZ+ZIZ+ZZI\right)$$
 	
 	\begin{itemize}
 	
-		\item The goal is to find the graph $\mathbf{a}$ that minimizes this energy
+		\item The goal is to find the graph $\mathbf{a}$ that minimises this energy,
 		\begin{align*}
-		&	\textbf{Minimize } \mathcal{{H}}^n_{r,b}(\mathbf{a}) = C^n_r(\mathbf{a})+C^n_b(\mathbf{a})\\
+		& \mathcal{{H}}_c(\mathbf{a}) = C^n_r(\mathbf{a})+C^n_b(\mathbf{a})\\
 		&\mathcal{{\hat{H}}}|\mathbf{a}\rangle = E_{min}|\mathbf{a}\rangle
 		\end{align*}
 
-		\pause
-		\item If $E_{\min}= 0$  a counterexample exists, $R(r,b)>n$ \pause
+		
+		\item If $E_{\min}= 0$  a counterexample exists, $R(r,b)>n$ 
 		\item But when $E_{\min}> 0$ then $R(r, b) = n$.
 	\end{itemize}
 
@@ -407,16 +377,20 @@ $$\mathcal{{H}}^3_{3,3}(a)=\frac{1}{4}\left(IZZ+ZIZ+ZZI\right)$$
 
 \begin{frame}{Mapping Ramsey Number to Quantum Computing}
 \begin{itemize}
-	\item Each graph is represented as a state on a quantum computer\pause
-	\item The edges on a graph are mapped to qubits\pause
-	\item These exists as a superposition 
-	$$|\psi\rangle = \frac{1}{\sqrt{2^{M}}}\left(|0\rangle +|1\rangle+|2\rangle+...|2^{M}-1\rangle\right)$$
+	\item Each graph is represented as a state on a quantum computer,
+	\item The edges on a graph are mapped to qubits,
+	\item These exists as a superposition ,
+	\[|\psi\rangle = \frac{1}{\sqrt{2^{M}}}\left(|0\rangle +|1\rangle+|2\rangle+...|2^{M}-1\rangle\right)\]
+	in vector notation
+	\[=\frac{1}{\sqrt{2^{M}}}\begin{pmatrix}
+x_1 &x_2& x_3&...&x_{M-1}
+	\end{pmatrix}\]
 \end{itemize}
 	
 \end{frame}
 \begin{frame}{Quantum Algorithms}
 	\begin{itemize}
-		\item Grover's Algorithm
+		\item Grover's Algorithm-$O(\sqrt{N})$ (Quadratic Speedup)
 		\item The Quantum Approximate Optimization Algorithm (QAOA)
 		\item Variational Quantum Eigensolver 
 	\end{itemize}
@@ -424,23 +398,26 @@ $$\mathcal{{H}}^3_{3,3}(a)=\frac{1}{4}\left(IZZ+ZIZ+ZZI\right)$$
 \begin{frame}{The Quantum Approximate Optimization Algorithm (QAOA)}
 	
 	\begin{itemize}
-		\item A variational algorithm designed to solve optimization problems
-		\pause
-		
+		\item A variational algorithm designed to solve optimization problems.
+
 		\item QAOA is a hybrid algorithm both classical and quantum computing:
 		\begin{enumerate}
-			\item \textbf{Quantum Computer:} Runs a parameterized circuit to explore the solution space.
-			\pause
-			\item Analyzes the results and adjusts the circuit parameters to minimize the cost
+			\item Quantum : Runs a parameterized circuit to explore the solution space.
+			
+			\item Classical: minimise parameters
+		\item  steers the system toward the ground state.
+				
+		\[U_c = \exp{(-i \alpha \mathcal{{H}}_c )}\]
+		\[U_M = \exp{(-i \gamma \mathcal{{H}}_M )}\]
 		\end{enumerate}
-		\pause
 		
-		\item  To find the graph that has the lowest number of cliques
+		
+		\item  To find the graph that has the lowest number of cliques.
 	\end{itemize}
 	
 \end{frame}
 \begin{frame}{Mapping Ramsey Number to Quantum Computing}
-	\hspace*{-1.7cm} Example For $R(3,3)$ starting with $n = 3$ vertices
+	Example For $R(3,3)$ starting with $n = 3$ vertices
 	\begin{center}
 		\begin{tabular}{|c|c|c|c|}\hline
 			\hline
@@ -464,50 +441,28 @@ $$\mathcal{{H}}^3_{3,3}(a)=\frac{1}{4}\left(IZZ+ZIZ+ZZI\right)$$
 \end{frame}
 \begin{frame}
 
-		\includegraphics[scale=0.5]{../QAOA/prob_distribution_3.png}
+		\includegraphics[scale=0.4]{../QAOA/prob_distribution_3.png}
 		
 \end{frame}
 \begin{frame}
 	\begin{center}
-				\centering Results from real quantum hardware (ibm\_kingston)
-	\includegraphics[scale=0.5]{../QAOA/quantum_measurement_binary_distribution_v2}
+				\centering Results from real quantum hardware (Qiskit ibm\_kingston)
+	\includegraphics[scale=0.4]{../QAOA/quantum_measurement_binary_distribution_v2}
 	\end{center}
-%	Total Shots = 10000, Program = sampler, Quantum Computer= ibm\_kingston
-\end{frame}
-\begin{frame}
-	\begin{center}
-		\includegraphics[scale = 0.4]{../QAOA/energy_hlines_distribution_4}
-	\end{center}
-\end{frame}
-\begin{frame}
-	
-	\includegraphics[scale=0.5]{../QAOA/prob_distribution_4.png}
-	
-\end{frame}
-\begin{frame}
-	
-	\centering
-	\includegraphics[width=0.7\linewidth]{../graphs/order_4/k4_coloring_33}\\
-	\small{Graph with Most probability of being measured}
-	\label{fig:k4coloring33}
-	
+Total Shots = 10000, Program = sampler, Quantum Computer= ibm\_kingston, classical optimizer = COBYLA, 3 QAOA reps
 \end{frame}
 
-\begin{frame}{Quantum computers limitations}
-	\begin{itemize}
-		\item Noise and Error
-		\item Small number of qubits
-		
-	\end{itemize}
-\end{frame}
-\begin{frame}{Conclusion}
-	\section{Conclusion}
+\begin{frame}
+\begin{center}
+	\includegraphics[scale = 0.45]{../QAOA/energy_hlines_distribution_6}
+\end{center}
 
 \end{frame}
 \begin{frame}
-\textbf{Thank you}
+	
+	\includegraphics[scale=0.32]{../QAOA/prob_distribution_6.png}
+	With the following graph numbers 24851 and 29271 having 2 cliques each
 \end{frame}
-
 
 \begin{frame}{References}
 	\begin{thebibliography}{9}
@@ -522,11 +477,49 @@ $$\mathcal{{H}}^3_{3,3}(a)=\frac{1}{4}\left(IZZ+ZIZ+ZZI\right)$$
 		F. Gaitan and L. Clark, Ramsey numbers and adiabatic quantum computing, \textit{Phys. Rev. A}, 2016.
 	\end{thebibliography}
 \end{frame}
-
+\begin{frame}
+	% --- Plot ---	
+	\includegraphics[scale=0.41]{my_plot}
+	
+\end{frame}
+\begin{frame}{Quantum Gates}
+	\centering
+	{Visualizing Gate Effects on the Bloch Sphere}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		
+		&	Initial state&Final state  \\\hline
+		\hline
+		Apply $H$ gate&	\includegraphics[scale =0.2]{../bloch_plots/initial}&
+		\includegraphics[scale = 0.2]{superposition}\\
+		\hline
+		Apply $X$ gate&	\includegraphics[scale =0.2]{../bloch_plots/initial}&
+		\includegraphics[scale = 0.2]{../bloch_plots/final}\\ \hline
+	\end{tabular}
+\end{frame}
 \begin{frame}
 Lower bound (\(R(5,5)\ge 43\)): In 1989, Geoffrey Exoo constructed a graph with 42 vertices that does not contain a clique of size 5 or an independent set of size 5. This proves that \(R(5,5)\) must be at least 43.
 \end{frame}
-
-
+\begin{frame}
+	\begin{center}
+		\includegraphics[scale = 0.4]{../QAOA/energy_hlines_distribution_4}
+	\end{center}
+\end{frame}
+\begin{frame}
+	Results from real quantum hardware (Qiskit ibm\_kingston)	
+	\includegraphics[scale=0.5]{../QAOA/prob_distribution_4.png}
+	
+\end{frame}
+\begin{frame}
+	
+	\centering
+	\includegraphics[width=0.7\linewidth]{../graphs/order_4/k4_coloring_33}\\
+	\small{Graph with Most probability of being measured}
+	\label{fig:k4coloring33}
+	
+\end{frame}
 \end{document}
 Upper bound (\(R(5,5)\le 46\)): In a 2024 paper, Vigleik Angeltveit and Brendan McKay established that \(R(5,5)\) is at most 46. This was the latest improvement on previous upper bounds of 48 and 49.
+
+
+a2m​=(−1)m22m(m!)2λ2m​a0​.​
