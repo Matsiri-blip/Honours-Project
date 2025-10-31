@@ -1,0 +1,33 @@
+search for R(2,2)...
+All graphs with n = 2 vertices have a monochromatic clique.
+2 is R(2,2) and time taken was 0.012980461120605469 seconds.
+
+search for R(2,3)...
+All graphs with n = 3 vertices have a monochromatic clique.
+3 is R(2,3) and time taken was 0.0037758350372314453 seconds.
+
+search for R(2,4)...
+All graphs with n = 5 vertices have a monochromatic clique.
+5 is R(2,5) and time taken was 0.00882411003112793 seconds.
+
+search for R(2,6)...
+All graphs with n = 6 vertices have a monochromatic clique.
+6 is R(2,6) and time taken was 0.14064741134643555 seconds.
+
+
+search for R(2,7)...
+All graphs with n = 7 vertices have a monochromatic clique.
+7 is R(2,7) and time taken was 9.712141990661621 seconds.
+
+
+search for R(2,8)...
+All graphs with n = 8 vertices have a monochromatic clique.
+8 is R(2,8) and time taken was 1397.8638470172882 seconds.
+
+search for R(2,9)...
+All graphs with n = 9 vertices have a monochromatic clique.
+9 is R(2,9) and time taken was 209315.2557823658 seconds.
+
+search for R(3,3)...
+All graphs with n = 6 vertices have a monochromatic clique.
+6 is R(3,3) and time taken was 0.410031795501709 seconds.
