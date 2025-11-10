@@ -6,15 +6,34 @@ import os
 def total_edges(n):                         #total edges function,
   return int((n**2-n)/2)                    # returns total edges of a graph
 
-def binary_vector(n,graph_number):          ##define binary matrix 
+def to_latex_matrix(A: np.ndarray) -> str:
+    """
+    Converts a NumPy adjacency matrix (A) into a LaTeX pmatrix environment string.
+    """
+    # Use pmatrix (parentheses) which requires the amsmath package in LaTeX
+    latex_string = "\\begin{pmatrix}\n"
+    
+    for row in A:
+        # Convert row elements to strings and join them with ' & '
+        row_str = ' & '.join(map(str, row))
+        # Add a LaTeX line break
+        latex_string += f"    {row_str} \\\\\n"
+        
+    latex_string += "\\end{pmatrix}"
+    return latex_string
+
+def binary_vector(n,graph_number,output_format = 'python'):          ##define binary matrix 
     m = total_edges(n)                      #recall tota edges function
     binary_vec = np.zeros(m)
     binary = bin(graph_number)[2:].zfill(m) # Use zfill to pad with leading zeros
     for i in range(m):
         binary_vec[i] = int(binary[i])
-    return binary_vec                       #returns binary string of a number with m total bits
+    if output_format.lower() == 'latex':
+        return to_latex_matrix(binary_vec)
+    else:
+      return binary_vec                       #returns binary string of a number with m total bits
   
-def  adjacency_matrix(n,graph_number):                 #define adjacency matrix, using binary matrix to fill in upper triangular terms
+def  adjacency_matrix(n,graph_number,output_format = 'python'):                 #define adjacency matrix, using binary matrix to fill in upper triangular terms
 
   m =total_edges(n)                         ##call total edges function
   A_matrix = np.zeros((n,n))                       #initialize binary matrix
@@ -30,7 +49,11 @@ def  adjacency_matrix(n,graph_number):                 #define adjacency matrix,
   for l in range(n):
       for j in range(n):
           A_matrix[j,l] = A_matrix[l,j]
-  return A_matrix
+  if output_format.lower() == 'latex':
+        return to_latex_matrix(A_matrix)
+  else:
+        # Default Python output (NumPy array)
+        return A_matrix
 
 ##draw graph function, returns a plot of a graph on n vertices
 def Graph(n,graph_number):
