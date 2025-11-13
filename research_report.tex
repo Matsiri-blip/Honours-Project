@@ -7,7 +7,7 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
-
+\usepackage{tabularx}
 
 \usepackage{booktabs}       % For professional-looking tables (\toprule, \midrule, \bottomrule)
 \usepackage{adjustbox}      % For table adjustment if it's too wide
@@ -110,11 +110,12 @@
 	
 	\vfill % Pushes the next content to the bottom of the page
 	
-	{\large Supervisor: Dr Warren Carlson}
+	{\large Supervisor: Dr Warren Carlson}\\
+		{\large Co-Supervisor: Shawal Kassim}
 	
 	\vspace{0.5cm}
 	
-	{\large October 2025}
+	{\large November 2025}
 	
 \end{titlepage}
 
@@ -127,7 +128,7 @@
 	Ramsey theory, named after Frank P. Ramsey, originates from his 1928 paper 'On a problem of formal logic' studying order in large disordered structures \cite{graham1980ramsey}.
 	He proved a theorem that states that there exists a minimum integer $R(r,b)$ for positive integers $r, b$ such that every graph with $R(r,b)$ vertices contains either a clique of $r$ vertices or an independent set of $b$ vertices.
 	Ramsey theory explains how in a large structure it is guaranteed to find certain substructure.
-	A clique is a complete sub-graph that is a subset of a complete graph, and an independent set is a set of vertices with no edges \cite{BondyMurty2008}.	
+A clique is a complete sub-graph that is a subset of a complete graph, and an independent set is a set of vertices with no edges \cite{BondyMurty2008}.	
 	 $R(r,b)$ are known as Ramsey numbers.
 	An example is that in any group of six people, it is guaranteed that there will be at least three mutual acquaintances or three mutual strangers. However, for a group of five people, it is possible to arrange a combination where this is not true, this is why $6 = R(3,3)$.
 	Ramsey theory has applications in complexity theory, combinatorics and graph theory. 
@@ -151,12 +152,14 @@
 	\\
 	This paper reviews classical and quantum computational methods for computing Ramsey numbers.
 \newpage
-	\section{Graph Theory}
-	\subsection{Theory}
+	\section{Theory}
+	\subsection{Graph Theory}
 	Graph theory is a study of mathematical structures called graphs, which aims to understand relationships between objects. 
 	A graph is a structure $G =\left(V,E\right)$ made up of a vertex set $V$ and an edge set $E$.
 	$V = \{v_1,v_2,v_3,...,v_n$\} has elements called vertices, and the edge set $E$ has pairs of objects taken from $V$ called edges \cite{BondyMurty2008}.
-	The order of a graph is the number of vertices.
+	The order of a graph is equal to the total number of vertices.
+	 The number of neighbours a specific vertex has is called its degree.
+	 In a graph of order $n$, any single vertex can have anywhere from $0$ neighbours up to $n-1$ neighbours.
 	Edges are unordered pairs $e_{ij} = \left\{v_i,v_j\right\}$ for undirected graphs or ordered pair $e_{ij} = (v_i,v_j)$ for directed graphs with $i\neq j$  \cite{BondyMurty2008}.
 	Directed graphs have asymmetrical edges $e_{ij} \neq e_{ji}$ whereas undirected have symmetrical edges $e_{ij} = e_{ji}$.
 	An empty graph has no edges, whose complement is a complete graph with total edges between all pairs of vertices.
@@ -166,7 +169,7 @@
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale = 0.7]{random_graphs/figure_1.png}
-		\caption{A graph with four vertices and three edges}
+		\caption{A graph with four vertices (black) and three (blue) edges}
 		\label{random_graph}
 	\end{figure}
 \noindent For clarity the vertices can be labeled.
@@ -175,15 +178,15 @@
 	Let $G = (V,E)$ be a graph with $V = \{v_1, v_2, v_3, v_4\}$
 	\begin{figure}[H]
 		\centering
-		\includegraphics[scale = 0.7]{random_graphs/empty_graph.png}
-		\caption{Empty graph}
+		\includegraphics[scale = 0.5]{random_graphs/empty_graph.png}
+		\caption{Visualization of graph, where the edge set is empty}
 		\label{empty_graph}
 	\end{figure}
 \noindent	The graph in figure \ref{empty_graph} is given by the sets $V = \{v_1, v_2, v_3, v_4\}$ and $E=\{\}.$
 	\begin{figure}[H]
 		\centering
-		\includegraphics[scale = 0.7]{random_graphs/complete_graph.png}
-		\caption{Complete graph with four vertices }
+		\includegraphics[scale = 0.5]{random_graphs/complete_graph.png}
+		\caption{The complete graph on $4$ vertices}
 		\label{complete_graph}
 	\end{figure}
 \noindent	The graph in figure \ref{complete_graph} is given by the sets  $V = \{v_1, v_2, v_3, v_4\} $ and $E=\{e_{12},e_{13},e_{14},e_{23},e_{24},e_{34}\}.$ 
@@ -201,12 +204,16 @@ There are $n$ vertices in the graph each vertex has $n-1$ edges.
 	If there is an edge in the edge set $E$ then the entry in the matrix between the vertices would be 1, else equal 0.
 	\begin{equation}
 		A = \begin{tabular}{|c|c|c|c|c|c|}
+			\hline
 			& $v_1$ & $v_2$ & $v_3$ & $v_j$ & $v_n$ \\ \hline
 			$v_1$ & $e_{11}$ & $e_{12}$ & $e_{13}$ & $\dots$ & $e_{1n}$ \\ \hline
 			$v_2$ & $e_{21}$ & $e_{22}$ & $e_{23}$ & $e_{2j}$ & $\dots$ \\ \hline
 			$v_3$ & $e_{31}$ & $e_{32}$ & $e_{33}$ & $e_{3j}$ & $\dots$ \\ \hline
 			$v_4$ & $e_{41}$ & $e_{42}$ & $e_{43}$ & $e_{4j}$ & $\dots$ \\ \hline
-			$v_n$ & $\vdots$ & $\ddots$ & $\ddots$ & $\vdots$ & $\dots$ \\ \hline
+
+
+			$v_i$ & $\vdots$ & $\ddots$ & $\ddots$ & $\vdots$ & $\dots$ \\ \hline
+			\hline
 			$v_n$ & $e_{n1}$ & $e_{n2}$ & $e_{n3}$ & $\dots$ & $e_{nn}$ \\ \hline
 		\end{tabular}
 				\label{adj_mat}
@@ -225,12 +232,12 @@ There are $n$ vertices in the graph each vertex has $n-1$ edges.
 	\end{equation}
 	Where $A_{ij}=1$ means there is an edge between the vertices and $A_{ij}=0$ means there is no edge.
 	Graphs have no unique way of representing them visually.
-	\subsection{Graph Labeling}
+	\subsubsection{Graph Labeling}
 A complete graph \( K_n \) has \( n \) vertices, with an edge between every pair of distinct vertices \citep{BondyMurty2008}. 
 A vertex has $n-1$ total edges, when I consider a graph where no edge connects a vertex to itself, which means a total number of vertices in a complete graph are $n(n-1)$.
 To avoid double counting edges since some vertices share a common edge I divide by 2, hence the total number of edges in a complete graph there is 
 \begin{equation}
-\binom{n}{2} = \frac{n(n-1)}{2}.
+M=\binom{n}{2} = \frac{n(n-1)}{2}.
 \label{total_edges}
 \end{equation}
 When deciding to draw a simple graph with $n$ vertices, the vertices can either have an edge or no edge between them.
@@ -247,7 +254,6 @@ If I choose $n = 3$ there a total number of $8$ graphs, and visually I draw the 
 		\includegraphics[scale=0.3]{graphs/order_3(1)/k3_coloring_0.png}&
 		\includegraphics[scale=0.3]{graphs/order_3(1)/k3_coloring_2.png}&
 		\includegraphics[scale=0.3]{graphs/order_3(1)/k3_coloring_4.png}&
-		
 		\includegraphics[scale=0.3]{graphs/order_3(1)/k3_coloring_1.png}\\\hline
 		\hline
 		\includegraphics[scale=0.3]{graphs/order_3(1)/k3_coloring_3.png}&
@@ -256,11 +262,11 @@ If I choose $n = 3$ there a total number of $8$ graphs, and visually I draw the 
 		\includegraphics[scale=0.3]{graphs/order_3(1)/k3_coloring_7.png}\\\hline
 		
 	\end{tabular}
-	\caption{All graphs of order 3}
+	\caption{All graphs drawn on 3 vertices}
 \label{order_3_graphs}
 \end{table}
 \noindent These graphs in the table \ref{order_3_graphs} are the graphs of $3$ vertices to verify this the equation \eqref{total_graphs}.
-If $n$ is increased to $4$, the total number of graphs is $64$ and this would get harder to draw the graphs the more $n$ is increased.\\
+If $n$ is increased to $4$, the total number of graphs is $64$ and this would get harder to draw the graphs the more $n$ is increased.\\\\
 One can start drawing the graphs in a random way in like the graphs drawn in the table \ref{order_3_graphs}.
 What I did was start with all the vertices unconnected then connect one edge to the other edges, then completing that increase each of the graphs' edge by one until I get a complete graph.
 This method would not be feasible for bigger values of $n$.
@@ -269,12 +275,12 @@ The way to label would by using binary encoding, this works well since the total
 Each element in the matrix $A_{ij}$ represents the relationship between the vertices.
 If each graph is turned into a binary string will always have a label encoded to it.
 A graph encoding can be in a way that I choose to label my edges.
-\\
+\\\\
 Starting at $0$ each graph will have a labeling until up to graph number $2^{\frac{n(n-1)}{2}}$.
 The total number of edges in a graph are given by the upper triangle of an adjacency matrix \eqref{adj_mat}.
 To ensure that the binary string can be encoded into the adjacency matrix the total bit length has to equal to the total edges of a graph ${\frac{n(n-1)}{2}}$
 I then turn this into a vector in order to label each graph.
-A way to ensure that the binary strings 
+A way to ensure that the binary strings.
 Taking the adjacency matrix \eqref{adj} as an example and only taking the upper triangular matrix 
 \begin{equation}
 	\begin{pmatrix}
@@ -313,12 +319,12 @@ in order to draw the graph the vector is then transposed into a matrix where the
 then using the matrix to draw the graph connecting to the vertices that are connected, I get the graph
 \begin{figure}[H]
 	\centering
-	\includegraphics{random_graphs/graph_27.png}
-	\caption{Graph 27}
+	\includegraphics[scale = 0.5]{random_graphs/graph_27.png}
+	\caption{Graph 27 represented by the binary encoding}
 	\label{graph 27}
 \end{figure}
-
-\subsection{Homomorphism}
+\noindent The graph~\ref{graph 27} shows how a graph can be labeled using binary encoding.
+\subsubsection{Homomorphism}
 \label{sec:homomorphic}
 
 	In the set of graphs of n vertices some have identical structures.
@@ -348,21 +354,21 @@ then using the matrix to draw the graph connecting to the vertices that are conn
 			\includegraphics[scale=0.25]{graphs/order_4/k4_coloring_48.png}\\
 			\hline
 		\end{tabular}
-		\small	\caption{Homomorphic Graphs of four vertices two edges between them}
+		\small	\caption{Homomorphic Graphs of four vertices with one vertex having two edges}
 		\label{Homomorphic}
 	\end{table}
 \noindent	These graphs represent graphs with same structure and properties.
-	Three vertices have an edge between them.
+	Three vertices have a blue edge between them.
+	Each graph has same number of red and blue edges and also the vertices connected have one vertex in common.
 	This is going to help in understanding Ramsey theory because they reduce the number of graphs needed to be verified.
 	
 	\subsection{Ramsey Theory}
-	
-	Ramsey Theory states given integers $ r,b\geq 1$, every large enough graph $G = (V,E)$ contains a monochromatic clique of either $r$ or $b$ vertices.  \cite{katz2018introduction}.
+	Ramsey Theory states given integers $ r,b\geq 1$, every large enough graph $G = (V,E)$ contains a monochromatic clique of either $r$ or $b$ vertices \cite{katz2018introduction}.
 	Monochromatic clique is a complete sub-graph with the same colour that is a subset of a larger complete graph \cite{BondyMurty2008}.
 	\begin{figure}[H]
 	\centering
 	\includegraphics{graphs/order_5/graph_869}
-	\caption{Graph with size 3 clique}
+	\caption{A complete graph of size 5 with size 3 clique}
 	\label{graph_869}
 \end{figure}
 \noindent The graph in figure \ref{graph_869} has a blue clique of size 3 formed by vertices $v_1,v_2, v_3$.
@@ -372,109 +378,106 @@ then using the matrix to draw the graph connecting to the vertices that are conn
 	\\\\
 	Ramsey numbers are very hard to find because the graphs in which we try to find the monochromatic cliques increase exponentially.
 	For an order n graph, the total amount of graphs would be $2^{\left(\frac{n^2-n}{2}\right)}$.
-	They are increasing with order $\sim 2^{\frac{n^2}{2}}$.
+	They are increasing with order $\sim 2^{n^2}$.
 	\begin{table}[H]
 		\begin{center}
-			
-			\begin{tabular}{|c|c|}
-				\textbf{Vertices ($n$)}&\textbf{Total Graphs} $2^{\left(\frac{n^2-n}{2}\right)}$\\\hline
-				\midrule 
-				1  & 1 \\\hline
-				2  & 2 \\\hline
-				3  & 8 \\\hline
-				4  & 64 \\\hline
-				5  & 1024 \\\hline
-				6  & 32768 \\\hline
-				7 & 2097152 \\\hline
-				8  & 268435456 \\\hline
-				9  & 68719476736 \\\hline
-				10  & 35184372088832 \\
-				\hline
-			\end{tabular}
+\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\arraybackslash}X|}\hline
+	\textbf{Vertices ($\mathbf{n}$)} &  \textbf{Edges ($\mathbf{M}$)} & \textbf{Total Graphs $\mathbf{2^{M}}$} \\\hline
+	\hline
+	1 & 0 & 1 \\\hline
+	2 & 1 & 2 \\\hline
+	3 & 3 & 8 \\\hline
+	4 & 6 & 64 \\\hline
+	5 & 10 & 1,024 \\\hline
+	6 & 15 & 32,768 \\\hline
+	7 & 21 & 2,097,152 \\\hline
+	8 & 28 & 268,435,456 \\\hline
+	9 & 36 & 68,719,476,736 \\\hline
+	10 & 45 & 35,184,372,088,832 \\\hline
+	\hline
+\end{tabularx}
 			
 			\caption{Table showing growth of graphs with increasing n}
 			\label{tableofn}
 		\end{center}
 	\end{table}
-\noindent	And if section \ref{sec:homomorphic} is considered while counting the total graphs to go through this is given by
-\begin{table}[h!]
-	\centering
 
-	\label{tab:labeled_vs_unlabeled}
-	\begin{tabular}{|c|c|c|}\toprule
-		\textbf{Vertices ($n$)} & \textbf{Total Graphs} $2^{\left(\frac{n^2-n}{2}\right)}$ & \textbf{Homomorphic Set graphs} \\\hline
-		\midrule
-		1  & $1$ & $1$ \\\hline
-		2 & $2$ & $2$ \\\hline
-		3 & $8$ & $4$ \\\hline
-		4 & $64$ & $11$ \\\hline
-		5& $1024$ & $34$ \\\hline
-		6  & $32768$ & $156$ \\\hline
-		7  & $2097152$ & $1044$ \\\hline
-		8  & $268435456$ & $12346$ \\\hline
-		9  & $68719476736$ & $274668$ \\\hline
-		10 & $35184372088832$ & $12005168$ \\\hline
-		\bottomrule
-	\end{tabular}
-		\caption{Total Number Graphs vs. Homomorphic Set Graphs}
-\end{table}
-	\\
 \noindent	Putting the table \ref{tableofn} on the plot,
-	\begin{figure}[H]
-		\centering
-		\includegraphics{plots/plot.png}
-		\caption{Plot of amount of graphs per n-vertices}
-		\label{plot}
-	\end{figure}
-\noindent	For example for order 4, we would have a total of 64 graphs and for order 5 we have 1024 graphs.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{presentation/my_plot2}
+	\caption{Plot of amount of graphs per n-vertices}
+	\label{growth}
+\end{figure}
+\noindent This shows how fast the search space grows.
+	For example for order 4, we would have a total of 64 graphs and for order 5 we have 1024 graphs.
 	The total number of graphs of order 6 is $32768$.
-	This difference is not visible on the plot \ref{plot} because of how these graphs exponentially increase.
-	The orders of magnitude for $n= 10$ are in the $10^{9}$ which is a huge number.
+	This difference is not visible on the plot \ref{growth} because of how these graphs exponentially increase.
+	The orders of magnitude for example $n= 10$ are in the $10^{9}$ magnitudes.
+	This growth can be shown on a log scale,
 	\begin{figure}[H]
 		\centering
-		\includegraphics{plots/logplot.png}
-		\caption{Logarithmic scale of the increase of n vertex graphs}
+		\includegraphics[scale=0.6]{presentation/my_plot}
+		\caption{Logarithmic scale comparison of search scale, exponential and factorial functions}
 		\label{logplot}
 	\end{figure}
-\noindent	In the logarithmic scale in figure \ref{logplot} shows a quadratic increase.
+\noindent	In the logarithmic scale in figure \ref{logplot} shows a quadratic increase compared to linear and factorial growth.
 	The total amount of graphs increase fast.
 	To find these clique we have to go through each graph.
 	These graphs grow larger with increase in n.
-	A few Ramsey numbers are known.
-	\begin{table}[H]
-		\centering
-		
-		\label{tab:ramsey_matrix_upto_6_6}
-		\begin{adjustbox}{max width=\textwidth} 
-			\begin{tabular}{| r | c | c | c | c | c | c |} 
-				\toprule
-				\multicolumn{1}{|c|}{$r \setminus b$} & 1 & 2 & 3 & 4 & 5 & 6 \\
-				\midrule
-				\textbf{1} & \textbf{1} & 1 & 1 & 1 & 1 & 1 \\\hline
-				\textbf{2} & & \textbf{2} & 3 & 4 & 5 & 6 \\\hline
-				\textbf{3} & & & \textbf{6} & 9 & 14 & 18 \\\hline
-				\textbf{4} & & & & \textbf{18} & 25 & 36--40 \\\hline
-				\textbf{5} & & & & & \textbf{43--46} & 59--85 \\\hline
-				\textbf{6} & & & & & & \textbf{102--160} \\
-				\bottomrule
-			\end{tabular}
-		\end{adjustbox}
-		\vspace{0.5cm}
-		\small 	\caption{ Known Ramsey numbers and bounds for $R(r,b)$  up to $R(6,6)$ \cite{GreenwoodGleason1955}}
-	\end{table}
-	
-\noindent	The highest known Ramsey number is $R(4,4)$ which was proved to be $18$
+	A few Ramsey numbers are known, the table of this is given below;
+\begin{table}[H]
+	\centering
+	\label{tab:ramsey_matrix_upto_6_6}
+	\scalebox{1.5}{
+		% Changed to remove all vertical lines (|) and rely on booktabs
+		\begin{tabular}{| r | c | c | c | c | c | c |}
+			\hline
+			r/b& 1 & 2 & 3 & 4 & 5 & 6 \\
+			\hline
+			\textbf{1} & \textbf{1} & 1 & 1 & 1 & 1 & 1 \\
+ \hline
+			\textbf{2} & & \textbf{2} & 3 & 4 & 5 & 6 \\
+ \hline
+			\textbf{3} & & & \textbf{6} & 9 & 14 & 18 \\
+ \hline
+			\textbf{4} & & & & \textbf{18} & 25 & 36--40 \\
+ \hline
+			\textbf{5} & & & & & \textbf{43--46} & 59--85 \\
+\hline
+			\textbf{6} & & & & & & \textbf{102--160} \\
+			\bottomrule
+	\end{tabular}}
+	\vspace{0.5cm}
+	% Note: I wrapped the citation in \cite{}
+	\caption{Known Ramsey numbers and bounds for $R(r,b)$ up to $R(6,6)$ \cite{GreenwoodGleason1955}}
+\end{table}
+\noindent	The highest known symmetric Ramsey number is $R(4,4)$ which was proved to be $18$
  \cite{GreenwoodGleason1955}.
+ This was found by constructing a graph that does not contain either a blue or red $K_4$ on $n = 17$ vertices.
+ \noindent $R(5,5)$ was found to be between 43 \cite{Exoo1993} and 46 \cite{angeltveit2024r55le46}.
+ For $n= 43$, the total number of graphs is $2^{903} \approx 10^{271}$ and for $n=46$ we have $2^{1035}\approx10^{312}$.
+ This makes checking the graphs or analytical proofs not feasible with traditional methods.
+ Proofs and combinatorial methods of checking if graphs do not have a certain clique of r amount of graphs is not feasible.
+ Analytic approaches start to fail since the orders of magnitude are impossible to work with.
+ Since as n grows, it becomes exponentially harder as shown by figure \ref{growth}.
+ \\\\
+ Computers have been used to find bounds of Ramsey numbers, by finding counter examples.
+ It is still extremely hard to determine the exact value of $R(5,5)$.
+ With the fastest classical computers available in the world, it would take a lot of years to go through every graph.
+ On an $n$ vertex graph there are a total number of \eqref{total_graphs} graphs, to confirm an existance of either clique of size $r$ and size $b$ all the total graphs have to be verified this is known as the brute force method.
 	This makes finding Ramsey numbers a class of problems called NP-hard.
 	These are problems that are hard to solve and also hard to verify.
-		\section{Quantum Computing}
+	Quantum computers can provide theoretical speedups compared to classical computers for NP-hard problems. 
+	\newpage
+		\subsection{Quantum Computing}
 	
 	Classical computers use bits to make calculations.
 	Bits represent a single binary number.
 	They can either be 1 or 0.
 	Logic gates use bits and to perform computations \cite{deutsch1985quantum}.
 	Logic gates are electronic circuits that take in bits as input and produce a bit as output based on a logical operation \cite{Jaeger1997}.\\
-	\subsection{Qubit}
+	\subsubsection{Qubit}
 	
 	A qubit, the quantum analogue of a classical bit, is a two-level quantum system that can exist in a superposition of states, unlike a classical bit that is restricted to either 0 or 1.
 	Qubits are typically expressed in the computational basis, denoted \(|0\rangle\) and \(|1\rangle\), which may represent physical configurations such as the spin-up and spin-down states of an electron.
@@ -499,7 +502,8 @@ then using the matrix to draw the graph connecting to the vertices that are conn
 			\caption{Qubit in a superposition state}
 		\end{center}
 	\end{figure}
-	\noindent	Quantum Computing uses principles like superposition, entanglement and quantum parallelism.
+	\noindent	Quantum Computing uses principles like superposition and entanglement to enable quantum parallelism.
+	This occurs when all possible states of the system are access at once in parallel.
 	This gives these computers more computational power over the classical ones.
 	Superposition of a state can be defined as a linear combination of these states \cite{mcintyre_quantum_2012}.
 	Superposition states make quantum computers powerful, because the amount of information contained in a quantum system grows exponentially with the n qubits in a system.
@@ -510,14 +514,16 @@ then using the matrix to draw the graph connecting to the vertices that are conn
 	Quantum states are sensitive, measuring them causes them to be in a classical state.
 	Quantum and logic gates use matrix multiplication to represent their transformations.
 	Pauli matrices are examples of quantum gates.
-	These matrices are known as operators which are linear, meaning they act on these states \cite{AndrewSteane,mcintyre_quantum_2012}.
+	These matrices are known as operators which are linear, meaning they act on the qubits \cite{AndrewSteane,mcintyre_quantum_2012}.
 	\begin{equation}
 		\sigma_x =\begin{pmatrix}
 			0&1\\1&0
 		\end{pmatrix},
+		\quad \quad \quad
 		\sigma_y =\begin{pmatrix}
 			0&-i\\i&0
-		\end{pmatrix},\sigma_z =\begin{pmatrix}
+		\end{pmatrix},
+		\quad \quad \quad \sigma_z =\begin{pmatrix}
 			1&0\\0&-1
 		\end{pmatrix}
 	\end{equation}
@@ -529,19 +535,6 @@ then using the matrix to draw the graph connecting to the vertices that are conn
 			0&1\\1&0 
 		\end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} =\begin{pmatrix} 0 \\ 1 \end{pmatrix}
 	\end{equation}
-	This transformation can be visually represented on the Bloch sphere,
-	\begin{figure}[H]
-		\begin{center}
-			\includegraphics[scale =0.5]{bloch_plots/initial.png}
-			\caption{Initial state}
-		\end{center}
-	\end{figure}
-	\begin{figure}[H]
-		\begin{center}
-			\includegraphics[scale =0.5]{bloch_plots/final.png}
-			\caption{Final state}
-		\end{center}
-	\end{figure}
 	\noindent The transformation shows that the qubit started at 0 state and when the x-gate is applied the qubit moves $\pi$ around the x-axis.\\
 	Another important gate that is the Hadamard gate which is given by the equation below
 	\begin{equation}U_H=\frac{1}{\sqrt{2}}
@@ -549,26 +542,48 @@ then using the matrix to draw the graph connecting to the vertices that are conn
 			1&1\\1&-1
 		\end{pmatrix}
 	\end{equation}  it helps turn a definite state either $|0\rangle$ or $|1\rangle$ into a superposition state.
-	If n particles are added we have $2^n$ states or $2^n$ pieces of information. 
+This transformation can be visually represented on the Bloch sphere,
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{tabular}{|c|c|c|}
+			\hline
+			
+			&	Initial state&Final state  \\\hline
+			\hline
+						Apply $X$ gate&	\includegraphics[scale =0.5]{bloch_plots/initial}&
+			\includegraphics[scale = 0.5]{bloch_plots/final}\\ \hline
+						\hline
+			Apply $U_H$ gate&	\includegraphics[scale =0.5]{bloch_plots/initial}&
+			\includegraphics[scale = 0.5]{presentation/superposition}\\\hline
+
+
+		\end{tabular}
+	\end{center}
+	\caption{Visualizing Hadamard and X-Pauli gates transformation on the Bloch Sphere}
+	\end{figure}
+\noindent	If n particles are added we have $2^n$ states or $2^n$ pieces of information. 
 	For n = 2 we have 4 different states which are,
 	\begin{equation}
 		|\psi\rangle =c_1 |00\rangle+c_2 |01\rangle+c_3 |10\rangle+ c_4 |11\rangle
 	\end{equation}
-	Where in this new state \begin{equation}|00\rangle = |0\rangle\otimes|0\rangle  =	\begin{pmatrix}
+	Where in this new state 
+	
+	\begin{equation}|00\rangle = |0\rangle\otimes|0\rangle  =	\begin{pmatrix}
 			1\\0\\0\\0
 	\end{pmatrix}\end{equation}
 	The other vectors are given by,
 	$$|01\rangle =	\begin{pmatrix}
 		0\\1\\0\\0
-	\end{pmatrix}|10\rangle =	\begin{pmatrix}
+	\end{pmatrix}\quad \quad \quad|10\rangle =	\begin{pmatrix}
 		0\\0\\1\\0
-	\end{pmatrix}|11\rangle =	\begin{pmatrix}
+	\end{pmatrix}\quad \quad \quad|11\rangle =	\begin{pmatrix}
 		0\\0\\0\\1
 	\end{pmatrix} $$
 	This represents a 2-qubit superposition state with the coefficients $c_i$ are complex and like the 1-qubit system they tell us the probability of measuring their respective states.
 	The pauli matrices for a state with more than 1 qubit is defined by 
-	\begin{equation}\sigma_x^{\otimes n} =\sigma_x \otimes \sigma_x \otimes \sigma_x \otimes ...\sigma_x \end{equation}n times\\
-	Example of 2 state system 
+	\begin{equation}\sigma_x^{\otimes n} =\sigma_x \otimes \sigma_x \otimes \sigma_x \otimes ...\otimes \sigma_x \quad \quad \text{n times} \end{equation}\\
+	Example of 2 qubit state system 
 	$$\sigma_x^{\otimes2} =\sigma_x \otimes \sigma_x $$
 	$$\sigma_x^{\otimes2} =\begin{pmatrix}
 		0&1\\1&0
@@ -588,7 +603,7 @@ then using the matrix to draw the graph connecting to the vertices that are conn
 			0&1\\1&0
 		\end{pmatrix}
 	\end{pmatrix}$$
-	$$\sigma_x^{\otimes2}=\begin{pmatrix}
+	\begin{equation}\sigma_x^{\otimes2}=\begin{pmatrix}
 		
 		0&0&0&1\\
 		
@@ -598,8 +613,8 @@ then using the matrix to draw the graph connecting to the vertices that are conn
 		
 		1&0&0&0
 		
-	\end{pmatrix}$$
-	\\\\
+	\end{pmatrix}\end{equation}
+\noindent	This enables the gates to act on multiple qubits.\\
 	Quantum entanglement is when quantum states of multiple particles are connected, such that the state of one particle cannot be described without considering the states of the other \cite{Horodecki_2009}.
 	This introduces quantum parallelism in quantum computing, where multiple operations are performed at once \cite{mcintyre_quantum_2012}.
 	A two particle system of entangled states is mathematically expressed as
@@ -639,18 +654,44 @@ then using the matrix to draw the graph connecting to the vertices that are conn
 			0&0&1&0
 		\end{pmatrix}
 	\end{equation}
+			\noindent 	A CNOT gate has two input qubits, referred to as the control and target qubits, and two output qubits \cite{mcintyre_quantum_2012}.
+				The C-NOT flips the target qubit if the control qubit is in state $|1\rangle$.
+			The transformation of the C-NOT can be shown in a truth table below where the first qubit is the control and the second qubit is the target.
+
+	\begin{table}[H]
+	\centering
+	
+	\begin{adjustbox}{max width=\textwidth} 
+		\begin{tabular}{| c | c |} 
+\hline
+			input&output\\
+\hline
+			$ |00\rangle$&$|00\rangle$\\\hline
+			$ |01\rangle$&$|01\rangle$\\\hline
+			$ |10\rangle$&$|11\rangle$ \\\hline
+			$ |11\rangle$&$|10\rangle$ \\\hline
+
+
+		\end{tabular}
+	\end{adjustbox}
+			\caption{Truth Table of C-NOT}
+\end{table}
+
+
+
+
+\noindent	From the table above shows that when control 1 the target flips from the $0$ state to $1$ and visa versa.
 	Combining CNOT gate with Hadamard gate produces entanglement.
-	A CNOT gate has two input qubits, referred to as the control and target qubits, and two output qubits \cite{mcintyre_quantum_2012}.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale= 3]{plots/quantum_circuit}
 	\caption{Quantum gate with Hadamard and CNOT gate}
-	\label{fig:quantumcircuit}
+	\label{quantumcircuit}
 \end{figure}
-	\noindent	Figure \ref{entanglement} the input state is $|0\rangle|0\rangle$.
-	The Hadamard gate will transform the upper $|0\rangle$ meaning,
+	\noindent	Figure \ref{quantumcircuit} the input state is $|0\rangle|0\rangle$.
+	The Hadamard gate will transform the first qubit($q_0$) meaning,
 	$$U_H|0\rangle = \frac{1}{\sqrt{2}}(|0 \rangle + |1\rangle)$$
-	Then with the bottom target $|0\rangle$ we have
+	Then with the second qubit $q_1$ we have
 	$$\frac{1}{\sqrt{2}}(|0 \rangle_C + |1\rangle_C)|0\rangle_T$$
 	$$=\frac{1}{\sqrt{2}}(|0 \rangle_C|0 \rangle_T + |1\rangle_C|0 \rangle_T)$$
 	Then CNOT ($U_X$) acting on this state we have 
@@ -665,28 +706,31 @@ then using the matrix to draw the graph connecting to the vertices that are conn
 	This is a probabilistic result, depending on the quantum circuit and algorithm the measurement must be ran multiple times to get a probabilistic distribution across all possible states.\\
 	In the equation \eqref{entangle} the state of one qubit determines the state of the other one,this is known as quantum correlation. 
 For instant the first qubit is measured to be $|0\rangle$ the other qubit is certain to be in $|0\rangle$.
-When the circuit in figure \ref{fig:quantumcircuit} is ran on a Quantum computer simulator the following results are given,
+When the circuit in figure \ref{quantumcircuit} is ran on a Quantum computer simulator the following results are given,
+
+
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{"quantum stuff/plots/entagled"}
+	\includegraphics[width=0.9\linewidth]{QAOA/matsiri}
 	\caption{Entangled state distribution}
-	\label{fig:entagled}
+	\label{entagled}
 \end{figure}
 \noindent The results above, obtained from running the circuit 1024 times, showing the expected probability distribution for an entangled two-qubit system.
- The histogram shows that the system is found in the correlated states $|00\rangle$ and $|11\rangle$, confirming result of the Bell state using the Qiskit Aer simulator with a Sampler.
+ The histogram shows that the system is found in the correlated states $|00\rangle$ and $|11\rangle$, confirming result of the Bell state using the Qiskit Aer simulator with a Sampler primitive.
 These are from a "perfect" Quantum computer where there are no errors, unlike the simulator real Quantum computers are prone to errors.
-When "noise" is added to the system the following distribution results:
+When a noisy simulator(FakeAlmadenV2) is used to the system the following distribution results:
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{"quantum stuff/plots/noisy_entanglement"}
+	\includegraphics[width=0.9\linewidth]{QAOA/matsiri2}
 	\caption{entangled states with noise}
-	\label{fig:noisyentanglement}
+	\label{noisyentanglement}
 \end{figure}
 \noindent Which still shows that the probability of measuring the states $|00\rangle$ and $|11\rangle$ is $\approx$ 50/50.
-However, the introduction of noise causes a non-zero probability of measuring the states  $|01\rangle$ and $|10\rangle$.\\
+However, the introduction of noise causes a non-zero probability of measuring the states  $|01\rangle$ and $|10\rangle$.
+The results from figure \ref{entagled} and figure \ref{noisyentanglement} are ran with $1024$ shots.
 These measurements results are helpful when solving a certain and the answer depends on whether the encoded problem defines.
 One of the way to define a problem for Quantum computing is by finding the ground state of a Hamiltonian.
-	\subsection{The Hamiltonian}
+	\subsubsection{The Hamiltonian}
 	A Hamiltonian is an operator that is equal to the total energy of a system, this is the sum of kinetic and potential energy of a system.
 	The Hamiltonian governs time evolution of a system.
 	This is described the Schr$\ddot{o}$dinger equation \cite{mcintyre_quantum_2012}.
@@ -703,7 +747,7 @@ One of the way to define a problem for Quantum computing is by finding the groun
 	In quantum computing the Hamiltonian is used to describe the dynamics of qubits and to design quantum gates, which are unitary transformations that manipulate quantum states \cite{Deutsch1989}. 
 	Quantum gates are implemented by applying specific Hamiltonian to a quantum system for a specific time using $U$.
 	The Hamiltonian depends on the type of problem defined.
-	In the next subsection I define an algorithm that determines Ramsey numbers which will use the Hamiltonian of this problem".
+	In the next subsection I define an algorithm that determines Ramsey numbers which will use the Hamiltonian of this problem.
 	\newpage
 
 \section{Computation of Ramsey numbers}
@@ -717,40 +761,83 @@ Firstly to establish a Ramsey number $R(r,b) = n$ two conditions must be satisfi
 \item All the graphs on $n$ vertices must have a clique of either size $r$ or $b$.
 \item A counter example on $n-1$ vertices has to exist that does not contain either a clique of size r and b.
 \end{enumerate}
-This proof was done by using the bounds.
-Ramsey numbers are bounded between certain numbers.
-It was shown that $R(4,4) > 17$ by checking if the graphs of 17 vertices cannot have a monochromatic clique of 4 vertices. 
-Using the lower bound:
-\begin{equation}
-	R(r ,b) < R(r-1,b)+ R(r,b-1) -1
-	\label{theorem_2}
-\end{equation}
-and the upper bound with:
-\begin{equation}
-	R(r ,b) \geq R(r-1,b)+ R(r,b-1)
-	\label{theorem_3}
-\end{equation}
-$$R(4,4) \geq R(3,4)+R(4,3) = 2R(3,4)$$
-$R(3,4) $ was found to be 9, from equation \eqref{theorem_2} and \eqref{theorem_3} it was showed that $17 < R(4,4) \leq 18$ \cite{GreenwoodGleason1955}.
-Hence combining the results it was proved that .
-The same result cannot be shown for 5th Ramsey number.
-$R(5,5)$ was found to be between 43 \cite{Exoo1993} and 46 \cite{angeltveit2024r55le46}.
-For $n= 43$, the total number of graphs is $2^{903} \approx 10^{271}$ and for $n=46$ we have $2^{1035}\approx10^{312}$.
-This makes checking the graphs or analytical proofs not feasible with traditional methods.
-Proofs and combinatorial methods of checking if graphs do not have a certain clique of r amount of graphs is not feasible.
-Analytic approaches start to fail since the orders of magnitude are impossible to work with.
-Since as n grows, it becomes exponentially harder as shown by figure \ref{plot}.
-\\
-Computers have been used to find bounds of Ramsey numbers.
-It is still extremely hard to determine the exact value of $R(5,5)$.
-With the fastest classical computers available in the world, it would take a lot of years to go through every graph.
-On an $n$ vertex graph there are a total number of \eqref{total_graphs} graphs, to confirm an existance of either clique of size $r$ and size $b$ all the total graphs have to be verified this is known as the brute force method.
-In determining and verifying smaller Ramsey numbers I create a function that checks every graph for cliques.
-For simplification I define a clique of size $b$ and the independent set $r$, as a blue clique and red clique respectively. 
-The main idea of the function is to identify a blue clique or red clique inside of a graph of $n$ vertices starting at $n = 2$.
+In order to determine if $n$ is a $R(r,b)$, the proof can be done by trying to avoid cliques of size $r$ and $b$.
+Firstly assume $n\leq R(r,b)$, meaning there exists a graph on $n$ vertices that does not contain a cliques of either size $r$ or size $b$.\\\\
+\subsubsection{Proof of $R(3,3) = 6$ }
+
+Assume $R(3,3)>4$ meaning there exists a graph on $4$ vertices with no cliques of size $3$.
+The counter example of this can be drawn by connecting blue edges until it becomes impossible to avoid a blue triangle and a red triangle.
+This example is given below,
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{"../../../Downloads/proof_graphs/download (3)"}
+	\caption{A counterexample of $n = 4$ for $R(3,3)$}
+	\label{graph37}
+\end{figure}
+\noindent and from the above graph showing no red triangle and blue triangle this does confirm that $R(3,3)>4$.
+Increasing $n$ to $5$ vertices, considering the counter example graph obtained from 4 vertices given by figure \ref{graph37}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{"../../../Downloads/proof_graphs/download"}
+	\caption{Counterexample graph~\ref{graph37} increased with a single vertex}
+	\label{fig:download}
+\end{figure}
+\noindent Assume $R(3,3)>5$ and to avoid either of the triangles, I can join each vertex pair by avoiding the desired red and blue clique. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{graphs/order_5/graph_613}
+	\caption{A counterexample of $n = 5$ for $R(3,3)$}
+	\label{graph613}
+\end{figure}
+\noindent When $n$ is increased to $6$, assume $R(3,3) > 6$ then there must be a counterexample exists of blue and red clique of size $3$.
+ Extend the graph from figure \ref{graph613} by to $6$ vertices, the same thing can be done of avoiding red and blue cliques.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../../../Downloads/proof_graphs/download (4)}
+	\caption{Counterexample graph~\ref{graph613} increased with a single vertex}
+	\label{graph1}
+\end{figure}
+\noindent In attempting to avoid a clique of either a blue or red triangle the result on figure \ref{graph2} is shown. 
+This is given by an example graph below, 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{../../../Downloads/proof_graphs/download (5)}
+	\caption{Add vertex to counter example from figure \ref{graph613}}
+	\label{graph2}
+\end{figure}
+\noindent From the figure \ref{graph2} above it turns out it is impossible to avoid a red or blue clique in $n = 6$ vertices.
+The resulting graph shows that there will be two edges (green dotted) if they are either red or blue, a clique would be formed.
+A reason may be that I have chosen the worst way of starting with the previous counterexample from $n = 5$.
+But another way to prove that it is not possible to not form a red or blue triangle is by focusing on one vertex from $n = 6$ vertices, demonstrating that there will always be a red or blue triangle.
+Choosing two colours edges coming from the vertex shown in the figure below,
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{../../../Downloads/proof_graphs/graph6}
+	\caption{ Vertex $v_1$ in a $K_6$ must have a degree of 5. When these 5 edges are 2-coloured, at least three edges must share the same color.}
+	\label{fig:graph4}
+\end{figure}
+\noindent Given that there is three red edges on vertices $v_1, v_2, v_3 \text{\&} v_4$ there cannot be a blue edge between either of the vertices.
+This means that there can only be blue edges connected between the selected vertices, 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{../../../Downloads/proof_graphs/graph7}
+	\caption{The edge connecting any two of vertices($v_2, v_3 \text{and} v_4$) must be blue. If this final edge were also blue, it would form a complete blue subgraph$K_3$}
+	\label{fig:graph5}
+\end{figure}
+\noindent This shows that a blue clique will be formed if either of the edges cannot be red.
+This is confirms that it is impossible to avoid forming a clique of size 3, meaning counterexample cannot exist hence making $n = 6$ equal to $R(3,3)$.\\
+The same logic can be applied for larger Ramsey numbers such as $R(2,b) = b$ and $R(4,4) = 18$, however it is more difficult due to the increase of number of edges.
+\newpage
+
+\subsubsection{Computational Method}
+A more systematic approach of finding counterexample is by using a computational search, this can be used to verify small known Ramsey numbers. 
+Where all $2^M$ graphs have to be search to determine if a counterexample exists.
+If a counterexample does not exist then that specific $n = R(r,b)$. \\
+The way of defining a search algorithm is by using the binary labeling where each edge is assigned 0 for red and 1 for blue.\\
+The main idea of the search algorithm is to identify a blue clique or red clique inside of a graph of $n$ vertices.
 And if a clique does not exist then return the graph that does not contain the clique
-I have a psuedo-code below to show how the algorithm works,
-	\\\\
+I have defined a psuedo-code below of the algorithm,\\\\
 	\RestyleAlgo{ruled}
 	\SetKwFunction{Fnumber}{total\_edges} % Defines a function named 'AddNumbers' that can be called with \
 	\SetKwFunction{Fdraw}{fill\_bits} % Defines another function
@@ -767,20 +854,21 @@ I have a psuedo-code below to show how the algorithm works,
 			\caption{Finding Ramsey numbers}\label{alg:two}
 			\DontPrintSemicolon
 			\KwIn{integers r and s}
-			\KwOut{minimum n that has r or s size clique}
+			\KwOut{minimum num\_vertices that has r or s size clique}
 			
 			\Begin{
 				Set\;
-				$n \gets 2$  \Comment{starting with 2 vertices}\;
+				$num\_vertices \gets 2$  \Comment{starting with 2 vertices}\;
+				$num\_graphs = \SetKwFunction{Ftotal}{total\_graphs}$\;
+									$m \leftarrow$ \Fnumber{$num\_vertices$}\;
+				$red\_clique \gets$\Fempty{$r\_sized\_clique$}\;
+				$blue\_clique \gets $ \Fcomplete{$s\_sized\_clique$}\;
+				plot $\gets$ \Fdraw{$num\_vertices,graph\_id$} \;
+				$A \gets$ \Flabel{$num\_vertices,graph\_id$}\;
 				
 				\Repeat{all graphs contain clique} {
-					$m \leftarrow$ \Fnumber{$n$}\;
-					$red\_clique \gets$\Fempty{$r$}\;
-					$blue\_clique \gets $ \Fcomplete{$s$}\;
-					plot $\gets$ \Fdraw{$n,k$} \;
-					$A \gets$ \Flabel{$n,k$}\;
-					
-					\For{$k$ from 1 to $2**m$} {
+
+					\For{$graph\_id$ from 1 to $num\_graphs$} {
 						\If{A has red clique or blue clique}{
 							Continue
 						}
@@ -790,89 +878,78 @@ I have a psuedo-code below to show how the algorithm works,
 					}
 					
 					\If{one graph has no clique}{
-						$n \gets n+1$
+						$num\_vertices \gets num\_vertices+1$
 					}
 				}
 			}
 		\end{algorithm}
 	
 \noindent I have defined the main function in the above pseudo-code, this includes extra functions that are found in the appendix section \ref{Psueso}.
-Here the function is defined in python.\\\\
-	\begin{lstlisting}[style=myPythonStyle, basicstyle={\fontsize{9pt}{9pt}\selectfont\ttfamily},caption=Ramsey number finding function ]
-def ramsey_numbers(r,b):
-
-	n = 2
+Here the function is defined in python.
+\\
+	\begin{lstlisting}[style=myPythonStyle, basicstyle={\fontsize{9pt}{9pt}\selectfont\ttfamily},caption=Ramsey numbers Algorithm]
+def ramsey_numbers(r_sized_vertices,b_sized_vertices):
+	num_vertices = 2
 	while True:
-	m = total_edges(n)  ##total number of edges
-	N = 2**m            ##total number of graphs
-	#calculate clique indices for the current n
-  	graph_edges = edges(n)                                                        ##define the total edges
-	edge_values = edge_values(n,graph_number)        
-	
-	##define ways of selecting vertices
-	r_clique_vertices = vertices_combinations(n,r)         ##choose a way to select r vertices using combinations
-	r_clique_indices = []                                     
-	for vertices in r_clique_vertices:
-	subgraph_edges = vertices_combinations(n,2)                  ##select r vertices to verify if they have a clique
-	indices = [edge_to_index[tuple(sorted(e))] for e in subgraph_edges] # Ensure consistent edge representation
-	r_clique_indices.append(indices)                                    #append to r_clique_indices list
-	
-	b_clique_vertices = vertices_combinations(n,b)
-	b_clique_indices = []
-	for vertices in b_clique_vertices:
-		subgraph_edges = vertices_combinations(n,2)
-		indices = [edge_to_index[tuple(sorted(e))] for e in subgraph_edges] # Ensure consistent edge representation
-		b_clique_indices.append(indices)                                    #append to r_clique_indices list
-	
-	is_ramsey_number = True
-	
-	start_time = time.time()                     ##define start of algorithm        
-	
-	for graph in range(N):  ##iterating over total number of graphs
-	
-		current_graph_label = binary_vector(n, graph)
+		num_edges = total_edges(num_vertices)                   ##total number of edges
+		total_number_graphs = total_graphs(num_vertices)        ##total number of graphs
+		
+		##define ways of selecting r-vertices
+		r_clique_indices = get_clique_edge_indices(num_vertices,r_sized_vertices)            #return possible r_clique_indices 
+		
+		b_clique_indices = get_clique_edge_indices(num_vertices,b_sized_vertices)                          
+		
+		is_ramsey_number = True
+		
+		start_graph = 0                   
+		for graph in range(start_graph,total_number_graphs):  ##iterating over total number of graphs
+		
+		current_graph_label = binary_vector(num_vertices, graph)
 		clique_found = False    ##intialize for when a clique exists in the graph
+		
+		
 		# Check for blue cliques
 		for indices in b_clique_indices:
-		if all(current_graph_label[idx] == 1 for idx in indices):   ##search for red cliques
-		clique_found = True
-		break                                                     ##if blue clique found go to the next graph
+			if all(current_graph_label[idx] == 1 for idx in indices):   ##search for blue cliques
+			clique_found = True
+			break            ##if blue clique found go to the next graph
 		##if a blue clique not found then,
+		
 		# Check for red cliques
 		for indices in r_clique_indices:
-		if all(current_graph_label[idx] == 0  for idx in indices):   ##search for red cliques
-		clique_found = True         
-			break                                                     ##if a red clique found go to the next graph        
+			if all(current_graph_label[idx] == 0  for idx in indices):   ##search for red cliques
+			clique_found = True         
+			break                              ##if a red clique found go to the next graph        
 		
 		
 		if not clique_found:                          ##if a clique of either size r or size b is not found, n is not Ramsey number
-		is_ramsey_number = False
-			break     ##break loop and go to next n 
-		final_time = time.time()              
-		change_in_time =   final_time-start_time
+			is_ramsey_number = False
+			save_graph(num_vertices,graph,folder_path)       ##save the counterexample graph
+			break  
 		if is_ramsey_number:
-		
-		break  # Exit the while loop
-		
-		n += 1                                  
+
+			break  # Exit the while loop
+		start_graph = graph_id
+		num_vertices += 1     
+
 	\end{lstlisting}
-	This function defined to find and return $R(r,b)$ which is defined as the smallest number n such that every graph on $n$ vertices either contain a clique of size $r$ or an independent set of size $b$. 
+	The algorithm finds $R(r,b)$ which is defined as the smallest number n such that every graph on $n$ vertices either contain a red clique of size $r$ or an blue clique of size $b$. 
 	The rest of the functions are found in the appendix section \ref{Algos}.
 	The binary vector of each graph is used to determine if these cliques exists.
-	The algorithm iterates through all possible graph starting at graph $0$ up to the last graph which is $2^m$ where $m$ is the total number of edges\eqref{total_edges}.
-	The goal is to find a counter example which does not contain a a clique of size $r$ or an independent set of size $b$.
-If one graph in the graph set does not contain either of these the algorithm continues by increasing $n$ by $1$ until $n$ with all the conditions satisfied.\\\\
+	The algorithm iterates through all possible graph starting at graph $0$ up to the last graph.
+	The goal is to find a counter example which does not contain a red clique of size $r$ or an blue clique of size $b$.
+If one graph in the graph set does not contain either of these the algorithm continues by increasing $n$ by $1$ until $n$ with all the conditions satisfied.
 	I will demonstrate this with known Ramsey number $R(3,3)=6$.
-	In this case the cliques being searched for are a clique of size $3$ or an independent set of size $3$.
+	In this case the cliques being searched for are a red clique of size $3$ or blue clique of size $3$.
 	The cliques are complete graphs of $3$ vertices which can be either two of the following,
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.3\linewidth]{../../../Downloads/order_3/k3_coloring_0}
-	\includegraphics[width=0.3\linewidth]{../../../Downloads/order_3/k3_coloring_7}
+	\includegraphics[width=0.3\linewidth]{graphs/order_3/k3_coloring_0}
+	\includegraphics[width=0.3\linewidth]{graphs/order_3/k3_coloring_7}
 	\caption{Complete graphs of size 3}
 	\label{fig:k3coloring0}
 \end{figure}
-\noindent the function starts at $n = 2$ vertices, with only two possible edges and vertices it is not possible to find the clique being searched for. 
+\noindent the algorithm starts at $n = 2$ vertices, with only two possible edges and vertices it is not possible to find the clique being searched for. 
 This shows that the substructures on $2$ vertices is not possible.
 \begin{figure}[H]
 	\centering
@@ -895,7 +972,7 @@ When increasing $n$ by 1, the next $n$ will start at graph 1.
 Going to $n = 4$ the algorithm finds the following 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{graphs/R(3,3)/counter_example_for_4_graph_12}
+	\includegraphics[width=0.7\linewidth]{graphs/order_4/k4_coloring_12}
 	\caption{counter example of $R(3,3)$ of order $4$}
 	\label{counterexamplefor4graph12}
 \end{figure}
@@ -907,9 +984,14 @@ Going to $n = 4$ the algorithm finds the following
 \end{figure}
 \noindent The above figures show the counter examples of $R(3,3)$ which the proves that $R(3,3) > 5$.
 When $n$ is increased to $6$ the algorithm goes through all the possible graphs, and no counter example was found.
-This then proves that $R(3,3) = 6$.
-This brute force method is computationally exhaustive considering the exponential increase of the possible graphs , I recorded the times taken to verify the known Ramsey numbers in the table below.
-	\newpage
+This then proves that $R(3,3) = 6$, for $n = 6$ there are $32,768$ graphs contain either a blue or red clique of size $3$.
+The brute force method gets computationally heavy when $n$ increases.
+The current search is to find the exact Ramsey number $R(5, 5)$. 
+ It is bounded between $n = 43$ and $46$ vertices \cite{Exoo1993,angeltveit2024r55le46}.
+ For $n=43$, there are $\approx 10^{271}$ graphs and $n=46$, there are $\approx 10^{311}$ graphs.
+The search space grows exponentially large for classical algorithms.
+\\
+
 	\subsubsection*{Time Taken for to verify known ramsey numbers}
 	\begin{table}[hbt!]
 		\centering
@@ -918,63 +1000,114 @@ This brute force method is computationally exhaustive considering the exponentia
 				\toprule
 				\multicolumn{1}{|c|}{Ramsey Number} & Time Taken(s) \\
 				\midrule
-				\textbf{R(2,2) = 2} & $3.719 \times 10^{-5}$ \\
+				\textbf{R(2,2) = 2} & $2.942 \times 10^{-4}$ \\
 				\hline
-				\textbf{R(2,3) = 3} & $4.816 \times 10^{-5}$ \\
+				\textbf{R(2,3) = 3} & $9.022 \times 10^{-4}$ \\
 				\hline
-				\textbf{R(2,4) = 4} & $2.291 \times 10^{-4}$ \\
+				\textbf{R(2,4) = 4} & $8.728 \times 10^{-3}$ \\
 				\hline
-				\textbf{R(2,5) = 5} & $4.204 \times 10^{-3}$ \\
+				\textbf{R(2,5) = 5} & $1.223 \times 10^{-1}$ \\
 				\hline
-				\textbf{R(2,6) = 6} & $1.638 \times 10^{-1}$ \\
+				\textbf{R(2,6) = 6} & 2.756$\times 10^{0}$ \\
 				\hline
-				\textbf{R(2,7) = 7} & $1.20559 \times 10^{1}$ \\
+				\textbf{R(2,7) = 7} & $1.722 \times 10^{2}$ \\
 				\hline
-				\textbf{R(2,8) = 8} & $3.792 \times 10^{4}$ \\
+				\textbf{R(2,8) = 8} & $4.396 \times 10^{4}$ \\
 				\hline
-				\textbf{R(2,9) = 9} & 9.26941$ \times 10^{6}$\\
-				\hline
-				\textbf{R(2,10) = 10} & \\
-				\hline
-				\textbf{R(3,3) = 6} &  $4.2922 \times 10^{-1}$ \\
-				\hline
-				\textbf{R(3,4) = 9} & \\
-				\hline
-				\textbf{R(3,5) = 14} & \\
-				\hline
-				\textbf{R(3,6) = 18} & \\
-				\hline
-				\textbf{R(3,7) = 25} & \\
-			\hline	
-				\textbf{R(4,4) = 18} & \\
+
+				\textbf{R(3,3) = 6} &8.671$\times 10^{0}$ \\
+
 				\bottomrule
 			\end{tabular}
 		\end{adjustbox}
-		\caption{Ramsey Number Calculation Times}
-		\label{tab:ramsey_times}
+		\caption{Ramsey Number Calculation Times(Adjacency Matrix)}
+		\label{tab:ramsey_times_2}
 	\end{table}
-\noindent	The algorithm was able to find and verify $9$ out of $15$ in the table.
-The highest verified Ramsey number is $R(2,9) = 9$ which has a total number of $68,719,476,736$ graphs.
-The other known Ramsey numbers are still running in a cluster.
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.7\linewidth]{plots/runtime_plot}
-		\caption{Plot of the runtime}
-		\label{fig:runtimeplot}
-	\end{figure}
-	
+\noindent	In the table above the adjacency matrix of each graph examined to detect monochromatic cliques of the desired size.
+A red clique of size $r$ corresponds to a principal submatrix consisting entirely of $0$s . 
+Conversely, a blue clique of size $b$ corresponds to a principal submatrix of all $1$s on the off-diagonal entries and $0$s on the diagonal.
+ For $r=3$ , these a red clique takes the form
+\begin{equation}K_{\text{red}} = \begin{pmatrix}    0 & 0 & 0\\    0 & 0 & 0\\    0 & 0 & 0\end{pmatrix}
+	\label{redclique}
+\end{equation}
+	and a blue clique ($b=3$) is in the form of
+	\begin{equation}
+		K_{\text{blue}} =\begin{pmatrix}    0 & 1 & 1\\    1 & 0 & 1\\    1 & 1 & 0\end{pmatrix}
+		\label{blueclique}
+		\end{equation}
+	 \\
+	The binary strings of the graphs were also considered where only the upper triangular vector of matrices \ref{redclique} and \ref{blueclique}.
+	  For $r=3$ , these a red clique takes the form
+	 \begin{equation}K_{\text{red}} = \begin{pmatrix}     0 & 0 & 0\end{pmatrix}\end{equation}
+	 and a blue clique ($b=3$) is in the form of
+	\begin{equation}K_{\text{blue}} =\begin{pmatrix}  1 & 1 & 1\end{pmatrix}\end{equation}
+	 The runtimes of the algorithms are in the table below
+\begin{table}[hbt!]
+	\centering
+	\begin{adjustbox}{max width=\textwidth}
+		\begin{tabular}{| r | c |}
+			\toprule
+			\multicolumn{1}{|c|}{Ramsey Number} & Time Taken(s) \\
+			\midrule
+			\textbf{R(2,2) = 2} & $3.791 \times 10^{-5}$ \\
+			\hline
+			\textbf{R(2,3) = 3} & $4.649 \times 10^{-5}$ \\
+			\hline
+			\textbf{R(2,4) = 4} & $4.032 \times 10^{-3}$ \\
+			\hline
+			\textbf{R(2,5) = 5} & $8.824 \times 10^{-3}$ \\
+			\hline
+			\textbf{R(2,6) = 6} & $1.406 \times 10^{-1}$ \\
+			\hline
+			\textbf{R(2,7) = 7} & $9.712 \times 10^{0}$ \\
+			\hline
+			\textbf{R(2,8) = 8} & $1.397 \times 10^{3}$ \\
+			\hline
+			\textbf{R(2,9) = 9} & 2.093$ \times 10^{5}$\\
+			\hline
+			\textbf{R(3,3) = 6} &  $4.292 \times 10^{-1}$ \\
+			\hline
+			\bottomrule
+		\end{tabular}
+	\end{adjustbox}
+	\caption{Ramsey Number Calculation Times}
+	\label{tab:ramsey_times}
+\end{table}
+\noindent The runtimes in table~\ref{tab:ramsey_times_2} adjacency matrix method are slower than those in table~\ref{tab:ramsey_times} binary string method, for larger Ramsey numbers. 
+The highest verified Ramsey number using the binary string approach is $R(2,9) = 9$, which has a total number of $68,719,476,736$ graphs.
+The other known Ramsey numbers have to be given enough time to run and finish which requires a lot of computational resources.
 
-
-	Quantum computers can be considered to compute Ramsey numbers.
-	\newpage
-		\subsection{Quantum Computation of Ramsey Numbers}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{presentation/screenshot001}
+	\caption{Plot of the runtime}
+	\label{fig:runtimeplot}
+\end{figure}
+\noindent The figure~\ref{fig:runtimeplot} shows how exponential the problem of solving Ramsey numbers scale.
+This can be seen from $R(2,7)$ to $R(2,8)$ goes from magnitudes of $\approx 10^{0}$ to  $\approx 10^{3}$ seconds, and further to $R(2,9)$ to  $\approx 10^{5}$ seconds.
+This shows that as $n$ increases the runtime increases exponentially.
+Another factor in the runtime would be the size of the clique.
+This can be seen by the runtime when $r$ and $b$ are switched when $b = 2$ and $r > 2$.
+Although the Ramsey numbers are the same, it is computationally harder since the submatrix being search for is $r > b$.
+Example of this can be shown with $R(3,4) = 9$ and $R(2,9) = 9$, the search for $R(2,9)$ completed in the runtime  2.093$ \times 10^{5}$ seconds with the search for $R(3,4) = 9$ only at approximately $38\times 10^{9}$ graphs by the time the search for $R(2,9)$ completed.
+This shows that search for $R(r,b)$ does not only depend on $n$ but with the size of both $r$ and $b$.
+ This motivates the use of quantum algorithms to exhaustive search of the $2^{M}$ total number of graphs.
+\newpage
+		\subsubsection{Quantum Computation of Ramsey Numbers}
 	\label{quantum}
 	Due to the computational complexity of computing Ramsey numbers, Quantum computers can be used.
-	Unlike classical computers, quantum computing uses principles like superposition, entanglement and parallelism to explore large solution spaces simultaneously, which provides an advantage over classical computers.\\
+Unlike classical computers, quantum computing uses principles like superposition, entanglement to allow quantum parallelism to explore large solution spaces simultaneously, which provides an advantage over classical computers.
+The quantum experiments were executed on IBM Quantum hardware using the Qiskit platform, which supports both simulations and real-device runs.
+\\
 	One way to solve this is by mapping the Ramsey constraints onto finding the ground state energy of a Hamiltonian \cite{PhysRevA.93.032301}.
 By assigning one qubit to represent the red or blue edge, the total states represent all total graphs $2^m$ on $n$ vertices.
-The edge encoding are defined by thee red edge is given by state $ |0\rangle$ and blue $ |1\rangle$.
+The edge encoding are defined by the red edge is given by state $ |0\rangle$ and blue $ |1\rangle$.
 Each state $|z_1z_2z_3..z_N\rangle$ corresponds to a unique graph which is also defined by the bit string \eqref{binary_matrix}.
+\[|\psi\rangle = \frac{1}{\sqrt{2^{M}}}\left(|0\rangle +|1\rangle+|2\rangle+...+|2^{M}-1\rangle\right)\]
+in vector notation
+\[|\psi\rangle =\frac{1}{\sqrt{2^{M}}}\begin{pmatrix}
+	1\\1\\ 1\\\vdots\\1
+\end{pmatrix}\]
 The way of proving that $n $ is a Ramsey number, all graphs on $n$ vertices have to contain a clique of either size $r$ or size $b$.
 This definition can be used to define the problem Hamiltonian.\\
 	 Define the energy function as the total number of s sized cliques and total number of r sized cliques for a certain graph:
@@ -989,8 +1122,51 @@ Then if the energy function is a positive number for the lowest energy graph, th
  \begin{equation}H_p|z_1 z_2 z_3.....z_N\rangle =h^n_{r,b}(a)|z_1 z_2 z_3.....z_N\rangle
  	\label{Hamiltonian}
  \end{equation}
+$$H_p|z_1 z_2 z_3.....z_N\rangle =0$$
+when a bit string does not contain a clique of either size b or r.
+The way of defining this on a quantum computer is by converting the problem into a $QUBO$.
+\begin{lstlisting}[style=myPythonStyle, caption=red clique count]
+ # 1. Penalty for Red Cliques
 
-$$H_p|z_1 z_2 z_3.....z_N\rangle =0$$when a bit string does not contain a clique of either size s or r.
+for subset_v in combinations(range(n), r):
+	clique_edges = [(min(i, j), max(i, j)) for i, j in combinations(subset_v, 2)]
+
+# Start the projector for this specific r-clique with the Identity operator
+	projector_r = SparsePauliOp.from_list([("I" * num_qubits, 1.0)])
+
+	for edge in clique_edges:
+		qubit_idx = edge_map[edge]
+
+		# (I + Z)/2 is the factor that penalizes Red (0)
+		# Represent as SparsePauliOp from list
+		I_term = SparsePauliOp.from_list([('I' * num_qubits, 0.5)])
+		Z_label = ['I'] * num_qubits
+		Z_label[qubit_idx] = 'Z'
+		Z_term = SparsePauliOp.from_list([("".join(Z_label), 0.5)])
+		
+		# The factor for this edge: (I + Z_e)/2
+		factor = I_term + Z_term
+		
+		# Perform the multiplication and simplification
+		projector_r = projector_r.compose(factor, front=True).simplify()
+
+# Add the completed r-clique projector to the total Hamiltonian
+H_total += projector_r
+
+\end{lstlisting}
+Example of red cliques count,
+	\begin{equation}\mathbf{C}_{\text{red}, i} = \frac{1}{\sqrt{2^M}} \prod_{j=1}^{M} (\mathbf{I} + \mathbf{Z}_j)\end{equation}
+	If the qubit is $|0\rangle$, the $Z$ operator returns $+1$. 
+	The whole factor is $\frac{1}{2}(\mathbf{I} + \mathbf{Z}) \to \frac{1}{2}(1 + 1) = \mathbf{1}$.
+	If the qubit is $|1\rangle$, the $Z$ operator returns $-1$. 
+	The whole factor is $\frac{1}{2}(\mathbf{I} + \mathbf{Z}) \to \frac{1}{2}(1 - 1) = \mathbf{0}$
+$$|\psi\rangle = \frac{1}{\sqrt{8}} \sum_{a=0}^{7} |a\rangle = \frac{1}{\sqrt{8}} (|000\rangle + |001\rangle + \dots + |111\rangle)$$
+
+$$C_{Red, i} = \frac{1}{\sqrt{8}} (I + Z) (I + Z) (I + Z)$$
+$$\mathbf{C}_{\text{Red}, i} = \frac{1}{\sqrt{8}}\begin{pmatrix} 2 & 0 \\ 0 & 0 \end{pmatrix} \otimes \begin{pmatrix} 2 & 0 \\ 0 & 0 \end{pmatrix} \otimes \begin{pmatrix} 2 & 0 \\ 0 & 0 \end{pmatrix}$$
+$$\mathbf{C}_{\text{Red}, i} |\psi\rangle  =\frac{1}{\sqrt{8}}  \begin{pmatrix} 2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \end{pmatrix}\begin{pmatrix}1\\1\\1\\1\\1\\1\\1\\1\end{pmatrix}$$
+$$\mathbf{C}_{\text{Red}, i} |\psi\rangle = \frac{1}{\sqrt{8}} \begin{pmatrix} 2 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \end{pmatrix}$$
+\\\\
 The following pseudocode defines how this is done,\\
 \begin{algorithm}[H]
 	\DontPrintSemicolon
@@ -1039,71 +1215,92 @@ The lines 11 and 17 counts the total cliques found in the graph $a$, then $1$ is
 The following plot for $R(3,3)$ on $n$ vertices, is given by the plot below
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{"quantum stuff/plots/clique_plot_n3_s3_r3"}
-	\caption{Clique counts of $3$ vertices}
+	\includegraphics[width=1.0\linewidth]{QAOA/energy_hlines_distribution_3}
+	\caption{Clique counts function of $3$ vertices}
 	\label{fig:cliqueplotn3s3r3}
 \end{figure}
 \noindent The above plot shows the total cliques each graphs have of order $3$.
 The min number of cliques is $0$, which does prove that $3 \neq R(3,3)$. 
  Three algorithms are focused on in this paper which are Quantum Approximate Optimization Algorithm(QAOA), Variational Quantum Eigensolver (VQE) and Grover's Algorithm.
-The quantum computer used is on a website called Qiskit which enables users to run simulations and do experiments on a quantum hardware.
 Each of these algorithm have the ability to find the minimum energy defined by the algorithm \ref{ener}.
 	\subsubsection*{QAOA}
 	The Quantum Approximate Optimization Algorithm(QAOA) is a variational quantum algorithm that can solve combinatorial optimization problems such as finding Ramsey numbers.
 	QAOA is a hybrid quantum-classical optimization that involves a
-	parameterized quantum circuit to be run on a quantum computer and an optimizer that can update the parameters on a classical machine by minimizing the cost function constructed based on the outputs of the quantum circuit.
+	parameterized quantum circuit to be run on a quantum computer and classical optimizer.
+	\begin{itemize}
+\item Quantum Part: This component runs a parameterized quantum circuit to explore the solution space. The circuit is constructed using a sequence of problem-specific operators, primarily the cost unitary and the mixing unitary:$$U_C = \exp{(-i \alpha \mathcal{H}_c )}$$$$U_M = \exp{(-i \gamma \mathcal{H}_M )}$$
+\item Classical Part: After the quantum circuit runs, the classical computer minimizes $\alpha$ and $\gamma$ to improve the performance of the circuit's .
+	\end{itemize}
  The idea behind QAOA is to encode the objective function of the optimization problem into the cost Hamiltonian which is done using the energy function \eqref{energy}.
  The idea is to search for an optimal bitstring that will give a good approximation ratio with a high probability of having the least amount of cliques.
 	I have defined the QAOA method to determine a binary string of the graph with the lowest energy.
-	\begin{lstlisting}[style=myPythonStyle, caption=quantum min function]
-		from qiskit.primitives import StatevectorSampler
-		from qiskit.quantum_info import Pauli
-		from qiskit.result import QuasiDistribution
-		
-		from qiskit_algorithms import QAOA
-		from qiskit_algorithms.optimizers import COBYLA
-		
-		from qiskit_algorithms.utils import algorithm_globals
-		sampler = StatevectorSampler(seed=42)
-		
-		
+	\begin{lstlisting}[style=myPythonStyle, caption=QAOA function]
 		algorithm_globals.random_seed = 10598
+		sampler = Sampler(mode = backend)
 		
 		optimizer = COBYLA()
-		qaoa = QAOA(sampler, optimizer, reps=8)
 		
-		cost_hamiltonian, shift = get_ramsey_hamiltonian(n, r, s)
-		result = qaoa.compute_minimum_eigenvalue(cost_hamiltonian)
+		cost_hamiltonian = get_ramsey_hamiltonian(n, r, s)
+		circuit = QAOAAnsatz(cost_operator=cost_hamiltonian, reps=3) ## ansatz
+		sampler = Sampler(mode=backend)
+		sampler.options.default_shots = 10000
+
+		
+		# Set simple error mitigation options
+		sampler.options.dynamical_decoupling.enable = True
+		sampler.options.dynamical_decoupling.sequence_type = "XY4"
+		sampler.options.twirling.enable_gates = True
+		sampler.options.twirling.num_randomizations = "auto"
+		
+		pub = (qaoa_circuit,)
+		job = sampler.run([pub], shots=int(10000))
+		
 	\end{lstlisting}
-	and the result of this are as follows starting with $R(3,3)$ with $n = 3$ of the state with the lowest energy is $|1 0 0 \rangle$ with the energy 0.
+
+			\begin{figure}[H]
+		\centering
+		\includegraphics[width=1\linewidth]{"../../../Downloads/project (1)"}
+		\caption{Circuit of QAOA}
+		\label{fig:project-1}
+	\end{figure}
+		
 	\begin{table}[H]
 		\centering
 		\caption{Probability Distribution of Graph IDs}
 		\begin{tabular}{|c|c|}
 			\hline
 			\textbf{Graph ID} & \textbf{Probability ($\mathbf{P}$)} \\ \hline
-			101 & 0.164062 \\
-			011 & 0.159180 \\
-			110 & 0.168945 \\
-			001 & 0.187500 \\
-			100 & 0.164062 \\
-			010 & 0.156250 \\
-			000 & 0.000000 \\
-			111 & 0.000000 \\\hline
+			101 & 0.1651 \\
+			011 & 0.1737 \\
+			110 & 0.1675 \\
+			001 & 0.1705 \\
+			100 & 0.1643 \\
+			010 & 0.1588 \\
+			000 & 0.0010 \\
+			111 & 0.0000 \\\hline
 		\end{tabular}
 		\label{tab:prob_dist}
 	\end{table}
 	\noindent The above table shows the probability distribution of measuring bit strings with the lowest energy.
 	These bit strings correspond to the graphs that have the lowest clique count. 
-	The graphs $[000]$ and $[111]$ have 0 probabilities and all the other bit strings have almost similar probabilities.
+	The graphs $[000]$ and $[111]$ have $\approx 0$ probabilities and all the other bit strings have almost similar probabilities.
 	The QAOA results successfully identified the six bit strings corresponding to the minimum energy confirming the theoretical ground states of the problem. 
 	The results are plotted below in the histogram.
 	\begin{figure}[H]
 		\centering
-		\includegraphics[scale=0.6]{quantum stuff/plots/prob_distribution_3.png}
+		\includegraphics[scale=0.6]{QAOA/prob_distribution_3.png}
 		\caption{The most frequently measured output}
 		\label{probability_distr}
 	\end{figure}
+		\begin{figure}[H]
+		\begin{center}
+
+		\includegraphics[scale=0.6]{QAOA/quantum_measurement_binary_distribution_v2}
+				 \caption{Results from (Qiskit ibm\_)}
+	\end{center}
+		\end{figure}
+
+\noindent	Total Shots = 10000, Program = sampler, Quantum Computer= ibm\_kingston, classical optimizer = COBYLA, 3 QAOA reps.\\
 	These plot shows the graphs with no cliques of size 3, and these graphs 
 	\begin{figure}[H]
 		\centering
@@ -1121,201 +1318,137 @@ Each of these algorithm have the ability to find the minimum energy defined by t
 		\caption{	\small Graphs of order 3 with no cliques of size 3}
 		\label{no_clique_3}
 	\end{figure}
-	\noindent This does confirm that $n = 3$ is not Ramsey number $R(3,3)$, increasing $n$ to $4$ the probability distribution are defined in the table below,
-	\begin{table}[H]
+				\begin{figure}[H]
 		\centering
-		\caption{Probability Distribution of Graph Indices}
-		\begin{tabular}{|c|c||c|c|}
-			\hline
-			\textbf{Graph ID} & \textbf{P} & \textbf{Graph ID} & \textbf{P} \\ \hline
-			001100 & 0.1582 & 101001 & 0.0039 \\ \hline
-			011110 & 0.1426 & 011010 & 0.0039 \\ \hline
-			101101 & 0.1416 & 100110 & 0.0039 \\ \hline
-			110011 & 0.1396 & 000011 & 0.0029 \\ \hline
-			100001 & 0.1396 & 100011 & 0.0020 \\ \hline
-			010010 & 0.1338 & 100111 & 0.0020 \\ \hline
-			001101 & 0.0088 & 110000 & 0.0020 \\ \hline
-			100101 & 0.0088 & 101000 & 0.0020 \\ \hline
-			111000 & 0.0078 & 000110 & 0.0020 \\ \hline
-			010011 & 0.0078 & 100100 & 0.0020 \\ \hline
-			011001 & 0.0078 & 111001 & 0.0020 \\ \hline
-			101010 & 0.0068 & 011000 & 0.0020 \\ \hline
-			001011 & 0.0068 & 000101 & 0.0020 \\ \hline
-			110100 & 0.0068 & 111100 & 0.0020 \\ \hline
-			110010 & 0.0059 & 011100 & 0.0010 \\ \hline
-			110001 & 0.0049 & 001001 & 0.0010 \\ \hline
-			010101 & 0.0049 & 101110 & 0.0010 \\ \hline
-			000111 & 0.0049 & 001111 & 0.0010 \\ \hline
-			001110 & 0.0049 & 100010 & 0.0010 \\ \hline
-			010110 & 0.0049 & 110110 & 0.0010 \\ \hline
-			101100 & 0.0049 & 111010 & 0.0010 \\ \hline
-			110101 & 0.0039 & 111101 & 0.0010 \\ \hline
-			\hline
-		\end{tabular}
-		\label{tab:prob_dist_multicolumn_46}
-	\end{table}
-	
-	
-	\begin{figure}[H] 
-		\centering
-		\includegraphics[scale = 0.6]{quantum stuff/plots/prob_distribution_4.png}
-		\caption{The most frequently measured output}
-		\label{pro_dis}
+		\includegraphics[width=1\linewidth]{QAOA/QAOA_1}
+		\caption{QAOA convergence plot $n = 3$}
+		\label{fig:QAOA1}
+	\end{figure}
+	\noindent This does confirm that $n = 3$ is not Ramsey number $R(3,3)$, increasing $n$ to $6$ the probability distribution are defined in the table below,
+
+	\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale = 0.6]{QAOA/energy_hlines_distribution_6}
+	\end{center}
 	\end{figure}
 	
-	\subsubsection*{VQE}
-	In this part of the section I define the same problem using VQE method.
-	\begin{lstlisting}[style=myPythonStyle, caption=quantum min function]
-		from qiskit.circuit.library import n_local
-		from qiskit_algorithms import VQE
-		from qiskit_algorithms.optimizers import COBYLA, SPSA
-		from qiskit_algorithms.utils import algorithm_globals
-		from qiskit.primitives import StatevectorEstimator
-		algorithm_globals.random_seed = 13345
-		
-		optimizer = COBYLA()
-		num_qubits = total_edges(n)
-		cost_hamiltonian, shift = get_ramsey_hamiltonian(n, r, s) # Define cost_hamiltonian first
-		ansatz = n_local(cost_hamiltonian.num_qubits, "ry", "cz", reps=2, entanglement="linear") # Initialize ansatz with the correct number of qubits
-		
-		# Use StatevectorEstimator for simulation
-		estimator = StatevectorEstimator(seed=42)
-		
-		vqe = VQE(estimator=estimator, ansatz=ansatz, optimizer=optimizer)
-		
-		result = vqe.compute_minimum_eigenvalue(cost_hamiltonian) 
-		min_eigenvalue = result.eigenvalue.real+shift
-	\end{lstlisting}
-	When I perform the same calculations using the VQE method I get the following results, the following probability distribution emerge,
-	This algorithm return an eigenvalue which corresponds to the measured energy of the graphs, if the lowest energy found is close to 0, this will mean that the $n$ is not Ramsey number.
+		\begin{figure}[H]
+			\centering
+	\includegraphics[scale=0.5]{QAOA/prob_distribution_6.png}
+		\end{figure}
+
+
+	\begin{figure}[H]
+		\begin{center}
+			\begin{tabular}{|c|c|}
+				\hline
+\hline
+					\includegraphics[width=0.4\linewidth]{graphs/order_6/counter_example_for_6_graph_24851}
+				&
+				\includegraphics[width=0.4\linewidth]{graphs/order_6/counter_example_for_6_graph_29271}\\
+				\hline
+			\end{tabular}
+		\end{center}
+		\caption{Graphs measured with lowest number of cliques}
+	\end{figure}
+	
 	\begin{figure}[H]
 		\centering
-		\begin{tabular}{|c|c|c|c|c|c|}\hline
-			$n$&2&3&4&5&6\\\hline
-			$R(2,2)$&&&&&\\\hline
-			$R(2,3)$&$1.476\times 10^{-9}$&$1.0000$&$2.0000$&$4.0000$&$6.0004$\\\hline
-			$R(2,4)$&$3.1829\times10^{-10}$&$3.2814\times 10^{-9}$& $1.0000$&$2.0000$&$4.00000$\\\hline
-			$R(2,5)$&$4.15797\times10^{-9}$&$1.08576\times10^{-6}$&$2.35099\times10^{-6}$&$1.000$&$  2.00049$\\\hline
-			$R(2,6)$&$1.2112\times10^{-9}$&$1.37641\times10^{-9}$&$3.2020\times10^{-9}$&$5.1116\times10^{-9}$&\\\hline
-			$R(3,3)$&&$1.51139\times10^{-9}$&$5.8141\times10^{-5}$&$0.000377$&$ 2.0003$\\\hline
-		\end{tabular}
-		\caption{	\small VQE results}
-		\label{VQe_results}
+		\includegraphics[width=1\linewidth]{QAOA/QAOA_2}
+		\caption{QAOA convergence plot $n = 6$}
+		\label{fig:QAOA2}
 	\end{figure}
-	\noindent The results of the VQE code confirms known Ramsey numbers, the output of returns the lowest energy of the "cost\_hamiltonian" function.
-	Unlike the previous algorithm which returns the state with the lowest energy.
-	\begin{figure}[H] 
-		\centering
-		\includegraphics[scale = 0.6]{quantum stuff/plots/VQE_prob_distri_3.png}
-		\caption{The most frequently measured output}
-		\label{VQEpro_dis_1}
-	\end{figure}
-	\subsubsection*{Grover Algorithm}
-	This is a search algorithm that finds a unique state in an unstructured list or database.
-	It offers a quadratic speed up, this means that in a list of $N$ items, only  $\mathcal{O}(\sqrt{N})$ iterations compared to  $\mathcal{O}(N)$ iterations of the best classical algorithm.
-	Grovers' Algorithm uses the principle of superposition and quantum interference to increase the probability of the unique state being measured while suppressing the amplitudes of all other states.\\
-	For this Ramsey numbers the unique states would be the graphs with the least number of cliques of sizes $r$ and $b$.
-	The same energy function from equation \eqref{energy} is used to determine the graph with the lowest clique making it a search problem instead.
-	The goal is to determine the minimum energy of the function if a positive number is returned then, $n$ is a $R(r,b)$ else it is not.
-	Below i define the pseudo-code of finding the lowest number of cliques using Grover's algorithm;
-	\begin{algorithm}[H]
-		\caption{Main Function}\label{Grover's}
-		\DontPrintSemicolon
-		\KwIn{integers r and s}
-		\KwOut{minimum n that has r or s size clique}
-		
-		\Begin{
-			Initialize quantum register\;
-			Apply hadamard gate on all states\;
-			Define Oracle \;
-		 {
-		
-			Apply phase oracle on the marked state\;
-				$red\_clique \gets$\Fempty{$r$}\;
-				$blue\_clique \gets $ \Fcomplete{$s$}\;
-				plot $\gets$ \Fdraw{$n,graph\_number$} \;
-				$A \gets$ \Flabel{$n,graph\_number$}\;
-				
-				\For{$graph\_number$ from 1 to $2^m$} {
-					\If{A has red clique or blue clique}{
-						Continue
-					}
-					\Else{
-						return plot\;Break
-					}
-				}
-				
-				\If{one graph has no clique}{
-					$n \gets n+1$
-				}
-			}
-		}
-	\end{algorithm}
-		\begin{tabular}{|c|c|}
-		\hline
-		Basis State (Decimal) & Count \\
-		\hline
-		(0) & 0.4982 \\
-		(1) & 0.0 \\
-		(2) & 0.0 \\
-		(3) & 0.0 \\
-		(4) & 0.0 \\
-		(5) & 0.0 \\
-		(6) & 0.0 \\
-		(7) & 0.5018 \\
-		\hline
-	\end{tabular} \\
-	\begin{tabular}{|c|c|c}
-		\hline
-		Basis State (Decimal) & Count \\
-		\hline
-		000000 & 0 & 2 \\
-		000001 & 1 & 2 \\
-		000010 & 2 & 1 \\
-		000011 & 3 & 3 \\
-		000100 & 4 & 1 \\
-		000101 & 5 & 3 \\
-		000110 & 6 & 1 \\
-		000111 & 7 & 3 \\
-		001000 & 8 & 1 \\
-		001001 & 9 & 3 \\
-		001010 & 10 & 2 \\
-		001011 & 11 & 3 \\
-		001100 & 12 & 517 \\
-		001101 & 13 & 535 \\
-		001110 & 14 & 539 \\
-		001111 & 15 & 2 \\
-		010001 & 17 & 3 \\
-		010010 & 18 & 546 \\
-		010011 & 19 & 544 \\
-		010100 & 20 & 1 \\
-		010101 & 21 & 1 \\
-		010110 & 22 & 518 \\
-		010111 & 23 & 1 \\
-		011000 & 24 & 3 \\
-		011001 & 25 & 2 \\
-		011010 & 26 & 552 \\
-		011011 & 27 & 2 \\
-		011100 & 28 & 596 \\
-		011101 & 29 & 4 \\
-		011110 & 30 & 544 \\
-		011111 & 31 & 2 \\
-		100001 & 33 & 539 \\
-		100010 & 34 & 1 \\
+	\noindent	With the following graph numbers 24851 and 29271 having 2 cliques each.
+		This again confirms that $R(3,3) = 6$ since the lowest clique count measured is greater than $0$.
+		\newpage
+	\subsubsection*{VQE}
+	Variational Quantum Eigensolver(VQE) is also a variational which can solve optimization problems.
+	VQE is a hybrid quantum-classical algorithm designed to approximate the ground state energy of a quantum Hamiltonian \citep{Peruzzo2014}.
+	 It is effective for problems that can be mapped to finding the minimum eigenvalue of an operator, such as the Ramsey numbers. 
+	 VQE uses the variational principle, which states that for any trial wavefunction $|\psi(\vec{\theta})\rangle$, the expectation value of the Hamiltonian $\hat{H}$ satisfies:
+	\[
+	E(\vec{\theta}) = |\psi(\vec{\theta}) \hat{H} |\psi(\vec{\theta})\rangle \geq E_0,
+	\]
+	where $E_0$ is the true ground state energy. 
+	Similar to the QAOA, a parameterized quantum circuit prepares $|\psi(\vec{\theta})\rangle$, and a classical optimizer adjusts $\vec{\theta}$ to minimize $E(\vec{\theta})$ \cite{IBM_VQE}.
+	The algorithm uses an estimator primitive which returns the expectation value, where the number of cliques is the "measured" quantity. 
+Another part of VQE is the ansatz which is a parameterized quantum circuit designed to prepare a multi-qubit state that closely approximates the ground state of the target Hamiltonian \cite{IBM_VQE}.
+Qiskit has different types of ansatzes including EfficientSU2,realamplitudes and n\_local.
+The n\_local is considered for VQE, for its simplicity and effectiveness \cite{Qiskit_TwoLocal} . 
+	\begin{lstlisting}[style=myPythonStyle, caption= VQE ansatz]
+		num_qubits = cost_hamiltonian.num_qubits
+ansatz = n_local(num_qubits=num_qubits,
+rotation_blocks='ry',           # Real rotations only
+entanglement_blocks='cz',       # CZ for ZZ terms in Ising
+entanglement='circular',        
+reps=3,                         # p=3 layers
 
-		\hline
-	\end{tabular}
+)
+
+num_params = ansatz.num_parameters
+	\end{lstlisting}
+	The above code defines the n\_local ansatz used to approximate the ground state of the Hamiltonian found in the appendix~\ref{Ham}.
+	When I perform the calculations using the VQE method I get the following results,
+	This algorithm return an eigenvalue which corresponds to the measured energy of the graphs, if the lowest energy found approaches $0$, suggests that the size $n$ is not the desired Ramsey number $R(r,b)$.
+ The results of the VQE code confirms known Ramsey numbers, the output of returns the least number of cliques of the hamiltonian function, unlike the QAOA which returns the graph(state) with the lowest number of cliques.
+Using the known Ramsey number $R(3,3)=6$ to demonstrate the VQE method starting at $n = 3$, the expectation is that the minimum number of cliques $E_0 = 0$.
+ \begin{lstlisting}[style=myPythonStyle, caption=Cost function]
+def cost_func(params, ansatz, hamiltonian, estimator):
+
+	pub = (ansatz, [hamiltonian], [params])
+	result = estimator.run(pubs=[pub]).result()
+	energy = result[0].data.evs[0]+shift           ##add shift term to energy
+	
+	cost_history_dict["iters"] += 1
+	cost_history_dict["prev_vector"] = params
+	cost_history_dict["cost_history"].append(energy)
+
+	
+	return energy
+ \end{lstlisting}
+ 			\begin{figure}[H]
+ 	\centering
+ 	\includegraphics[width=1\linewidth]{"../../../Downloads/project (2)"}
+ 	\caption{Circuit of VQE}
+ 	\label{fig:project2}
+ \end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{QAOA/vqe_1}
+	\caption{VQE convergence plot $n = 3$}
+	\label{fig:vqe1}
+\end{figure}
+
+
+The figure~\ref{fig:vqe1} shows that the cost function converges to 0.
+This does confirm that $3$ is not $R(3,3)$.
+Increasing $n$ to $6$ the classical expectation would be that the cost function to converge to $2$ or at least a number greater than $0$.
 	
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{QAOA/vqe_2}
+	\caption{VQE convergence plot $n = 6$}
+	\label{fig:vqe2}
+\end{figure}
+\noindent Although it takes more iterations to converge, it shows that $n = 6$ is $R(3,3)$ since the cost function converges to $2$.\\
+The convergence figures figure~\ref{fig:QAOA1} for QAOA and figure~\ref{fig:vqe1} for VQE, show that the QAOA optimization converged faster.
+A factor maybe that different ansatz where used,the structure of the hardware-efficient $n$-local ansatz used in VQE differs fundamentally from the problem-specific QAOA ansatz.\\
+		This may suggest that for this specific Ramsey Number problem, the QAOA's structure provides a more efficient path to the solution than the VQE ansatz.
 
-	 
-	\newpage
-		\section{Discussion}
-	
 
-
-\newpage
 	\section{Conclusion}
+	Ramsey numbers define the smallest number such that every graph on $K_n$ contains a monochromatic clique of either blue $K_b$ or red $K_b$.
+The reason why they are hard to compute is because of the exponential growth of the graph.
+Smaller Ramsey number were proved using mathematical techniques, but the search currently is for $R(5,5)$.
+ $R(5,5)$ is bounded between $n = 43$ and $46$, this makes it harder to formulate proofs as it the different ways to combine vertices.
+This is also difficult using classical computers.
+Quantum computing was introduced to find a better way of computing Ramsey numbers.
+The algorithms focused on where QAOA and VQE.
+The problem was transformed into a quantum optimization by encoding it into a physical system.
+This was done by counting the number of cliques each graph has, but instead of going through each graph quantum computers use quantum parallelism to find the graph with the least number of cliques.
+The focus for this was mostly on Ramsey number $R(3,3) = 6$, which requires only 3 qubits from IBM Qiskit platform.
+For larger Ramsey numbers, such as $R(4,4) = 18$ and the search for $R(5,5)$ the number of qubit requirements grow.
 
 	\newpage
 	\section{Appendix}
@@ -1468,11 +1601,15 @@ Each of these algorithm have the ability to find the minimum energy defined by t
 	\subsection{Python Functions}
 	\label{Algos}
 	These functions are defined in the python as such,
-	\begin{lstlisting}[style=myPythonStyle, caption=total edges]
+	\begin{lstlisting}[style=myPythonStyle, caption=total number of edges]
 def total_edges(n):
 	return int((n**2-n)/2)
 
 	\end{lstlisting}
+	\begin{lstlisting}[style=myPythonStyle, caption=total number of graphs]
+	def total_number_graphs(num_vertices):
+		return 2**(total_edges(num_vertices))
+\end{lstlisting}
 	\begin{lstlisting}[style=myPythonStyle, caption=adjacency matrix]
 def binary_vector(n,graph_number):
 	m =total_edges(n)
@@ -1546,6 +1683,19 @@ def vertices_combinations(n,r):
 	r_clique_vertices = list(combinations(range(n), r))
 	return r_clique_vertices
 		\end{lstlisting}
+		\begin{lstlisting} [style=myPythonStyle, caption=get edges vertices]
+def get_clique_edge_indices(num_vertices,a_sized_vertices):
+	num_edges = total_edges(num_vertices)
+	edges = list(combinations(range(num_vertices), 2))                       ##define edges in graph
+	edge_to_index = {edge: i for i, edge in enumerate(edges)}               ##map each edge to a number
+	a_cliques = list(combinations(range(num_vertices),a_sized_vertices))   ##choose different way of selecting subgraphs of size 'a_clique_size'
+	a_clique_indices = []                                                     ##initialize clique_indices list
+	for vertices in a_cliques:
+	subgraph_edges = list(combinations(vertices, 2))
+	indices = [edge_to_index[tuple(sorted(e))] for e in subgraph_edges]
+	a_clique_indices.append(indices)
+	return a_clique_indices
+\end{lstlisting}
 			\begin{lstlisting}[style=myPythonStyle, caption=Save counter example]
 def save_graph(n, graph_number, folder_path):
 	if not os.path.exists(folder_path):
@@ -1565,6 +1715,97 @@ def save_graph(n, graph_number, folder_path):
 		print(f"Error saving {image_path}: {e}")
 	
 	return plt.close(fig)
+		\end{lstlisting}
+		\label{Ham}
+		\begin{lstlisting}[style=myPythonStyle, caption=Ramsey numbers Hamiltonian]
+def get_ramsey_hamiltonian(num_vertices, r_sized_vertices, b_sized_vertices):
+	edges = list(combinations(range(n), 2))
+	edge_map = {edge: idx for idx, edge in enumerate(edges)}
+	num_qubits = total_edges(num_vertices)
+
+	# Initialize the total Hamiltonian using from_list
+	H_total = SparsePauliOp.from_list([("I" * num_qubits, 0.0)])
+# Penalty for red Cliques (Size r)
+	for subset_v in combinations(range(num_vertices), r_sized_vertices):
+	clique_edges = [(min(i, j), max(i, j)) for i, j in combinations(subset_v, 2)]
+	
+	# Start the projector for this specific r-clique with the Identity operator
+	projector_r = SparsePauliOp.from_list([("I" * num_qubits, 1.0)])
+	
+	for edge in clique_edges:
+		qubit_idx = edge_map[edge]
+		
+		# (I + Z)/2 is the factor that penalizes Red (|0>)
+		# Represent as SparsePauliOp from list
+		I_term = SparsePauliOp.from_list([('I' * num_qubits, 0.5)])
+		Z_label = ['I'] * num_qubits
+		Z_label[qubit_idx] = 'Z'
+		Z_term = SparsePauliOp.from_list([("".join(Z_label), 0.5)])
+		
+		# The factor for this edge: (I + Z_e)/2
+		factor = I_term + Z_term
+		
+		# Perform the multiplication and simplification
+		projector_r = projector_r.compose(factor, front=True).simplify()
+		
+		# Add the completed r-clique projector to the total Hamiltonian
+		H_total += projector_r
+		
+
+	# 2. Penalty for Blue Cliques (Size b) 
+
+	for subset_v in combinations(range(num_vertices), b_sized_vertices):
+	clique_edges = [(min(i, j), max(i, j)) for i, j in combinations(subset_v, 2)]
+	
+	# Start the projector for this specific s-clique
+	projector_s = SparsePauliOp.from_list([("I" * num_qubits, 1.0)])
+	
+	for edge in clique_edges:
+		qubit_idx = edge_map[edge]
+		
+		# (I - Z)/2 is the factor that penalizes Blue 
+		I_term = SparsePauliOp.from_list([('I' * num_qubits, 0.5)])
+		Z_label = ['I'] * num_qubits
+		Z_label[qubit_idx] = 'Z'
+		Z_term = SparsePauliOp.from_list([("".join(Z_label), -0.5)]) # Note the negative coefficient
+		
+		# The factor for this edge: (I - Z_e)/2
+		factor = I_term + Z_term
+		
+		# Perform the multiplication and simplification
+		projector_s = projector_s.compose(factor, front=True).simplify()
+		
+		# Add the completed b-clique projector to the total Hamiltonian
+		H_total += projector_b
+	
+
+	# 3.  Shift term
+
+	H_total = H_total.simplify()
+	
+	total_shift = 0.0
+	identity_pauli = Pauli('I' * num_qubits)
+	new_pauli_list = []
+	new_coeffs = []
+	
+	for pauli, coeff in zip(H_total.paulis, H_total.coeffs):
+		# Compare Pauli objects directly
+		if pauli == identity_pauli:
+		total_shift += coeff.real
+		else:
+		new_pauli_list.append(pauli)
+		new_coeffs.append(coeff.real) # Ensure coeffs are real for the final operator
+	
+	
+	# Rebuild the operator without the identity term
+	# If the new_pauli_list is empty, return the identity operator
+	if not new_pauli_list:
+		ramsey_op = SparsePauliOp.from_list([("I" * num_qubits, 0.0)]) # Return zero operator if only identity remains
+	else:
+		ramsey_op = SparsePauliOp(new_pauli_list, coeffs=new_coeffs)
+	
+	return ramsey_op, total_shift
+
 		\end{lstlisting}
 			\subsection{Qiskit}
 		There are 6 different types of Quantum computers namely
@@ -1591,22 +1832,47 @@ def save_graph(n, graph_number, folder_path):
 		\end{enumerate}
 		\textbf{IBM}:\\
 		IBM is a leader in superconducting quantum computing, with its IBM Quantum platform that provides cloud-based quantum computing services. 
-		IBM Quantum Platform provides access to quantum computers.\\\\
+		IBM Quantum Platform provides access to quantum computers.
 		The company has developed an open-source toolbox for quantum computing called Qiskit which enables users to run simulations and do experiments on a quantum hardware.
 		Qiskit gives access to components like building circuits, operators and primitives that enable optimized computations through the IBM quantum cloud.
-		Main features of Qiskit involve defined libraries of quantum logic gates and parameterized circuits, a quantum information module for working with quantum states and operators, and a transpiler that optimizes and converts circuits to run on specific quantum hardware backends.
+		Main features of Qiskit involve defined libraries of quantum logic gates and parameterized circuits, a quantum information module for working with quantum states and operators, and a transpiler that optimizes and converts circuits to run on specific quantum hardware backends \cite{IBM_Qiskit2025}.
 		\subsubsection{Primitives}
 		Primitives are computational modules.
 		A primitive is the smallest processing instruction, the simplest building block from which one can create something useful for a given level.
 		The two most common tasks for quantum computers are sampling quantum states and calculating expectation values. These tasks motivated the design of the Qiskit primitives: Estimator and Sampler.
+		
 		\begin{enumerate}
 			\item Estimator computes expectation values of observables with respect to states prepared by quantum circuits.
 			\item Sampler samples the output register from quantum circuit execution.
 		\end{enumerate}
+
 	\newpage
 	\bibliography{sample.bib}
 	
 \end{document}
+\noindent	And if section \ref{sec:homomorphic} is considered while counting the total graphs to go through this is given by
+\begin{table}[h!]
+	\centering
+	
+	\label{tab:labeled_vs_unlabeled}
+	\begin{tabular}{|c|c|c|}\toprule
+		\textbf{Vertices ($n$)} & \textbf{Total Graphs} $2^{M}$ & \textbf{Homomorphic Set graphs} \\\hline
+		\midrule
+		1  & $1$ & $1$ \\\hline
+		2 & $2$ & $2$ \\\hline
+		3 & $8$ & $4$ \\\hline
+		4 & $64$ & $11$ \\\hline
+		5& $1024$ & $34$ \\\hline
+		6  & $32768$ & $156$ \\\hline
+		7  & $2097152$ & $1044$ \\\hline
+		8  & $268435456$ & $12346$ \\\hline
+		9  & $68719476736$ & $274668$ \\\hline
+		10 & $35184372088832$ & $12005168$ \\\hline
+		\bottomrule
+	\end{tabular}
+	\caption{Total Number Graphs vs. Homomorphic Set Graphs}
+\end{table}
+
 	\section{Objectives}
 The main objective of this research project is to use both quantum and classical implementations to find Ramsey numbers.
 To also develop and test quantum algorithms for finding small Ramsey numbers.
@@ -1615,3 +1881,38 @@ Understand computational complexity of NP problems in computing.
 To develop both classical and quantum algorithm for finding Ramsey numbers.
 In the classical case I will use a brute force method in determining if a certain $n$ is Ramsey number $R(r,b)$ and also determining the counter examples of graphs on vertices $ < n.$
 For the Quantum computation, I firstly map finding Ramsey numbers into a quantum problem.
+
+		\subsubsection{Different Ansatz}
+\label{ansatz}
+\begin{enumerate}
+	\item \textbf{Hardware-Efficient Ansatz (HEA)} \\
+	\textit{Structure}: Alternating layers of single-qubit rotations ($R_y$, $R_z$) and entangling gates. \\
+	\textit{Advantages}: Low circuit depth, hardware-native, noise-resilient. \\
+	\textit{Disadvantages}: Limited expressivity for strongly correlated systems. \\
+	
+	\item \textbf{TwoLocal Ansatz} \\
+	\textit{Structure}: Generalization of HEA with customizable rotation and entanglement blocks. \\
+	\textit{Use Case}: Rapid prototyping; supports \texttt{ry}, \texttt{rz}, \texttt{cx}, \texttt{cz}\\
+	
+	
+	\item \textbf{Unitary Coupled Cluster (UCCSD)} \\
+	\textit{Structure}: Chemistry-inspired; uses fermionic excitations mapped via Jordan–Wigner or parity transformation. \\
+	\textit{Advantages}: Physically motivated, highly expressive for molecular Hamiltonians. \\
+	\textit{Disadvantages}: High parameter count and circuit depth. \\
+	
+	
+	\item \textbf{Problem-Inspired Ansatz} \\
+	\textit{Structure}: Uses the same $p$-layer structure as QAOA but optimized variationally. \\
+	\textit{Use Case}: Combinatorial problems like Ramsey number verification. \\
+	\textit{Example}: Cost ($e^{-i\gamma H\_C}$) and mixer ($e^{-i\beta H\_M}$) layers with trainable $\gamma, \beta$.
+	
+	
+\end{enumerate}
+
+	\subsubsection*{Grover Algorithm}
+This is a search algorithm that finds a unique state in an unstructured list or database.
+It offers a quadratic speed up, this means that in a list of $N$ items, only  $\mathcal{O}(\sqrt{N})$ iterations compared to  $\mathcal{O}(N)$ iterations of the best classical algorithm.
+Grovers' Algorithm uses the principle of superposition and quantum interference to increase the probability of the unique state being measured while suppressing the amplitudes of all other states.\\
+For this Ramsey numbers the unique states would be the graphs with the least number of cliques of sizes $r$ and $b$.
+The same energy function from equation \eqref{energy} is used to determine the graph with the lowest clique making it a search problem instead.
+The goal is to determine the minimum energy of the function if a positive number is returned then, $n$ is a $R(r,b)$ else it is not.
