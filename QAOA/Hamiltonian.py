@@ -1,53 +1,21 @@
 from classical_algorithm import *
 import numpy as np
-
-# from qiskit_algorithms import QAOA
-# from qiskit_algorithms.optimizers import COBYLA
-
-
-
-
 from itertools import combinations
 from qiskit.quantum_info import SparsePauliOp, Pauli
 
-def total_edges(num_vertices):
-  return int((num_vertices**2-num_vertices)/2)
 
-def binary_string(num, length):
-    return bin(num)[2:].zfill(length)
+def get_ramsey_hamiltonian(num_vertices: int, r_sized_vertices: int, b_sized_vertices: int):
 
-
-def get_ramsey_hamiltonian(n: int, r: int, s: int) -> tuple[SparsePauliOp, float]:
-    """
-    Constructs the Cost Hamiltonian for the R(r, s) Ramsey problem on K_n.
-
-    The Hamiltonian H is the sum of projectors that penalize the existence of
-    monochromatic r-cliques (Red) and s-cliques (Blue).
-    H = sum(P_Red) + sum(P_Blue)
-
-    Args:
-        n: Number of vertices (K_n).
-        r: Size of the forbidden Red clique (K_r).
-        s: Size of the forbidden Blue clique (K_s).
-
-    Returns:
-        A tuple: (SparsePauliOp: The final Hamiltonian without identity term,
-                  float: The constant energy shift).
-    """
-    edges = list(combinations(range(n), 2))
+    edges = list(combinations(range(num_vertices), 2))
     edge_map = {edge: idx for idx, edge in enumerate(edges)}
-    num_qubits = total_edges(n)
-
-    if num_qubits == 0 or (r > n and s > n):
-        return SparsePauliOp.from_list([("I" * num_qubits, 1.0)]), 1.0
-
+    num_qubits = total_edges(num_vertices)
+  
     # Initialize the total Hamiltonian using from_list
     H_total = SparsePauliOp.from_list([("I" * num_qubits, 0.0)])
 
-    # ----------------------------------------------------------------------
-    # 1. Penalty for Red Cliques (Size r): P_Red = Product_{e in K_r} (I + Z_e)/2
-    # ----------------------------------------------------------------------
-    for subset_v in combinations(range(n), r):
+     # 1. Penalty for Red Cliques (Size r): P_Red = Product_{e in K_r} (I + Z_e)/2
+  
+     for subset_v in combinations(range(num_vertices), r_sized_vertices):
         clique_edges = [(min(i, j), max(i, j)) for i, j in combinations(subset_v, 2)]
 
         # Start the projector for this specific r-clique with the Identity operator
@@ -75,7 +43,7 @@ def get_ramsey_hamiltonian(n: int, r: int, s: int) -> tuple[SparsePauliOp, float
     # ----------------------------------------------------------------------
     # 2. Penalty for Blue Cliques (Size s): P_Blue = Product_{e in K_s} (I - Z_e)/2
     # ----------------------------------------------------------------------
-    for subset_v in combinations(range(n), s):
+    for subset_v in combinations(range(num_vertices), b_sized_vertices):
         clique_edges = [(min(i, j), max(i, j)) for i, j in combinations(subset_v, 2)]
 
         # Start the projector for this specific s-clique
@@ -118,8 +86,7 @@ def get_ramsey_hamiltonian(n: int, r: int, s: int) -> tuple[SparsePauliOp, float
             new_coeffs.append(coeff.real) # Ensure coeffs are real for the final operator
 
 
-    # Rebuild the operator without the identity term
-    # If the new_pauli_list is empty, return the identity operator
+    #  return the identity operator
     if not new_pauli_list:
         ramsey_op = SparsePauliOp.from_list([("I" * num_qubits, 0.0)]) # Return zero operator if only identity remains
     else:
