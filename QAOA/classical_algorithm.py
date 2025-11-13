@@ -109,6 +109,8 @@ def verifies_cliques(num_vertices,graph_id,r_clique_size,b_clique_size):        
     if all(binary_vec[idx] == 1 for idx in indices):                       #verifies if all edges are connected
       return 0                                                             ##returns        
   return 1
+
+
 def get_clique_edge_indices(num_vertices,a_sized_clique):
   num_qubits = total_edges(num_vertices)
   edges = list(combinations(range(num_vertices), 2))                       ##define edges in graph
@@ -212,6 +214,7 @@ def energy(n, b, r, graph_number):
             total_cliques += penalty                                                 ##add 1 per clique found
 
     return total_cliques # Return the total_cliques
+  
 def plot_energy(n,s,r):
     fig, ax = plt.subplots()
     m = total_edges(n)
